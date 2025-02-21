@@ -3,13 +3,18 @@
     "description": "The `dotcms-php-sdk` is a PHP library designed to simplify interaction with the dotCMS Page API",
     "type": "library",
     "require": {
+        "php": "^8.2",
         "guzzlehttp/guzzle": "^7.9",
         "monolog/monolog": "^3.8",
         "respect/validation": "^2.4",
         "symfony/serializer": "^7.2"
     },
     "require-dev": {
-        "phpunit/phpunit": "^12.0"
+        "phpunit/phpunit": "^12.0",
+        "phpstan/phpstan": "^1.10",
+        "friendsofphp/php-cs-fixer": "^3.49",
+        "symfony/var-dumper": "^7.0",
+        "mockery/mockery": "^1.6"
     },
     "license": "MIT",
     "autoload": {
@@ -17,10 +22,29 @@
             "Dotcms\\PhpSdk\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Dotcms\\PhpSdk\\Tests\\": "tests/"
+        }
+    },
     "authors": [
         {
             "name": "Freddy Montes"
         }
     ],
+    "scripts": {
+        "test": "phpunit",
+        "cs-check": "php-cs-fixer fix --dry-run --diff",
+        "cs-fix": "php-cs-fixer fix",
+        "phpstan": "phpstan analyse src tests --level=max",
+        "check": [
+            "@cs-check",
+            "@phpstan",
+            "@test"
+        ]
+    },
+    "config": {
+        "sort-packages": true
+    },
     "minimum-stability": "alpha"
 }
