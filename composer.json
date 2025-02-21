@@ -1,0 +1,26 @@
+{
+    "name": "dotcms/php-sdk",
+    "description": "The `dotcms-php-sdk` is a PHP library designed to simplify interaction with the dotCMS Page API",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^7.9",
+        "monolog/monolog": "^3.8",
+        "respect/validation": "^2.4",
+        "symfony/serializer": "^7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^12.0"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Dotcms\\PhpSdk\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Freddy Montes"
+        }
+    ],
+    "minimum-stability": "alpha"
+}

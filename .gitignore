@@ -1,0 +1,29 @@
+/vendor/
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Laravel 4 specific
+bootstrap/compiled.php
+app/storage/
+
+# Laravel 5 and up specific
+public/storage
+public/hot
+
+# Laravel 5 and up specific
+.env
+.env.backup
+Homestead.json
+Homestead.yaml
+.phpunit.result.cache
+docker-compose.override.yml
+
+# IDE specific files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
