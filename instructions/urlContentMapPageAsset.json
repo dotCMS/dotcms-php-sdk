@@ -1,0 +1,910 @@
+
+{"entity":{
+  "numberContents" : 1,
+  "page" : {
+    "__icon__" : "pageIcon",
+    "archived" : false,
+    "baseType" : "HTMLPAGE",
+    "cachettl" : "0",
+    "canEdit" : true,
+    "canLock" : true,
+    "canRead" : true,
+    "canSeeRules" : true,
+    "contentType" : "htmlpageasset",
+    "creationDate" : 1609956863886,
+    "deleted" : false,
+    "extension" : "page",
+    "folder" : "fa455fb5-b961-4d0c-9e63-e79a8ba8622a",
+    "friendlyName" : "Blog Detail",
+    "hasLiveVersion" : true,
+    "hasTitleImage" : false,
+    "host" : "48190c8c-42c4-46af-8d1a-0cd5db894797",
+    "hostName" : "demo.dotcms.com",
+    "httpsRequired" : false,
+    "identifier" : "8a14180a-4144-4807-80c4-b7cad20ac57b",
+    "inode" : "1a2abb52-0802-442f-928d-d5e02b99b69a",
+    "isContentlet" : true,
+    "languageId" : 1,
+    "live" : true,
+    "liveInode" : "1a2abb52-0802-442f-928d-d5e02b99b69a",
+    "locked" : false,
+    "mimeType" : "application/dotpage",
+    "modDate" : 1718817859273,
+    "modUser" : "dotcms.org.1",
+    "modUserName" : "Admin User",
+    "name" : "blog-detail",
+    "owner" : "dotcms.org.1",
+    "ownerName" : "Admin User",
+    "pageURI" : "/blog/post/french-polynesia-everything-you-need-to-know",
+    "pageUrl" : "blog-detail",
+    "path" : "/Blog/blog-detail",
+    "publishDate" : 1718817859727,
+    "publishUser" : "dotcms.org.1",
+    "publishUserName" : "Admin User",
+    "shortyId" : "8a14180a41",
+    "shortyLive" : "1a2abb5208",
+    "shortyWorking" : "1a2abb5208",
+    "sortOrder" : 0,
+    "stInode" : "c541abb1-69b3-4bc5-8430-5e09e5239cc8",
+    "statusIcons" : "<span class='greyDotIcon' style='opacity:.4'></span><span class='liveIcon'></span>",
+    "template" : "191c51b5-c2f7-4f2d-a5d5-5d723e2a250d",
+    "title" : "Blog Detail",
+    "titleImage" : "TITLE_IMAGE_NOT_FOUND",
+    "type" : "htmlpage",
+    "url" : "/Blog/blog-detail",
+    "working" : true,
+    "workingInode" : "1a2abb52-0802-442f-928d-d5e02b99b69a",
+    "rendered" : "<!doctype html>\n<html lang=\"en\">\n\n    <div data-dot-object='vtl-file' data-dot-inode='89a528df-9698-46e0-bca4-ee7c8b5a73fc' data-dot-url='html_head.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><head>\n<div data-dot-object='vtl-file' data-dot-inode='e147b353-c99a-4bcb-82b6-af5ffe21445d' data-dot-url='dot_seo.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div>\n\n        \n\n\n        \n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n        \n\n\n        \n\n\n            <title>French Polynesia Everything You Need to Know</title>\n    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" />\n    <meta name=\"dotCMS\" content=\"48190c8c-42c4-46af-8d1a-0cd5db894797\" />\n    <meta name=\"description\" content=\"Discover the exotic paradise of French Polynesia! Located in the South Pacific Ocean, this romantic honeymoon destination offers crystal clear waters and incredible scuba diving opportunities. Plan your trip carefully, as travel options are limited to flights, ferries, or hitchhiking on private sailboats. This complete travel guide provides everything you need to know about visas, getting to French Polynesia, and exploring its five unique archipelagos. Experience the authentic Polynesian culture, stunning landscapes, and unbeatable beaches. Ensure your safety with dive insurance and stay aware of petty crimes and mosquito-borne illnesses. Get ready for the beach trip of a lifetime!\" />\n    <link rel=\"canonical\" href=\"https://demo.dotcms.com\" />\n    <link rel=\"icon\" href=\"/application/themes/travel/images/favicon.ico\" />\n    <link rel=\"alternate\" hreflang=\"x-default\" href=\"$dotSeo.get('canonicalUrl')\">\n\n    <!-- OpenGraph -->\n    <meta property=\"og:title\" content=\"French Polynesia Everything You Need to Know\" />\n    <meta property=\"og:description\" content=\"The linked webpage provides a comprehensive overview of French Polynesia, covering its stunning islands, vibrant culture, and diverse attractions. It highlights the enchanting beauty of Bora Bora and Tahiti, shares insights into Polynesian traditions and cuisine, and offers practical travel tips for an unforgettable experience in this tropical paradise.\" />\n    <meta property=\"og:url\" content=\"\" />\n    <meta property=\"og:image\" content=\"/dA/2b100ac707/1200maxw/1200cw/630ch/\" />\n    <meta property=\"og:image:alt\" content=\"French Polynesia Everything You Need to Know\" />\n    <meta property=\"og:image:width\" content=\"1200\" />\n    <meta property=\"og:site_name\" content=\"https://demo.dotcms.com\" />\n    <meta property=\"og:type\" content=\"\" />\n\n    <!-- Twitter Card -->\n    <meta name=\"twitter:card\" content=\"summary_large_image\" />\n    <meta name=\"twitter:site\" content=\"@dotcms\" />\n    <meta name=\"twitter:image\" content=\"/dA/2b100ac707/1200maxw/1200cw/630ch/\" />\n\n    <!-- Robots -->\n    <meta name=\"robots\" content=\"index, follow\" />\n    <meta name=\"robots\" content=\"max-snippet: -1\" />\n\n    <!-- CSS -->\n    <link rel=\"preload\" as=\"style\" href=\"//fonts.googleapis.com/css?family=Oswald:500,600,700%7CRoboto:300,300i,700%7CCondiment%7CDella+Respira\">\n    \n    <!-- Precomipled SASS/CSS -->\n        \n        <link rel=\"preload\" as=\"style\" href=\"/application/themes/travel/css/styles.dotsass\">\n    \n    <link rel=\"stylesheet\" type=\"text/css\" href=\"//fonts.googleapis.com/css?family=Oswald:500,600,700%7CRoboto:300,300i,700%7CCondiment%7CDella+Respira\">\n    <link rel=\"stylesheet\" href=\"/application/themes/travel/css/styles.dotsass\">\n\n    <style>\n        .edit-button-wrapper {\n            display:flex;\n            position: relative;\n            z-index: 99999999;\n            align-items:center;\n            cursor:pointer; \n            color: #14151A;\n            font-weight: 700;\n            padding: 4px 8px;\n            width: 140px;\n            border-radius: 8px;\n            background: #fff;\n            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24) ;\n        }\n        .edit-button-wrapper:hover{\n            color: #5167F1;\n            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;\n            transform: scale(1.025) !important;\n        }\n        .edit-button-icon {\n            height: 32px !important;\n            outline: none !important;\n            width: 32px !important;\n            background: #fff url(data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjNDQ0NDQ0IiBoZWlnaHQ9IjE4IiB2aWV3Qm94PSIwIDAgMjQgMjQiIHdpZHRoPSIxOCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4gICAgPHBhdGggZD0iTTMgMTcuMjVWMjFoMy43NUwxNy44MSA5Ljk0bC0zLjc1LTMuNzVMMyAxNy4yNXpNMjAuNzEgNy4wNGMuMzktLjM5LjM5LTEuMDIgMC0xLjQxbC0yLjM0LTIuMzRjLS4zOS0uMzktMS4wMi0uMzktMS40MSAwbC0xLjgzIDEuODMgMy43NSAzLjc1IDEuODMtMS44M3oiLz4gICAgPHBhdGggZD0iTTAgMGgyNHYyNEgweiIgZmlsbD0ibm9uZSIvPjwvc3ZnPg==) no-repeat center center !important;\n        }\n    </style>\n</head>\n\n<body id=\"french-polynesia-everything-you-need-to-know\" class=\"edit-mode\">\n\n            <div data-dot-object='vtl-file' data-dot-inode='2f60baac-75eb-4748-a93c-e50864e539c4' data-dot-url='header.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><header>\n\n  <!-- RD Navbar-->\n  <div class=\"rd-navbar-wrap\">\n    <nav class=\"rd-navbar rd-navbar-static rd-navbar-classic\" data-layout=\"rd-navbar-fixed\" data-sm-layout=\"rd-navbar-fixed\" data-md-layout=\"rd-navbar-fixed\" data-md-device-layout=\"rd-navbar-fixed\" data-lg-layout=\"rd-navbar-static\" data-lg-device-layout=\"rd-navbar-static\" data-xl-layout=\"rd-navbar-static\" data-xl-device-layout=\"rd-navbar-static\" data-lg-stick-up-offset=\"78px\" data-xl-stick-up-offset=\"98px\" data-xxl-stick-up-offset=\"118px\" data-lg-stick-up=\"true\" data-xl-stick-up=\"true\" data-xxl-stick-up=\"true\">\n      <div class=\"rd-navbar-collapse-toggle rd-navbar-fixed-element-1\" data-rd-navbar-toggle=\".rd-navbar-collapse\"><span></span></div>\n      \n      <div class=\"rd-navbar-aside-outer rd-navbar-collapse bg-default\">\n        <div class=\"rd-navbar-aside\">\n\n          <!-- CONTACT INFO -->\n          <ul class=\"list-inline list-inline-xxl\">\n            <li>\n              <div class=\"unit unit-spacing-xs\">\n                <div class=\"unit-left\"><span class=\"icon mdi mdi-map-marker\"></span></div>\n                <div class=\"unit-body\"><a href=\"#\">382 NE 191st St, #92150 Miami, FL, 33179 USA</a></div>\n              </div>\n            </li>\n            <li>\n              <div class=\"unit unit-spacing-xs\">\n                <div class=\"unit-left\"><span class=\"icon mdi mdi-cellphone-android\"></span></div>\n                <div class=\"unit-body\"><a href=\"tel:+1-305-900-2001\">+1-305-900-2001</a></div>\n              </div>\n            </li>\n            <li>\n              <div class=\"unit unit-spacing-xs\">\n                <div class=\"unit-left\"><span class=\"icon mdi mdi-email-outline\"></span></div>\n                <div class=\"unit-body\"><a href=\"mailto: info@dotcms.com\">info@dotcms.com</a></div>\n              </div>\n            </li>\n          </ul>\n\n          <div>\n            <!-- CART -->\n            <a class=\"basket\" href=\"/store/cart\"><span class=\"icon mdi mdi-cart-outline\"></span><span class=\"basket-count\">3</span></a>\n\n            <!-- My Account -->\n            <a href=\"/login/profile\" class=\"ml-3 dropdown-link\" data-toggle=\"dropdown\">\n                                    <img src=\"/html/images/persona/default-persona.png\"  style=\"width:42px;\" alt=\"Default Persona\" class=\"img-circles border\">\n                            </a>\n            <div class=\"dropdown-menu persona-menu\">     \n                <a href=\"?com.dotmarketing.persona.id=0\">\n                    <img src=\"/html/images/persona/default-persona.png\"  style=\"width:33px;\" class=\"img-circles border mr-2\">\n                    Default\n                </a>\n                                  <a href=\"?com.dotmarketing.persona.id=EcoEnthusiast\">\n                                                <img src=\"/dA/0ed8e71a-47c7-4b30-a6f2-3796aa71ba49/photo/33w/50q/hiking-profile.jpg\" style=\"width:33px;\" class=\"img-circles border mr-2\">\n                                            Eco Enthusiast\n                  </a>\n                                  <a href=\"?com.dotmarketing.persona.id=OceanEnthusiast\">\n                                                <img src=\"/dA/d948d85c-3bc8-4d85-b0aa-0e989b9ae235/photo/33w/50q/surfer-profile.jpg\" style=\"width:33px;\" class=\"img-circles border mr-2\">\n                                            Ocean Enthusiast\n                  </a>\n                                  <a href=\"?com.dotmarketing.persona.id=WinterEnthusiast\">\n                                                <img src=\"/dA/792c7c9f-6b6f-427b-80ff-1643376c9999/photo/33w/50q/mountain-persona.jpg\" style=\"width:33px;\" class=\"img-circles border mr-2\">\n                                            Winter Enthusiast\n                  </a>\n                                <a href=\"/login/profile\" class=\"my-account\">Who Am I...?</a>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <div class=\"rd-navbar-main-outer\">\n        <div class=\"rd-navbar-main\">\n\n          <div class=\"rd-navbar-panel\">\n            <button class=\"rd-navbar-toggle\" data-rd-navbar-toggle=\".rd-navbar-nav-wrap\" aria-label=\"Toggle Menu\"><span></span></button>\n            <div class=\"rd-navbar-brand\"><a class=\"brand\" href=\"/\" aria-label=\"TravelLux Home\"><img class=\"brand-logo-dark\" src=\"/application/themes/travel/images/logo.png\" width=\"195\" height=\"40\" alt=\"TravelLux Home\"></a></div>\n          </div>\n\n          <!-- NAV BAR -->\n\n          <div class=\"rd-navbar-main-element\">\n\n            <div class=\"rd-navbar-nav-wrap\">\n            \n                                        <form class=\"dotcms__navbar-form\" action=\"/c/portal/layout?p_l_id=2df9f117-b140-44bf-93d7-5b10a36fb7f9&p_p_id=site-browser&p_p_action=1&p_p_state=maximized&_site_browser_struts_action=%2Fext%2Ffolders%2Forder_menu\" method=\"post\" name=\"dot_form_menu_1740076473655\" id=\"dot_form_menu_1740076473655\">\n                    <input type=\"hidden\" name=\"cmd\" value=\"orderMenu\" />\n                    <input type=\"hidden\" name=\"hostId\" value=\"48190c8c-42c4-46af-8d1a-0cd5db894797\" />\n                    <input type=\"hidden\" name=\"referer\" value=\"/Blog/blog-detail\" />\n                    <input type=\"hidden\" name=\"pagePath\" value=\"/Blog/blog-detail\" />\n                    <input type=\"hidden\" name=\"startLevel\" value=\"1\" />\n                    <input type=\"hidden\" name=\"depth\" value=\"2\" />\n                    <a href=\"javascript:document.getElementById('dot_form_menu_1740076473655').submit();\" class=\"reorder-menu-link\" data-original-title=\"Reorder Menu\">\n                        <i class=\"arrow-up\"></i> \n                        <i class=\"arrow-down\"></i> \n                    </a>\n                </form>\n            \n              <ul class=\"rd-navbar-nav\">\n                <li class=\"rd-nav-item  \"><a class=\"rd-nav-link\" href='/'>Home</a></li>\n                                                                      <li class=\"rd-nav-item \"><a class=\"rd-nav-link\" href='/Blog' target='_self'>Blog</a></li>\n                                                                        <li class=\"rd-nav-item \"><a class=\"rd-nav-link\" href='/destinations' target='_self'>Destinations</a></li>\n                                                                        <li class=\"rd-nav-item rd-navbar--has-dropdown rd-navbar-submenu \">\n                      <a href=\"/store\" class=\"rd-nav-link\">Store</a>\n                        <ul class=\"rd-menu rd-navbar-dropdown\">\n                                                        <li class=\"rd-dropdown-item\">\n                                <a class=\"rd-dropdown-link\" href='/store/snow' target='_self'>Snow</a>\n                                                                                              </li>\n                                                        <li class=\"rd-dropdown-item\">\n                                <a class=\"rd-dropdown-link\" href='/store/outdoor' target='_self'>Outdoor</a>\n                                                                                              </li>\n                                                        <li class=\"rd-dropdown-item\">\n                                <a class=\"rd-dropdown-link\" href='/store/water' target='_self'>Water</a>\n                                                                                              </li>\n                                                        <li class=\"rd-dropdown-item\">\n                                <a class=\"rd-dropdown-link\" href='/store/apparel' target='_self'>Apparel</a>\n                                                                                              </li>\n                                                  </ul>\n                    </li>\n                                                                        <li class=\"rd-nav-item \"><a class=\"rd-nav-link\" href='/TravelBot' target='_self'>TravelBot</a></li>\n                                                                        <li class=\"rd-nav-item \"><a class=\"rd-nav-link\" href='/members' target='_self'>Members Only</a></li>\n                                                                        <li class=\"rd-nav-item \"><a class=\"rd-nav-link\" href='/contact-us' target='_self'>Contact Us</a></li>\n                                                </ul>\n            </div>\n\n            <!-- RD Navbar Search-->\n            <div class=\"rd-navbar-search\">\n              <button class=\"rd-navbar-search-toggle rd-navbar-fixed-element-2\" data-rd-navbar-toggle=\".rd-navbar-search\" aria-label=\"Search Box Toggle\"><span></span></button>\n              <form class=\"rd-search\" action=\"/search/\" method=\"GET\">\n                <div class=\"form-wrap\">\n                  <label class=\"form-label search-label\" for=\"site-search\">Search...</label>\n                  <input class=\"rd-navbar-search-form-input form-input site-search\" type=\"text\" name=\"q\" autocomplete=\"off\">\n                </div>\n                <button class=\"rd-search-form-submit fa-search\" type=\"submit\" aria-label=\"Submit\"></button>\n              </form>\n            </div>\n            \n          </div>\n        </div>\n      </div>\n    </nav>\n  </div>\n\n</header>\n    \n    <div class=\"body-wrapper\">\n    \n            \n            \n                \n                        \n    \n                                                            \n                                                \n                                                                                                                        \n                        <section id=\"section-1\" class=\"section \"><!-- section -->\n                            <div class=\"container\"><!-- container -->\n                                <div class=\"row\"><!-- row -->\n                        \n                                                \n                                                                                                \n                                    <div class=\" col-lg-10 offset-lg-1 \"><!-- Column -->\n                                                                                <div data-dot-object='vtl-file' data-dot-inode='854ac983-9a18-4a9a-874b-dd18d8be91f5' data-dot-url='preloop.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div>    <div class=\"container-notes\">Defualt Container</div>\n\n<div data-dot-object=\"container\" data-dot-inode=\"f6a7e729-56f5-4fc0-a045-9711960b7427\" data-dot-identifier=\"//demo.dotcms.com/application/containers/default/\" data-dot-uuid=\"1\" data-max-contentlets=\"25\" data-dot-accept-types=\"Images,calendarEvent,CallToAction,Video,webPageContent,Activity,Blog,YouTube,Product,WIDGET,FORM\" data-dot-can-add=\"CONTENT,WIDGET,FORM\"><div data-dot-object=\"contentlet\" data-dot-on-number-of-pages=\"1\" data-dot-inode=\"6348092a-7930-437d-947f-71ad3a43d134\" data-dot-identifier=\"53abd5c7c4ee227c2945b592dbc367c5\" data-dot-type=\"VtlInclude\" data-dot-variant=\"DEFAULT\" data-dot-basetype=\"WIDGET\" data-dot-lang=\"1\" data-dot-title=\"Blog Detail Page\" data-dot-can-edit=\"true\" data-dot-content-type-id=\"9e0a09af-a7be-4c83-9d5e-c6cc9c050219\" data-dot-has-page-lang-version=\"true\">\r\n<div data-dot-object='vtl-file' data-dot-inode='45ec2f74-3688-41c8-a169-d31df813e822' data-dot-url='blog-detail.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><!-- VTL File: /application/vtl/blogs/blog-detail.vtl -->\n    <div class=\"section-blog-post\">\n                    <div class=\"edit-button-wrapper\" style=\"margin-bottom: 20px; margin-top :-20px;\" data-dot-identifier=\"2b100ac7-07b1-48c6-8270-dc01ff958c69\" data-dot-inode=\"4b337160-a5a3-42a7-b272-7b506603cb72\" data-dot-object=\"edit-content\">\n                <span class=\"edit-button-icon\" data-dot-identifier=\"2b100ac7-07b1-48c6-8270-dc01ff958c69\" data-dot-inode=\"4b337160-a5a3-42a7-b272-7b506603cb72\" data-dot-object=\"edit-content\"></span> \n                <span class=\"edit-button-text\" data-dot-identifier=\"2b100ac7-07b1-48c6-8270-dc01ff958c69\" data-dot-inode=\"4b337160-a5a3-42a7-b272-7b506603cb72\" data-dot-object=\"edit-content\">Edit Blog</span>\n            </div>\n                <div class=\"section-blog-post-header\">\n            <h1\n                                    data-language=\"1\"\n                    data-mode=\"minimal\"\n                    data-inode=\"4b337160-a5a3-42a7-b272-7b506603cb72\"\n                    data-field-name=\"title\"      \n                            >French Polynesia Everything You Need to Know</h1>\n            <div class=\"post-bottom-panel\">\n                <div>\n                    <div class=\"group-xl\">\n                                                    <div class=\"post-modern-author\">\n                                <span class=\"post-icon icon mdi mdi-account\"></span>\n                                <span>by John Smith</span>\n                            </div>\n                                                <div class=\"post-modern-time\">\n                            <span class=\"post-icon icon mdi mdi-calendar-clock\"></span>\n                            <time datetime=\"2018-07-20 12:29\">February 10, 2024 at 09:59 PM</time>\n                        </div>\n                    </div>\n                </div>\n                <div class=\"d-none d-md-block\">\n                    <div class=\"group-xl\">\n                        <div class=\"post-modern-views\">\n                            <span class=\"post-icon icon mdi mdi-eye\"></span>\n                            <span>193</span>\n                        </div>\n                        <div class=\"post-modern-comment\">\n                            <span class=\"post-icon icon mdi mdi-comment\"></span>\n                            <a href=\"#comments\">3</a>\n                        </div>\n                    </div>\n                </div>\n            </div>\n        </div>\n\n        <!-- BLOG IMAGE -->\n        <div class=\"section-blog-post-figure\">\n            <img class=\"img-fluid\" src=\"/dA/2b100ac7-07b1-48c6-8270-dc01ff958c69/935maxw/935cw/400ch/80q/12ro/bora-bora-french-polynesia.jpeg\" alt=\"French Polynesia Everything You Need to Know\">\n            <span class=\"badge badge-primary\">french polynesia</span>\n        </div>\n\n        <!-- BLOG BODY -->\n        <div class=\"section-blog-post-content\"\n                            data-language=\"1\"\n                data-inode=\"4b337160-a5a3-42a7-b272-7b506603cb72\"\n                data-field-name=\"blogContent\"\n                data-content-type=\"Blog\"\n                data-contentlet-identifier=\"2b100ac7-07b1-48c6-8270-dc01ff958c69\"\n                data-block-editor-content=\"[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;underline&quot;},{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;Few&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot; to no other place in the world has a more exotic feel to its name than what French Polynesia has.&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;The tiny island nation that's located halfway between the USA and Australia in the middle of the South Pacific Ocean, a romantic honeymoon destination for some, and an underwater paradise for scuba divers around the world.&quot;}]},{&quot;type&quot;:&quot;heading&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;,&quot;level&quot;:2},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;French Polynesia everything you need to know before visiting paradise&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;But French Polynesia got more than enough to offer for everyone. But it should be to no one\\u2019s surprise traveling around here will take a bit of planning, especially since the only to travel around is by flights, slow-going ferries or hitchhiking one of the thousands of private owned sailboats they cruise around the crystal clear waters.&quot;}]},{&quot;type&quot;:&quot;dotImage&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;,&quot;src&quot;:&quot;/dA/86299f7066888fc1241bf601f529ac85/asset/beach-1838501_960_720.jpg?language_id=1&quot;,&quot;alt&quot;:&quot;beach-1838501_960_720.jpg&quot;,&quot;title&quot;:&quot;beach-1838501_960_720.jpg&quot;,&quot;href&quot;:null,&quot;data&quot;:{&quot;identifier&quot;:&quot;86299f7066888fc1241bf601f529ac85&quot;,&quot;languageId&quot;:1,&quot;hostName&quot;:&quot;48190c8c-42c4-46af-8d1a-0cd5db894797&quot;,&quot;modDate&quot;:&quot;2024-06-03T19:49:35.290+00:00&quot;,&quot;title&quot;:&quot;beach-1838501_960_720.jpg&quot;,&quot;contentTypeIcon&quot;:&quot;image&quot;,&quot;baseType&quot;:&quot;DotAsset&quot;,&quot;inode&quot;:&quot;8f26cc2d-4c7b-4f01-b02c-0ce9176c8028&quot;,&quot;archived&quot;:false,&quot;working&quot;:true,&quot;locked&quot;:false,&quot;stInode&quot;:&quot;4061db324fdce3993a494c856e76ab1e&quot;,&quot;contentType&quot;:&quot;Images&quot;,&quot;live&quot;:true,&quot;owner&quot;:&quot;dotcms.org.1&quot;,&quot;hasLiveVersion&quot;:true,&quot;folder&quot;:&quot;SYSTEM_FOLDER&quot;,&quot;sortOrder&quot;:0,&quot;modUser&quot;:&quot;dotcms.org.1&quot;,&quot;asset&quot;:&quot;/data/shared/assets/8/f/8f26cc2d-4c7b-4f01-b02c-0ce9176c8028/asset/beach-1838501_960_720.jpg&quot;},&quot;target&quot;:null}},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;French Polynesia for nearly a month by the end of 2018. During my trip did I visit Tahiti \\u2013 Bora Bora \\u2013 Moorea \\u2013 Tahiti \\u2013 Fakarava \\u2013 Tahiti, while this is only a fraction of the island, so did It give me some amazing experiences and some hard-learned lessons, that there\\u2019s nowhere else in the world quite like French Polynesia.&quot;}]},{&quot;type&quot;:&quot;heading&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;,&quot;level&quot;:2},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;Complete travel guide to French Polynesia&quot;}]},{&quot;type&quot;:&quot;heading&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;,&quot;level&quot;:3},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;Visa to French Polynesia?&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;French Polynesia is, obviously, a French overseas territory under the constitution of the &quot;},{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;link&quot;,&quot;attrs&quot;:{&quot;href&quot;:&quot;https://www.france.fr/en&quot;,&quot;target&quot;:&quot;_blank&quot;,&quot;rel&quot;:&quot;noopener noreferrer nofollow&quot;,&quot;class&quot;:null}}],&quot;text&quot;:&quot;French Republic&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot; (Police, army, immigration is the same as in mainland France), so arriving in French Polynesia is just as simple as arriving in France for Citizens of western countries. Visa is also not needed for Citizens of all countries in Latin America, Australia, New Zealand, plus Japan, Taiwan, Singapore, Malaysia and South Korea do not need a visa for up to 3 months stay.&quot;}]},{&quot;type&quot;:&quot;dotImage&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;,&quot;src&quot;:&quot;/dA/276570060fe0cd5e120198152d950eb0/asset/pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg?language_id=1&quot;,&quot;alt&quot;:&quot;pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg&quot;,&quot;title&quot;:&quot;pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg&quot;,&quot;href&quot;:null,&quot;data&quot;:{&quot;identifier&quot;:&quot;276570060fe0cd5e120198152d950eb0&quot;,&quot;languageId&quot;:1,&quot;hostName&quot;:&quot;48190c8c-42c4-46af-8d1a-0cd5db894797&quot;,&quot;modDate&quot;:&quot;2024-06-04T18:53:52.350+00:00&quot;,&quot;title&quot;:&quot;pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg&quot;,&quot;contentTypeIcon&quot;:&quot;image&quot;,&quot;baseType&quot;:&quot;DotAsset&quot;,&quot;inode&quot;:&quot;b6fab593-81f1-46f1-bb52-70b57d474d10&quot;,&quot;archived&quot;:false,&quot;working&quot;:true,&quot;locked&quot;:false,&quot;stInode&quot;:&quot;4061db324fdce3993a494c856e76ab1e&quot;,&quot;contentType&quot;:&quot;Images&quot;,&quot;live&quot;:true,&quot;owner&quot;:&quot;dotcms.org.1&quot;,&quot;hasLiveVersion&quot;:true,&quot;folder&quot;:&quot;SYSTEM_FOLDER&quot;,&quot;sortOrder&quot;:0,&quot;modUser&quot;:&quot;dotcms.org.1&quot;,&quot;asset&quot;:&quot;/data/shared/assets/b/6/b6fab593-81f1-46f1-bb52-70b57d474d10/asset/pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg&quot;},&quot;target&quot;:null}},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;Citizens from countries not available for visa on arrival will have to apply for a visa to French Polynesia from a French Embassy or Consulate in advance. Normal fee is 9 Euro. &quot;},{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;A return ticket is required for everyone; you might get asked for it upon arrival at immigration.&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;&nbsp;&quot;}]},{&quot;type&quot;:&quot;heading&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;,&quot;level&quot;:3},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;Getting to French Polynesia?&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;The remoteness of French Polynesia makes flying into this paradise the only option if you don\\u2019t arrive by your sailboat.&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;International Airport (PPT) the only international airport in French Polynesia which is located just outside Papeete on Tahiti, the Capital and biggest city in French Polynesia.&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;International Airport (PPT) is served by no more than 9 Airlines, all of which offers international flight.&quot;}]},{&quot;type&quot;:&quot;bulletList&quot;,&quot;content&quot;:[{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;Air France&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot; (SkyTeam) : Los Angeles \\u2013 Lax, Paris \\u2013 Charles de Gaulle.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;Air New Zealand&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot; (Star Alliance): Auckland.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;Air Tahiti:&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot; Rarotonga Cook Island.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;Air Tahiti Nui&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;: Paris \\u2013 Charles de Gaulle, Tokyo \\u2013 Narita, New Zealand \\u2013 Auckland, Los Angeles \\u2013 Lax.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;Aircalin&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;: Noum&eacute;a \\u2013 New Caledonia.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;French Bee:&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot; San Fransisco, Paris \\u2013 Orly Airport.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;Hawaiian Airlines&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;: Honolulu, Hawaii.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;LATAM Chile&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot; (OneWorld): Easter Island, Santiago de Chile.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;United Airline&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot; (Star Alliance) : San Fransisco.&quot;}]}]}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;From Europe are flights with Air France through LAX, Los Angeles or with Qatar Airways that has a codeshare agreement with Air New Zealand through Auckland the two most accessible options. If you are stopping by New Zealand on your way to French Polynesia, be sure to check out this post about the best campsites in New Zealand.&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;French Polynesia is made up of five archipelagos, all more different, than the other. There are only about 280,000 lucky islanders living on 67 inhabited islands and atolls. With over 70% of the population concentrated on the big island of Tahiti.&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;It's important to know that while there are local flights between the islands inside each Archipelago. So will you have to transit through Tahiti when traveling from one archipelago to another.&nbsp; Be aware that you often will, you have to stay a night in Tahiti before taking your onward flight to the next Archipelago early the next morning. Flights to smaller islands and atolls are often booked out months in advance.&quot;}]},{&quot;type&quot;:&quot;bulletList&quot;,&quot;content&quot;:[{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;Marquesas Archipelago&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;: The best Archipelago to visit for hiking and horseback riding, can go hiking for days, take a swim in belove skyscraper tall waterfalls, or just watch the best handcraft makers in all of French Polynesia.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;Society Archipelago: The most popular Archipelago in French Polynesia, and home to famous islands like Tahiti, Moorea, Bora Bora and Huahine.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;Tuamotu Archipelago&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;: Home to Famous Atolls like Rangiroa, Tikehau and Fakarava, the best Scuba Diving in French Polynesia is in the waters here which is classified as UNESCO as a biosphere reserve.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;Gambier Archipelago&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;: Which is located the furthest away from Tahiti and home to only, 1319 people. Famous for producing the finest pearls in French Polynesia and home to the oldest church in the country. Offer good hiking, virgin nature; the least visited of all the archipelagos in French Polynesia. No Banks &amp; ATM'S here.&quot;}]}]},{&quot;type&quot;:&quot;listItem&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;marks&quot;:[{&quot;type&quot;:&quot;bold&quot;}],&quot;text&quot;:&quot;AustralArchipelago&quot;},{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;: Home to the most authentic Polynesian Culture in all of French Polynesia and home to only, 6300 people. Said to have the clearest water in all of French Polynesia, a real of the beaten path destination. The Austral Islands are the southernmost group in French Polynesia. The tiny Raivavae island located here is said to be of the most beautiful in the whole of French Polynesia.&quot;}]}]}]},{&quot;type&quot;:&quot;heading&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;,&quot;level&quot;:3},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;Safety in French Polynesia.&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;French Polynesia is one of the safest places in the world, generally speaking, but petty crime, such as pickpocketing and purse snatching, occurs. I did hear of a lot of cases of cars and tent's that had been broken into on Moorea.&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;Although there is no malaria in French Polynesia, there are occasional dengue-fever and chikungunya outbreaks spread by mosquitoes. All island I visited had tons of mosquitoes in the evenings.&quot;}]},{&quot;type&quot;:&quot;dotImage&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;,&quot;src&quot;:&quot;/dA/a77e64e2ad7f349f8008fd3905c45f8b/asset/fiji-destinations.jpg?language_id=1&quot;,&quot;alt&quot;:&quot;fiji-destinations.jpg&quot;,&quot;title&quot;:&quot;fiji-destinations.jpg&quot;,&quot;href&quot;:null,&quot;data&quot;:{&quot;identifier&quot;:&quot;a77e64e2ad7f349f8008fd3905c45f8b&quot;,&quot;languageId&quot;:1,&quot;hostName&quot;:&quot;48190c8c-42c4-46af-8d1a-0cd5db894797&quot;,&quot;modDate&quot;:&quot;2024-06-01T03:03:09.592+00:00&quot;,&quot;title&quot;:&quot;fiji-destinations.jpg&quot;,&quot;contentTypeIcon&quot;:&quot;image&quot;,&quot;baseType&quot;:&quot;DotAsset&quot;,&quot;inode&quot;:&quot;b434f15b-1c20-4247-b88e-87adf022eb9a&quot;,&quot;archived&quot;:false,&quot;working&quot;:true,&quot;locked&quot;:false,&quot;stInode&quot;:&quot;4061db324fdce3993a494c856e76ab1e&quot;,&quot;contentType&quot;:&quot;Images&quot;,&quot;live&quot;:true,&quot;owner&quot;:&quot;dotcms.org.1&quot;,&quot;hasLiveVersion&quot;:true,&quot;folder&quot;:&quot;SYSTEM_FOLDER&quot;,&quot;sortOrder&quot;:0,&quot;modUser&quot;:&quot;dotcms.org.1&quot;,&quot;asset&quot;:&quot;/data/shared/assets/b/4/b434f15b-1c20-4247-b88e-87adf022eb9a/asset/fiji-destinations.jpg&quot;},&quot;target&quot;:null}},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;Dive insurance is highly recommended if you decide to go scuba diving. By law are you forbidden to dive deeper than 27 meters in French Polynesia.&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;Reef Sharks are normally harmless, but They can become dangerous in the presence of food, and they tend to be more aggressive if encountered in open water rather than on the reef. It's not unheard of reef sharks biting people that wading through shallow water.&quot;}]},{&quot;type&quot;:&quot;heading&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;,&quot;level&quot;:2},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;Recommended Products&quot;}]},{&quot;type&quot;:&quot;paragraph&quot;,&quot;attrs&quot;:{&quot;textAlign&quot;:&quot;left&quot;},&quot;content&quot;:[{&quot;type&quot;:&quot;text&quot;,&quot;text&quot;:&quot;If you are ready for the beach trip of your life, you are going to need some things. Take a look at the top 3 recommended products for French Polynesia:&quot;}]},{&quot;type&quot;:&quot;dotContent&quot;,&quot;attrs&quot;:{&quot;data&quot;:{&quot;identifier&quot;:&quot;adf567f9-f8a9-487e-b942-6bc083f677db&quot;,&quot;languageId&quot;:1,&quot;hostName&quot;:&quot;48190c8c-42c4-46af-8d1a-0cd5db894797&quot;,&quot;modDate&quot;:&quot;2020-09-18T21:28:33.069+00:00&quot;,&quot;title&quot;:&quot;Patagonia Boys' Baggies 5\\&quot; Shorts&quot;,&quot;contentTypeIcon&quot;:&quot;inventory&quot;,&quot;baseType&quot;:&quot;CONTENT&quot;,&quot;inode&quot;:&quot;e2f94fef-ea05-4b99-a41c-ad7d06326d82&quot;,&quot;archived&quot;:false,&quot;working&quot;:true,&quot;locked&quot;:false,&quot;stInode&quot;:&quot;a1661fbc-9e84-4c00-bd62-76d633170da3&quot;,&quot;contentType&quot;:&quot;Product&quot;,&quot;live&quot;:true,&quot;owner&quot;:&quot;dotcms.org.1&quot;,&quot;hasLiveVersion&quot;:true,&quot;folder&quot;:&quot;SYSTEM_FOLDER&quot;,&quot;sortOrder&quot;:0,&quot;modUser&quot;:&quot;dotcms.org.1&quot;,&quot;urlTitle&quot;:&quot;patagonia-boys-baggies-5-shorts&quot;,&quot;productNumber&quot;:&quot;9133062261900&quot;,&quot;retailPrice&quot;:&quot;39.00&quot;,&quot;description&quot;:&quot;&lt;p&gt;The Patagonia Boys' Baggies&amp;trade; 5\\&quot; Shorts have an all day comfort regular fitting style. Built from SUPPLEX&amp;reg; 100% nylon (92% recycled) that looks great and is water ready. Featuring elasticized waistband with an internal drawcord for an adjustable fit, quick drying mesh liner, pockets with mesh for drainage and is finished with durable water repellent. The Patagonia Boys' Baggies&amp;trade; 5\\&quot; Shorts are wind and water resistant and waiting for your water adventures.&lt;\\/p&gt;\\n&lt;p&gt;&lt;strong&gt;Features&lt;\\/strong&gt;&lt;\\/p&gt;\\n&lt;ul&gt;\\n&lt;li&gt;Wind- and water-resistant SUPPLEX&amp;reg; recycled nylon dries quickly&lt;\\/li&gt;\\n&lt;li&gt;Elasticized waistband with an internal drawcord for an adjustable fit&lt;\\/li&gt;\\n&lt;li&gt;Quick-drying mesh liner&lt;\\/li&gt;\\n&lt;li&gt;Pockets with mesh for drainage; bartacks on pocket seams for durability&lt;\\/li&gt;\\n&lt;li&gt;DWR (durable water repellent) finish&lt;\\/li&gt;\\n&lt;\\/ul&gt;&quot;,&quot;image&quot;:&quot;/data/shared/assets/e/2/e2f94fef-ea05-4b99-a41c-ad7d06326d82/image/shorts-blue.jpeg&quot;,&quot;image2&quot;:&quot;/data/shared/assets/e/2/e2f94fef-ea05-4b99-a41c-ad7d06326d82/image2/shorts.jpeg&quot;,&quot;image3&quot;:&quot;/data/shared/assets/e/2/e2f94fef-ea05-4b99-a41c-ad7d06326d82/image3/shorts-pattern.jpeg&quot;,&quot;specifications1&quot;:{&quot;Fabric&quot;:&quot;SUPPLEX&reg; 100% nylon (92% recycled)&quot;,&quot;Fit&quot;:&quot;Regular&quot;,&quot;Inseam&quot;:&quot;5&amp;#x22;&quot;}}}},{&quot;type&quot;:&quot;dotContent&quot;,&quot;attrs&quot;:{&quot;data&quot;:{&quot;identifier&quot;:&quot;1f5c10a8-b87d-4889-9289-147f35f074cf&quot;,&quot;languageId&quot;:1,&quot;hostName&quot;:&quot;48190c8c-42c4-46af-8d1a-0cd5db894797&quot;,&quot;modDate&quot;:&quot;2020-09-18T21:27:22.404+00:00&quot;,&quot;title&quot;:&quot;Aqua Sphere Cub Kid Mask Goggles&quot;,&quot;contentTypeIcon&quot;:&quot;inventory&quot;,&quot;baseType&quot;:&quot;CONTENT&quot;,&quot;inode&quot;:&quot;6c8119f9-2336-4a6b-ae8b-cd2f10dd27cb&quot;,&quot;archived&quot;:false,&quot;working&quot;:true,&quot;locked&quot;:false,&quot;stInode&quot;:&quot;a1661fbc-9e84-4c00-bd62-76d633170da3&quot;,&quot;contentType&quot;:&quot;Product&quot;,&quot;live&quot;:true,&quot;owner&quot;:&quot;dotcms.org.1&quot;,&quot;hasLiveVersion&quot;:true,&quot;folder&quot;:&quot;SYSTEM_FOLDER&quot;,&quot;sortOrder&quot;:0,&quot;modUser&quot;:&quot;dotcms.org.1&quot;,&quot;urlTitle&quot;:&quot;aqua-sphere-cub-kid-mask-goggles&quot;,&quot;productNumber&quot;:&quot;0848067892019-7720000&quot;,&quot;retailPrice&quot;:&quot;12.99&quot;,&quot;description&quot;:&quot;&lt;p&gt;The Aqua Sphere Cub Kid Mask Goggles are redefined and durable. The Cub Kid features a shatter resistant PC lens, anti fog material, and quick release three way buckles. Let your young explorer wear this super sleek design for comfort, and a great fit.&lt;\\/p&gt;\\n&lt;p&gt;&lt;strong&gt;Features&lt;\\/strong&gt;&lt;\\/p&gt;\\n&lt;ul&gt;\\n&lt;li&gt;The skirt is designed to fit smaller faces&lt;\\/li&gt;\\n&lt;li&gt;Anti-Fog for ultra clear vision&lt;\\/li&gt;\\n&lt;li&gt;Quick release three-way buckles&lt;\\/li&gt;\\n&lt;\\/ul&gt;&quot;,&quot;image&quot;:&quot;/data/shared/assets/6/c/6c8119f9-2336-4a6b-ae8b-cd2f10dd27cb/image/mask-1.jpeg&quot;,&quot;image2&quot;:&quot;/data/shared/assets/6/c/6c8119f9-2336-4a6b-ae8b-cd2f10dd27cb/image2/mask-2.jpg&quot;,&quot;specifications1&quot;:{}}}},{&quot;type&quot;:&quot;dotContent&quot;,&quot;attrs&quot;:{&quot;data&quot;:{&quot;identifier&quot;:&quot;68456a2b-5e3d-4ebe-8a83-f15dd2a2fa36&quot;,&quot;languageId&quot;:1,&quot;hostName&quot;:&quot;48190c8c-42c4-46af-8d1a-0cd5db894797&quot;,&quot;modDate&quot;:&quot;2020-09-18T21:28:04.280+00:00&quot;,&quot;title&quot;:&quot;O'Neill Men's Hammer 1.5mm Long Sleeve Crew Wetsuit&quot;,&quot;contentTypeIcon&quot;:&quot;inventory&quot;,&quot;baseType&quot;:&quot;CONTENT&quot;,&quot;inode&quot;:&quot;7a31c745-9d0e-465d-b175-2f6ef43ce457&quot;,&quot;archived&quot;:false,&quot;working&quot;:true,&quot;locked&quot;:false,&quot;stInode&quot;:&quot;a1661fbc-9e84-4c00-bd62-76d633170da3&quot;,&quot;contentType&quot;:&quot;Product&quot;,&quot;live&quot;:true,&quot;owner&quot;:&quot;dotcms.org.1&quot;,&quot;hasLiveVersion&quot;:true,&quot;folder&quot;:&quot;SYSTEM_FOLDER&quot;,&quot;sortOrder&quot;:0,&quot;modUser&quot;:&quot;dotcms.org.1&quot;,&quot;urlTitle&quot;:&quot;oneill-mens-hammer-15mm-long-sleeve-crew-wetsuit&quot;,&quot;productNumber&quot;:&quot;0858061871600-0019004&quot;,&quot;retailPrice&quot;:&quot;68.95&quot;,&quot;description&quot;:&quot;&lt;p&gt;The O'Neill Men's Hammer 1.5mm Long Sleeve Crew Wetsuit is nailed for every condition. The Hammer Series maintains exceptional styling, fit and unrestricted movement in each style with 100% Super Stretch materials. Flatlock stitched breathable seams eliminate chafing and the fabric has a UV protection of up to 50 UPF to protect from the sun's harmful rays. This wetsuit features a performance fit that's a form fitting tight layer that fits like a second skin.&lt;\\/p&gt;&quot;,&quot;image&quot;:&quot;/data/shared/assets/7/a/7a31c745-9d0e-465d-b175-2f6ef43ce457/image/wetsuit-1.jpg&quot;,&quot;specifications1&quot;:{}}}}]\"\n             >\n            \n<p style=\"text-align: left;\">\n    <u><strong>Few</strong></u> to no other place in the world has a more exotic feel to its name than what French Polynesia has.\n</p>\n\n<p style=\"text-align: left;\">\n    The tiny island nation that's located halfway between the USA and Australia in the middle of the South Pacific Ocean, a romantic honeymoon destination for some, and an underwater paradise for scuba divers around the world.\n</p>\n\n<h2 style=\"text-align: left;\">\nFrench Polynesia everything you need to know before visiting paradise\n</h2>\n\n<p style=\"text-align: left;\">\n    But French Polynesia got more than enough to offer for everyone. But it should be to no one’s surprise traveling around here will take a bit of planning, especially since the only to travel around is by flights, slow-going ferries or hitchhiking one of the thousands of private owned sailboats they cruise around the crystal clear waters.\n</p>\n<div data-dot-object='vtl-file' data-dot-inode='7ea5202d-4829-4d5d-b4eb-610b59ec6812' data-dot-url='dotImage.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><div class=\"block-image\">\n    <img class=\"img-fluid\" src=\"/dA/86299f7066888fc1241bf601f529ac85/1024maxw/80q/13ro/beach-1838501_960_720.jpg\">\n</div>\n<p style=\"text-align: left;\">\n    French Polynesia for nearly a month by the end of 2018. During my trip did I visit Tahiti – Bora Bora – Moorea – Tahiti – Fakarava – Tahiti, while this is only a fraction of the island, so did It give me some amazing experiences and some hard-learned lessons, that there’s nowhere else in the world quite like French Polynesia.\n</p>\n\n<h2 style=\"text-align: left;\">\nComplete travel guide to French Polynesia\n</h2>\n<h3 style=\"text-align: left;\">\nVisa to French Polynesia?\n</h3>\n\n<p style=\"text-align: left;\">\n    French Polynesia is, obviously, a French overseas territory under the constitution of the <a href=\"https://www.france.fr/en\" target=\"_blank\">French Republic</a> (Police, army, immigration is the same as in mainland France), so arriving in French Polynesia is just as simple as arriving in France for Citizens of western countries. Visa is also not needed for Citizens of all countries in Latin America, Australia, New Zealand, plus Japan, Taiwan, Singapore, Malaysia and South Korea do not need a visa for up to 3 months stay.\n</p>\n<div data-dot-object='vtl-file' data-dot-inode='7ea5202d-4829-4d5d-b4eb-610b59ec6812' data-dot-url='dotImage.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><div class=\"block-image\">\n    <img class=\"img-fluid\" src=\"/dA/276570060fe0cd5e120198152d950eb0/1024maxw/80q/13ro/pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg\">\n</div>\n<p style=\"text-align: left;\">\n    Citizens from countries not available for visa on arrival will have to apply for a visa to French Polynesia from a French Embassy or Consulate in advance. Normal fee is 9 Euro. <strong>A return ticket is required for everyone; you might get asked for it upon arrival at immigration.</strong> \n</p>\n<h3 style=\"text-align: left;\">\nGetting to French Polynesia?\n</h3>\n\n<p style=\"text-align: left;\">\n    The remoteness of French Polynesia makes flying into this paradise the only option if you don’t arrive by your sailboat.\n</p>\n\n<p style=\"text-align: left;\">\n    International Airport (PPT) the only international airport in French Polynesia which is located just outside Papeete on Tahiti, the Capital and biggest city in French Polynesia.\n</p>\n\n<p style=\"text-align: left;\">\n    International Airport (PPT) is served by no more than 9 Airlines, all of which offers international flight.\n</p>\n\n<ul> \n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>Air France</strong> (SkyTeam) : Los Angeles – Lax, Paris – Charles de Gaulle.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>Air New Zealand</strong> (Star Alliance): Auckland.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>Air Tahiti:</strong> Rarotonga Cook Island.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>Air Tahiti Nui</strong>: Paris – Charles de Gaulle, Tokyo – Narita, New Zealand – Auckland, Los Angeles – Lax.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>Aircalin</strong>: Nouméa – New Caledonia.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>French Bee:</strong> San Fransisco, Paris – Orly Airport.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>Hawaiian Airlines</strong>: Honolulu, Hawaii.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>LATAM Chile</strong> (OneWorld): Easter Island, Santiago de Chile.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>United Airline</strong> (Star Alliance) : San Fransisco.</p>  </li>\n</ul>\n\n<p style=\"text-align: left;\">\n    From Europe are flights with Air France through LAX, Los Angeles or with Qatar Airways that has a codeshare agreement with Air New Zealand through Auckland the two most accessible options. If you are stopping by New Zealand on your way to French Polynesia, be sure to check out this post about the best campsites in New Zealand.\n</p>\n\n<p style=\"text-align: left;\">\n    French Polynesia is made up of five archipelagos, all more different, than the other. There are only about 280,000 lucky islanders living on 67 inhabited islands and atolls. With over 70% of the population concentrated on the big island of Tahiti.\n</p>\n\n<p style=\"text-align: left;\">\n    It's important to know that while there are local flights between the islands inside each Archipelago. So will you have to transit through Tahiti when traveling from one archipelago to another.  Be aware that you often will, you have to stay a night in Tahiti before taking your onward flight to the next Archipelago early the next morning. Flights to smaller islands and atolls are often booked out months in advance.\n</p>\n\n<ul> \n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>Marquesas Archipelago</strong>: The best Archipelago to visit for hiking and horseback riding, can go hiking for days, take a swim in belove skyscraper tall waterfalls, or just watch the best handcraft makers in all of French Polynesia.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\">Society Archipelago: The most popular Archipelago in French Polynesia, and home to famous islands like Tahiti, Moorea, Bora Bora and Huahine.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>Tuamotu Archipelago</strong>: Home to Famous Atolls like Rangiroa, Tikehau and Fakarava, the best Scuba Diving in French Polynesia is in the waters here which is classified as UNESCO as a biosphere reserve.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>Gambier Archipelago</strong>: Which is located the furthest away from Tahiti and home to only, 1319 people. Famous for producing the finest pearls in French Polynesia and home to the oldest church in the country. Offer good hiking, virgin nature; the least visited of all the archipelagos in French Polynesia. No Banks & ATM'S here.</p>  </li>\n  <li style=\"text-align: left;\"><p style=\"text-align: left;\"><strong>AustralArchipelago</strong>: Home to the most authentic Polynesian Culture in all of French Polynesia and home to only, 6300 people. Said to have the clearest water in all of French Polynesia, a real of the beaten path destination. The Austral Islands are the southernmost group in French Polynesia. The tiny Raivavae island located here is said to be of the most beautiful in the whole of French Polynesia.</p>  </li>\n</ul>\n<h3 style=\"text-align: left;\">\nSafety in French Polynesia.\n</h3>\n\n<p style=\"text-align: left;\">\n    French Polynesia is one of the safest places in the world, generally speaking, but petty crime, such as pickpocketing and purse snatching, occurs. I did hear of a lot of cases of cars and tent's that had been broken into on Moorea.\n</p>\n\n<p style=\"text-align: left;\">\n    Although there is no malaria in French Polynesia, there are occasional dengue-fever and chikungunya outbreaks spread by mosquitoes. All island I visited had tons of mosquitoes in the evenings.\n</p>\n<div data-dot-object='vtl-file' data-dot-inode='7ea5202d-4829-4d5d-b4eb-610b59ec6812' data-dot-url='dotImage.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><div class=\"block-image\">\n    <img class=\"img-fluid\" src=\"/dA/a77e64e2ad7f349f8008fd3905c45f8b/1024maxw/80q/13ro/fiji-destinations.jpg\">\n</div>\n<p style=\"text-align: left;\">\n    Dive insurance is highly recommended if you decide to go scuba diving. By law are you forbidden to dive deeper than 27 meters in French Polynesia.\n</p>\n\n<p style=\"text-align: left;\">\n    Reef Sharks are normally harmless, but They can become dangerous in the presence of food, and they tend to be more aggressive if encountered in open water rather than on the reef. It's not unheard of reef sharks biting people that wading through shallow water.\n</p>\n\n<h2 style=\"text-align: left;\">\nRecommended Products\n</h2>\n\n<p style=\"text-align: left;\">\n    If you are ready for the beach trip of your life, you are going to need some things. Take a look at the top 3 recommended products for French Polynesia:\n</p>\n<div data-dot-object='vtl-file' data-dot-inode='4de83ab4-d83a-4eb0-bdfb-392fd5b6c52e' data-dot-url='dotContent-product.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><div class=\"blog-contentlet\">\n    <img class=\"blog-contentlet__image\" alt=\"Patagonia Boys' Baggies 5\" Shorts\" src=\"/dA/adf567f9-f8a9-487e-b942-6bc083f677db/370w/20q/\">\n    <div class=\"blog-contentlet__desc\">\n        <h3>Patagonia Boys' Baggies 5\" Shorts</h3>\n        <span><p>The Patagonia Boys' Baggies&trade; 5\" Shorts have an all day comfort regular fitting style. Built from SUPPLEX&reg; 100% nylon (92% recycled) that looks great and is water ready. Featuring elasticized waistband with an internal drawcord for an adjustable fit, quick drying mesh liner, pockets with mesh for drainage and is finished with durable water repellent. The Patagonia Boys' Baggies&trade; 5\" Shorts are wind and water resistant and waiting for your water adventures.</p>\n<p><strong>Features</strong></p>\n<ul>\n<li>Wind- and water-resistant SUPPLEX&reg; recycled nylon dries quickly</li>\n<li>Elasticized waistband with an internal drawcord for an adjustable fit</li>\n<li>Quick-drying mesh liner</li>\n<li>Pockets with mesh for drainage; bartacks on pocket seams for durability</li>\n<li>DWR (durable water repellent) finish</li>\n</ul></span>\n    </div>\n    <div class=\"blog-contentlet__action\">\n                            <span class=\"current-price sale-price\">39.00</span>\n        \t\t<a class=\"button button-primary\" href=\"/store/products/\">Buy</a>\n    </div>\n</div><div data-dot-object='vtl-file' data-dot-inode='4de83ab4-d83a-4eb0-bdfb-392fd5b6c52e' data-dot-url='dotContent-product.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><div class=\"blog-contentlet\">\n    <img class=\"blog-contentlet__image\" alt=\"Aqua Sphere Cub Kid Mask Goggles\" src=\"/dA/1f5c10a8-b87d-4889-9289-147f35f074cf/370w/20q/\">\n    <div class=\"blog-contentlet__desc\">\n        <h3>Aqua Sphere Cub Kid Mask Goggles</h3>\n        <span><p>The Aqua Sphere Cub Kid Mask Goggles are redefined and durable. The Cub Kid features a shatter resistant PC lens, anti fog material, and quick release three way buckles. Let your young explorer wear this super sleek design for comfort, and a great fit.</p>\n<p><strong>Features</strong></p>\n<ul>\n<li>The skirt is designed to fit smaller faces</li>\n<li>Anti-Fog for ultra clear vision</li>\n<li>Quick release three-way buckles</li>\n</ul></span>\n    </div>\n    <div class=\"blog-contentlet__action\">\n                            <span class=\"current-price sale-price\">12.99</span>\n        \t\t<a class=\"button button-primary\" href=\"/store/products/\">Buy</a>\n    </div>\n</div><div data-dot-object='vtl-file' data-dot-inode='4de83ab4-d83a-4eb0-bdfb-392fd5b6c52e' data-dot-url='dotContent-product.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><div class=\"blog-contentlet\">\n    <img class=\"blog-contentlet__image\" alt=\"O'Neill Men's Hammer 1.5mm Long Sleeve Crew Wetsuit\" src=\"/dA/68456a2b-5e3d-4ebe-8a83-f15dd2a2fa36/370w/20q/\">\n    <div class=\"blog-contentlet__desc\">\n        <h3>O'Neill Men's Hammer 1.5mm Long Sleeve Crew Wetsuit</h3>\n        <span><p>The O'Neill Men's Hammer 1.5mm Long Sleeve Crew Wetsuit is nailed for every condition. The Hammer Series maintains exceptional styling, fit and unrestricted movement in each style with 100% Super Stretch materials. Flatlock stitched breathable seams eliminate chafing and the fabric has a UV protection of up to 50 UPF to protect from the sun's harmful rays. This wetsuit features a performance fit that's a form fitting tight layer that fits like a second skin.</p></span>\n    </div>\n    <div class=\"blog-contentlet__action\">\n                            <span class=\"current-price sale-price\">68.95</span>\n        \t\t<a class=\"button button-primary\" href=\"/store/products/\">Buy</a>\n    </div>\n</div>\n        </div>\n\n        <!-- SOCIAL SHARES -->\n        <div class=\"group-xl text-center\">\n            <a class=\"button button-md button-facebook button-icon button-icon-left button-leaf\" href=\"https://www.facebook.com/dotCMS/\"><span class=\"icon mdi mdi-facebook\"></span>Facebook</a>\n            <a class=\"button button-md button-twitter button-icon button-icon-left button-leaf\" href=\"https://twitter.com/dotcms\"><span class=\"icon mdi mdi-twitter\"></span>Twitter</a>\n            <a class=\"button button-md button-linkedin button-icon button-icon-left button-leaf\" href=\"https://www.linkedin.com/company/2307658/\"><span class=\"icon mdi mdi-linkedin\"></span>LinkedIn</a>\n        </div>\n    </div>\n\n    <!-- COMMENTS -->\n    <div id=\"comments\" class=\"pt-5 mt-5\">\n        <div data-dot-object='vtl-file' data-dot-inode='4fbf7e89-0a90-4d92-896d-d6fc03c40d7e' data-dot-url='comments.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div>\n\n\n<div data-dot-object='vtl-file' data-dot-inode='e6cd225d-e415-4983-a4c2-32c8f5dd18dd' data-dot-url='relatedblogcomments.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><div class=\"row\">\n    <div class=\"col\"><h2>Comments</h2></div>\n    <div class=\"col text-right\"><a href=\"#webup\" class=\"button button-md button-primary button-leaf\" id=\"addComment\"><span class=\"mdi mdi-plus\"></span> Comment</a></div>\n</div>\n\n\n\n<div data-dot-object='vtl-file' data-dot-inode='47ed683c-0dcb-45cb-b82c-0b80082bd33b' data-dot-url='newblogcomment.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div>\n\n\n<div class=\"row mt-5 pt-5\">\n  <div class=\"col-lg-12\">\n    <h2 id=\"comments\" class=\"mb-2\">Leave a Comment</h2>\n\n    <form id=\"webup\">\n      <input type=\"hidden\" id=\"blogTitle\" name=\"blogTitle\" value=\"French Polynesia Everything You Need to Know\">\n      <input type=\"hidden\" id=\"blogId\" name=\"blogId\" value=\"2b100ac7-07b1-48c6-8270-dc01ff958c69\">\n      <input type=\"hidden\" id=\"commenterId\" name=\"commenterId\" value=\"dotcms.org.1\">\n      <input type=\"hidden\" id=\"todayDateTime\" name=\"today\" value=\"02/20/25 18:34:33\">\n      <input type=\"hidden\" id=\"returnUrl\" name=\"returnUrl\" value=\"/blog/post/french-polynesia-everything-you-need-to-know#comments\">\n      <div class=\"form-wrap\">\n        <label class=\"form-label rd-input-label sr-only\" for=\"contact-message\">Message</label>\n        <textarea class=\"form-input form-control-has-validation form-control-last-child\" id=\"commentBody\" name=\"commentBody\" placeholder=\"Type a comment about this blog. Your feedback is appreciated\"></textarea>\n      </div> \n      <input type=\"submit\" class=\"button button-primary\" value=\"Submit\">\n    </form>\n    \n  </div>\n</div>    </div>\n\n    \n\n</div></div><div data-dot-object='vtl-file' data-dot-inode='23654d34-8259-4ff9-9ec5-9ba1dbaa5c6b' data-dot-url='postloop.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><div></div>\n                                    </div><!-- Column -->\n\n                                                        </div><!-- /row -->\n                            </div><!-- /container -->\n                        </section><!-- /section -->\n                                                                            \n                                                    </div><!-- /body-wrapper -->\n\n            <div data-dot-object='vtl-file' data-dot-inode='564a6c23-8bed-463d-9866-a24c260cddf0' data-dot-url='footer.vtl' data-dot-can-read='true' data-dot-can-edit='true'></div><!-- Page Footer-->\n\n\n\n\n<footer class=\"footer-classic bg-footer bg-overlay-80 context-dark\" style=\"background-image: url('/dA/716dcfa9-537d-419a-837f-73084a499cf3/fileAsset/1200w/50q/bg-footer.jpg')\" >\n  <div class=\"section-xxl\">\n    <div class=\"container\">\n      <div class=\"row row-50 justify-content-center\">\n        <div class=\"col-lg-4\">\n          <h2>About us</h2>\n          <p class=\"max-width-xl-90 text-gray-400\">We are TravelLux, a community of dedicated travel experts, journalists, and bloggers. Our aim is to offer you the best insight on where to go for your travel as well as to give you amazing opportunities with free benefits and bonuses for registered clients.</p>\n          <a class=\"footer-brand\" href=\"/\"><img src=\"/application/themes/travel/images/logo-white.png\" alt=\"TravelLux Home\" height=\"40\"/></a>\n        </div>\n\n\n        <div class=\"col-sm-8 col-md-6 col-lg-4\">\n          <h2>Latest blog posts</h2>\n          \n          <!-- Latest Blogs -->\n                      <div class=\"unit unit-spacing-lg\">\n              <div class=\"unit-left\"><a href=\"/blog/post/ecotourism-in-costa-rica\"><img src=\"/dA/a7df3f39-a18a-4b16-b369-aa9d7acb0b27/image/70w/sloth-1879999_960_720.jpg\" alt=\"Ecotourism in Costa Rica\" width=\"70\" height=\"70\"></a></div>\n              <div class=\"unit-body\">\n                <h6><a href=\"/blog/post/ecotourism-in-costa-rica\">Ecotourism in Costa Rica</a></h6>\n                <time datetime=\"2024-09-02 9:33 PM\">September 02, 2024</time>\n              </div>\n            </div>\n                      <div class=\"unit unit-spacing-lg\">\n              <div class=\"unit-left\"><a href=\"/blog/post/french-polynesia-everything-you-need-to-know\"><img src=\"/dA/2b100ac7-07b1-48c6-8270-dc01ff958c69/image/70w/bora-bora-french-polynesia.jpeg\" alt=\"French Polynesia Everything You Need to Know\" width=\"70\" height=\"70\"></a></div>\n              <div class=\"unit-body\">\n                <h6><a href=\"/blog/post/french-polynesia-everything-you-need-to-know\">French Polynesia Everything You Need to Know</a></h6>\n                <time datetime=\"2024-02-10 9:59 PM\">February 10, 2024</time>\n              </div>\n            </div>\n                      <div class=\"unit unit-spacing-lg\">\n              <div class=\"unit-left\"><a href=\"/blog/post/10-surfing-spots-to-checkout-in-tahiti\"><img src=\"/dA/e7ceee89-3cc5-4e35-9795-5927ac88ad89/image/70w/tahiti-surf.jpeg\" alt=\"10 Surfing spots to checkout in Tahiti\" width=\"70\" height=\"70\"></a></div>\n              <div class=\"unit-body\">\n                <h6><a href=\"/blog/post/10-surfing-spots-to-checkout-in-tahiti\">10 Surfing spots to checkout in Tahiti</a></h6>\n                <time datetime=\"2024-01-30 5:45 PM\">January 30, 2024</time>\n              </div>\n            </div>\n                    \n        </div>\n        <div class=\"col-sm-8 col-md-6 col-lg-4\">\n          <h2>Get in touch</h2>\n          <form class=\"rd-form form-sm rd-mailform\" data-form-output=\"form-output-global\" data-form-type=\"contact\" method=\"post\" action=\"\">\n            <div class=\"form-wrap\">\n              <input class=\"form-input\" id=\"footer-form-name\" type=\"text\" name=\"name\" data-constraints=\"@Required\">\n              <label class=\"form-label\" for=\"footer-form-name\">Name</label>\n            </div>\n            <div class=\"form-wrap\">\n              <input class=\"form-input\" id=\"footer-form-email\" type=\"email\" name=\"email\" data-constraints=\"@Email @Required\">\n              <label class=\"form-label\" for=\"footer-form-email\">E-mail</label>\n            </div>\n            <div class=\"form-wrap\">\n              <label class=\"form-label\" for=\"footer-form-message\">Message</label>\n              <textarea class=\"form-input\" id=\"footer-form-message\" name=\"message\" data-constraints=\"@Required\"></textarea>\n            </div>\n            <div class=\"form-wrap\">\n              <button class=\"button button-md button-primary\" type=\"submit\">Send</button>\n            </div>\n          </form>\n        </div>\n      </div>\n    </div>\n  </div>\n  <div class=\"container\">\n    <!-- Rights-->\n    <p class=\"rights mb-0\"><span>©2012 - 2025 All Rights Reserved</span> <a href=\"https://dotcms.com/company/policies/privacy-policy\">Terms of Use</a> <span>and</span> <a href=\"https://dotcms.com/company/policies/privacy-policy\">Privacy Policy</a></p>\n  </div>\n</footer>\n\n<!-- Javascript-->\n<script src=\"/application/themes/travel/js/core.min.js\"></script>\n<script src=\"/application/themes/travel/js/script.js\"></script>\n\n    \n</body>\n</html>"
+  },
+  "urlContentMap" : {
+    "pageTitle" : "French Polynesia Everything You Need to Know",
+    "ogTitle" : "French Polynesia Everything You Need to Know",
+    "publishDate" : 1723055088121,
+    "postingDate" : 1707602340000,
+    "metaDescription" : "Discover the exotic paradise of French Polynesia! Located in the South Pacific Ocean, this romantic honeymoon destination offers crystal clear waters and incredible scuba diving opportunities. Plan your trip carefully, as travel options are limited to flights, ferries, or hitchhiking on private sailboats. This complete travel guide provides everything you need to know about visas, getting to French Polynesia, and exploring its five unique archipelagos. Experience the authentic Polynesian culture, stunning landscapes, and unbeatable beaches. Ensure your safety with dive insurance and stay aware of petty crimes and mosquito-borne illnesses. Get ready for the beach trip of a lifetime!",
+    "ogType" : "article",
+    "inode" : "4b337160-a5a3-42a7-b272-7b506603cb72",
+    "host" : "48190c8c-42c4-46af-8d1a-0cd5db894797",
+    "locked" : false,
+    "stInode" : "799f176a-d32e-4844-a07c-1b5fcd107578",
+    "contentType" : "Blog",
+    "sitemap" : "true",
+    "identifier" : "2b100ac7-07b1-48c6-8270-dc01ff958c69",
+    "image" : "1f515feb61157aeb08d755d52ec38438",
+    "urlTitle" : "french-polynesia-everything-you-need-to-know",
+    "author" : [ {
+      "publishDate" : "2020-09-17 14:20:07.156",
+      "language" : {
+        "languageId" : 1,
+        "language" : "English",
+        "languageCode" : "en",
+        "country" : "United States",
+        "countryCode" : "US",
+        "languageFlag" : "en_US",
+        "isoCode" : "en-us",
+        "id" : 1
+      },
+      "inode" : "da883772-bc17-4adb-9e04-b49ffaafc792",
+      "profilePhotoVersion" : "/dA/da883772-bc17-4adb-9e04-b49ffaafc792/profilePhoto/john-smith.jpg",
+      "profilePhoto" : "/dA/f851e34a-d128-408e-a75a-4fa1c33201b8/profilePhoto/john-smith.jpg",
+      "host" : "48190c8c-42c4-46af-8d1a-0cd5db894797",
+      "locked" : false,
+      "stInode" : "045d0b52-fa68-465a-b820-f9fc22febc50",
+      "contentType" : "BlogAuthor",
+      "identifier" : "f851e34a-d128-408e-a75a-4fa1c33201b8",
+      "profilePhotoContentAsset" : "f851e34a-d128-408e-a75a-4fa1c33201b8/profilePhoto",
+      "publishUserName" : "Admin User",
+      "publishUser" : "dotcms.org.1",
+      "creationDate" : "2020-09-17 14:20:07.112",
+      "firstName" : "John",
+      "folder" : "SYSTEM_FOLDER",
+      "hasTitleImage" : true,
+      "sortOrder" : 0,
+      "lastName" : "Smith",
+      "hostName" : "demo.dotcms.com",
+      "modDate" : "2020-09-17 14:20:07.111",
+      "title" : "John",
+      "profilePhotoMetaData" : {
+        "modDate" : 1740052935543,
+        "sha256" : "b1aa20d9c5420987d2503db6eea29074f478e6b63d73dbf6f48f8db39448303b",
+        "length" : 2800,
+        "title" : "john-smith.jpg",
+        "editableAsText" : false,
+        "version" : 20220201,
+        "isImage" : true,
+        "fileSize" : 2800,
+        "name" : "john-smith.jpg",
+        "width" : 80,
+        "contentType" : "image/jpeg",
+        "height" : 80
+      },
+      "baseType" : "CONTENT",
+      "archived" : false,
+      "ownerName" : "Admin User",
+      "working" : true,
+      "live" : true,
+      "owner" : "dotcms.org.1",
+      "languageId" : 1,
+      "userId" : "036fd43a-6d98-46e0-b22e-bae02cb86f0c",
+      "shortyId" : "f851e34ad1",
+      "url" : "/content.2c85ccae-0c95-4904-a58e-105e83caf0de",
+      "titleImage" : "profilePhoto",
+      "modUserName" : "Admin User",
+      "hasLiveVersion" : true,
+      "modUser" : "dotcms.org.1",
+      "__icon__" : "contentIcon",
+      "contentTypeIcon" : "person",
+      "variant" : "DEFAULT"
+    } ],
+    "publishUserName" : "Admin User",
+    "publishUser" : "dotcms.org.1",
+    "creationDate" : 1599065014976,
+    "tags" : "vaction,french polynesia,waterenthusiast",
+    "sitemapImportance" : "0.5",
+    "folder" : "SYSTEM_FOLDER",
+    "hasTitleImage" : true,
+    "sortOrder" : 0,
+    "hostName" : "demo.dotcms.com",
+    "modDate" : 1723055087909,
+    "searchEngineIndex" : "index,follow,snippet",
+    "blogContent" : {
+      "type" : "doc",
+      "content" : [ {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "marks" : [ {
+            "type" : "underline"
+          }, {
+            "type" : "bold"
+          } ],
+          "text" : "Few"
+        }, {
+          "type" : "text",
+          "text" : " to no other place in the world has a more exotic feel to its name than what French Polynesia has."
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "The tiny island nation that's located halfway between the USA and Australia in the middle of the South Pacific Ocean, a romantic honeymoon destination for some, and an underwater paradise for scuba divers around the world."
+        } ]
+      }, {
+        "type" : "heading",
+        "attrs" : {
+          "textAlign" : "left",
+          "level" : 2
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "French Polynesia everything you need to know before visiting paradise"
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "But French Polynesia got more than enough to offer for everyone. But it should be to no one’s surprise traveling around here will take a bit of planning, especially since the only to travel around is by flights, slow-going ferries or hitchhiking one of the thousands of private owned sailboats they cruise around the crystal clear waters."
+        } ]
+      }, {
+        "type" : "dotImage",
+        "attrs" : {
+          "textAlign" : "left",
+          "src" : "/dA/86299f7066888fc1241bf601f529ac85/asset/beach-1838501_960_720.jpg?language_id=1",
+          "alt" : "beach-1838501_960_720.jpg",
+          "title" : "beach-1838501_960_720.jpg",
+          "href" : null,
+          "data" : {
+            "identifier" : "86299f7066888fc1241bf601f529ac85",
+            "languageId" : 1,
+            "hostName" : "48190c8c-42c4-46af-8d1a-0cd5db894797",
+            "modDate" : "2024-06-03T19:49:35.290+00:00",
+            "title" : "beach-1838501_960_720.jpg",
+            "contentTypeIcon" : "image",
+            "baseType" : "DotAsset",
+            "inode" : "8f26cc2d-4c7b-4f01-b02c-0ce9176c8028",
+            "archived" : false,
+            "working" : true,
+            "locked" : false,
+            "stInode" : "4061db324fdce3993a494c856e76ab1e",
+            "contentType" : "Images",
+            "live" : true,
+            "owner" : "dotcms.org.1",
+            "hasLiveVersion" : true,
+            "folder" : "SYSTEM_FOLDER",
+            "sortOrder" : 0,
+            "modUser" : "dotcms.org.1",
+            "asset" : "/data/shared/assets/8/f/8f26cc2d-4c7b-4f01-b02c-0ce9176c8028/asset/beach-1838501_960_720.jpg"
+          },
+          "target" : null
+        }
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "French Polynesia for nearly a month by the end of 2018. During my trip did I visit Tahiti – Bora Bora – Moorea – Tahiti – Fakarava – Tahiti, while this is only a fraction of the island, so did It give me some amazing experiences and some hard-learned lessons, that there’s nowhere else in the world quite like French Polynesia."
+        } ]
+      }, {
+        "type" : "heading",
+        "attrs" : {
+          "textAlign" : "left",
+          "level" : 2
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "Complete travel guide to French Polynesia"
+        } ]
+      }, {
+        "type" : "heading",
+        "attrs" : {
+          "textAlign" : "left",
+          "level" : 3
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "Visa to French Polynesia?"
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "French Polynesia is, obviously, a French overseas territory under the constitution of the "
+        }, {
+          "type" : "text",
+          "marks" : [ {
+            "type" : "link",
+            "attrs" : {
+              "href" : "https://www.france.fr/en",
+              "target" : "_blank",
+              "rel" : "noopener noreferrer nofollow",
+              "class" : null
+            }
+          } ],
+          "text" : "French Republic"
+        }, {
+          "type" : "text",
+          "text" : " (Police, army, immigration is the same as in mainland France), so arriving in French Polynesia is just as simple as arriving in France for Citizens of western countries. Visa is also not needed for Citizens of all countries in Latin America, Australia, New Zealand, plus Japan, Taiwan, Singapore, Malaysia and South Korea do not need a visa for up to 3 months stay."
+        } ]
+      }, {
+        "type" : "dotImage",
+        "attrs" : {
+          "textAlign" : "left",
+          "src" : "/dA/276570060fe0cd5e120198152d950eb0/asset/pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg?language_id=1",
+          "alt" : "pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg",
+          "title" : "pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg",
+          "href" : null,
+          "data" : {
+            "identifier" : "276570060fe0cd5e120198152d950eb0",
+            "languageId" : 1,
+            "hostName" : "48190c8c-42c4-46af-8d1a-0cd5db894797",
+            "modDate" : "2024-06-04T18:53:52.350+00:00",
+            "title" : "pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg",
+            "contentTypeIcon" : "image",
+            "baseType" : "DotAsset",
+            "inode" : "b6fab593-81f1-46f1-bb52-70b57d474d10",
+            "archived" : false,
+            "working" : true,
+            "locked" : false,
+            "stInode" : "4061db324fdce3993a494c856e76ab1e",
+            "contentType" : "Images",
+            "live" : true,
+            "owner" : "dotcms.org.1",
+            "hasLiveVersion" : true,
+            "folder" : "SYSTEM_FOLDER",
+            "sortOrder" : 0,
+            "modUser" : "dotcms.org.1",
+            "asset" : "/data/shared/assets/b/6/b6fab593-81f1-46f1-bb52-70b57d474d10/asset/pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg"
+          },
+          "target" : null
+        }
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "Citizens from countries not available for visa on arrival will have to apply for a visa to French Polynesia from a French Embassy or Consulate in advance. Normal fee is 9 Euro. "
+        }, {
+          "type" : "text",
+          "marks" : [ {
+            "type" : "bold"
+          } ],
+          "text" : "A return ticket is required for everyone; you might get asked for it upon arrival at immigration."
+        }, {
+          "type" : "text",
+          "text" : " "
+        } ]
+      }, {
+        "type" : "heading",
+        "attrs" : {
+          "textAlign" : "left",
+          "level" : 3
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "Getting to French Polynesia?"
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "The remoteness of French Polynesia makes flying into this paradise the only option if you don’t arrive by your sailboat."
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "International Airport (PPT) the only international airport in French Polynesia which is located just outside Papeete on Tahiti, the Capital and biggest city in French Polynesia."
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "International Airport (PPT) is served by no more than 9 Airlines, all of which offers international flight."
+        } ]
+      }, {
+        "type" : "bulletList",
+        "content" : [ {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "Air France"
+            }, {
+              "type" : "text",
+              "text" : " (SkyTeam) : Los Angeles – Lax, Paris – Charles de Gaulle."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "Air New Zealand"
+            }, {
+              "type" : "text",
+              "text" : " (Star Alliance): Auckland."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "Air Tahiti:"
+            }, {
+              "type" : "text",
+              "text" : " Rarotonga Cook Island."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "Air Tahiti Nui"
+            }, {
+              "type" : "text",
+              "text" : ": Paris – Charles de Gaulle, Tokyo – Narita, New Zealand – Auckland, Los Angeles – Lax."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "Aircalin"
+            }, {
+              "type" : "text",
+              "text" : ": Nouméa – New Caledonia."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "French Bee:"
+            }, {
+              "type" : "text",
+              "text" : " San Fransisco, Paris – Orly Airport."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "Hawaiian Airlines"
+            }, {
+              "type" : "text",
+              "text" : ": Honolulu, Hawaii."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "LATAM Chile"
+            }, {
+              "type" : "text",
+              "text" : " (OneWorld): Easter Island, Santiago de Chile."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "United Airline"
+            }, {
+              "type" : "text",
+              "text" : " (Star Alliance) : San Fransisco."
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "From Europe are flights with Air France through LAX, Los Angeles or with Qatar Airways that has a codeshare agreement with Air New Zealand through Auckland the two most accessible options. If you are stopping by New Zealand on your way to French Polynesia, be sure to check out this post about the best campsites in New Zealand."
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "French Polynesia is made up of five archipelagos, all more different, than the other. There are only about 280,000 lucky islanders living on 67 inhabited islands and atolls. With over 70% of the population concentrated on the big island of Tahiti."
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "It's important to know that while there are local flights between the islands inside each Archipelago. So will you have to transit through Tahiti when traveling from one archipelago to another.  Be aware that you often will, you have to stay a night in Tahiti before taking your onward flight to the next Archipelago early the next morning. Flights to smaller islands and atolls are often booked out months in advance."
+        } ]
+      }, {
+        "type" : "bulletList",
+        "content" : [ {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "Marquesas Archipelago"
+            }, {
+              "type" : "text",
+              "text" : ": The best Archipelago to visit for hiking and horseback riding, can go hiking for days, take a swim in belove skyscraper tall waterfalls, or just watch the best handcraft makers in all of French Polynesia."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "text" : "Society Archipelago: The most popular Archipelago in French Polynesia, and home to famous islands like Tahiti, Moorea, Bora Bora and Huahine."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "Tuamotu Archipelago"
+            }, {
+              "type" : "text",
+              "text" : ": Home to Famous Atolls like Rangiroa, Tikehau and Fakarava, the best Scuba Diving in French Polynesia is in the waters here which is classified as UNESCO as a biosphere reserve."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "Gambier Archipelago"
+            }, {
+              "type" : "text",
+              "text" : ": Which is located the furthest away from Tahiti and home to only, 1319 people. Famous for producing the finest pearls in French Polynesia and home to the oldest church in the country. Offer good hiking, virgin nature; the least visited of all the archipelagos in French Polynesia. No Banks & ATM'S here."
+            } ]
+          } ]
+        }, {
+          "type" : "listItem",
+          "attrs" : {
+            "textAlign" : "left"
+          },
+          "content" : [ {
+            "type" : "paragraph",
+            "attrs" : {
+              "textAlign" : "left"
+            },
+            "content" : [ {
+              "type" : "text",
+              "marks" : [ {
+                "type" : "bold"
+              } ],
+              "text" : "AustralArchipelago"
+            }, {
+              "type" : "text",
+              "text" : ": Home to the most authentic Polynesian Culture in all of French Polynesia and home to only, 6300 people. Said to have the clearest water in all of French Polynesia, a real of the beaten path destination. The Austral Islands are the southernmost group in French Polynesia. The tiny Raivavae island located here is said to be of the most beautiful in the whole of French Polynesia."
+            } ]
+          } ]
+        } ]
+      }, {
+        "type" : "heading",
+        "attrs" : {
+          "textAlign" : "left",
+          "level" : 3
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "Safety in French Polynesia."
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "French Polynesia is one of the safest places in the world, generally speaking, but petty crime, such as pickpocketing and purse snatching, occurs. I did hear of a lot of cases of cars and tent's that had been broken into on Moorea."
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "Although there is no malaria in French Polynesia, there are occasional dengue-fever and chikungunya outbreaks spread by mosquitoes. All island I visited had tons of mosquitoes in the evenings."
+        } ]
+      }, {
+        "type" : "dotImage",
+        "attrs" : {
+          "textAlign" : "left",
+          "src" : "/dA/a77e64e2ad7f349f8008fd3905c45f8b/asset/fiji-destinations.jpg?language_id=1",
+          "alt" : "fiji-destinations.jpg",
+          "title" : "fiji-destinations.jpg",
+          "href" : null,
+          "data" : {
+            "identifier" : "a77e64e2ad7f349f8008fd3905c45f8b",
+            "languageId" : 1,
+            "hostName" : "48190c8c-42c4-46af-8d1a-0cd5db894797",
+            "modDate" : "2024-06-01T03:03:09.592+00:00",
+            "title" : "fiji-destinations.jpg",
+            "contentTypeIcon" : "image",
+            "baseType" : "DotAsset",
+            "inode" : "b434f15b-1c20-4247-b88e-87adf022eb9a",
+            "archived" : false,
+            "working" : true,
+            "locked" : false,
+            "stInode" : "4061db324fdce3993a494c856e76ab1e",
+            "contentType" : "Images",
+            "live" : true,
+            "owner" : "dotcms.org.1",
+            "hasLiveVersion" : true,
+            "folder" : "SYSTEM_FOLDER",
+            "sortOrder" : 0,
+            "modUser" : "dotcms.org.1",
+            "asset" : "/data/shared/assets/b/4/b434f15b-1c20-4247-b88e-87adf022eb9a/asset/fiji-destinations.jpg"
+          },
+          "target" : null
+        }
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "Dive insurance is highly recommended if you decide to go scuba diving. By law are you forbidden to dive deeper than 27 meters in French Polynesia."
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "Reef Sharks are normally harmless, but They can become dangerous in the presence of food, and they tend to be more aggressive if encountered in open water rather than on the reef. It's not unheard of reef sharks biting people that wading through shallow water."
+        } ]
+      }, {
+        "type" : "heading",
+        "attrs" : {
+          "textAlign" : "left",
+          "level" : 2
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "Recommended Products"
+        } ]
+      }, {
+        "type" : "paragraph",
+        "attrs" : {
+          "textAlign" : "left"
+        },
+        "content" : [ {
+          "type" : "text",
+          "text" : "If you are ready for the beach trip of your life, you are going to need some things. Take a look at the top 3 recommended products for French Polynesia:"
+        } ]
+      }, {
+        "type" : "dotContent",
+        "attrs" : {
+          "data" : {
+            "identifier" : "adf567f9-f8a9-487e-b942-6bc083f677db",
+            "languageId" : 1,
+            "hostName" : "48190c8c-42c4-46af-8d1a-0cd5db894797",
+            "modDate" : "2020-09-18T21:28:33.069+00:00",
+            "title" : "Patagonia Boys' Baggies 5\" Shorts",
+            "contentTypeIcon" : "inventory",
+            "baseType" : "CONTENT",
+            "inode" : "e2f94fef-ea05-4b99-a41c-ad7d06326d82",
+            "archived" : false,
+            "working" : true,
+            "locked" : false,
+            "stInode" : "a1661fbc-9e84-4c00-bd62-76d633170da3",
+            "contentType" : "Product",
+            "live" : true,
+            "owner" : "dotcms.org.1",
+            "hasLiveVersion" : true,
+            "folder" : "SYSTEM_FOLDER",
+            "sortOrder" : 0,
+            "modUser" : "dotcms.org.1",
+            "urlTitle" : "patagonia-boys-baggies-5-shorts",
+            "productNumber" : "9133062261900",
+            "retailPrice" : "39.00",
+            "description" : "<p>The Patagonia Boys' Baggies&trade; 5\" Shorts have an all day comfort regular fitting style. Built from SUPPLEX&reg; 100% nylon (92% recycled) that looks great and is water ready. Featuring elasticized waistband with an internal drawcord for an adjustable fit, quick drying mesh liner, pockets with mesh for drainage and is finished with durable water repellent. The Patagonia Boys' Baggies&trade; 5\" Shorts are wind and water resistant and waiting for your water adventures.</p>\n<p><strong>Features</strong></p>\n<ul>\n<li>Wind- and water-resistant SUPPLEX&reg; recycled nylon dries quickly</li>\n<li>Elasticized waistband with an internal drawcord for an adjustable fit</li>\n<li>Quick-drying mesh liner</li>\n<li>Pockets with mesh for drainage; bartacks on pocket seams for durability</li>\n<li>DWR (durable water repellent) finish</li>\n</ul>",
+            "image" : "/data/shared/assets/e/2/e2f94fef-ea05-4b99-a41c-ad7d06326d82/image/shorts-blue.jpeg",
+            "image2" : "/data/shared/assets/e/2/e2f94fef-ea05-4b99-a41c-ad7d06326d82/image2/shorts.jpeg",
+            "image3" : "/data/shared/assets/e/2/e2f94fef-ea05-4b99-a41c-ad7d06326d82/image3/shorts-pattern.jpeg",
+            "specifications1" : {
+              "Fabric" : "SUPPLEX® 100% nylon (92% recycled)",
+              "Fit" : "Regular",
+              "Inseam" : "5&#x22;"
+            }
+          }
+        }
+      }, {
+        "type" : "dotContent",
+        "attrs" : {
+          "data" : {
+            "identifier" : "1f5c10a8-b87d-4889-9289-147f35f074cf",
+            "languageId" : 1,
+            "hostName" : "48190c8c-42c4-46af-8d1a-0cd5db894797",
+            "modDate" : "2020-09-18T21:27:22.404+00:00",
+            "title" : "Aqua Sphere Cub Kid Mask Goggles",
+            "contentTypeIcon" : "inventory",
+            "baseType" : "CONTENT",
+            "inode" : "6c8119f9-2336-4a6b-ae8b-cd2f10dd27cb",
+            "archived" : false,
+            "working" : true,
+            "locked" : false,
+            "stInode" : "a1661fbc-9e84-4c00-bd62-76d633170da3",
+            "contentType" : "Product",
+            "live" : true,
+            "owner" : "dotcms.org.1",
+            "hasLiveVersion" : true,
+            "folder" : "SYSTEM_FOLDER",
+            "sortOrder" : 0,
+            "modUser" : "dotcms.org.1",
+            "urlTitle" : "aqua-sphere-cub-kid-mask-goggles",
+            "productNumber" : "0848067892019-7720000",
+            "retailPrice" : "12.99",
+            "description" : "<p>The Aqua Sphere Cub Kid Mask Goggles are redefined and durable. The Cub Kid features a shatter resistant PC lens, anti fog material, and quick release three way buckles. Let your young explorer wear this super sleek design for comfort, and a great fit.</p>\n<p><strong>Features</strong></p>\n<ul>\n<li>The skirt is designed to fit smaller faces</li>\n<li>Anti-Fog for ultra clear vision</li>\n<li>Quick release three-way buckles</li>\n</ul>",
+            "image" : "/data/shared/assets/6/c/6c8119f9-2336-4a6b-ae8b-cd2f10dd27cb/image/mask-1.jpeg",
+            "image2" : "/data/shared/assets/6/c/6c8119f9-2336-4a6b-ae8b-cd2f10dd27cb/image2/mask-2.jpg",
+            "specifications1" : { }
+          }
+        }
+      }, {
+        "type" : "dotContent",
+        "attrs" : {
+          "data" : {
+            "identifier" : "68456a2b-5e3d-4ebe-8a83-f15dd2a2fa36",
+            "languageId" : 1,
+            "hostName" : "48190c8c-42c4-46af-8d1a-0cd5db894797",
+            "modDate" : "2020-09-18T21:28:04.280+00:00",
+            "title" : "O'Neill Men's Hammer 1.5mm Long Sleeve Crew Wetsuit",
+            "contentTypeIcon" : "inventory",
+            "baseType" : "CONTENT",
+            "inode" : "7a31c745-9d0e-465d-b175-2f6ef43ce457",
+            "archived" : false,
+            "working" : true,
+            "locked" : false,
+            "stInode" : "a1661fbc-9e84-4c00-bd62-76d633170da3",
+            "contentType" : "Product",
+            "live" : true,
+            "owner" : "dotcms.org.1",
+            "hasLiveVersion" : true,
+            "folder" : "SYSTEM_FOLDER",
+            "sortOrder" : 0,
+            "modUser" : "dotcms.org.1",
+            "urlTitle" : "oneill-mens-hammer-15mm-long-sleeve-crew-wetsuit",
+            "productNumber" : "0858061871600-0019004",
+            "retailPrice" : "68.95",
+            "description" : "<p>The O'Neill Men's Hammer 1.5mm Long Sleeve Crew Wetsuit is nailed for every condition. The Hammer Series maintains exceptional styling, fit and unrestricted movement in each style with 100% Super Stretch materials. Flatlock stitched breathable seams eliminate chafing and the fabric has a UV protection of up to 50 UPF to protect from the sun's harmful rays. This wetsuit features a performance fit that's a form fitting tight layer that fits like a second skin.</p>",
+            "image" : "/data/shared/assets/7/a/7a31c745-9d0e-465d-b175-2f6ef43ce457/image/wetsuit-1.jpg",
+            "specifications1" : { }
+          }
+        }
+      } ]
+    },
+    "title" : "French Polynesia Everything You Need to Know",
+    "baseType" : "CONTENT",
+    "archived" : false,
+    "ownerName" : "Admin User",
+    "working" : true,
+    "live" : true,
+    "owner" : "dotcms.org.1",
+    "languageId" : 1,
+    "URL_MAP_FOR_CONTENT" : "/blog/post/french-polynesia-everything-you-need-to-know",
+    "ogDescription" : "The linked webpage provides a comprehensive overview of French Polynesia, covering its stunning islands, vibrant culture, and diverse attractions. It highlights the enchanting beauty of Bora Bora and Tahiti, shares insights into Polynesian traditions and cuisine, and offers practical travel tips for an unforgettable experience in this tropical paradise.",
+    "shortyId" : "2b100ac707",
+    "url" : "/content.ec5c6e2f-4266-4ff8-adfc-22f76ba453b7",
+    "titleImage" : "image",
+    "modUserName" : "Admin User",
+    "urlMap" : "/blog/post/french-polynesia-everything-you-need-to-know",
+    "hasLiveVersion" : true,
+    "blogContent_raw" : "{\n  \"type\" : \"doc\",\n  \"content\" : [ {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"marks\" : [ {\n        \"type\" : \"underline\"\n      }, {\n        \"type\" : \"bold\"\n      } ],\n      \"text\" : \"Few\"\n    }, {\n      \"type\" : \"text\",\n      \"text\" : \" to no other place in the world has a more exotic feel to its name than what French Polynesia has.\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"The tiny island nation that's located halfway between the USA and Australia in the middle of the South Pacific Ocean, a romantic honeymoon destination for some, and an underwater paradise for scuba divers around the world.\"\n    } ]\n  }, {\n    \"type\" : \"heading\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\",\n      \"level\" : 2\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"French Polynesia everything you need to know before visiting paradise\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"But French Polynesia got more than enough to offer for everyone. But it should be to no one’s surprise traveling around here will take a bit of planning, especially since the only to travel around is by flights, slow-going ferries or hitchhiking one of the thousands of private owned sailboats they cruise around the crystal clear waters.\"\n    } ]\n  }, {\n    \"type\" : \"dotImage\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\",\n      \"src\" : \"/dA/86299f7066888fc1241bf601f529ac85/asset/beach-1838501_960_720.jpg?language_id=1\",\n      \"alt\" : \"beach-1838501_960_720.jpg\",\n      \"title\" : \"beach-1838501_960_720.jpg\",\n      \"href\" : null,\n      \"data\" : {\n        \"identifier\" : \"86299f7066888fc1241bf601f529ac85\",\n        \"languageId\" : 1,\n        \"hostName\" : \"48190c8c-42c4-46af-8d1a-0cd5db894797\",\n        \"modDate\" : \"2024-06-03T19:49:35.290+00:00\",\n        \"title\" : \"beach-1838501_960_720.jpg\",\n        \"contentTypeIcon\" : \"image\",\n        \"baseType\" : \"DotAsset\",\n        \"inode\" : \"8f26cc2d-4c7b-4f01-b02c-0ce9176c8028\",\n        \"archived\" : false,\n        \"working\" : true,\n        \"locked\" : false,\n        \"stInode\" : \"4061db324fdce3993a494c856e76ab1e\",\n        \"contentType\" : \"Images\",\n        \"live\" : true,\n        \"owner\" : \"dotcms.org.1\",\n        \"hasLiveVersion\" : true,\n        \"folder\" : \"SYSTEM_FOLDER\",\n        \"sortOrder\" : 0,\n        \"modUser\" : \"dotcms.org.1\",\n        \"asset\" : \"/data/shared/assets/8/f/8f26cc2d-4c7b-4f01-b02c-0ce9176c8028/asset/beach-1838501_960_720.jpg\"\n      },\n      \"target\" : null\n    }\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"French Polynesia for nearly a month by the end of 2018. During my trip did I visit Tahiti – Bora Bora – Moorea – Tahiti – Fakarava – Tahiti, while this is only a fraction of the island, so did It give me some amazing experiences and some hard-learned lessons, that there’s nowhere else in the world quite like French Polynesia.\"\n    } ]\n  }, {\n    \"type\" : \"heading\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\",\n      \"level\" : 2\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"Complete travel guide to French Polynesia\"\n    } ]\n  }, {\n    \"type\" : \"heading\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\",\n      \"level\" : 3\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"Visa to French Polynesia?\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"French Polynesia is, obviously, a French overseas territory under the constitution of the \"\n    }, {\n      \"type\" : \"text\",\n      \"marks\" : [ {\n        \"type\" : \"link\",\n        \"attrs\" : {\n          \"href\" : \"https://www.france.fr/en\",\n          \"target\" : \"_blank\",\n          \"rel\" : \"noopener noreferrer nofollow\",\n          \"class\" : null\n        }\n      } ],\n      \"text\" : \"French Republic\"\n    }, {\n      \"type\" : \"text\",\n      \"text\" : \" (Police, army, immigration is the same as in mainland France), so arriving in French Polynesia is just as simple as arriving in France for Citizens of western countries. Visa is also not needed for Citizens of all countries in Latin America, Australia, New Zealand, plus Japan, Taiwan, Singapore, Malaysia and South Korea do not need a visa for up to 3 months stay.\"\n    } ]\n  }, {\n    \"type\" : \"dotImage\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\",\n      \"src\" : \"/dA/276570060fe0cd5e120198152d950eb0/asset/pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg?language_id=1\",\n      \"alt\" : \"pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg\",\n      \"title\" : \"pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg\",\n      \"href\" : null,\n      \"data\" : {\n        \"identifier\" : \"276570060fe0cd5e120198152d950eb0\",\n        \"languageId\" : 1,\n        \"hostName\" : \"48190c8c-42c4-46af-8d1a-0cd5db894797\",\n        \"modDate\" : \"2024-06-04T18:53:52.350+00:00\",\n        \"title\" : \"pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg\",\n        \"contentTypeIcon\" : \"image\",\n        \"baseType\" : \"DotAsset\",\n        \"inode\" : \"b6fab593-81f1-46f1-bb52-70b57d474d10\",\n        \"archived\" : false,\n        \"working\" : true,\n        \"locked\" : false,\n        \"stInode\" : \"4061db324fdce3993a494c856e76ab1e\",\n        \"contentType\" : \"Images\",\n        \"live\" : true,\n        \"owner\" : \"dotcms.org.1\",\n        \"hasLiveVersion\" : true,\n        \"folder\" : \"SYSTEM_FOLDER\",\n        \"sortOrder\" : 0,\n        \"modUser\" : \"dotcms.org.1\",\n        \"asset\" : \"/data/shared/assets/b/6/b6fab593-81f1-46f1-bb52-70b57d474d10/asset/pacuare_lodge_plunge_pool_deck_hanging_bridge_6793047b72.jpg\"\n      },\n      \"target\" : null\n    }\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"Citizens from countries not available for visa on arrival will have to apply for a visa to French Polynesia from a French Embassy or Consulate in advance. Normal fee is 9 Euro. \"\n    }, {\n      \"type\" : \"text\",\n      \"marks\" : [ {\n        \"type\" : \"bold\"\n      } ],\n      \"text\" : \"A return ticket is required for everyone; you might get asked for it upon arrival at immigration.\"\n    }, {\n      \"type\" : \"text\",\n      \"text\" : \" \"\n    } ]\n  }, {\n    \"type\" : \"heading\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\",\n      \"level\" : 3\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"Getting to French Polynesia?\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"The remoteness of French Polynesia makes flying into this paradise the only option if you don’t arrive by your sailboat.\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"International Airport (PPT) the only international airport in French Polynesia which is located just outside Papeete on Tahiti, the Capital and biggest city in French Polynesia.\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"International Airport (PPT) is served by no more than 9 Airlines, all of which offers international flight.\"\n    } ]\n  }, {\n    \"type\" : \"bulletList\",\n    \"content\" : [ {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"Air France\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \" (SkyTeam) : Los Angeles – Lax, Paris – Charles de Gaulle.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"Air New Zealand\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \" (Star Alliance): Auckland.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"Air Tahiti:\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \" Rarotonga Cook Island.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"Air Tahiti Nui\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \": Paris – Charles de Gaulle, Tokyo – Narita, New Zealand – Auckland, Los Angeles – Lax.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"Aircalin\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \": Nouméa – New Caledonia.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"French Bee:\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \" San Fransisco, Paris – Orly Airport.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"Hawaiian Airlines\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \": Honolulu, Hawaii.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"LATAM Chile\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \" (OneWorld): Easter Island, Santiago de Chile.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"United Airline\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \" (Star Alliance) : San Fransisco.\"\n        } ]\n      } ]\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"From Europe are flights with Air France through LAX, Los Angeles or with Qatar Airways that has a codeshare agreement with Air New Zealand through Auckland the two most accessible options. If you are stopping by New Zealand on your way to French Polynesia, be sure to check out this post about the best campsites in New Zealand.\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"French Polynesia is made up of five archipelagos, all more different, than the other. There are only about 280,000 lucky islanders living on 67 inhabited islands and atolls. With over 70% of the population concentrated on the big island of Tahiti.\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"It's important to know that while there are local flights between the islands inside each Archipelago. So will you have to transit through Tahiti when traveling from one archipelago to another.  Be aware that you often will, you have to stay a night in Tahiti before taking your onward flight to the next Archipelago early the next morning. Flights to smaller islands and atolls are often booked out months in advance.\"\n    } ]\n  }, {\n    \"type\" : \"bulletList\",\n    \"content\" : [ {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"Marquesas Archipelago\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \": The best Archipelago to visit for hiking and horseback riding, can go hiking for days, take a swim in belove skyscraper tall waterfalls, or just watch the best handcraft makers in all of French Polynesia.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"text\" : \"Society Archipelago: The most popular Archipelago in French Polynesia, and home to famous islands like Tahiti, Moorea, Bora Bora and Huahine.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"Tuamotu Archipelago\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \": Home to Famous Atolls like Rangiroa, Tikehau and Fakarava, the best Scuba Diving in French Polynesia is in the waters here which is classified as UNESCO as a biosphere reserve.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"Gambier Archipelago\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \": Which is located the furthest away from Tahiti and home to only, 1319 people. Famous for producing the finest pearls in French Polynesia and home to the oldest church in the country. Offer good hiking, virgin nature; the least visited of all the archipelagos in French Polynesia. No Banks & ATM'S here.\"\n        } ]\n      } ]\n    }, {\n      \"type\" : \"listItem\",\n      \"attrs\" : {\n        \"textAlign\" : \"left\"\n      },\n      \"content\" : [ {\n        \"type\" : \"paragraph\",\n        \"attrs\" : {\n          \"textAlign\" : \"left\"\n        },\n        \"content\" : [ {\n          \"type\" : \"text\",\n          \"marks\" : [ {\n            \"type\" : \"bold\"\n          } ],\n          \"text\" : \"AustralArchipelago\"\n        }, {\n          \"type\" : \"text\",\n          \"text\" : \": Home to the most authentic Polynesian Culture in all of French Polynesia and home to only, 6300 people. Said to have the clearest water in all of French Polynesia, a real of the beaten path destination. The Austral Islands are the southernmost group in French Polynesia. The tiny Raivavae island located here is said to be of the most beautiful in the whole of French Polynesia.\"\n        } ]\n      } ]\n    } ]\n  }, {\n    \"type\" : \"heading\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\",\n      \"level\" : 3\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"Safety in French Polynesia.\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"French Polynesia is one of the safest places in the world, generally speaking, but petty crime, such as pickpocketing and purse snatching, occurs. I did hear of a lot of cases of cars and tent's that had been broken into on Moorea.\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"Although there is no malaria in French Polynesia, there are occasional dengue-fever and chikungunya outbreaks spread by mosquitoes. All island I visited had tons of mosquitoes in the evenings.\"\n    } ]\n  }, {\n    \"type\" : \"dotImage\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\",\n      \"src\" : \"/dA/a77e64e2ad7f349f8008fd3905c45f8b/asset/fiji-destinations.jpg?language_id=1\",\n      \"alt\" : \"fiji-destinations.jpg\",\n      \"title\" : \"fiji-destinations.jpg\",\n      \"href\" : null,\n      \"data\" : {\n        \"identifier\" : \"a77e64e2ad7f349f8008fd3905c45f8b\",\n        \"languageId\" : 1,\n        \"hostName\" : \"48190c8c-42c4-46af-8d1a-0cd5db894797\",\n        \"modDate\" : \"2024-06-01T03:03:09.592+00:00\",\n        \"title\" : \"fiji-destinations.jpg\",\n        \"contentTypeIcon\" : \"image\",\n        \"baseType\" : \"DotAsset\",\n        \"inode\" : \"b434f15b-1c20-4247-b88e-87adf022eb9a\",\n        \"archived\" : false,\n        \"working\" : true,\n        \"locked\" : false,\n        \"stInode\" : \"4061db324fdce3993a494c856e76ab1e\",\n        \"contentType\" : \"Images\",\n        \"live\" : true,\n        \"owner\" : \"dotcms.org.1\",\n        \"hasLiveVersion\" : true,\n        \"folder\" : \"SYSTEM_FOLDER\",\n        \"sortOrder\" : 0,\n        \"modUser\" : \"dotcms.org.1\",\n        \"asset\" : \"/data/shared/assets/b/4/b434f15b-1c20-4247-b88e-87adf022eb9a/asset/fiji-destinations.jpg\"\n      },\n      \"target\" : null\n    }\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"Dive insurance is highly recommended if you decide to go scuba diving. By law are you forbidden to dive deeper than 27 meters in French Polynesia.\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"Reef Sharks are normally harmless, but They can become dangerous in the presence of food, and they tend to be more aggressive if encountered in open water rather than on the reef. It's not unheard of reef sharks biting people that wading through shallow water.\"\n    } ]\n  }, {\n    \"type\" : \"heading\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\",\n      \"level\" : 2\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"Recommended Products\"\n    } ]\n  }, {\n    \"type\" : \"paragraph\",\n    \"attrs\" : {\n      \"textAlign\" : \"left\"\n    },\n    \"content\" : [ {\n      \"type\" : \"text\",\n      \"text\" : \"If you are ready for the beach trip of your life, you are going to need some things. Take a look at the top 3 recommended products for French Polynesia:\"\n    } ]\n  }, {\n    \"type\" : \"dotContent\",\n    \"attrs\" : {\n      \"data\" : {\n        \"identifier\" : \"adf567f9-f8a9-487e-b942-6bc083f677db\",\n        \"languageId\" : 1,\n        \"hostName\" : \"48190c8c-42c4-46af-8d1a-0cd5db894797\",\n        \"modDate\" : \"2020-09-18T21:28:33.069+00:00\",\n        \"title\" : \"Patagonia Boys' Baggies 5\\\" Shorts\",\n        \"contentTypeIcon\" : \"inventory\",\n        \"baseType\" : \"CONTENT\",\n        \"inode\" : \"e2f94fef-ea05-4b99-a41c-ad7d06326d82\",\n        \"archived\" : false,\n        \"working\" : true,\n        \"locked\" : false,\n        \"stInode\" : \"a1661fbc-9e84-4c00-bd62-76d633170da3\",\n        \"contentType\" : \"Product\",\n        \"live\" : true,\n        \"owner\" : \"dotcms.org.1\",\n        \"hasLiveVersion\" : true,\n        \"folder\" : \"SYSTEM_FOLDER\",\n        \"sortOrder\" : 0,\n        \"modUser\" : \"dotcms.org.1\",\n        \"urlTitle\" : \"patagonia-boys-baggies-5-shorts\",\n        \"productNumber\" : \"9133062261900\",\n        \"retailPrice\" : \"39.00\",\n        \"description\" : \"<p>The Patagonia Boys' Baggies&trade; 5\\\" Shorts have an all day comfort regular fitting style. Built from SUPPLEX&reg; 100% nylon (92% recycled) that looks great and is water ready. Featuring elasticized waistband with an internal drawcord for an adjustable fit, quick drying mesh liner, pockets with mesh for drainage and is finished with durable water repellent. The Patagonia Boys' Baggies&trade; 5\\\" Shorts are wind and water resistant and waiting for your water adventures.</p>\\n<p><strong>Features</strong></p>\\n<ul>\\n<li>Wind- and water-resistant SUPPLEX&reg; recycled nylon dries quickly</li>\\n<li>Elasticized waistband with an internal drawcord for an adjustable fit</li>\\n<li>Quick-drying mesh liner</li>\\n<li>Pockets with mesh for drainage; bartacks on pocket seams for durability</li>\\n<li>DWR (durable water repellent) finish</li>\\n</ul>\",\n        \"image\" : \"/data/shared/assets/e/2/e2f94fef-ea05-4b99-a41c-ad7d06326d82/image/shorts-blue.jpeg\",\n        \"image2\" : \"/data/shared/assets/e/2/e2f94fef-ea05-4b99-a41c-ad7d06326d82/image2/shorts.jpeg\",\n        \"image3\" : \"/data/shared/assets/e/2/e2f94fef-ea05-4b99-a41c-ad7d06326d82/image3/shorts-pattern.jpeg\",\n        \"specifications1\" : {\n          \"Fabric\" : \"SUPPLEX® 100% nylon (92% recycled)\",\n          \"Fit\" : \"Regular\",\n          \"Inseam\" : \"5&#x22;\"\n        }\n      }\n    }\n  }, {\n    \"type\" : \"dotContent\",\n    \"attrs\" : {\n      \"data\" : {\n        \"identifier\" : \"1f5c10a8-b87d-4889-9289-147f35f074cf\",\n        \"languageId\" : 1,\n        \"hostName\" : \"48190c8c-42c4-46af-8d1a-0cd5db894797\",\n        \"modDate\" : \"2020-09-18T21:27:22.404+00:00\",\n        \"title\" : \"Aqua Sphere Cub Kid Mask Goggles\",\n        \"contentTypeIcon\" : \"inventory\",\n        \"baseType\" : \"CONTENT\",\n        \"inode\" : \"6c8119f9-2336-4a6b-ae8b-cd2f10dd27cb\",\n        \"archived\" : false,\n        \"working\" : true,\n        \"locked\" : false,\n        \"stInode\" : \"a1661fbc-9e84-4c00-bd62-76d633170da3\",\n        \"contentType\" : \"Product\",\n        \"live\" : true,\n        \"owner\" : \"dotcms.org.1\",\n        \"hasLiveVersion\" : true,\n        \"folder\" : \"SYSTEM_FOLDER\",\n        \"sortOrder\" : 0,\n        \"modUser\" : \"dotcms.org.1\",\n        \"urlTitle\" : \"aqua-sphere-cub-kid-mask-goggles\",\n        \"productNumber\" : \"0848067892019-7720000\",\n        \"retailPrice\" : \"12.99\",\n        \"description\" : \"<p>The Aqua Sphere Cub Kid Mask Goggles are redefined and durable. The Cub Kid features a shatter resistant PC lens, anti fog material, and quick release three way buckles. Let your young explorer wear this super sleek design for comfort, and a great fit.</p>\\n<p><strong>Features</strong></p>\\n<ul>\\n<li>The skirt is designed to fit smaller faces</li>\\n<li>Anti-Fog for ultra clear vision</li>\\n<li>Quick release three-way buckles</li>\\n</ul>\",\n        \"image\" : \"/data/shared/assets/6/c/6c8119f9-2336-4a6b-ae8b-cd2f10dd27cb/image/mask-1.jpeg\",\n        \"image2\" : \"/data/shared/assets/6/c/6c8119f9-2336-4a6b-ae8b-cd2f10dd27cb/image2/mask-2.jpg\",\n        \"specifications1\" : { }\n      }\n    }\n  }, {\n    \"type\" : \"dotContent\",\n    \"attrs\" : {\n      \"data\" : {\n        \"identifier\" : \"68456a2b-5e3d-4ebe-8a83-f15dd2a2fa36\",\n        \"languageId\" : 1,\n        \"hostName\" : \"48190c8c-42c4-46af-8d1a-0cd5db894797\",\n        \"modDate\" : \"2020-09-18T21:28:04.280+00:00\",\n        \"title\" : \"O'Neill Men's Hammer 1.5mm Long Sleeve Crew Wetsuit\",\n        \"contentTypeIcon\" : \"inventory\",\n        \"baseType\" : \"CONTENT\",\n        \"inode\" : \"7a31c745-9d0e-465d-b175-2f6ef43ce457\",\n        \"archived\" : false,\n        \"working\" : true,\n        \"locked\" : false,\n        \"stInode\" : \"a1661fbc-9e84-4c00-bd62-76d633170da3\",\n        \"contentType\" : \"Product\",\n        \"live\" : true,\n        \"owner\" : \"dotcms.org.1\",\n        \"hasLiveVersion\" : true,\n        \"folder\" : \"SYSTEM_FOLDER\",\n        \"sortOrder\" : 0,\n        \"modUser\" : \"dotcms.org.1\",\n        \"urlTitle\" : \"oneill-mens-hammer-15mm-long-sleeve-crew-wetsuit\",\n        \"productNumber\" : \"0858061871600-0019004\",\n        \"retailPrice\" : \"68.95\",\n        \"description\" : \"<p>The O'Neill Men's Hammer 1.5mm Long Sleeve Crew Wetsuit is nailed for every condition. The Hammer Series maintains exceptional styling, fit and unrestricted movement in each style with 100% Super Stretch materials. Flatlock stitched breathable seams eliminate chafing and the fabric has a UV protection of up to 50 UPF to protect from the sun's harmful rays. This wetsuit features a performance fit that's a form fitting tight layer that fits like a second skin.</p>\",\n        \"image\" : \"/data/shared/assets/7/a/7a31c745-9d0e-465d-b175-2f6ef43ce457/image/wetsuit-1.jpg\",\n        \"specifications1\" : { }\n      }\n    }\n  } ]\n}",
+    "blogComment" : [ ],
+    "modUser" : "dotcms.org.1",
+    "teaser" : "Few to no other place in the world has a more exotic feel to its name than what French Polynesia has."
+  }
+}

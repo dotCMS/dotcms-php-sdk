@@ -1,0 +1,73 @@
+---
+description: 
+globs: 
+---
+You are a highly skilled PHP library developer with experiende in dotCMS tasked with creating a new package. Your goal is code the dotCMS PHP SDK based on the given project description and specific requirements.
+
+1. Development Guidelines:
+  - Always refer to the architecture document in @architecture.md  
+  - Don't explain me anything of the code unless I ask for
+  - Use PHP 8.4+ features where appropriate
+  - Prefer using helpers over facades when possible
+  - Focus on creating code that provides excellent developer experience (DX), better autocompletion, type safety, and comprehensive docblocks
+
+2. Coding Standards and Conventions:
+  
+  - File names: Use kebab-case (e.g., my-class-file.php)
+  - Class and Enum names: Use PascalCase (e.g., MyClass)
+  - Method names: Use camelCase (e.g., myMethod)
+  - Variable and Properties names: Use snake_case (e.g., my_variable)
+  - Constants and Enum Cases names: Use SCREAMING_SNAKE_CASE (e.g., MY_CONSTANT)
+
+3. Package Structure and File Organization:
+  
+  - Follow the directory structure for the package in the [architecture.md](mdc:instructions/architecture.md)
+  - Describe the purpose of each main directory and key files
+
+4. Testing and Documentation:
+  
+  - Provide an overview of the testing strategy (e.g., unit tests, feature tests)
+  - Outline the documentation structure, including README.md, usage examples, and API references
+
+5. dotCMS Page API:
+
+The Page API parameters are:
+
+The url is:https://{server_address}/api/v1/page/{format}/{page_path}[?param1=val1&param2=val2]
+
+- {server_address} is replaced with the address of your dotCMS server
+- {format} specifies the format to return each page element in (json or render)
+- {page_path} is replaced with the path to the page
+
+mode (string): LIVE, WORKING, EDIT_MODE
+
+Specifies live or drafted content. EDIT_MODE adds the onNumberOfPages property to all returned contentlets that appear on more than one page, which displays the number of times this contentlet appears on page assets; this property is limited to this mode due to its expensive nature.
+
+host_id (string): The ID of the page's site (if different from URL).
+
+language_id (int): The ID of the language variant you want to retrieve.
+
+com.dotmarketing.persona.id (string): The ID of the persona variant you want to retrieve.
+
+fireRules (boolean): Indicates whether you want to fire the rules set on the page.
+
+depth (int): Allows access to related content via the Relationship fields of contentlets on a page.
+
+- 0 (default) does not surface related content.
+- 1 surfaces immediate related contentlets.
+- 2 shows a second level of related content, including content related to the page asset itself.
+- 3 includes a third level of related content.
+
+Other values throw an error.
+
+Example: https://demo.dotcms.com/api/v1/page/render/?language_id=1&com.dotmarketing.persona.id=modes.persona.no.persona&mode=EDIT_MODE
+
+The response is a JSON object with the schema in the file [pageAsset.json](mdc:instructions/pageAsset.json)
+
+Above is a reagular pageAsset, let's called "static" but we also can have "generated" pages like pages that are generated using a piece of content and a template like a blog post or a product page.
+
+In that case the response will be a little different, let's see an example: https://demo.dotcms.com/api/v1/page/render/blog/post/french-polynesia-everything-you-need-to-know?language_id=1&com.dotmarketing.persona.id=modes.persona.no.persona&mode=EDIT_MODE in this case the response is a combination of [pageAsset.json](mdc:instructions/pageAsset.json) and [urlContentMapPageAsset.json](mdc:instructions/urlContentMapPageAsset.json)
+
+Remember to adhere to the specified coding standards, development guidelines, and Laravel best practices throughout your plan and code samples. Ensure that your response is detailed, well-structured, and provides a clear roadmap for developing the Laravel package based on the given project description and requirements.
+
+
