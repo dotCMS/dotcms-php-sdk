@@ -6,6 +6,9 @@ namespace Dotcms\PhpSdk\Exception;
 
 class DotCMSException extends \Exception
 {
+    /**
+     * @param array<string, mixed>|null $context
+     */
     public function __construct(
         string $message = "",
         int $code = 0,
@@ -15,8 +18,11 @@ class DotCMSException extends \Exception
         parent::__construct($message, $code, $previous);
     }
 
+    /**
+     * @return array<string, mixed>|null
+     */
     public function getContext(): ?array
     {
         return $this->context;
     }
-} 
+}

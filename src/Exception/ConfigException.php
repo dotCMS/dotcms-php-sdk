@@ -26,4 +26,4 @@ class ConfigException extends DotCMSException
             context: ['option' => $option]
         );
     }
-} 
+}

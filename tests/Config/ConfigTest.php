@@ -22,7 +22,9 @@ class ConfigTest extends TestCase
 
         $clientOptions = $config->getClientOptions();
         $this->assertEquals('https://demo.dotcms.com', $clientOptions['base_uri']);
-        $this->assertEquals('Bearer test-api-key', $clientOptions['headers']['Authorization']);
+        /** @var array<string, string> $headers */
+        $headers = $clientOptions['headers'];
+        $this->assertEquals('Bearer test-api-key', $headers['Authorization']);
         $this->assertTrue($clientOptions['verify']);
         $this->assertEquals(30, $clientOptions['timeout']);
         $this->assertEquals(10, $clientOptions['connect_timeout']);
@@ -49,8 +51,10 @@ class ConfigTest extends TestCase
 
         $clientOptions = $config->getClientOptions();
         $this->assertEquals('https://demo.dotcms.com', $clientOptions['base_uri']);
-        $this->assertEquals('Bearer test-api-key', $clientOptions['headers']['Authorization']);
-        $this->assertEquals('value', $clientOptions['headers']['X-Custom']);
+        /** @var array<string, string> $headers */
+        $headers = $clientOptions['headers'];
+        $this->assertEquals('Bearer test-api-key', $headers['Authorization']);
+        $this->assertEquals('value', $headers['X-Custom']);
         $this->assertFalse($clientOptions['verify']);
         $this->assertEquals(60, $clientOptions['timeout']);
         $this->assertEquals(20, $clientOptions['connect_timeout']);
@@ -162,4 +166,4 @@ class ConfigTest extends TestCase
             clientOptions: ['allow_redirects' => 'yes']
         );
     }
-} 
+}
