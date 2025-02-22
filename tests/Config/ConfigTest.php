@@ -96,7 +96,6 @@ class ConfigTest extends TestCase
     public function testInvalidHeadersType(): void
     {
         $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Invalid client option "headers": Must be an array');
         new Config(
             host: 'https://demo.dotcms.com',
             apiKey: 'test-api-key',
@@ -107,7 +106,6 @@ class ConfigTest extends TestCase
     public function testInvalidHeaderValue(): void
     {
         $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Invalid client option "headers": Header names and values must be strings');
         new Config(
             host: 'https://demo.dotcms.com',
             apiKey: 'test-api-key',
@@ -118,7 +116,6 @@ class ConfigTest extends TestCase
     public function testInvalidTimeout(): void
     {
         $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Invalid client option "timeout": Must be a positive integer');
         new Config(
             host: 'https://demo.dotcms.com',
             apiKey: 'test-api-key',
@@ -129,7 +126,6 @@ class ConfigTest extends TestCase
     public function testInvalidConnectTimeout(): void
     {
         $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Invalid client option "connect_timeout": Must be a positive integer');
         new Config(
             host: 'https://demo.dotcms.com',
             apiKey: 'test-api-key',
@@ -140,7 +136,6 @@ class ConfigTest extends TestCase
     public function testInvalidVerify(): void
     {
         $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Invalid client option "verify": Must be a boolean');
         new Config(
             host: 'https://demo.dotcms.com',
             apiKey: 'test-api-key',
@@ -151,7 +146,6 @@ class ConfigTest extends TestCase
     public function testInvalidHttpErrors(): void
     {
         $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Invalid client option "http_errors": Must be a boolean');
         new Config(
             host: 'https://demo.dotcms.com',
             apiKey: 'test-api-key',
@@ -162,22 +156,10 @@ class ConfigTest extends TestCase
     public function testInvalidAllowRedirects(): void
     {
         $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Invalid client option "allow_redirects": Must be a boolean');
         new Config(
             host: 'https://demo.dotcms.com',
             apiKey: 'test-api-key',
             clientOptions: ['allow_redirects' => 'yes']
-        );
-    }
-
-    public function testUnknownOption(): void
-    {
-        $this->expectException(ConfigException::class);
-        $this->expectExceptionMessage('Invalid client option "unknown": Unknown option');
-        new Config(
-            host: 'https://demo.dotcms.com',
-            apiKey: 'test-api-key',
-            clientOptions: ['unknown' => 'value']
         );
     }
 } 

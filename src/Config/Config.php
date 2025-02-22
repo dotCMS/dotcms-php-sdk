@@ -5,9 +5,21 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Config;
 
 use Dotcms\PhpSdk\Exception\ConfigException;
+use GuzzleHttp\RequestOptions;
 
 class Config
 {
+    private array $validatedOptions;
+
+    private const ALLOWED_OPTIONS = [
+        RequestOptions::HEADERS,
+        RequestOptions::VERIFY,
+        RequestOptions::TIMEOUT,
+        RequestOptions::CONNECT_TIMEOUT,
+        RequestOptions::HTTP_ERRORS,
+        RequestOptions::ALLOW_REDIRECTS,
+    ];
+
     public function __construct(
         private readonly string $host,
         private readonly string $apiKey,
@@ -37,10 +49,10 @@ class Config
 
     public function getClientOptions(): array
     {
-        return array_merge($this->clientOptions, [
+        return array_merge($this->validatedOptions, [
             'base_uri' => $this->host,
             'headers' => array_merge(
-                $this->clientOptions['headers'] ?? [],
+                $this->validatedOptions['headers'] ?? [],
                 ['Authorization' => 'Bearer ' . $this->apiKey]
             ),
         ]);
@@ -62,50 +74,54 @@ class Config
 
     private function validateClientOptions(array $options): void
     {
-        foreach ($options as $key => $value) {
-            match ($key) {
-                'headers' => $this->validateHeaders($value),
-                'verify' => $this->validateBoolean($key, $value),
-                'timeout', 'connect_timeout' => $this->validateTimeout($key, $value),
-                'http_errors', 'allow_redirects' => $this->validateBoolean($key, $value),
-                default => throw ConfigException::invalidClientOption($key, 'Unknown option')
-            };
-        }
-    }
-
-    private function validateHeaders(mixed $headers): void
-    {
-        if (!is_array($headers)) {
-            throw ConfigException::invalidClientOption('headers', 'Must be an array');
+        // Check for unknown options
+        $unknownOptions = array_diff(array_keys($options), self::ALLOWED_OPTIONS);
+        if (!empty($unknownOptions)) {
+            throw ConfigException::invalidClientOption(
+                (string) array_key_first($unknownOptions),
+                'Unknown option'
+            );
         }
 
-        foreach ($headers as $name => $value) {
-            if (!is_string($name) || !is_string($value)) {
+        // Validate headers
+        if (isset($options['headers'])) {
+            if (!is_array($options['headers'])) {
                 throw ConfigException::invalidClientOption(
                     'headers',
-                    'Header names and values must be strings'
+                    'Must be an array'
+                );
+            }
+
+            foreach ($options['headers'] as $name => $value) {
+                if (!is_string($name) || !is_string($value)) {
+                    throw ConfigException::invalidClientOption(
+                        'headers',
+                        'Header names and values must be strings'
+                    );
+                }
+            }
+        }
+
+        // Validate timeouts
+        foreach (['timeout', 'connect_timeout'] as $option) {
+            if (isset($options[$option]) && (!is_int($options[$option]) || $options[$option] < 0)) {
+                throw ConfigException::invalidClientOption(
+                    $option,
+                    'Must be a positive integer'
                 );
             }
         }
-    }
 
-    private function validateTimeout(string $key, mixed $value): void
-    {
-        if (!is_int($value) || $value < 0) {
-            throw ConfigException::invalidClientOption(
-                $key,
-                'Must be a positive integer'
-            );
+        // Validate booleans
+        foreach (['verify', 'http_errors', 'allow_redirects'] as $option) {
+            if (isset($options[$option]) && !is_bool($options[$option])) {
+                throw ConfigException::invalidClientOption(
+                    $option,
+                    'Must be a boolean'
+                );
+            }
         }
-    }
 
-    private function validateBoolean(string $key, mixed $value): void
-    {
-        if (!is_bool($value)) {
-            throw ConfigException::invalidClientOption(
-                $key,
-                'Must be a boolean'
-            );
-        }
+        $this->validatedOptions = $options;
     }
 } 
