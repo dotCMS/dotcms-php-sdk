@@ -7,7 +7,6 @@ namespace Dotcms\PhpSdk\Http;
 use Dotcms\PhpSdk\Config\Config;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
-use Psr\Http\Message\ResponseInterface;
 
 class HttpClient
 {
@@ -42,9 +41,9 @@ class HttpClient
      *     allow_redirects?: bool
      * } $options
      */
-    public function request(string $method, string $uri, array $options = []): ResponseInterface
+    public function request(string $method, string $uri, array $options = []): Response
     {
-        return $this->client->request($method, $uri, $options);
+        return new Response($this->client->request($method, $uri, $options));
     }
 
     /**
@@ -58,7 +57,7 @@ class HttpClient
      *     allow_redirects?: bool
      * } $options
      */
-    public function get(string $uri, array $options = []): ResponseInterface
+    public function get(string $uri, array $options = []): Response
     {
         return $this->request('GET', $uri, $options);
     }
@@ -76,7 +75,7 @@ class HttpClient
      *     allow_redirects?: bool
      * } $options
      */
-    public function post(string $uri, array $options = []): ResponseInterface
+    public function post(string $uri, array $options = []): Response
     {
         return $this->request('POST', $uri, $options);
     }
@@ -94,7 +93,7 @@ class HttpClient
      *     allow_redirects?: bool
      * } $options
      */
-    public function put(string $uri, array $options = []): ResponseInterface
+    public function put(string $uri, array $options = []): Response
     {
         return $this->request('PUT', $uri, $options);
     }
@@ -109,7 +108,7 @@ class HttpClient
      *     allow_redirects?: bool
      * } $options
      */
-    public function delete(string $uri, array $options = []): ResponseInterface
+    public function delete(string $uri, array $options = []): Response
     {
         return $this->request('DELETE', $uri, $options);
     }

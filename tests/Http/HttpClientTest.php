@@ -5,11 +5,14 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Tests\Http;
 
 use Dotcms\PhpSdk\Config\Config;
+use Dotcms\PhpSdk\Exception\ResponseException;
 use Dotcms\PhpSdk\Http\HttpClient;
+use Dotcms\PhpSdk\Http\Response;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
+use Psr\Http\Message\StreamInterface;
 
 class HttpClientTest extends TestCase
 {
@@ -58,60 +61,92 @@ class HttpClientTest extends TestCase
     {
         $uri = '/api/v1/content';
         $options = ['query' => ['limit' => 10]];
-        $expectedResponse = $this->createMock(ResponseInterface::class);
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('{"data": "test"}');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
 
         $this->mockClient->expects($this->once())
             ->method('request')
             ->with('GET', $uri, $options)
-            ->willReturn($expectedResponse);
+            ->willReturn($mockResponse);
 
         $response = $this->httpClient->get($uri, $options);
-        $this->assertSame($expectedResponse, $response);
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals(['data' => 'test'], $response->toArray());
     }
 
     public function testPostRequest(): void
     {
         $uri = '/api/v1/content';
         $options = ['json' => ['title' => 'Test']];
-        $expectedResponse = $this->createMock(ResponseInterface::class);
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('{"id": 123, "title": "Test"}');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
 
         $this->mockClient->expects($this->once())
             ->method('request')
             ->with('POST', $uri, $options)
-            ->willReturn($expectedResponse);
+            ->willReturn($mockResponse);
 
         $response = $this->httpClient->post($uri, $options);
-        $this->assertSame($expectedResponse, $response);
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals(['id' => 123, 'title' => 'Test'], $response->toArray());
     }
 
     public function testPutRequest(): void
     {
         $uri = '/api/v1/content/123';
         $options = ['json' => ['title' => 'Updated']];
-        $expectedResponse = $this->createMock(ResponseInterface::class);
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('{"id": 123, "title": "Updated"}');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
 
         $this->mockClient->expects($this->once())
             ->method('request')
             ->with('PUT', $uri, $options)
-            ->willReturn($expectedResponse);
+            ->willReturn($mockResponse);
 
         $response = $this->httpClient->put($uri, $options);
-        $this->assertSame($expectedResponse, $response);
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals(['id' => 123, 'title' => 'Updated'], $response->toArray());
     }
 
     public function testDeleteRequest(): void
     {
         $uri = '/api/v1/content/123';
         $options = [];
-        $expectedResponse = $this->createMock(ResponseInterface::class);
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('{"success": true}');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
 
         $this->mockClient->expects($this->once())
             ->method('request')
             ->with('DELETE', $uri, $options)
-            ->willReturn($expectedResponse);
+            ->willReturn($mockResponse);
 
         $response = $this->httpClient->delete($uri, $options);
-        $this->assertSame($expectedResponse, $response);
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals(['success' => true], $response->toArray());
     }
 
     public function testGenericRequest(): void
@@ -119,14 +154,128 @@ class HttpClientTest extends TestCase
         $method = 'PATCH';
         $uri = '/api/v1/content/123';
         $options = ['json' => ['status' => 'published']];
-        $expectedResponse = $this->createMock(ResponseInterface::class);
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('{"status": "published"}');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
 
         $this->mockClient->expects($this->once())
             ->method('request')
             ->with($method, $uri, $options)
-            ->willReturn($expectedResponse);
+            ->willReturn($mockResponse);
 
         $response = $this->httpClient->request($method, $uri, $options);
-        $this->assertSame($expectedResponse, $response);
+        $this->assertInstanceOf(Response::class, $response);
+        $this->assertEquals(['status' => 'published'], $response->toArray());
+    }
+
+    public function testInvalidJsonResponse(): void
+    {
+        $uri = '/api/v1/content';
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('{"invalid": json}');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
+
+        $this->mockClient->method('request')
+            ->willReturn($mockResponse);
+
+        $response = $this->httpClient->get($uri);
+
+        $this->expectException(ResponseException::class);
+        $response->toArray();
+    }
+
+    public function testEmptyResponse(): void
+    {
+        $uri = '/api/v1/content';
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
+
+        $this->mockClient->method('request')
+            ->willReturn($mockResponse);
+
+        $response = $this->httpClient->get($uri);
+        $this->assertEquals([], $response->toArray());
+    }
+
+    public function testNonArrayResponse(): void
+    {
+        $uri = '/api/v1/content';
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('"string response"');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
+
+        $this->mockClient->method('request')
+            ->willReturn($mockResponse);
+
+        $response = $this->httpClient->get($uri);
+
+        $this->expectException(ResponseException::class);
+        $this->expectExceptionMessage('Response data is not an array. Got string: "string response"');
+        $response->toArray();
+    }
+
+    public function testNonArrayResponseWithNumber(): void
+    {
+        $uri = '/api/v1/content';
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('42');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
+
+        $this->mockClient->method('request')
+            ->willReturn($mockResponse);
+
+        $response = $this->httpClient->get($uri);
+
+        $this->expectException(ResponseException::class);
+        $this->expectExceptionMessage('Response data is not an array. Got integer: 42');
+        $response->toArray();
+    }
+
+    public function testNonArrayResponseWithBoolean(): void
+    {
+        $uri = '/api/v1/content';
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('true');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
+
+        $this->mockClient->method('request')
+            ->willReturn($mockResponse);
+
+        $response = $this->httpClient->get($uri);
+
+        $this->expectException(ResponseException::class);
+        $this->expectExceptionMessage('Response data is not an array. Got boolean: true');
+        $response->toArray();
     }
 }
