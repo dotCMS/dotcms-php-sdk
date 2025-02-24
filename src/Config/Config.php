@@ -70,24 +70,25 @@ class Config
         $this->validateLogConfig($logConfig);
 
         $this->logger = new Logger('dotcms-sdk');
-        
+
         // If no config provided, use NullHandler
         if (empty($logConfig)) {
             $this->logger->pushHandler(new NullHandler());
+
             return;
         }
 
-        $level = isset($this->logConfig['level']) 
-            ? $this->logConfig['level']->toMonologLevel() 
+        $level = isset($this->logConfig['level'])
+            ? $this->logConfig['level']->toMonologLevel()
             : LogLevel::INFO->toMonologLevel();
-        
+
         // Add console handler by default unless explicitly disabled
         if ($this->logConfig['console'] ?? true) {
             $this->logger->pushHandler(new StreamHandler('php://stdout', $level));
         }
 
         // Add custom handlers if provided
-        if (!empty($this->logConfig['handlers'])) {
+        if (! empty($this->logConfig['handlers'])) {
             foreach ($this->logConfig['handlers'] as $handler) {
                 $this->logger->pushHandler($handler);
             }
@@ -179,23 +180,23 @@ class Config
      */
     private function validateLogConfig(array $config): void
     {
-        if (isset($config['level']) && !$config['level'] instanceof LogLevel) {
+        if (isset($config['level']) && ! $config['level'] instanceof LogLevel) {
             throw ConfigException::invalidLogConfig('level', 'Must be a LogLevel enum');
         }
 
         if (isset($config['handlers'])) {
-            if (!is_array($config['handlers'])) {
+            if (! is_array($config['handlers'])) {
                 throw ConfigException::invalidLogConfig('handlers', 'Must be an array');
             }
 
             foreach ($config['handlers'] as $handler) {
-                if (!$handler instanceof HandlerInterface) {
+                if (! $handler instanceof HandlerInterface) {
                     throw ConfigException::invalidLogConfig('handlers', 'Must be an array of HandlerInterface');
                 }
             }
         }
 
-        if (isset($config['console']) && !is_bool($config['console'])) {
+        if (isset($config['console']) && ! is_bool($config['console'])) {
             throw ConfigException::invalidLogConfig('console', 'Must be a boolean');
         }
     }

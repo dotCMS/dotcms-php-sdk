@@ -8,11 +8,10 @@ use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\Config\LogLevel;
 use Dotcms\PhpSdk\Exception\ConfigException;
 use Monolog\Handler\NullHandler;
+use Monolog\Handler\StreamHandler;
 use Monolog\Handler\TestHandler;
-use Monolog\Level;
 use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
-use Monolog\Handler\StreamHandler;
 
 class ConfigTest extends TestCase
 {
@@ -41,7 +40,7 @@ class ConfigTest extends TestCase
             self::API_KEY,
             logConfig: [
                 'handlers' => [$handler],
-                'console' => false
+                'console' => false,
             ]
         );
 
@@ -56,12 +55,12 @@ class ConfigTest extends TestCase
             self::HOST,
             self::API_KEY,
             logConfig: [
-                'level' => LogLevel::DEBUG
+                'level' => LogLevel::DEBUG,
             ]
         );
 
         $this->assertEquals(LogLevel::DEBUG, $config->getLogLevel());
-        
+
         $handlers = $config->getLogger()->getHandlers();
         $this->assertCount(1, $handlers);
         $this->assertInstanceOf(StreamHandler::class, $handlers[0]);
@@ -74,7 +73,7 @@ class ConfigTest extends TestCase
             self::API_KEY,
             logConfig: [
                 'level' => LogLevel::INFO,
-                'console' => false
+                'console' => false,
             ]
         );
 
@@ -91,7 +90,7 @@ class ConfigTest extends TestCase
             self::API_KEY,
             logConfig: [
                 'level' => LogLevel::INFO,
-                'handlers' => [$testHandler]
+                'handlers' => [$testHandler],
             ]
         );
 
@@ -99,18 +98,18 @@ class ConfigTest extends TestCase
         $this->assertCount(2, $handlers);
         $this->assertInstanceOf(TestHandler::class, $handlers[0]);
         $this->assertInstanceOf(StreamHandler::class, $handlers[1]);
-        
+
         // Verify the test handler is the same instance
         $this->assertSame($testHandler, $handlers[0]);
-        
+
         // Verify the console handler is configured correctly
         $consoleHandler = $handlers[1];
         $this->assertInstanceOf(StreamHandler::class, $consoleHandler);
-        
+
         $urlReflection = new \ReflectionProperty($consoleHandler, 'url');
         $urlReflection->setAccessible(true);
         $this->assertEquals('php://stdout', $urlReflection->getValue($consoleHandler));
-        
+
         $levelReflection = new \ReflectionProperty($consoleHandler, 'level');
         $levelReflection->setAccessible(true);
         $this->assertEquals(LogLevel::INFO->toMonologLevel(), $levelReflection->getValue($consoleHandler));

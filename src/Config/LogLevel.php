@@ -22,4 +22,4 @@ enum LogLevel: string
             self::ERROR => Level::Error,
         };
     }
-} 
+}
