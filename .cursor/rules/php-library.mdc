@@ -1,6 +1,7 @@
 ---
 description: 
 globs: 
+alwaysApply: false
 ---
 You are a highly skilled PHP library developer with experiende in dotCMS tasked with creating a new package. Your goal is code the dotCMS PHP SDK based on the given project description and specific requirements.
 
@@ -28,6 +29,11 @@ You are a highly skilled PHP library developer with experiende in dotCMS tasked 
   
   - Provide an overview of the testing strategy (e.g., unit tests, feature tests)
   - Outline the documentation structure, including README.md, usage examples, and API references
+  - Prefer individual test methods over data providers for better readability and reliability
+  - Each test method should have a descriptive name that explains the scenario
+  - Test methods can be customized with specific test data for each case
+  - Avoid @dataProvider annotation due to compatibility issues with PHPUnit 12+ and PHP 8.4
+  - Provide comprehensive test coverage for success and error cases
 
 5. dotCMS Page API:
 

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Tests\Http;
 
 use Dotcms\PhpSdk\Config\Config;
+use Dotcms\PhpSdk\Exception\HttpException;
 use Dotcms\PhpSdk\Exception\ResponseException;
 use Dotcms\PhpSdk\Http\HttpClient;
 use Dotcms\PhpSdk\Http\Response;
@@ -70,6 +71,9 @@ class HttpClientTest extends TestCase
         $mockResponse->method('getBody')
             ->willReturn($mockStream);
 
+        $mockResponse->method('getStatusCode')
+            ->willReturn(200);
+
         $this->mockClient->expects($this->once())
             ->method('request')
             ->with('GET', $uri, $options)
@@ -77,6 +81,7 @@ class HttpClientTest extends TestCase
 
         $response = $this->httpClient->get($uri, $options);
         $this->assertInstanceOf(Response::class, $response);
+        $this->assertSame(200, $response->getStatusCode());
         $this->assertEquals(['data' => 'test'], $response->toArray());
     }
 
@@ -93,6 +98,9 @@ class HttpClientTest extends TestCase
         $mockResponse->method('getBody')
             ->willReturn($mockStream);
 
+        $mockResponse->method('getStatusCode')
+            ->willReturn(201);
+
         $this->mockClient->expects($this->once())
             ->method('request')
             ->with('POST', $uri, $options)
@@ -100,6 +108,7 @@ class HttpClientTest extends TestCase
 
         $response = $this->httpClient->post($uri, $options);
         $this->assertInstanceOf(Response::class, $response);
+        $this->assertSame(201, $response->getStatusCode());
         $this->assertEquals(['id' => 123, 'title' => 'Test'], $response->toArray());
     }
 
@@ -116,6 +125,9 @@ class HttpClientTest extends TestCase
         $mockResponse->method('getBody')
             ->willReturn($mockStream);
 
+        $mockResponse->method('getStatusCode')
+            ->willReturn(200);
+
         $this->mockClient->expects($this->once())
             ->method('request')
             ->with('PUT', $uri, $options)
@@ -123,6 +135,7 @@ class HttpClientTest extends TestCase
 
         $response = $this->httpClient->put($uri, $options);
         $this->assertInstanceOf(Response::class, $response);
+        $this->assertSame(200, $response->getStatusCode());
         $this->assertEquals(['id' => 123, 'title' => 'Updated'], $response->toArray());
     }
 
@@ -139,6 +152,9 @@ class HttpClientTest extends TestCase
         $mockResponse->method('getBody')
             ->willReturn($mockStream);
 
+        $mockResponse->method('getStatusCode')
+            ->willReturn(204);
+
         $this->mockClient->expects($this->once())
             ->method('request')
             ->with('DELETE', $uri, $options)
@@ -146,6 +162,7 @@ class HttpClientTest extends TestCase
 
         $response = $this->httpClient->delete($uri, $options);
         $this->assertInstanceOf(Response::class, $response);
+        $this->assertSame(204, $response->getStatusCode());
         $this->assertEquals(['success' => true], $response->toArray());
     }
 
@@ -162,6 +179,9 @@ class HttpClientTest extends TestCase
 
         $mockResponse->method('getBody')
             ->willReturn($mockStream);
+
+        $mockResponse->method('getStatusCode')
+            ->willReturn(200);
 
         $this->mockClient->expects($this->once())
             ->method('request')
@@ -185,6 +205,9 @@ class HttpClientTest extends TestCase
         $mockResponse->method('getBody')
             ->willReturn($mockStream);
 
+        $mockResponse->method('getStatusCode')
+            ->willReturn(200);
+
         $this->mockClient->method('request')
             ->willReturn($mockResponse);
 
@@ -205,6 +228,9 @@ class HttpClientTest extends TestCase
 
         $mockResponse->method('getBody')
             ->willReturn($mockStream);
+
+        $mockResponse->method('getStatusCode')
+            ->willReturn(204);
 
         $this->mockClient->method('request')
             ->willReturn($mockResponse);
@@ -269,6 +295,9 @@ class HttpClientTest extends TestCase
         $mockResponse->method('getBody')
             ->willReturn($mockStream);
 
+        $mockResponse->method('getStatusCode')
+            ->willReturn(200);
+
         $this->mockClient->method('request')
             ->willReturn($mockResponse);
 
@@ -277,5 +306,129 @@ class HttpClientTest extends TestCase
         $this->expectException(ResponseException::class);
         $this->expectExceptionMessage('Response data is not an array. Got boolean: true');
         $response->toArray();
+    }
+
+    public function testBadRequestError(): void
+    {
+        $uri = '/api/v1/content';
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('{"error": "Invalid input"}');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
+
+        $mockResponse->method('getStatusCode')
+            ->willReturn(400);
+
+        $mockResponse->method('getReasonPhrase')
+            ->willReturn('Error');
+
+        $mockResponse->method('getHeaders')
+            ->willReturn([]);
+
+        $this->mockClient->method('request')
+            ->willReturn($mockResponse);
+
+        $this->expectException(HttpException::class);
+        $this->expectExceptionMessage('Bad Request: HTTP 400 Error');
+        $this->expectExceptionCode(400);
+
+        $this->httpClient->get($uri);
+    }
+
+    public function testUnauthorizedError(): void
+    {
+        $uri = '/api/v1/content';
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('{"error": "Invalid token"}');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
+
+        $mockResponse->method('getStatusCode')
+            ->willReturn(401);
+
+        $mockResponse->method('getReasonPhrase')
+            ->willReturn('Error');
+
+        $mockResponse->method('getHeaders')
+            ->willReturn([]);
+
+        $this->mockClient->method('request')
+            ->willReturn($mockResponse);
+
+        $this->expectException(HttpException::class);
+        $this->expectExceptionMessage('Unauthorized: HTTP 401 Error');
+        $this->expectExceptionCode(401);
+
+        $this->httpClient->get($uri);
+    }
+
+    public function testNotFoundError(): void
+    {
+        $uri = '/api/v1/content/123';
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('{"error": "Content not found"}');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
+
+        $mockResponse->method('getStatusCode')
+            ->willReturn(404);
+
+        $mockResponse->method('getReasonPhrase')
+            ->willReturn('Error');
+
+        $mockResponse->method('getHeaders')
+            ->willReturn([]);
+
+        $this->mockClient->method('request')
+            ->willReturn($mockResponse);
+
+        $this->expectException(HttpException::class);
+        $this->expectExceptionMessage('Not Found: HTTP 404 Error');
+        $this->expectExceptionCode(404);
+
+        $this->httpClient->get($uri);
+    }
+
+    public function testServerError(): void
+    {
+        $uri = '/api/v1/content';
+        $mockResponse = $this->createMock(ResponseInterface::class);
+        $mockStream = $this->createMock(StreamInterface::class);
+
+        $mockStream->method('getContents')
+            ->willReturn('{"error": "Internal server error"}');
+
+        $mockResponse->method('getBody')
+            ->willReturn($mockStream);
+
+        $mockResponse->method('getStatusCode')
+            ->willReturn(500);
+
+        $mockResponse->method('getReasonPhrase')
+            ->willReturn('Error');
+
+        $mockResponse->method('getHeaders')
+            ->willReturn([]);
+
+        $this->mockClient->method('request')
+            ->willReturn($mockResponse);
+
+        $this->expectException(HttpException::class);
+        $this->expectExceptionMessage('Internal Server Error: HTTP 500 Error');
+        $this->expectExceptionCode(500);
+
+        $this->httpClient->get($uri);
     }
 }

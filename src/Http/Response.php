@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Http;
 
+use Dotcms\PhpSdk\Exception\HttpException;
 use Dotcms\PhpSdk\Exception\ResponseException;
 use Psr\Http\Message\ResponseInterface;
 
@@ -14,10 +15,13 @@ class Response
 {
     /**
      * Creates a new Response instance.
+     *
+     * @throws HttpException If the response has an error status code (4xx or 5xx)
      */
     public function __construct(
         private readonly ResponseInterface $response
     ) {
+        $this->throwIfError();
     }
 
     /**
@@ -88,6 +92,7 @@ class Response
         if (! is_array($data)) {
             $type = gettype($data);
             $preview = $this->getValuePreview($data);
+
             throw ResponseException::invalidType($type, $preview);
         }
 
@@ -104,6 +109,10 @@ class Response
     {
         if (is_scalar($value)) {
             $preview = json_encode($value);
+            if ($preview === false) {
+                return sprintf('(%s unable to encode)', gettype($value));
+            }
+
             return strlen($preview) > 100 ? substr($preview, 0, 97) . '...' : $preview;
         }
 
@@ -121,5 +130,22 @@ class Response
     public function getRawResponse(): ResponseInterface
     {
         return $this->response;
+    }
+
+    /**
+     * Checks if the response has an error status code and throws an exception if it does.
+     *
+     * @throws HttpException If the response has an error status code (4xx or 5xx)
+     */
+    private function throwIfError(): void
+    {
+        $statusCode = $this->response->getStatusCode();
+
+        if ($statusCode >= 400) {
+            throw HttpException::fromResponse(
+                $this->response,
+                $this->response->getBody()->getContents()
+            );
+        }
     }
 }
