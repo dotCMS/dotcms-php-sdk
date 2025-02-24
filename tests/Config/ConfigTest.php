@@ -5,11 +5,150 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Tests\Config;
 
 use Dotcms\PhpSdk\Config\Config;
+use Dotcms\PhpSdk\Config\LogLevel;
 use Dotcms\PhpSdk\Exception\ConfigException;
+use Monolog\Handler\NullHandler;
+use Monolog\Handler\TestHandler;
+use Monolog\Level;
+use Monolog\Logger;
 use PHPUnit\Framework\TestCase;
+use Monolog\Handler\StreamHandler;
 
 class ConfigTest extends TestCase
 {
+    private const HOST = 'https://demo.dotcms.com';
+    private const API_KEY = 'test-api-key';
+
+    public function testValidConfig(): void
+    {
+        $config = new Config(self::HOST, self::API_KEY);
+
+        $this->assertSame(self::HOST, $config->getHost());
+        $this->assertSame(self::API_KEY, $config->getApiKey());
+        $this->assertInstanceOf(Logger::class, $config->getLogger());
+        $this->assertEquals(LogLevel::INFO, $config->getLogLevel());
+
+        $handlers = $config->getLogger()->getHandlers();
+        $this->assertCount(1, $handlers);
+        $this->assertInstanceOf(NullHandler::class, $handlers[0]);
+    }
+
+    public function testCustomLogHandler(): void
+    {
+        $handler = new TestHandler();
+        $config = new Config(
+            self::HOST,
+            self::API_KEY,
+            logConfig: [
+                'handlers' => [$handler],
+                'console' => false
+            ]
+        );
+
+        $handlers = $config->getLogger()->getHandlers();
+        $this->assertCount(1, $handlers);
+        $this->assertSame($handler, $handlers[0]);
+    }
+
+    public function testCustomLogLevel(): void
+    {
+        $config = new Config(
+            self::HOST,
+            self::API_KEY,
+            logConfig: [
+                'level' => LogLevel::DEBUG
+            ]
+        );
+
+        $this->assertEquals(LogLevel::DEBUG, $config->getLogLevel());
+        
+        $handlers = $config->getLogger()->getHandlers();
+        $this->assertCount(1, $handlers);
+        $this->assertInstanceOf(StreamHandler::class, $handlers[0]);
+    }
+
+    public function testConsoleLoggingDisabled(): void
+    {
+        $config = new Config(
+            self::HOST,
+            self::API_KEY,
+            logConfig: [
+                'level' => LogLevel::INFO,
+                'console' => false
+            ]
+        );
+
+        $handlers = $config->getLogger()->getHandlers();
+        $this->assertCount(1, $handlers);
+        $this->assertInstanceOf(NullHandler::class, $handlers[0]);
+    }
+
+    public function testMultipleHandlers(): void
+    {
+        $testHandler = new TestHandler();
+        $config = new Config(
+            self::HOST,
+            self::API_KEY,
+            logConfig: [
+                'level' => LogLevel::INFO,
+                'handlers' => [$testHandler]
+            ]
+        );
+
+        $handlers = $config->getLogger()->getHandlers();
+        $this->assertCount(2, $handlers);
+        $this->assertInstanceOf(TestHandler::class, $handlers[0]);
+        $this->assertInstanceOf(StreamHandler::class, $handlers[1]);
+        
+        // Verify the test handler is the same instance
+        $this->assertSame($testHandler, $handlers[0]);
+        
+        // Verify the console handler is configured correctly
+        $consoleHandler = $handlers[1];
+        $this->assertInstanceOf(StreamHandler::class, $consoleHandler);
+        
+        $urlReflection = new \ReflectionProperty($consoleHandler, 'url');
+        $urlReflection->setAccessible(true);
+        $this->assertEquals('php://stdout', $urlReflection->getValue($consoleHandler));
+        
+        $levelReflection = new \ReflectionProperty($consoleHandler, 'level');
+        $levelReflection->setAccessible(true);
+        $this->assertEquals(LogLevel::INFO->toMonologLevel(), $levelReflection->getValue($consoleHandler));
+    }
+
+    public function testInvalidLogConfigLevel(): void
+    {
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('Invalid log config option "level": Must be a LogLevel enum');
+        new Config(
+            self::HOST,
+            self::API_KEY,
+            logConfig: ['level' => 'debug']
+        );
+    }
+
+    public function testInvalidLogConfigHandlers(): void
+    {
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('Invalid log config option "handlers": Must be an array of HandlerInterface');
+        new Config(
+            self::HOST,
+            self::API_KEY,
+            logConfig: ['handlers' => ['not a handler']]
+        );
+    }
+
+    public function testInvalidLogConfigConsole(): void
+    {
+        $this->expectException(ConfigException::class);
+        $this->expectExceptionMessage('Invalid log config option "console": Must be a boolean');
+        new Config(
+            self::HOST,
+            self::API_KEY,
+            logConfig: ['console' => 'yes']
+        );
+    }
+
     public function testConfigCreation(): void
     {
         $config = new Config(

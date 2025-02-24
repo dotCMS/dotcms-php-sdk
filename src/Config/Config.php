@@ -6,6 +6,10 @@ namespace Dotcms\PhpSdk\Config;
 
 use Dotcms\PhpSdk\Exception\ConfigException;
 use GuzzleHttp\RequestOptions;
+use Monolog\Handler\HandlerInterface;
+use Monolog\Handler\NullHandler;
+use Monolog\Handler\StreamHandler;
+use Monolog\Logger;
 
 class Config
 {
@@ -20,6 +24,8 @@ class Config
      * }
      */
     private array $validatedOptions;
+
+    private readonly Logger $logger;
 
     private const ALLOWED_OPTIONS = [
         RequestOptions::HEADERS,
@@ -39,6 +45,11 @@ class Config
      *     http_errors?: bool,
      *     allow_redirects?: bool
      * } $clientOptions
+     * @param array{
+     *    level?: LogLevel,
+     *    handlers?: HandlerInterface[],
+     *    console?: bool
+     * } $logConfig
      */
     public function __construct(
         private readonly string $host,
@@ -50,11 +61,42 @@ class Config
             'connect_timeout' => 10,
             'http_errors' => true,
             'allow_redirects' => true,
-        ]
+        ],
+        private readonly array $logConfig = []
     ) {
         $this->validateHost($host);
         $this->validateApiKey($apiKey);
         $this->validateClientOptions($clientOptions);
+        $this->validateLogConfig($logConfig);
+
+        $this->logger = new Logger('dotcms-sdk');
+        
+        // If no config provided, use NullHandler
+        if (empty($logConfig)) {
+            $this->logger->pushHandler(new NullHandler());
+            return;
+        }
+
+        $level = isset($this->logConfig['level']) 
+            ? $this->logConfig['level']->toMonologLevel() 
+            : LogLevel::INFO->toMonologLevel();
+        
+        // Add console handler by default unless explicitly disabled
+        if ($this->logConfig['console'] ?? true) {
+            $this->logger->pushHandler(new StreamHandler('php://stdout', $level));
+        }
+
+        // Add custom handlers if provided
+        if (!empty($this->logConfig['handlers'])) {
+            foreach ($this->logConfig['handlers'] as $handler) {
+                $this->logger->pushHandler($handler);
+            }
+        }
+
+        // If no handlers were added (console disabled and no custom handlers), use NullHandler
+        if (empty($this->logger->getHandlers())) {
+            $this->logger->pushHandler(new NullHandler());
+        }
     }
 
     public function getHost(): string
@@ -65,6 +107,28 @@ class Config
     public function getApiKey(): string
     {
         return $this->apiKey;
+    }
+
+    public function getLogger(): Logger
+    {
+        return $this->logger;
+    }
+
+    public function getLogLevel(): LogLevel
+    {
+        return $this->logConfig['level'] ?? LogLevel::INFO;
+    }
+
+    /**
+     * @return array{
+     *    level?: LogLevel,
+     *    handlers?: HandlerInterface[],
+     *    console?: bool
+     * }
+     */
+    public function getLogConfig(): array
+    {
+        return $this->logConfig;
     }
 
     /**
@@ -103,6 +167,36 @@ class Config
     {
         if (trim($apiKey) === '') {
             throw ConfigException::emptyApiKey();
+        }
+    }
+
+    /**
+     * @param array{
+     *    level?: LogLevel,
+     *    handlers?: HandlerInterface[],
+     *    console?: bool
+     * } $config
+     */
+    private function validateLogConfig(array $config): void
+    {
+        if (isset($config['level']) && !$config['level'] instanceof LogLevel) {
+            throw ConfigException::invalidLogConfig('level', 'Must be a LogLevel enum');
+        }
+
+        if (isset($config['handlers'])) {
+            if (!is_array($config['handlers'])) {
+                throw ConfigException::invalidLogConfig('handlers', 'Must be an array');
+            }
+
+            foreach ($config['handlers'] as $handler) {
+                if (!$handler instanceof HandlerInterface) {
+                    throw ConfigException::invalidLogConfig('handlers', 'Must be an array of HandlerInterface');
+                }
+            }
+        }
+
+        if (isset($config['console']) && !is_bool($config['console'])) {
+            throw ConfigException::invalidLogConfig('console', 'Must be a boolean');
         }
     }
 
