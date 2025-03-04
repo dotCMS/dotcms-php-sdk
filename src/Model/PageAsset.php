@@ -12,7 +12,7 @@ class PageAsset implements \JsonSerializable
      * @param Layout $layout Page layout structure
      * @param Template $template Template details
      * @param Page $page Page metadata
-     * @param array $containers Associative array of containers
+     * @param array<string, ContainerPage> $containers Associative array of containers keyed by identifier
      * @param Site $site Site information
      * @param array|null $urlContentMap Content map for generated pages
      * @param ViewAs $viewAs Visitor context
