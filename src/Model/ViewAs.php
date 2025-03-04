@@ -10,7 +10,7 @@ class ViewAs implements \JsonSerializable
 {
     /**
      * @param Visitor $visitor Visitor context information
-     * @param array $language Language details
+     * @param array<string, mixed> $language Language details
      * @param string $mode The view mode (LIVE, PREVIEW, EDIT_MODE)
      */
     public function __construct(

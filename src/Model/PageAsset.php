@@ -6,7 +6,6 @@ namespace Dotcms\PhpSdk\Model;
 
 use Dotcms\PhpSdk\Model\Container\ContainerPage;
 use Dotcms\PhpSdk\Model\Layout\Layout;
-use Dotcms\PhpSdk\Model\Visitor\ViewAs;
 
 class PageAsset implements \JsonSerializable
 {

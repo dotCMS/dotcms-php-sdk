@@ -8,6 +8,8 @@ use Symfony\Component\Serializer\Annotation\Ignore;
 
 /**
  * Abstract base class for models that need to handle additional properties
+ *
+ * @implements \ArrayAccess<string, mixed>
  */
 abstract class AbstractModel implements \ArrayAccess, \JsonSerializable
 {
