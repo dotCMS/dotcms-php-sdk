@@ -3,7 +3,7 @@
     "description": "The `dotcms-php-sdk` is a PHP library designed to simplify interaction with the dotCMS Page API",
     "type": "library",
     "require": {
-        "php": "^8.2",
+        "php": "^8.4",
         "guzzlehttp/guzzle": "^7.9",
         "monolog/monolog": "^3.8",
         "respect/validation": "^2.4",
