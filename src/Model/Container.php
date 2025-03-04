@@ -9,7 +9,7 @@ use Symfony\Component\Serializer\Annotation as Serializer;
 class Container implements \JsonSerializable
 {
     /**
-     * @param array $containerStructures Container structure details
+     * @param ContainerStructure[] $containerStructures Container structure details
      * @param array $rendered Rendered content
      */
     public function __construct(
