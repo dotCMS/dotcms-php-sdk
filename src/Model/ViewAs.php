@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Model\Visitor;
+namespace Dotcms\PhpSdk\Model;
 
+use Dotcms\PhpSdk\Model\ViewAs\Visitor;
 use Symfony\Component\Serializer\Annotation as Serializer;
 
 class ViewAs implements \JsonSerializable

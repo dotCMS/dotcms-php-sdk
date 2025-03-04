@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Model\Visitor;
+namespace Dotcms\PhpSdk\Model\ViewAs;
 
 class UserAgent implements \JsonSerializable
 {
