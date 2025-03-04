@@ -33,7 +33,7 @@ class Site extends AbstractModel
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -52,4 +52,4 @@ class Site extends AbstractModel
             $this->getAdditionalProperties()
         );
     }
-} 
+}

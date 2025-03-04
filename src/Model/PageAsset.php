@@ -7,7 +7,6 @@ namespace Dotcms\PhpSdk\Model;
 use Dotcms\PhpSdk\Model\Container\ContainerPage;
 use Dotcms\PhpSdk\Model\Layout\Layout;
 use Dotcms\PhpSdk\Model\Visitor\ViewAs;
-use Symfony\Component\Serializer\Annotation as Serializer;
 
 class PageAsset implements \JsonSerializable
 {
@@ -38,10 +37,10 @@ class PageAsset implements \JsonSerializable
     {
         return $this->urlContentMap !== null;
     }
-    
+
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -56,4 +55,4 @@ class PageAsset implements \JsonSerializable
             'viewAs' => $this->viewAs,
         ];
     }
-} 
+}

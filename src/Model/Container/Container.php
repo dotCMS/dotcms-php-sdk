@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Model\Container;
 
 use Dotcms\PhpSdk\Model\AbstractModel;
-use Symfony\Component\Serializer\Annotation as Serializer;
 
 class Container extends AbstractModel
 {
@@ -42,7 +41,7 @@ class Container extends AbstractModel
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -64,4 +63,4 @@ class Container extends AbstractModel
             $this->getAdditionalProperties()
         );
     }
-} 
+}

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Layout;
 
-use Symfony\Component\Serializer\Annotation as Serializer;
-
 class Row implements \JsonSerializable
 {
     /**
@@ -20,7 +18,7 @@ class Row implements \JsonSerializable
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -30,4 +28,4 @@ class Row implements \JsonSerializable
             'styleClass' => $this->styleClass,
         ];
     }
-} 
+}

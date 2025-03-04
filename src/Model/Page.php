@@ -35,7 +35,7 @@ class Page extends AbstractModel
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -55,4 +55,4 @@ class Page extends AbstractModel
             $this->getAdditionalProperties()
         );
     }
-} 
+}

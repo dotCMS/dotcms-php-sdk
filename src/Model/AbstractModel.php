@@ -19,7 +19,7 @@ abstract class AbstractModel implements \ArrayAccess, \JsonSerializable
 
     /**
      * Set additional properties
-     * 
+     *
      * @param array<string, mixed> $additionalProperties
      */
     protected function setAdditionalProperties(array $additionalProperties): void
@@ -66,7 +66,7 @@ abstract class AbstractModel implements \ArrayAccess, \JsonSerializable
      */
     public function offsetGet(mixed $offset): mixed
     {
-        if (!is_string($offset)) {
+        if (! is_string($offset)) {
             return null;
         }
 
@@ -91,11 +91,11 @@ abstract class AbstractModel implements \ArrayAccess, \JsonSerializable
 
     /**
      * Get all additional properties
-     * 
+     *
      * @return array<string, mixed>
      */
     protected function getAdditionalProperties(): array
     {
         return $this->additionalProperties;
     }
-} 
+}

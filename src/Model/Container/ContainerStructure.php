@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Container;
 
-use Symfony\Component\Serializer\Annotation as Serializer;
-
 class ContainerStructure implements \JsonSerializable
 {
     /**
@@ -28,7 +26,7 @@ class ContainerStructure implements \JsonSerializable
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -42,4 +40,4 @@ class ContainerStructure implements \JsonSerializable
             'contentTypeVar' => $this->contentTypeVar,
         ];
     }
-} 
+}

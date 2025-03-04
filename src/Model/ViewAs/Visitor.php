@@ -30,7 +30,7 @@ class Visitor implements \JsonSerializable
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -46,4 +46,4 @@ class Visitor implements \JsonSerializable
             'personas' => $this->personas,
         ];
     }
-} 
+}

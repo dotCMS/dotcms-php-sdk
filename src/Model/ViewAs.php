@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Model;
 
 use Dotcms\PhpSdk\Model\ViewAs\Visitor;
-use Symfony\Component\Serializer\Annotation as Serializer;
 
 class ViewAs implements \JsonSerializable
 {
@@ -23,7 +22,7 @@ class ViewAs implements \JsonSerializable
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -34,4 +33,4 @@ class ViewAs implements \JsonSerializable
             'mode' => $this->mode,
         ];
     }
-} 
+}

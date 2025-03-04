@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Layout;
 
-use Symfony\Component\Serializer\Annotation as Serializer;
-
 class Layout implements \JsonSerializable
 {
     /**
@@ -28,7 +26,7 @@ class Layout implements \JsonSerializable
             'location' => '',
             'width' => 'small',
             'widthPercent' => 20,
-            'preview' => false
+            'preview' => false,
         ],
         public readonly int $version = 1,
     ) {
@@ -36,7 +34,7 @@ class Layout implements \JsonSerializable
 
     /**
      * Get rows from the body
-     * 
+     *
      * @return Row[] Array of rows
      */
     public function getRows(): array
@@ -46,7 +44,7 @@ class Layout implements \JsonSerializable
 
     /**
      * Get containers from the sidebar
-     * 
+     *
      * @return ContainerRef[] Array of container references
      */
     public function getSidebarContainers(): array
@@ -56,7 +54,7 @@ class Layout implements \JsonSerializable
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -71,4 +69,4 @@ class Layout implements \JsonSerializable
             'version' => $this->version,
         ];
     }
-} 
+}

@@ -18,7 +18,7 @@ class VisitorTag implements \JsonSerializable
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -28,4 +28,4 @@ class VisitorTag implements \JsonSerializable
             'count' => $this->count,
         ];
     }
-} 
+}

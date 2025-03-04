@@ -41,7 +41,7 @@ class Contentlet extends AbstractModel
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -64,4 +64,4 @@ class Contentlet extends AbstractModel
             $this->getAdditionalProperties()
         );
     }
-} 
+}

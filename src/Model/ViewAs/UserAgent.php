@@ -22,7 +22,7 @@ class UserAgent implements \JsonSerializable
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -34,4 +34,4 @@ class UserAgent implements \JsonSerializable
             'mobile' => $this->mobile,
         ];
     }
-} 
+}

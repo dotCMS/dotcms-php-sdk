@@ -26,7 +26,7 @@ class GeoLocation implements \JsonSerializable
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -40,4 +40,4 @@ class GeoLocation implements \JsonSerializable
             'region' => $this->region,
         ];
     }
-} 
+}

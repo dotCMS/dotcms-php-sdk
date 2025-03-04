@@ -35,7 +35,7 @@ class Template extends AbstractModel
 
     /**
      * Specify data which should be serialized to JSON
-     * 
+     *
      * @return array<string, mixed>
      */
     public function jsonSerialize(): array
@@ -55,4 +55,4 @@ class Template extends AbstractModel
             $this->getAdditionalProperties()
         );
     }
-} 
+}
