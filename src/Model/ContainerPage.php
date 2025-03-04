@@ -6,7 +6,7 @@ namespace Dotcms\PhpSdk\Model;
 
 use Symfony\Component\Serializer\Annotation as Serializer;
 
-class Container implements \JsonSerializable
+class ContainerPage implements \JsonSerializable
 {
     /**
      * @param ContainerStructure[] $containerStructures Container structure details
