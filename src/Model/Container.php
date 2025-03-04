@@ -6,15 +6,8 @@ namespace Dotcms\PhpSdk\Model;
 
 use Symfony\Component\Serializer\Annotation as Serializer;
 
-class Container implements \ArrayAccess, \JsonSerializable
+class Container extends AbstractModel
 {
-    /**
-     * Additional properties not explicitly defined in the class
-     * 
-     * @var array<string, mixed>
-     */
-    protected array $additionalProperties;
-
     /**
      * @param string $identifier Container identifier
      * @param string $inode Container inode
@@ -43,71 +36,7 @@ class Container implements \ArrayAccess, \JsonSerializable
         public readonly string $notes = '',
         array $additionalProperties = [],
     ) {
-        $this->additionalProperties = $additionalProperties;
-    }
-
-    /**
-     * Get a property value
-     *
-     * @param string $name Property name
-     * @return mixed Property value or null if not found
-     */
-    protected function get(string $name): mixed
-    {
-        if (property_exists($this, $name)) {
-            return $this->$name;
-        }
-
-        return $this->additionalProperties[$name] ?? null;
-    }
-
-    /**
-     * Check if a property exists
-     *
-     * @param string $name Property name
-     * @return bool True if the property exists
-     */
-    protected function has(string $name): bool
-    {
-        return property_exists($this, $name) || isset($this->additionalProperties[$name]);
-    }
-
-    /**
-     * Check if an offset exists
-     */
-    public function offsetExists(mixed $offset): bool
-    {
-        return $this->has((string) $offset);
-    }
-
-    /**
-     * Get an offset
-     * 
-     * @return mixed The value at the specified offset
-     */
-    public function offsetGet(mixed $offset): mixed
-    {
-        return $this->get((string) $offset);
-    }
-
-    /**
-     * Set a value at the specified offset
-     * 
-     * @throws \RuntimeException Always throws an exception as this object is immutable
-     */
-    public function offsetSet(mixed $offset, mixed $value): void
-    {
-        throw new \RuntimeException('Cannot modify immutable object');
-    }
-
-    /**
-     * Unset an offset
-     * 
-     * @throws \RuntimeException Always throws an exception as this object is immutable
-     */
-    public function offsetUnset(mixed $offset): void
-    {
-        throw new \RuntimeException('Cannot modify immutable object');
+        $this->setAdditionalProperties($additionalProperties);
     }
 
     /**
@@ -131,7 +60,7 @@ class Container implements \ArrayAccess, \JsonSerializable
                 'maxContentlets' => $this->maxContentlets,
                 'notes' => $this->notes,
             ],
-            $this->additionalProperties
+            $this->getAdditionalProperties()
         );
     }
 } 

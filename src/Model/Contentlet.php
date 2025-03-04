@@ -4,16 +4,8 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model;
 
-use Symfony\Component\Serializer\Annotation\Ignore;
-
-class Contentlet implements \ArrayAccess, \JsonSerializable
+class Contentlet extends AbstractModel
 {
-    /**
-     * @var array<string, mixed> Additional properties not explicitly defined
-     * @Ignore()
-     */
-    private array $additionalProperties = [];
-
     /**
      * @param string $identifier The contentlet identifier
      * @param string $inode The contentlet inode
@@ -44,72 +36,7 @@ class Contentlet implements \ArrayAccess, \JsonSerializable
         public readonly int $creationDate = 0,
         array $additionalProperties = [],
     ) {
-        $this->additionalProperties = $additionalProperties;
-    }
-
-    /**
-     * Get a property value
-     *
-     * @param string $name Property name
-     * @return mixed Property value or null if not found
-     */
-    protected function get(string $name): mixed
-    {
-        if (property_exists($this, $name)) {
-            return $this->$name;
-        }
-
-        return $this->additionalProperties[$name] ?? null;
-    }
-
-    /**
-     * Check if a property exists
-     *
-     * @param string $name Property name
-     * @return bool True if the property exists
-     */
-    protected function has(string $name): bool
-    {
-        return property_exists($this, $name) || isset($this->additionalProperties[$name]);
-    }
-
-    /**
-     * @param mixed $offset
-     * @return bool
-     */
-    public function offsetExists(mixed $offset): bool
-    {
-        return $this->has((string) $offset);
-    }
-
-    /**
-     * @param mixed $offset
-     * @return mixed
-     */
-    public function offsetGet(mixed $offset): mixed
-    {
-        return $this->get((string) $offset);
-    }
-
-    /**
-     * @param mixed $offset
-     * @param mixed $value
-     * @return void
-     * @throws \LogicException Contentlet properties are read-only
-     */
-    public function offsetSet(mixed $offset, mixed $value): void
-    {
-        throw new \LogicException('Contentlet properties are read-only');
-    }
-
-    /**
-     * @param mixed $offset
-     * @return void
-     * @throws \LogicException Contentlet properties are read-only
-     */
-    public function offsetUnset(mixed $offset): void
-    {
-        throw new \LogicException('Contentlet properties are read-only');
+        $this->setAdditionalProperties($additionalProperties);
     }
 
     /**
@@ -134,7 +61,7 @@ class Contentlet implements \ArrayAccess, \JsonSerializable
                 'languageId' => $this->languageId,
                 'creationDate' => $this->creationDate,
             ],
-            $this->additionalProperties
+            $this->getAdditionalProperties()
         );
     }
 } 
