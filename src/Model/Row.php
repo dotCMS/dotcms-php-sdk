@@ -10,11 +10,11 @@ class Row implements \JsonSerializable
 {
     /**
      * @param Column[] $columns Array of Column objects
-     * @param string $styleClass CSS class for styling
+     * @param string|null $styleClass CSS class for styling
      */
     public function __construct(
         public readonly array $columns,
-        public readonly string $styleClass,
+        public readonly ?string $styleClass = null,
     ) {
     }
 

@@ -11,10 +11,12 @@ class ContainerRef implements \JsonSerializable
     /**
      * @param string $identifier The container identifier
      * @param string $uuid The container UUID
+     * @param string[] $historyUUIDs Array of history UUIDs
      */
     public function __construct(
         public readonly string $identifier,
         public readonly string $uuid,
+        public readonly array $historyUUIDs = [],
     ) {
     }
 
@@ -28,6 +30,7 @@ class ContainerRef implements \JsonSerializable
         return [
             'identifier' => $this->identifier,
             'uuid' => $this->uuid,
+            'historyUUIDs' => $this->historyUUIDs,
         ];
     }
 } 
