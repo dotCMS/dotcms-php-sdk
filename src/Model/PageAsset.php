@@ -13,7 +13,6 @@ class PageAsset implements \JsonSerializable
      * @param Template $template Template details
      * @param Page $page Page metadata
      * @param array $containers Associative array of containers
-     * @param array $contentlets Associative array of contentlets
      * @param Site $site Site information
      * @param array|null $urlContentMap Content map for generated pages
      * @param ViewAs $viewAs Visitor context
@@ -23,7 +22,6 @@ class PageAsset implements \JsonSerializable
         public readonly Template $template,
         public readonly Page $page,
         public readonly array $containers,
-        public readonly array $contentlets,
         public readonly Site $site,
         public readonly ?array $urlContentMap,
         public readonly ViewAs $viewAs,
@@ -50,7 +48,6 @@ class PageAsset implements \JsonSerializable
             'template' => $this->template,
             'page' => $this->page,
             'containers' => $this->containers,
-            'contentlets' => $this->contentlets,
             'site' => $this->site,
             'urlContentMap' => $this->urlContentMap,
             'viewAs' => $this->viewAs,
