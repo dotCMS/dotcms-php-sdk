@@ -14,7 +14,7 @@ class PageAsset implements \JsonSerializable
      * @param Page $page Page metadata
      * @param array<string, ContainerPage> $containers Associative array of containers keyed by identifier
      * @param Site $site Site information
-     * @param array|null $urlContentMap Content map for generated pages
+     * @param Contentlet|null $urlContentMap Content map for generated pages
      * @param ViewAs $viewAs Visitor context
      */
     public function __construct(
@@ -23,7 +23,7 @@ class PageAsset implements \JsonSerializable
         public readonly Page $page,
         public readonly array $containers,
         public readonly Site $site,
-        public readonly ?array $urlContentMap,
+        public readonly ?Contentlet $urlContentMap,
         public readonly ViewAs $viewAs,
     ) {
     }
