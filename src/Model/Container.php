@@ -10,7 +10,7 @@ class Container implements \JsonSerializable
 {
     /**
      * @param ContainerStructure[] $containerStructures Container structure details
-     * @param array $rendered Rendered content
+     * @param array<string, string> $rendered Rendered content keyed by UUID
      */
     public function __construct(
         public readonly array $containerStructures = [],
