@@ -4,6 +4,9 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model;
 
+use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Layout\Layout;
+use Dotcms\PhpSdk\Model\Visitor\ViewAs;
 use Symfony\Component\Serializer\Annotation as Serializer;
 
 class PageAsset implements \JsonSerializable

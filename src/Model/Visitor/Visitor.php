@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Model;
+namespace Dotcms\PhpSdk\Model\Visitor;
 
 class Visitor implements \JsonSerializable
 {
@@ -24,7 +24,7 @@ class Visitor implements \JsonSerializable
         public readonly string $referer,
         public readonly string $dmid,
         public readonly GeoLocation $geo,
-        public readonly array $personas, // TODO: Add type to personas
+        public readonly array $personas,
     ) {
     }
 

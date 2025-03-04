@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Model;
+namespace Dotcms\PhpSdk\Model\Container;
 
+use Dotcms\PhpSdk\Model\AbstractModel;
 use Symfony\Component\Serializer\Annotation as Serializer;
 
 class Container extends AbstractModel
