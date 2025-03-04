@@ -11,10 +11,12 @@ class Container implements \JsonSerializable
     /**
      * @param ContainerStructure[] $containerStructures Container structure details
      * @param array<string, string> $rendered Rendered content keyed by UUID
+     * @param array<string, Contentlet[]> $contentlets Contentlets keyed by UUID
      */
     public function __construct(
         public readonly array $containerStructures = [],
         public readonly array $rendered = [],
+        public readonly array $contentlets = [],
     ) {
     }
 
@@ -28,6 +30,7 @@ class Container implements \JsonSerializable
         return [
             'containerStructures' => $this->containerStructures,
             'rendered' => $this->rendered,
+            'contentlets' => $this->contentlets,
         ];
     }
 } 
