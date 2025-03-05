@@ -10,8 +10,8 @@ class GeoLocation implements \JsonSerializable
      * @param string $city City name
      * @param string $country Country name
      * @param string $countryCode Country code
-     * @param string $latitude Latitude coordinate
-     * @param string $longitude Longitude coordinate
+     * @param float $latitude Latitude coordinate
+     * @param float $longitude Longitude coordinate
      * @param string $region Region name
      */
     public function __construct(
