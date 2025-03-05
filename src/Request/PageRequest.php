@@ -3,12 +3,14 @@
 namespace Dotcms\PhpSdk\Request;
 
 use InvalidArgumentException;
+use Respect\Validation\Exceptions\ValidationException;
+use Respect\Validation\Validator as v;
 
 /**
  * Class PageRequest
- * 
+ *
  * Represents a request to the dotCMS Page API.
- * 
+ *
  * @package Dotcms\PhpSdk\Request
  */
 class PageRequest
@@ -77,12 +79,12 @@ class PageRequest
     /**
      * PageRequest constructor.
      *
-     * @param string $format The format of the response (json or render)
      * @param string $pagePath The path to the page
+     * @param string $format The format of the response (json or render), defaults to json
      * 
      * @throws InvalidArgumentException If the format is invalid
      */
-    public function __construct(string $format, string $pagePath)
+    public function __construct(string $pagePath, string $format = self::FORMAT_JSON)
     {
         $this->setFormat($format);
         $this->setPagePath($pagePath);
@@ -92,13 +94,17 @@ class PageRequest
      * Set the format of the response.
      *
      * @param string $format The format (json or render)
-     * 
+     *
      * @return self
      * @throws InvalidArgumentException If the format is invalid
      */
     private function setFormat(string $format): self
     {
-        if (!in_array($format, self::VALID_FORMATS)) {
+        try {
+            v::in(self::VALID_FORMATS)
+                ->setName('format')
+                ->assert($format);
+        } catch (ValidationException $e) {
             throw new InvalidArgumentException(
                 sprintf(
                     'Invalid format "%s". Valid formats are: %s',
@@ -109,6 +115,7 @@ class PageRequest
         }
 
         $this->format = $format;
+
         return $this;
     }
 
@@ -116,18 +123,22 @@ class PageRequest
      * Set the page path.
      *
      * @param string $pagePath The path to the page
-     * 
+     *
      * @return self
      * @throws InvalidArgumentException If the page path is empty
      */
     private function setPagePath(string $pagePath): self
     {
-        if (empty($pagePath)) {
+        try {
+            v::notEmpty()
+                ->setName('page path')
+                ->assert($pagePath);
+        } catch (ValidationException $e) {
             throw new InvalidArgumentException('Page path cannot be empty');
         }
 
         // Ensure the path starts with a slash
-        if (!str_starts_with($pagePath, '/')) {
+        if (! str_starts_with($pagePath, '/')) {
             $pagePath = '/' . $pagePath;
         }
 
@@ -137,6 +148,7 @@ class PageRequest
         }
 
         $this->pagePath = $pagePath;
+
         return $this;
     }
 
@@ -224,13 +236,17 @@ class PageRequest
      * Set the mode.
      *
      * @param string $mode The mode (LIVE, WORKING, EDIT_MODE)
-     * 
+     *
      * @return self A new instance with the updated mode
      * @throws InvalidArgumentException If the mode is invalid
      */
     public function withMode(string $mode): self
     {
-        if (!in_array($mode, self::VALID_MODES)) {
+        try {
+            v::in(self::VALID_MODES)
+                ->setName('mode')
+                ->assert($mode);
+        } catch (ValidationException $e) {
             throw new InvalidArgumentException(
                 sprintf(
                     'Invalid mode "%s". Valid modes are: %s',
@@ -242,6 +258,7 @@ class PageRequest
 
         $clone = clone $this;
         $clone->mode = $mode;
+
         return $clone;
     }
 
@@ -249,13 +266,25 @@ class PageRequest
      * Set the host ID.
      *
      * @param string $hostId The host ID (Site ID)
-     * 
+     *
      * @return self A new instance with the updated host ID
+     * @throws InvalidArgumentException If the host ID is invalid
      */
     public function withHostId(string $hostId): self
     {
+        try {
+            v::notEmpty()->uuid()
+                ->setName('host ID')
+                ->assert($hostId);
+        } catch (ValidationException $e) {
+            throw new InvalidArgumentException(
+                sprintf('Invalid host ID "%s". Host ID must be a valid UUID.', $hostId)
+            );
+        }
+
         $clone = clone $this;
         $clone->hostId = $hostId;
+
         return $clone;
     }
 
@@ -263,13 +292,25 @@ class PageRequest
      * Set the language ID.
      *
      * @param int $languageId The language ID
-     * 
+     *
      * @return self A new instance with the updated language ID
+     * @throws InvalidArgumentException If the language ID is invalid
      */
     public function withLanguageId(int $languageId): self
     {
+        try {
+            v::positive()
+                ->setName('language ID')
+                ->assert($languageId);
+        } catch (ValidationException $e) {
+            throw new InvalidArgumentException(
+                sprintf('Invalid language ID "%d". Language ID must be a positive integer.', $languageId)
+            );
+        }
+
         $clone = clone $this;
         $clone->languageId = $languageId;
+
         return $clone;
     }
 
@@ -277,13 +318,23 @@ class PageRequest
      * Set the persona ID.
      *
      * @param string $personaId The persona ID
-     * 
+     *
      * @return self A new instance with the updated persona ID
+     * @throws InvalidArgumentException If the persona ID is invalid
      */
     public function withPersonaId(string $personaId): self
     {
+        try {
+            v::notEmpty()
+                ->setName('persona ID')
+                ->assert($personaId);
+        } catch (ValidationException $e) {
+            throw new InvalidArgumentException('Persona ID cannot be empty');
+        }
+
         $clone = clone $this;
         $clone->personaId = $personaId;
+
         return $clone;
     }
 
@@ -291,13 +342,14 @@ class PageRequest
      * Set whether to fire rules.
      *
      * @param bool $fireRules Whether to fire rules
-     * 
+     *
      * @return self A new instance with the updated fire rules setting
      */
     public function withFireRules(bool $fireRules): self
     {
         $clone = clone $this;
         $clone->fireRules = $fireRules;
+
         return $clone;
     }
 
@@ -305,13 +357,17 @@ class PageRequest
      * Set the depth.
      *
      * @param int $depth The depth of related content to retrieve (0-3)
-     * 
+     *
      * @return self A new instance with the updated depth
      * @throws InvalidArgumentException If the depth is invalid
      */
     public function withDepth(int $depth): self
     {
-        if ($depth < self::MIN_DEPTH || $depth > self::MAX_DEPTH) {
+        try {
+            v::intVal()->between(self::MIN_DEPTH, self::MAX_DEPTH)
+                ->setName('depth')
+                ->assert($depth);
+        } catch (ValidationException $e) {
             throw new InvalidArgumentException(
                 sprintf(
                     'Invalid depth "%d". Depth must be between %d and %d',
@@ -324,6 +380,7 @@ class PageRequest
 
         $clone = clone $this;
         $clone->depth = $depth;
+
         return $clone;
     }
 
@@ -372,40 +429,4 @@ class PageRequest
 
         return $params;
     }
-
-    /**
-     * Validate the request.
-     *
-     * @return bool True if the request is valid
-     * @throws InvalidArgumentException If the request is invalid
-     */
-    public function validate(): bool
-    {
-        // Format and page path are validated in the constructor
-        
-        // Validate mode if set
-        if ($this->mode !== null && !in_array($this->mode, self::VALID_MODES)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    'Invalid mode "%s". Valid modes are: %s',
-                    $this->mode,
-                    implode(', ', self::VALID_MODES)
-                )
-            );
-        }
-
-        // Validate depth if set
-        if ($this->depth !== null && ($this->depth < self::MIN_DEPTH || $this->depth > self::MAX_DEPTH)) {
-            throw new InvalidArgumentException(
-                sprintf(
-                    'Invalid depth "%d". Depth must be between %d and %d',
-                    $this->depth,
-                    self::MIN_DEPTH,
-                    self::MAX_DEPTH
-                )
-            );
-        }
-
-        return true;
-    }
-} 
+}
