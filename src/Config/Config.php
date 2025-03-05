@@ -66,9 +66,9 @@ class Config
         ],
         private readonly array $logConfig = []
     ) {
+        $this->validatedOptions = $clientOptions;
         $this->validateHost($host);
         $this->validateApiKey($apiKey);
-        $this->validatedOptions = $clientOptions;
         $this->validateClientOptions($clientOptions);
         $this->validateLogConfig($logConfig);
 
@@ -162,23 +162,22 @@ class Config
 
     private function validateHost(string $host): void
     {
-        if (empty(trim($host))) {
-            throw ConfigException::invalidHost('');
-        }
-
-        if (!filter_var($host, FILTER_VALIDATE_URL)) {
-            throw ConfigException::invalidHost($host);
-        }
-
-        $parsedUrl = parse_url($host);
-        if (!isset($parsedUrl['scheme']) || !in_array($parsedUrl['scheme'], ['http', 'https'])) {
+        try {
+            v::stringType()->notEmpty()
+                ->url()
+                ->regex('/^https?:\/\/.+/')
+                ->assert($host);
+        } catch (ValidationException $e) {
             throw ConfigException::invalidHost($host);
         }
     }
 
     private function validateApiKey(string $apiKey): void
     {
-        if (empty(trim($apiKey))) {
+        try {
+            v::notEmpty()
+                ->assert($apiKey);
+        } catch (ValidationException $e) {
             throw ConfigException::emptyApiKey();
         }
     }
@@ -193,26 +192,34 @@ class Config
     private function validateLogConfig(array $config): void
     {
         // Validate level if set
-        if (isset($config['level']) && !($config['level'] instanceof LogLevel)) {
-            throw ConfigException::invalidLogConfig('level', 'Must be a LogLevel enum');
+        if (isset($config['level'])) {
+            try {
+                v::instance(LogLevel::class)
+                    ->assert($config['level']);
+            } catch (ValidationException $e) {
+                throw ConfigException::invalidLogConfig('level', 'Must be a LogLevel enum');
+            }
         }
 
         // Validate handlers if set
         if (isset($config['handlers'])) {
-            if (!is_array($config['handlers'])) {
+            try {
+                v::arrayVal()
+                    ->each(v::instance(HandlerInterface::class))
+                    ->assert($config['handlers']);
+            } catch (ValidationException $e) {
                 throw ConfigException::invalidLogConfig('handlers', 'Must be an array of HandlerInterface');
-            }
-
-            foreach ($config['handlers'] as $handler) {
-                if (!$handler instanceof HandlerInterface) {
-                    throw ConfigException::invalidLogConfig('handlers', 'Must be an array of HandlerInterface');
-                }
             }
         }
 
         // Validate console if set
-        if (isset($config['console']) && !is_bool($config['console'])) {
-            throw ConfigException::invalidLogConfig('console', 'Must be a boolean');
+        if (isset($config['console'])) {
+            try {
+                v::boolType()
+                    ->assert($config['console']);
+            } catch (ValidationException $e) {
+                throw ConfigException::invalidLogConfig('console', 'Must be a boolean');
+            }
         }
     }
 
@@ -247,7 +254,10 @@ class Config
             }
 
             foreach ($options[RequestOptions::HEADERS] as $name => $value) {
-                if (!is_string($name) || !is_string($value)) {
+                try {
+                    v::stringType()->assert($name);
+                    v::stringType()->assert($value);
+                } catch (ValidationException $e) {
                     throw ConfigException::invalidClientOption(
                         RequestOptions::HEADERS,
                         'Header names and values must be strings'
@@ -256,48 +266,34 @@ class Config
             }
         }
 
-        // Validate timeout
-        if (isset($options[RequestOptions::TIMEOUT])) {
-            if (!is_int($options[RequestOptions::TIMEOUT]) || $options[RequestOptions::TIMEOUT] <= 0) {
-                throw ConfigException::invalidClientOption(
-                    RequestOptions::TIMEOUT,
-                    'Must be a positive integer'
-                );
+        // Validate timeouts
+        foreach ([RequestOptions::TIMEOUT, RequestOptions::CONNECT_TIMEOUT] as $option) {
+            if (isset($options[$option])) {
+                try {
+                    v::intType()->positive()
+                        ->assert($options[$option]);
+                } catch (ValidationException $e) {
+                    throw ConfigException::invalidClientOption(
+                        $option,
+                        'Must be a positive integer'
+                    );
+                }
             }
         }
 
-        // Validate connect_timeout
-        if (isset($options[RequestOptions::CONNECT_TIMEOUT])) {
-            if (!is_int($options[RequestOptions::CONNECT_TIMEOUT]) || $options[RequestOptions::CONNECT_TIMEOUT] <= 0) {
-                throw ConfigException::invalidClientOption(
-                    RequestOptions::CONNECT_TIMEOUT,
-                    'Must be a positive integer'
-                );
+        // Validate booleans
+        foreach ([RequestOptions::VERIFY, RequestOptions::HTTP_ERRORS, RequestOptions::ALLOW_REDIRECTS] as $option) {
+            if (isset($options[$option])) {
+                try {
+                    v::boolType()
+                        ->assert($options[$option]);
+                } catch (ValidationException $e) {
+                    throw ConfigException::invalidClientOption(
+                        $option,
+                        'Must be a boolean'
+                    );
+                }
             }
-        }
-
-        // Validate verify
-        if (isset($options[RequestOptions::VERIFY]) && !is_bool($options[RequestOptions::VERIFY])) {
-            throw ConfigException::invalidClientOption(
-                RequestOptions::VERIFY,
-                'Must be a boolean'
-            );
-        }
-
-        // Validate http_errors
-        if (isset($options[RequestOptions::HTTP_ERRORS]) && !is_bool($options[RequestOptions::HTTP_ERRORS])) {
-            throw ConfigException::invalidClientOption(
-                RequestOptions::HTTP_ERRORS,
-                'Must be a boolean'
-            );
-        }
-
-        // Validate allow_redirects
-        if (isset($options[RequestOptions::ALLOW_REDIRECTS]) && !is_bool($options[RequestOptions::ALLOW_REDIRECTS])) {
-            throw ConfigException::invalidClientOption(
-                RequestOptions::ALLOW_REDIRECTS,
-                'Must be a boolean'
-            );
         }
 
         $this->validatedOptions = $options;
