@@ -47,11 +47,13 @@ class PageService
                 $request->buildPath(),
                 ['query' => $request->buildQueryParams()]
             );
+            
+            $responseData = $response->toArray();
 
             // Validate the response before mapping
-            $this->validateResponse($response);
+            $this->validateResponse($responseData);
 
-            return $this->mapResponseToPageAsset($response);
+            return $this->mapResponseToPageAsset($responseData);
         } catch (ResponseException $e) {
             throw $e;
         } catch (\Throwable $e) {
@@ -88,10 +90,12 @@ class PageService
                     $response->getBody()->rewind();
                 }
 
-                // Validate the response before mapping
-                $this->validateResponse($dotcmsResponse);
+                $responseData = $dotcmsResponse->toArray();
 
-                return $this->mapResponseToPageAsset($dotcmsResponse);
+                // Validate the response before mapping
+                $this->validateResponse($responseData);
+
+                return $this->mapResponseToPageAsset($responseData);
             },
             function ($reason) {
                 if ($reason instanceof ResponseException) {
@@ -113,10 +117,11 @@ class PageService
      * @param Response $response The response to validate
      * @throws ResponseException If the response is missing required parts
      */
-    private function validateResponse(Response $response): void
+    private function validateResponse(array $entity): void
     {
         try {
-            $data = $response->toArray();
+            $data = $entity['entity'];
+
 
             // Ensure $data is an array
             if (! is_array($data)) {
@@ -124,7 +129,7 @@ class PageService
             }
 
             // Check if entity.page exists in the response
-            if (! isset($data['entity']) || ! is_array($data['entity']) || ! isset($data['entity']['page'])) {
+            if (! isset($data['page'])) {
                 throw new ResponseException('Page data not found in response: entity.page is missing');
             }
 
@@ -160,17 +165,17 @@ class PageService
      * @return Page The mapped page
      * @throws ResponseException If the response cannot be mapped to a Page
      */
-    private function mapResponseToPage(Response $response): Page
+    private function mapResponseToPage(array $entity): Page
     {
         try {
-            $data = $response->toArray();
+            $data = $entity['entity'];
 
             // Ensure $data is an array and entity is an array
-            if (! is_array($data) || ! isset($data['entity']) || ! is_array($data['entity'])) {
-                throw new ResponseException('Response data or entity is not an array');
+            if (! is_array($data)) {
+                throw new ResponseException('Can\'t map response to Page: Response data is not an array');
             }
 
-            $pageData = $data['entity']['page'] ?? [];
+            $pageData = $data['page'] ?? [];
 
             if (! is_array($pageData)) {
                 $pageData = [];
@@ -206,13 +211,13 @@ class PageService
      * @return PageAsset The mapped page asset
      * @throws ResponseException If the response cannot be mapped to a PageAsset
      */
-    private function mapResponseToPageAsset(Response $response): PageAsset
+    private function mapResponseToPageAsset(array $entity): PageAsset
     {
         try {
-            $data = $response->toArray();
+            $data = $entity['entity'];
 
             // Extract page data
-            $page = $this->mapResponseToPage($response);
+            $page = $this->mapResponseToPage($entity);
 
             // Extract layout data
             $layoutData = $data['layout'] ?? [];

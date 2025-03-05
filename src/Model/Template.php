@@ -12,8 +12,8 @@ class Template extends AbstractModel
      * @param bool $drawed Whether the template is drawn in the layout designer
      * @param string $inode The template inode
      * @param string $friendlyName The template friendly name
-     * @param bool $header Whether the template has a header
-     * @param bool $footer Whether the template has a footer
+     * @param bool|string $header Whether the template has a header
+     * @param bool|string $footer Whether the template has a footer
      * @param bool $working Whether the template is in working state
      * @param bool $live Whether the template is live
      * @param array<string, mixed> $additionalProperties Additional properties
@@ -24,8 +24,8 @@ class Template extends AbstractModel
         public readonly bool $drawed,
         public readonly string $inode = '',
         public readonly string $friendlyName = '',
-        public readonly bool $header = true,
-        public readonly bool $footer = true,
+        public readonly bool|string $header = true,
+        public readonly bool|string $footer = true,
         public readonly bool $working = false,
         public readonly bool $live = false,
         array $additionalProperties = [],

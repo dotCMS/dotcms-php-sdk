@@ -18,8 +18,8 @@ class GeoLocation implements \JsonSerializable
         public readonly string $city,
         public readonly string $country,
         public readonly string $countryCode,
-        public readonly string $latitude,
-        public readonly string $longitude,
+        public readonly float $latitude,
+        public readonly float $longitude,
         public readonly string $region,
     ) {
     }
