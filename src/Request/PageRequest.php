@@ -397,7 +397,7 @@ class PageRequest
     /**
      * Build the query parameters.
      *
-     * @return array The query parameters
+     * @return array<string, string|int>
      */
     public function buildQueryParams(): array
     {
