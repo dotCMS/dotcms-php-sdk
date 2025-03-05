@@ -47,7 +47,7 @@ class PageService
                 $request->buildPath(),
                 ['query' => $request->buildQueryParams()]
             );
-            
+
             $responseData = $response->toArray();
 
             // Validate the response before mapping
