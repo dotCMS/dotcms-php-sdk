@@ -19,28 +19,18 @@ use Dotcms\PhpSdk\Model\ViewAs\UserAgent;
 use Dotcms\PhpSdk\Model\ViewAs\Visitor;
 use Dotcms\PhpSdk\Request\PageRequest;
 use GuzzleHttp\Promise\PromiseInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
-use Symfony\Component\Serializer\Normalizer\ArrayDenormalizer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Serializer;
 
 /**
  * Service for interacting with dotCMS Page API
  */
 class PageService
 {
-    private readonly Serializer $serializer;
-
     /**
      * @param HttpClient $httpClient The HTTP client to use for requests
      */
     public function __construct(
         private readonly HttpClient $httpClient
     ) {
-        $this->serializer = new Serializer(
-            [new ObjectNormalizer(), new ArrayDenormalizer()],
-            [new JsonEncoder()]
-        );
     }
 
     /**
@@ -74,18 +64,6 @@ class PageService
     }
 
     /**
-     * Fetch a complete page asset from dotCMS
-     *
-     * @param PageRequest $request The page request
-     * @return PageAsset The complete page asset including layout, template, and containers
-     * @throws ResponseException If the response cannot be mapped to a PageAsset
-     */
-    public function getPageAsset(PageRequest $request): PageAsset
-    {
-        return $this->getPage($request);
-    }
-
-    /**
      * Fetch a page from dotCMS asynchronously
      *
      * @param PageRequest $request The page request
@@ -93,8 +71,6 @@ class PageService
      */
     public function getPageAsync(PageRequest $request): PromiseInterface
     {
-        $path = $request->buildPath();
-
         $promise = $this->httpClient->requestAsync(
             'GET',
             $request->buildPath(),
@@ -103,8 +79,6 @@ class PageService
 
         return $promise->then(
             function ($response) {
-                echo "getPageAsync promise resolved\n";
-
                 // If the response is already a Response object, use it directly
                 if ($response instanceof Response) {
                     $dotcmsResponse = $response;
@@ -114,28 +88,12 @@ class PageService
                     $response->getBody()->rewind();
                 }
 
-                // Debug the response
-                $responseData = $dotcmsResponse->toArray();
-                echo "getPageAsync response data: " . json_encode($responseData) . "\n";
-
                 // Validate the response before mapping
                 $this->validateResponse($dotcmsResponse);
 
-                $pageAsset = $this->mapResponseToPageAsset($dotcmsResponse);
-
-                // Use the serializer to normalize the PageAsset for debugging
-                $normalizedData = $this->serializer->normalize($pageAsset);
-                if (is_array($normalizedData) && isset($normalizedData['page']) && is_array($normalizedData['page'])) {
-                    $pageIdentifier = $normalizedData['page']['identifier'] ?? 'no identifier';
-                } else {
-                    $pageIdentifier = 'no identifier';
-                }
-                echo "getPageAsync mapped to PageAsset: " . $pageIdentifier . "\n";
-
-                return $pageAsset;
+                return $this->mapResponseToPageAsset($dotcmsResponse);
             },
             function ($reason) {
-                echo "getPageAsync promise rejected: " . $reason->getMessage() . "\n";
                 if ($reason instanceof ResponseException) {
                     throw $reason;
                 }
@@ -147,17 +105,6 @@ class PageService
                 );
             }
         );
-    }
-
-    /**
-     * Fetch a complete page asset from dotCMS asynchronously
-     *
-     * @param PageRequest $request The page request
-     * @return PromiseInterface A promise that resolves to a PageAsset
-     */
-    public function getPageAssetAsync(PageRequest $request): PromiseInterface
-    {
-        return $this->getPageAsync($request);
     }
 
     /**

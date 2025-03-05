@@ -14,10 +14,8 @@ use Dotcms\PhpSdk\Service\PageService;
 use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\HandlerStack;
-use GuzzleHttp\Promise\FulfilledPromise;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
-use GuzzleHttp\Psr7\Stream;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 
@@ -38,7 +36,7 @@ class TestHttpClient extends HttpClient
                 'verify' => false,
                 'timeout' => 30,
                 'connect_timeout' => 5,
-                'http_errors' => false
+                'http_errors' => false,
             ]
         );
         $this->mockHandler = $mockHandler;
@@ -48,6 +46,7 @@ class TestHttpClient extends HttpClient
     protected function createClient(): Client
     {
         $handlerStack = HandlerStack::create($this->mockHandler);
+
         return new Client(['handler' => $handlerStack]);
     }
 
@@ -55,6 +54,7 @@ class TestHttpClient extends HttpClient
     {
         $client = $this->createClient();
         $response = $client->request($method, $uri, $options);
+
         return new TestResponse($response);
     }
 
@@ -62,7 +62,7 @@ class TestHttpClient extends HttpClient
     {
         $client = $this->createClient();
         $promise = $client->requestAsync($method, $uri, $options);
-        
+
         return $promise->then(function ($response) {
             return new TestResponse($response);
         });
@@ -86,11 +86,11 @@ class TestResponse extends DotcmsResponse
     {
         $body = (string)$this->originalResponse->getBody();
         $data = json_decode($body, true);
-        
+
         if (json_last_error() !== JSON_ERROR_NONE) {
             throw new ResponseException('Invalid JSON response: ' . json_last_error_msg());
         }
-        
+
         return $data;
     }
 }
@@ -116,22 +116,16 @@ class PageServiceTest extends TestCase
 
     public function testGetPage(): void
     {
-        $responseJson = file_get_contents(__DIR__ . '/../fixtures/page-response.json');
-        echo "Response JSON: " . $responseJson . "\n";
-
         $this->mockHandler->append(
             new GuzzleResponse(
                 200,
                 ['Content-Type' => 'application/json'],
-                $responseJson
+                file_get_contents(__DIR__ . '/../fixtures/page-response.json')
             )
         );
 
         $request = new PageRequest('/about-us');
         $page = $this->pageService->getPage($request);
-
-        // Debug output
-        var_dump($page);
 
         $this->assertInstanceOf(PageAsset::class, $page);
         $this->assertEquals('about-us', $page->page->identifier);
@@ -142,53 +136,29 @@ class PageServiceTest extends TestCase
         $this->assertEquals('WebPageContent', $page->page->contentType);
         $this->assertTrue($page->page->live);
         $this->assertTrue($page->page->working);
-    }
-
-    public function testGetPageAsset(): void
-    {
-        $this->mockHandler->append(
-            new GuzzleResponse(
-                200,
-                ['Content-Type' => 'application/json'],
-                file_get_contents(__DIR__ . '/../fixtures/page-response.json')
-            )
-        );
-
-        $request = new PageRequest('/about-us');
-        $pageAsset = $this->pageService->getPageAsset($request);
-
-        $this->assertInstanceOf(PageAsset::class, $pageAsset);
-        $this->assertEquals('about-us', $pageAsset->page->identifier);
-        $this->assertEquals('About Us', $pageAsset->page->title);
-        $this->assertEquals('about-us', $pageAsset->page->pageUrl);
-        $this->assertEquals('demo.dotcms.com', $pageAsset->page->hostName);
-        $this->assertEquals('48190c8c-42c4-46af-8d1a-0cd5db894797', $pageAsset->page->host);
-        $this->assertEquals('WebPageContent', $pageAsset->page->contentType);
-        $this->assertTrue($pageAsset->page->live);
-        $this->assertTrue($pageAsset->page->working);
 
         // Test layout
-        $this->assertEquals('Default Layout', $pageAsset->layout->title);
-        $this->assertEquals(1, $pageAsset->layout->version);
-        $this->assertTrue($pageAsset->layout->header);
-        $this->assertTrue($pageAsset->layout->footer);
+        $this->assertEquals('Default Layout', $page->layout->title);
+        $this->assertEquals(1, $page->layout->version);
+        $this->assertTrue($page->layout->header);
+        $this->assertTrue($page->layout->footer);
 
         // Test template
-        $this->assertEquals('Default', $pageAsset->template->title);
-        $this->assertEquals('c541abb1-69b3-4bc5-8430-5e09e5239cc8', $pageAsset->template->identifier);
-        $this->assertTrue($pageAsset->template->drawed);
-        $this->assertTrue($pageAsset->template->header);
-        $this->assertTrue($pageAsset->template->footer);
-        $this->assertTrue($pageAsset->template->live);
-        $this->assertTrue($pageAsset->template->working);
+        $this->assertEquals('Default', $page->template->title);
+        $this->assertEquals('c541abb1-69b3-4bc5-8430-5e09e5239cc8', $page->template->identifier);
+        $this->assertTrue($page->template->drawed);
+        $this->assertTrue($page->template->header);
+        $this->assertTrue($page->template->footer);
+        $this->assertTrue($page->template->live);
+        $this->assertTrue($page->template->working);
 
         // Test site
-        $this->assertEquals('48190c8c-42c4-46af-8d1a-0cd5db894797', $pageAsset->site->identifier);
-        $this->assertEquals('demo.dotcms.com', $pageAsset->site->hostname);
-        $this->assertTrue($pageAsset->site->live);
-        $this->assertTrue($pageAsset->site->working);
-        $this->assertFalse($pageAsset->site->locked);
-        $this->assertFalse($pageAsset->site->archived);
+        $this->assertEquals('48190c8c-42c4-46af-8d1a-0cd5db894797', $page->site->identifier);
+        $this->assertEquals('demo.dotcms.com', $page->site->hostname);
+        $this->assertTrue($page->site->live);
+        $this->assertTrue($page->site->working);
+        $this->assertFalse($page->site->locked);
+        $this->assertFalse($page->site->archived);
     }
 
     public function testGetPageAsync(): void
@@ -208,37 +178,33 @@ class PageServiceTest extends TestCase
 
         $page = $promise->wait();
 
-        // Debug output
-        var_dump($page);
 
         $this->assertInstanceOf(PageAsset::class, $page);
         $this->assertEquals('about-us', $page->page->identifier);
         $this->assertEquals('About Us', $page->page->title);
-    }
 
-    public function testGetPageAssetAsync(): void
-    {
-        $this->mockHandler->append(
-            new GuzzleResponse(
-                200,
-                ['Content-Type' => 'application/json'],
-                file_get_contents(__DIR__ . '/../fixtures/page-response.json')
-            )
-        );
+        // Test layout
+        $this->assertEquals('Default Layout', $page->layout->title);
+        $this->assertEquals(1, $page->layout->version);
+        $this->assertTrue($page->layout->header);
+        $this->assertTrue($page->layout->footer);
 
-        $request = new PageRequest('/about-us');
-        $promise = $this->pageService->getPageAssetAsync($request);
+        // Test template
+        $this->assertEquals('Default', $page->template->title);
+        $this->assertEquals('c541abb1-69b3-4bc5-8430-5e09e5239cc8', $page->template->identifier);
+        $this->assertTrue($page->template->drawed);
+        $this->assertTrue($page->template->header);
+        $this->assertTrue($page->template->footer);
+        $this->assertTrue($page->template->live);
+        $this->assertTrue($page->template->working);
 
-        $this->assertInstanceOf(PromiseInterface::class, $promise);
-
-        $pageAsset = $promise->wait();
-
-        // Debug output
-        var_dump($pageAsset);
-
-        $this->assertInstanceOf(PageAsset::class, $pageAsset);
-        $this->assertEquals('about-us', $pageAsset->page->identifier);
-        $this->assertEquals('About Us', $pageAsset->page->title);
+        // Test site
+        $this->assertEquals('48190c8c-42c4-46af-8d1a-0cd5db894797', $page->site->identifier);
+        $this->assertEquals('demo.dotcms.com', $page->site->hostname);
+        $this->assertTrue($page->site->live);
+        $this->assertTrue($page->site->working);
+        $this->assertFalse($page->site->locked);
+        $this->assertFalse($page->site->archived);
     }
 
     public function testGetPageWithInvalidResponse(): void
