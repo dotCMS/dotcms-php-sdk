@@ -1,6 +1,6 @@
 <?php
 
-namespace DotCMS\SDK\Request;
+namespace Dotcms\PhpSdk\Request;
 
 use InvalidArgumentException;
 
@@ -9,7 +9,7 @@ use InvalidArgumentException;
  * 
  * Represents a request to the dotCMS Page API.
  * 
- * @package DotCMS\SDK\Request
+ * @package Dotcms\PhpSdk\Request
  */
 class PageRequest
 {
