@@ -10,6 +10,8 @@ use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Respect\Validation\Validator as v;
+use Respect\Validation\Exceptions\ValidationException;
 
 class Config
 {
@@ -66,6 +68,7 @@ class Config
     ) {
         $this->validateHost($host);
         $this->validateApiKey($apiKey);
+        $this->validatedOptions = $clientOptions;
         $this->validateClientOptions($clientOptions);
         $this->validateLogConfig($logConfig);
 
@@ -159,14 +162,23 @@ class Config
 
     private function validateHost(string $host): void
     {
-        if (! filter_var($host, FILTER_VALIDATE_URL) || ! preg_match('/^https?:\/\//', $host)) {
+        if (empty(trim($host))) {
+            throw ConfigException::invalidHost('');
+        }
+
+        if (!filter_var($host, FILTER_VALIDATE_URL)) {
+            throw ConfigException::invalidHost($host);
+        }
+
+        $parsedUrl = parse_url($host);
+        if (!isset($parsedUrl['scheme']) || !in_array($parsedUrl['scheme'], ['http', 'https'])) {
             throw ConfigException::invalidHost($host);
         }
     }
 
     private function validateApiKey(string $apiKey): void
     {
-        if (trim($apiKey) === '') {
+        if (empty(trim($apiKey))) {
             throw ConfigException::emptyApiKey();
         }
     }
@@ -180,23 +192,26 @@ class Config
      */
     private function validateLogConfig(array $config): void
     {
-        if (isset($config['level']) && ! $config['level'] instanceof LogLevel) {
+        // Validate level if set
+        if (isset($config['level']) && !($config['level'] instanceof LogLevel)) {
             throw ConfigException::invalidLogConfig('level', 'Must be a LogLevel enum');
         }
 
+        // Validate handlers if set
         if (isset($config['handlers'])) {
-            if (! is_array($config['handlers'])) {
-                throw ConfigException::invalidLogConfig('handlers', 'Must be an array');
+            if (!is_array($config['handlers'])) {
+                throw ConfigException::invalidLogConfig('handlers', 'Must be an array of HandlerInterface');
             }
 
             foreach ($config['handlers'] as $handler) {
-                if (! $handler instanceof HandlerInterface) {
+                if (!$handler instanceof HandlerInterface) {
                     throw ConfigException::invalidLogConfig('handlers', 'Must be an array of HandlerInterface');
                 }
             }
         }
 
-        if (isset($config['console']) && ! is_bool($config['console'])) {
+        // Validate console if set
+        if (isset($config['console']) && !is_bool($config['console'])) {
             throw ConfigException::invalidLogConfig('console', 'Must be a boolean');
         }
     }
@@ -223,42 +238,66 @@ class Config
         }
 
         // Validate headers
-        if (isset($options['headers'])) {
-            if (! is_array($options['headers'])) {
+        if (isset($options[RequestOptions::HEADERS])) {
+            if (!is_array($options[RequestOptions::HEADERS])) {
                 throw ConfigException::invalidClientOption(
-                    'headers',
+                    RequestOptions::HEADERS,
                     'Must be an array'
                 );
             }
 
-            foreach ($options['headers'] as $name => $value) {
-                if (! is_string($name) || ! is_string($value)) {
+            foreach ($options[RequestOptions::HEADERS] as $name => $value) {
+                if (!is_string($name) || !is_string($value)) {
                     throw ConfigException::invalidClientOption(
-                        'headers',
+                        RequestOptions::HEADERS,
                         'Header names and values must be strings'
                     );
                 }
             }
         }
 
-        // Validate timeouts
-        foreach (['timeout', 'connect_timeout'] as $option) {
-            if (isset($options[$option]) && (! is_int($options[$option]) || $options[$option] < 0)) {
+        // Validate timeout
+        if (isset($options[RequestOptions::TIMEOUT])) {
+            if (!is_int($options[RequestOptions::TIMEOUT]) || $options[RequestOptions::TIMEOUT] <= 0) {
                 throw ConfigException::invalidClientOption(
-                    $option,
+                    RequestOptions::TIMEOUT,
                     'Must be a positive integer'
                 );
             }
         }
 
-        // Validate booleans
-        foreach (['verify', 'http_errors', 'allow_redirects'] as $option) {
-            if (isset($options[$option]) && ! is_bool($options[$option])) {
+        // Validate connect_timeout
+        if (isset($options[RequestOptions::CONNECT_TIMEOUT])) {
+            if (!is_int($options[RequestOptions::CONNECT_TIMEOUT]) || $options[RequestOptions::CONNECT_TIMEOUT] <= 0) {
                 throw ConfigException::invalidClientOption(
-                    $option,
-                    'Must be a boolean'
+                    RequestOptions::CONNECT_TIMEOUT,
+                    'Must be a positive integer'
                 );
             }
+        }
+
+        // Validate verify
+        if (isset($options[RequestOptions::VERIFY]) && !is_bool($options[RequestOptions::VERIFY])) {
+            throw ConfigException::invalidClientOption(
+                RequestOptions::VERIFY,
+                'Must be a boolean'
+            );
+        }
+
+        // Validate http_errors
+        if (isset($options[RequestOptions::HTTP_ERRORS]) && !is_bool($options[RequestOptions::HTTP_ERRORS])) {
+            throw ConfigException::invalidClientOption(
+                RequestOptions::HTTP_ERRORS,
+                'Must be a boolean'
+            );
+        }
+
+        // Validate allow_redirects
+        if (isset($options[RequestOptions::ALLOW_REDIRECTS]) && !is_bool($options[RequestOptions::ALLOW_REDIRECTS])) {
+            throw ConfigException::invalidClientOption(
+                RequestOptions::ALLOW_REDIRECTS,
+                'Must be a boolean'
+            );
         }
 
         $this->validatedOptions = $options;
