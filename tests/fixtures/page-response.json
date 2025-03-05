@@ -1,0 +1,88 @@
+{
+  "entity": {
+    "page": {
+      "identifier": "about-us",
+      "inode": "123456789",
+      "title": "About Us",
+      "contentType": "WebPageContent",
+      "pageUrl": "about-us",
+      "live": true,
+      "working": true,
+      "hostName": "demo.dotcms.com",
+      "host": "48190c8c-42c4-46af-8d1a-0cd5db894797",
+      "extraField": "extra value"
+    }
+  },
+  "layout": {
+    "width": null,
+    "title": "Default Layout",
+    "header": true,
+    "footer": true,
+    "body": {
+      "rows": []
+    },
+    "sidebar": {
+      "containers": [],
+      "location": "right",
+      "width": "small",
+      "widthPercent": 20,
+      "preview": false
+    },
+    "version": 1
+  },
+  "template": {
+    "identifier": "c541abb1-69b3-4bc5-8430-5e09e5239cc8",
+    "title": "Default",
+    "drawed": true,
+    "inode": "template-inode-123",
+    "friendlyName": "Default Template",
+    "header": true,
+    "footer": true,
+    "working": true,
+    "live": true
+  },
+  "site": {
+    "identifier": "48190c8c-42c4-46af-8d1a-0cd5db894797",
+    "hostname": "demo.dotcms.com",
+    "inode": "site-inode-123",
+    "working": true,
+    "folder": "/demo",
+    "locked": false,
+    "archived": false,
+    "live": true
+  },
+  "containers": {},
+  "urlContentMap": null,
+  "viewAs": {
+    "visitor": {
+      "tags": [],
+      "device": "desktop",
+      "isNew": false,
+      "userAgent": {
+        "browser": "Chrome",
+        "version": "100.0",
+        "os": "macOS",
+        "mobile": false
+      },
+      "referer": "",
+      "dmid": "123456",
+      "geo": {
+        "city": "Miami",
+        "country": "United States",
+        "countryCode": "US",
+        "latitude": "25.7617",
+        "longitude": "-80.1918",
+        "region": "Florida"
+      },
+      "personas": []
+    },
+    "language": {
+      "id": 1,
+      "languageCode": "en",
+      "countryCode": "US",
+      "language": "English",
+      "country": "United States"
+    },
+    "mode": "LIVE"
+  }
+} 

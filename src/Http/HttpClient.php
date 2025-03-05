@@ -7,6 +7,7 @@ namespace Dotcms\PhpSdk\Http;
 use Dotcms\PhpSdk\Config\Config;
 use GuzzleHttp\Client;
 use GuzzleHttp\ClientInterface;
+use GuzzleHttp\Promise\PromiseInterface;
 
 class HttpClient
 {
@@ -44,6 +45,28 @@ class HttpClient
     public function request(string $method, string $uri, array $options = []): Response
     {
         return new Response($this->client->request($method, $uri, $options));
+    }
+
+    /**
+     * @param array{
+     *     headers?: array<string, string>,
+     *     query?: array<string, mixed>,
+     *     json?: array<string, mixed>|string,
+     *     form_params?: array<string, mixed>,
+     *     multipart?: array<array{name: string, contents: mixed, headers?: array<string, string>}>,
+     *     verify?: bool,
+     *     timeout?: positive-int,
+     *     connect_timeout?: positive-int,
+     *     http_errors?: bool,
+     *     allow_redirects?: bool
+     * } $options
+     */
+    public function requestAsync(string $method, string $uri, array $options = []): PromiseInterface
+    {
+        return $this->client->requestAsync($method, $uri, $options)
+            ->then(function ($response) {
+                return new Response($response);
+            });
     }
 
     /**
