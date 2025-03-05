@@ -10,8 +10,8 @@ use Monolog\Handler\HandlerInterface;
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use Respect\Validation\Validator as v;
 use Respect\Validation\Exceptions\ValidationException;
+use Respect\Validation\Validator as v;
 
 class Config
 {
@@ -246,7 +246,7 @@ class Config
 
         // Validate headers
         if (isset($options[RequestOptions::HEADERS])) {
-            if (!is_array($options[RequestOptions::HEADERS])) {
+            if (! is_array($options[RequestOptions::HEADERS])) {
                 throw ConfigException::invalidClientOption(
                     RequestOptions::HEADERS,
                     'Must be an array'

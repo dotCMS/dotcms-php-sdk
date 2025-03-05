@@ -7,6 +7,8 @@ namespace Dotcms\PhpSdk\Http;
 use Dotcms\PhpSdk\Exception\HttpException;
 use Dotcms\PhpSdk\Exception\ResponseException;
 use Psr\Http\Message\ResponseInterface;
+use Respect\Validation\Exceptions\ValidationException;
+use Respect\Validation\Validator as v;
 
 /**
  * Wrapper for PSR-7 ResponseInterface that provides convenient methods for handling HTTP responses.
@@ -61,7 +63,13 @@ class Response
      */
     public function getHeader(string $name): array
     {
-        return $this->response->getHeader($name);
+        try {
+            v::stringType()->notEmpty()->assert($name);
+
+            return $this->response->getHeader($name);
+        } catch (ValidationException $e) {
+            return [];
+        }
     }
 
     /**
@@ -113,7 +121,13 @@ class Response
                 return sprintf('(%s unable to encode)', gettype($value));
             }
 
-            return strlen($preview) > 100 ? substr($preview, 0, 97) . '...' : $preview;
+            try {
+                v::stringType()->length(1, 100)->assert($preview);
+
+                return $preview;
+            } catch (ValidationException $e) {
+                return substr($preview, 0, 97) . '...';
+            }
         }
 
         return sprintf('(%s)', gettype($value));

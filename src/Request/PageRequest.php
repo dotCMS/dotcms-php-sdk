@@ -81,7 +81,7 @@ class PageRequest
      *
      * @param string $pagePath The path to the page
      * @param string $format The format of the response (json or render), defaults to json
-     * 
+     *
      * @throws InvalidArgumentException If the format is invalid
      */
     public function __construct(string $pagePath, string $format = self::FORMAT_JSON)
