@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '../../vendor/autoload.php';
 
 use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\DotCMSClient;
 use Dotcms\PhpSdk\Config\LogLevel;
-use Dotcms\PhpSdk\Model\Container\ContainerPage;
 
 // Create a configuration for the client
 // Replace with your actual dotCMS host and API key

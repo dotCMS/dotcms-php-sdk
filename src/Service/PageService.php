@@ -114,13 +114,13 @@ class PageService
     /**
      * Validate the response to ensure it contains all required parts
      *
-     * @param Response $response The response to validate
+     * @param array<string, mixed> $response The response to validate
      * @throws ResponseException If the response is missing required parts
      */
-    private function validateResponse(array $entity): void
+    private function validateResponse(array $response): void
     {
         try {
-            $data = $entity['entity'];
+            $data = $response['entity'];
 
 
             // Ensure $data is an array
@@ -161,14 +161,14 @@ class PageService
     /**
      * Map a response to a Page object
      *
-     * @param Response $response The response to map
+     * @param array<string, mixed> $response The response to map
      * @return Page The mapped page
      * @throws ResponseException If the response cannot be mapped to a Page
      */
-    private function mapResponseToPage(array $entity): Page
+    private function mapResponseToPage(array $response): Page
     {
         try {
-            $data = $entity['entity'];
+            $data = $response['entity'];
 
             // Ensure $data is an array and entity is an array
             if (! is_array($data)) {
@@ -207,31 +207,33 @@ class PageService
     /**
      * Map a response to a PageAsset object
      *
-     * @param Response $response The response to map
+     * @param array<string, mixed> $response The response to map
      * @return PageAsset The mapped page asset
      * @throws ResponseException If the response cannot be mapped to a PageAsset
      */
-    private function mapResponseToPageAsset(array $entity): PageAsset
+    private function mapResponseToPageAsset(array $response): PageAsset
     {
         try {
-            $data = $entity['entity'];
+            $data = $response['entity'] ?? [];
+            
+            // Ensure $data is an array
+            if (!is_array($data)) {
+                $data = [];
+            }
 
             // Extract page data
-            $page = $this->mapResponseToPage($entity);
+            $page = $this->mapResponseToPage($response);
 
             // Extract layout data
-            $layoutData = $data['layout'] ?? [];
-            if (! is_array($layoutData)) {
-                $layoutData = [];
-            }
+            $layoutData = isset($data['layout']) && is_array($data['layout']) ? $data['layout'] : [];
 
             $layout = new Layout(
                 width: $layoutData['width'] ?? null,
                 title: $layoutData['title'] ?? '',
                 header: $layoutData['header'] ?? true,
                 footer: $layoutData['footer'] ?? true,
-                body: $layoutData['body'] ?? ['rows' => []],
-                sidebar: $layoutData['sidebar'] ?? [
+                body: is_array($layoutData['body'] ?? []) ? $layoutData['body'] : ['rows' => []],
+                sidebar: is_array($layoutData['sidebar'] ?? []) ? $layoutData['sidebar'] : [
                     'containers' => [],
                     'location' => '',
                     'width' => 'small',
@@ -242,10 +244,7 @@ class PageService
             );
 
             // Extract template data
-            $templateData = $data['template'] ?? [];
-            if (! is_array($templateData)) {
-                $templateData = [];
-            }
+            $templateData = isset($data['template']) && is_array($data['template']) ? $data['template'] : [];
 
             $template = new Template(
                 identifier: $templateData['identifier'] ?? '',
@@ -263,10 +262,7 @@ class PageService
             );
 
             // Extract site data
-            $siteData = $data['site'] ?? [];
-            if (! is_array($siteData)) {
-                $siteData = [];
-            }
+            $siteData = isset($data['site']) && is_array($data['site']) ? $data['site'] : [];
 
             $site = new Site(
                 identifier: $siteData['identifier'] ?? '',
@@ -283,14 +279,11 @@ class PageService
             );
 
             // Extract containers
-            $containers = $data['containers'] ?? [];
-            if (! is_array($containers)) {
-                $containers = [];
-            }
+            $containers = isset($data['containers']) && is_array($data['containers']) ? $data['containers'] : [];
 
             // Extract urlContentMap if available
-            $urlContentMapData = $data['urlContentMap'] ?? null;
             $urlContentMap = null;
+            $urlContentMapData = $data['urlContentMap'] ?? null;
             if (is_array($urlContentMapData)) {
                 $urlContentMap = new Contentlet(
                     identifier: $urlContentMapData['identifier'] ?? '',
@@ -304,10 +297,7 @@ class PageService
             }
 
             // Extract viewAs data
-            $viewAsData = $data['viewAs'] ?? [];
-            if (! is_array($viewAsData)) {
-                $viewAsData = [];
-            }
+            $viewAsData = isset($data['viewAs']) && is_array($data['viewAs']) ? $data['viewAs'] : [];
 
             $visitorData = $viewAsData['visitor'] ?? [];
             if (! is_array($visitorData)) {
@@ -344,20 +334,20 @@ class PageService
 
             // Create Visitor
             $visitor = new Visitor(
-                tags: $visitorData['tags'] ?? [],
+                tags: is_array($visitorData['tags'] ?? []) ? $visitorData['tags'] : [],
                 device: $visitorData['device'] ?? '',
                 isNew: $visitorData['isNew'] ?? false,
                 userAgent: $userAgent,
                 referer: $visitorData['referer'] ?? '',
                 dmid: $visitorData['dmid'] ?? '',
                 geo: $geoLocation,
-                personas: $visitorData['personas'] ?? []
+                personas: is_array($visitorData['personas'] ?? []) ? $visitorData['personas'] : []
             );
 
             // Create ViewAs
             $viewAs = new ViewAs(
                 visitor: $visitor,
-                language: $viewAsData['language'] ?? [],
+                language: is_array($viewAsData['language'] ?? []) ? $viewAsData['language'] : [],
                 mode: $viewAsData['mode'] ?? 'LIVE'
             );
 
