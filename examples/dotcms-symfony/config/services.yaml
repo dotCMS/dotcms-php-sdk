@@ -22,3 +22,26 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    # Configure the DotCMS client service
+    dotcms.client:
+        class: Dotcms\PhpSdk\DotCMSClient
+        public: true
+        arguments:
+            - '@dotcms.config'
+    
+    # Create an alias for the DotCMSClient to resolve autowiring
+    Dotcms\PhpSdk\DotCMSClient: '@dotcms.client'
+            
+    # Configure the DotCMS config
+    dotcms.config:
+        class: Dotcms\PhpSdk\Config\Config
+        arguments:
+            $host: '%env(DOTCMS_HOST)%'
+            $apiKey: '%env(DOTCMS_API_KEY)%'
+            $clientOptions:
+                timeout: 30
+                verify: true
+            $logConfig:
+                level: !php/const Dotcms\PhpSdk\Config\LogLevel::DEBUG
+                console: true

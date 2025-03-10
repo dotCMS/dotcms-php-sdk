@@ -1,3 +1,9 @@
+catch_all:
+    path: /{path}
+    controller: App\Controller\CatchAllController::show
+    requirements:
+        path: ".*"
+
 controllers:
     resource:
         path: ../src/Controller/
