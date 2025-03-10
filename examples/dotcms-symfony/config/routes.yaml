@@ -2,7 +2,7 @@ catch_all:
     path: /{path}
     controller: App\Controller\CatchAllController::show
     requirements:
-        path: ".*"
+        path: '^(?!(favicon\.ico|.*\.(css|js|jpg|jpeg|png|gif|svg|woff|woff2|ttf|eot|map|json)$)).*'
 
 controllers:
     resource:
