@@ -6,6 +6,12 @@ use App\Service\DotCMSService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Dotcms\PhpSdk\Exception\DotCMSException;
+use Dotcms\PhpSdk\Exception\HttpException;
+use Dotcms\PhpSdk\Exception\ResponseException;
+use Symfony\Component\HttpKernel\Exception\ServiceUnavailableHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 
 class CatchAllController extends AbstractController
 {
@@ -33,8 +39,25 @@ class CatchAllController extends AbstractController
                 'page' => $pageAsset->page ?? null,
                 'containers' => $pageAsset->containers ?? []
             ]);
+        } catch (HttpException $e) {
+            // Map HTTP errors to appropriate Symfony exceptions
+            $statusCode = $e->getCode();
+            throw match($statusCode) {
+                401 => new UnauthorizedHttpException('Bearer', $e->getMessage(), $e),
+                404 => new NotFoundHttpException($e->getMessage(), $e),
+                400 => new BadRequestHttpException($e->getMessage(), $e),
+                503 => new ServiceUnavailableHttpException(null, $e->getMessage(), $e),
+                default => new NotFoundHttpException($e->getMessage(), $e)
+            };
+        } catch (ResponseException $e) {
+            // Handle response parsing errors
+            throw new BadRequestHttpException('Invalid response from DotCMS: ' . $e->getMessage(), $e);
+        } catch (DotCMSException $e) {
+            // Handle any other DotCMS specific errors
+            throw new ServiceUnavailableHttpException(null, 'DotCMS Error: ' . $e->getMessage(), $e);
         } catch (\Exception $e) {
-            throw new NotFoundHttpException($e->getMessage(), $e);
+            // Handle any other unexpected errors
+            throw new ServiceUnavailableHttpException(null, 'Unexpected error: ' . $e->getMessage(), $e);
         }
     }
 }
