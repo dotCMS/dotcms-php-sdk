@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ pageAsset.page.friendlyName }}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ pageAsset.page.friendlyName }}</h1>
+        {{ pageAsset|json_encode(constant('JSON_PRETTY_PRINT'))|raw }}
+    </div>
+{% endblock %} 
