@@ -1,0 +1,15 @@
+{% if content.image %}
+    {% set imageHtml %}
+        <img src="https://demo.dotcms.com/dA/{{ content.identifier }}/image" 
+             alt="{{ content.title|default('')|e('html_attr') }}">
+    {% endset %}
+{% endif %}
+
+<article>
+    {{ imageHtml|default('')|raw }}
+    <div>
+        <h3>{{ content.title|default('') }}</h3>
+        <p>{{ content.description|default('') }}</p>
+        <a href="/activities/{{ content.urlTitle|default('#') }}">Link to detail →</a>
+    </div>
+</article> 

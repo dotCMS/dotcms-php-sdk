@@ -1,10 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{ pageAsset.page.friendlyName }}{% endblock %}
+{% block title %}{{ page.friendlyName|default('Welcome') }}{% endblock %}
 
 {% block body %}
-    <div class="container">
-        <h1>{{ pageAsset.page.friendlyName }}</h1>
-        {{ pageAsset|json_encode(constant('JSON_PRETTY_PRINT'))|raw }}
-    </div>
+    {% include 'dotcms/header.twig' %}
+
+    {# Page Content #}
+    {% if layout is not null and layout.body is defined %}
+        {% for row in layout.body.rows %}
+            <div class="container">
+                <div data-dot-object="row" class="row{% if row.styleClass %} {{ row.styleClass }}{% endif %}">
+                    {% if row.columns is defined and row.columns is not empty %}
+                        {% for column in row.columns %}
+                            {% set startClass = 'col-start-' ~ column.leftOffset|default(0) %}
+                            {% set endClass = 'col-end-' ~ (column.width|default(12) + column.leftOffset|default(0)) %}
+                            
+                            <div data-dot-object="column" class="{{ startClass }} {{ endClass }}{% if column.styleClass %} {{ column.styleClass }}{% endif %}">
+                                {% if column.containers is defined and column.containers is not empty %}
+                                    {% for container in column.containers %}
+                                        {% include 'dotcms/container.twig' with {
+                                            'container': container,
+                                            'containers': containers
+                                        } %}
+                                    {% endfor %}
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% else %}
+        <div class="container">
+            <div class="row">
+                <div class="col-start-1 col-end-13">
+                    <div class="alert alert-warning">
+                        No layout found
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
 {% endblock %} 

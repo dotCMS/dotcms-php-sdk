@@ -1,0 +1,16 @@
+{% if content.image %}
+    {% set imageHtml %}
+        <img src="https://demo.dotcms.com/dA/{{ content.identifier }}/image" 
+             alt="{{ content.title|default('')|e('html_attr') }}">
+    {% endset %}
+{% endif %}
+
+<article>
+    {{ imageHtml|default('')|raw }}
+    <div>
+        <h3>{{ content.title|default('') }}</h3>
+        <div>{{ content.retailPrice|default('') }}</div>
+        <div>{{ content.salePrice|default('') }}</div>
+        <a href="/store/products/{{ content.urlTitle|default('#') }}">Buy Now</a>
+    </div>
+</article> 

@@ -1,0 +1,34 @@
+{% set containerObject = getContainersData(containers, container) %}
+{% set containerContent = containers[container.identifier].contentlets['uuid-' ~ container.uuid]|default([]) %}
+
+{% set containerAttrs = {
+    'data-dot-object': 'container',
+    'data-dot-identifier': containerObject.path|default(containerObject.identifier),
+    'data-dot-accept-types': containerObject.acceptTypes,
+    'data-max-contentlets': containerObject.maxContentlets,
+    'data-dot-uuid': container.uuid
+} %}
+
+<div {{ htmlAttr(containerAttrs) }}>
+    {% for content in containerContent %}
+        {% set contentAttrs = {
+            'data-dot-object': 'contentlet',
+            'data-dot-identifier': content.identifier,
+            'data-dot-basetype': content.baseType,
+            'data-dot-title': content.widgetTitle|default(content.title),
+            'data-dot-inode': content.inode,
+            'data-dot-type': content.contentType,
+            'data-dot-container': {
+                'acceptTypes': containerObject.acceptTypes,
+                'identifier': containerObject.path|default(containerObject.identifier),
+                'maxContentlets': containerObject.maxContentlets,
+                'variantId': containerObject.variantId,
+                'uuid': container.uuid
+            }|json_encode
+        } %}
+        
+        <div {{ htmlAttr(contentAttrs) }}>
+            {{ generateHtmlBasedOnProperty(content)|raw }}
+        </div>
+    {% endfor %}
+</div>

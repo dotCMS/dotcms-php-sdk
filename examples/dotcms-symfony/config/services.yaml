@@ -45,3 +45,6 @@ services:
             $logConfig:
                 level: !php/const Dotcms\PhpSdk\Config\LogLevel::DEBUG
                 console: true
+
+    App\Twig\DotCMSExtension:
+        tags: ['twig.extension']

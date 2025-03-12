@@ -22,13 +22,19 @@ class CatchAllController extends AbstractController
             $request = $this->container->get('request_stack')->getCurrentRequest();
             $actualPath = $request->getPathInfo();
             $pageAsset = $this->dotCMSService->getPage($actualPath);
-            $page = $pageAsset->page;
             
+            if (!$pageAsset || !isset($pageAsset->page)) {
+                throw new NotFoundHttpException('Page not found');
+            }
+
             return $this->render('page.html.twig', [
                 'pageAsset' => $pageAsset,
+                'layout' => $pageAsset->layout ?? null,
+                'page' => $pageAsset->page ?? null,
+                'containers' => $pageAsset->containers ?? []
             ]);
         } catch (\Exception $e) {
-            throw new \Exception($e->getMessage());
+            throw new NotFoundHttpException($e->getMessage(), $e);
         }
     }
 }

@@ -1,0 +1,22 @@
+<div 
+    data-dot-object="contentlet"
+    data-dot-identifier="{{ content.identifier }}"
+    data-dot-basetype="{{ content.baseType }}"
+    data-dot-title="{{ content.widgetTitle|default(content.title) }}"
+    data-dot-inode="{{ content.inode }}"
+    data-dot-type="{{ content.contentType }}"
+    data-dot-container="{{ {
+        acceptTypes: containerObject.acceptTypes,
+        identifier: containerObject.path|default(containerObject.identifier),
+        maxContentlets: containerObject.maxContentlets,
+        variantId: containerObject.variantId,
+        uuid: container.uuid
+    }|json_encode }}"
+>
+    {% if content.contentType %}
+        {% set template = 'content-types/' ~ content.contentType|lower ~ '.twig' %}
+        {% if template is template_exists %}
+            {% include template %}
+        {% endif %}
+    {% endif %}
+</div> 
