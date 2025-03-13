@@ -8,7 +8,7 @@ namespace Dotcms\PhpSdk\Model;
  * Class NavigationItem
  *
  * Represents a navigation item from the dotCMS Navigation API.
- * 
+ *
  * Note: This class doesn't extend AbstractModel because we have a well-defined
  * structure with public properties, making array access unnecessary. We only
  * implement JsonSerializable for JSON conversion.
@@ -51,7 +51,7 @@ class NavigationItem implements \JsonSerializable
         // Map children to NavigationItem objects if they exist
         if ($this->children !== null) {
             $this->childrenItems = array_map(
-                fn($child) => new self(
+                fn ($child) => new self(
                     $child['code'] ?? null,
                     $child['folder'] ?? null,
                     $child['host'],
@@ -127,7 +127,7 @@ class NavigationItem implements \JsonSerializable
             'hash' => $this->hash,
             'target' => $this->target,
             'order' => $this->order,
-            'children' => $this->childrenItems
+            'children' => $this->childrenItems,
         ];
     }
 }
