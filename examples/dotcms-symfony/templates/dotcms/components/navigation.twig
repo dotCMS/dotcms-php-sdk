@@ -1,0 +1,21 @@
+{# Navigation component for DotCMS #}
+<nav class="container">
+    <ul>
+        {% if navigation is defined and navigation is not null %}
+            {% for item in navigation.children %}
+                <li>
+                    <a href="{{ item.href }}" target="{{ item.target }}">{{ item.title }}</a>
+                    {% if item.children is defined and item.children is not empty %}
+                        <ul>
+                            {% for child in item.children %}
+                                <li>
+                                    <a href="{{ child.href }}" target="{{ child.target }}">{{ child.title }}</a>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        {% endif %}
+    </ul>
+</nav> 

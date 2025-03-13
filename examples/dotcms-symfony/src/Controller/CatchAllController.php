@@ -32,12 +32,16 @@ class CatchAllController extends AbstractController
             if (!$pageAsset || !isset($pageAsset->page)) {
                 throw new NotFoundHttpException('Page not found');
             }
+            
+            // Get navigation with depth of 2 (top level + one level of children)
+            $navigation = $this->dotCMSService->getNavigation('/', 2);
 
             return $this->render('page.html.twig', [
                 'pageAsset' => $pageAsset,
                 'layout' => $pageAsset->layout ?? null,
                 'page' => $pageAsset->page ?? null,
-                'containers' => $pageAsset->containers ?? []
+                'containers' => $pageAsset->containers ?? [],
+                'navigation' => $navigation
             ]);
         } catch (HttpException $e) {
             // Map HTTP errors to appropriate Symfony exceptions
