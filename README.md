@@ -189,9 +189,6 @@ The main client for interacting with the dotCMS API.
 - `getPage(PageRequest $request)`: Fetch a page synchronously
 - `getPageAsync(PageRequest $request)`: Fetch a page asynchronously
 - `createPageRequest(string $pagePath, string $format = 'json')`: Create a new page request
-- `getConfig()`: Get the client configuration
-- `getHttpClient()`: Get the HTTP client
-- `getPageService()`: Get the page service
 
 ### PageRequest
 

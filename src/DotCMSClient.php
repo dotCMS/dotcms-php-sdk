@@ -32,36 +32,6 @@ class DotCMSClient
     }
 
     /**
-     * Get the configuration
-     *
-     * @return Config The client configuration
-     */
-    public function getConfig(): Config
-    {
-        return $this->config;
-    }
-
-    /**
-     * Get the HTTP client
-     *
-     * @return HttpClient The HTTP client
-     */
-    public function getHttpClient(): HttpClient
-    {
-        return $this->httpClient;
-    }
-
-    /**
-     * Get the page service
-     *
-     * @return PageService The page service
-     */
-    public function getPageService(): PageService
-    {
-        return $this->pageService;
-    }
-
-    /**
      * Fetch a page from dotCMS
      *
      * @param PageRequest $request The page request

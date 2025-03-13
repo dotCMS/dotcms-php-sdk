@@ -6,7 +6,6 @@ namespace Dotcms\PhpSdk\Tests;
 
 use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\DotCMSClient;
-use Dotcms\PhpSdk\Http\HttpClient;
 use Dotcms\PhpSdk\Model\PageAsset;
 use Dotcms\PhpSdk\Request\PageRequest;
 use Dotcms\PhpSdk\Service\PageService;
@@ -29,21 +28,6 @@ class DotCMSClientTest extends TestCase
         $this->client = new DotCMSClient($this->config);
     }
 
-    public function testGetConfig(): void
-    {
-        $this->assertSame($this->config, $this->client->getConfig());
-    }
-
-    public function testGetHttpClient(): void
-    {
-        $this->assertInstanceOf(HttpClient::class, $this->client->getHttpClient());
-    }
-
-    public function testGetPageService(): void
-    {
-        $this->assertInstanceOf(PageService::class, $this->client->getPageService());
-    }
-
     public function testCreatePageRequest(): void
     {
         $pagePath = '/about-us/index';
@@ -64,17 +48,21 @@ class DotCMSClientTest extends TestCase
         // Create a mock PageRequest
         $pageRequestMock = $this->createMock(PageRequest::class);
 
-        // Create a test double for DotCMSClient
-        $clientMock = $this->getMockBuilder(DotCMSClient::class)
-            ->setConstructorArgs([$this->config])
-            ->onlyMethods(['getPage'])
-            ->getMock();
-
-        // Configure the mock to return our mock page asset
-        $clientMock->expects($this->once())
+        // Create a mock PageService that will return our mock PageAsset
+        $pageServiceMock = $this->createMock(PageService::class);
+        $pageServiceMock->expects($this->once())
             ->method('getPage')
             ->with($pageRequestMock)
             ->willReturn($pageAssetMock);
+
+        // Create a partial mock of DotCMSClient with the pageService property replaced
+        $clientMock = $this->createPartialMock(DotCMSClient::class, []);
+
+        // Set the mocked pageService using reflection
+        $reflection = new \ReflectionClass($clientMock);
+        $property = $reflection->getProperty('pageService');
+        $property->setAccessible(true);
+        $property->setValue($clientMock, $pageServiceMock);
 
         // Call the method
         $result = $clientMock->getPage($pageRequestMock);
@@ -94,17 +82,21 @@ class DotCMSClientTest extends TestCase
         // Create a mock Promise
         $promiseMock = new FulfilledPromise($pageAssetMock);
 
-        // Create a test double for DotCMSClient
-        $clientMock = $this->getMockBuilder(DotCMSClient::class)
-            ->setConstructorArgs([$this->config])
-            ->onlyMethods(['getPageAsync'])
-            ->getMock();
-
-        // Configure the mock to return our mock Promise
-        $clientMock->expects($this->once())
+        // Create a mock PageService that will return our mock Promise
+        $pageServiceMock = $this->createMock(PageService::class);
+        $pageServiceMock->expects($this->once())
             ->method('getPageAsync')
             ->with($pageRequestMock)
             ->willReturn($promiseMock);
+
+        // Create a partial mock of DotCMSClient with the pageService property replaced
+        $clientMock = $this->createPartialMock(DotCMSClient::class, []);
+
+        // Set the mocked pageService using reflection
+        $reflection = new \ReflectionClass($clientMock);
+        $property = $reflection->getProperty('pageService');
+        $property->setAccessible(true);
+        $property->setValue($clientMock, $pageServiceMock);
 
         // Call the method
         $result = $clientMock->getPageAsync($pageRequestMock);
