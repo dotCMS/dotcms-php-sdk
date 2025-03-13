@@ -1,4 +1,4 @@
-# dotCMS PHP SDK
+# dotCMS PHP SDK (`alpha`)
 
 A PHP library designed to simplify interaction with the dotCMS Page API. This SDK provides a clean, object-oriented interface for retrieving and working with dotCMS pages and their components.
 
