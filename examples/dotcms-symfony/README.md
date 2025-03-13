@@ -1,22 +1,22 @@
 # DotCMS Symfony Integration
 
-This project demonstrates how to integrate DotCMS with Symfony using the DotCMS PHP SDK. It provides a complete example of rendering DotCMS pages within a Symfony application, including layouts, containers, and content types.
+This project demonstrates how to build a DotCMS webapp with Symfony using the DotCMS PHP SDK. It provides a complete example of rendering DotCMS pages within a Symfony application, including layouts, containers, and content types.
 
 ## Overview
 
 This integration allows you to:
 
 - Fetch and render DotCMS pages in a Symfony application
-- Use Symfony's routing system to handle DotCMS URLs
-- Render DotCMS containers and contentlets using Twig templates
-- Handle DotCMS errors with Symfony's exception system
+- Integrate Symfony routing with DotCMS, enabeling content authors to create new pages without developer intervention.
+- Render DotCMS Pages using Twig templates, this includes layouts, containers and contentlets.
+- Integrating DotCMS SDK feedback into Symfony's exception framework for a smooth and reliable developer experience.
 
 ## Prerequisites
 
 - PHP 8.1 or higher
-- Composer
-- Symfony CLI (optional, for local development)
-- DotCMS instance with API access
+- [Composer](https://getcomposer.org/doc/00-intro.md)
+- [Symfony CLI](https://symfony.com/download)
+- DotCMS instance with [API access](https://dev.dotcms.com/docs/rest-api-authentication)
 
 ## Project Structure
 
@@ -70,7 +70,11 @@ DOTCMS_API_KEY=your-api-key-here
 
 ## Configuration
 
+All the configuration described below is already implemented in this example project. The following sections explain the key components and how they work together to integrate DotCMS with Symfony.
+
 ### 1. Configure DotCMS Client
+
+Symfony have [Service Container](https://symfony.com/doc/current/service_container.html) allows you to centralize useful objects waiting to be used within the app.
 
 In `config/services.yaml`, add the DotCMS client configuration:
 
@@ -104,9 +108,13 @@ services:
         tags: ['twig.extension']
 ```
 
+In this case we register two objects from the SDK the dotCMS `Config` and the `DotCMSClient`.
+
+In Symfony's service container, we're initializing `DotCMSClient` by injecting a `Config` object as a dependency. The `Config` object itself is configured with environment variables and predefined options for the HTTP requests to the dotCMS APIs.
+
 ### 2. Create a DotCMS Service
 
-Create a service to wrap the DotCMS client in `src/Service/DotCMSService.php`:
+Create a service to wrap the PHP `DotCMSClient` in `src/Service/DotCMSService.php`:
 
 ```php
 <?php
@@ -139,7 +147,15 @@ class DotCMSService
 }
 ```
 
+The `DotCMSService` class serves two important purposes:
+
+1. **Dependency Injection**: Through Symfony's service container, the fully configured `DotCMSClient` is automatically injected into our service.
+
+2. **Facade Pattern**: The service acts as a facade, exposing only specific DotCMS client methods needed by the application (like `getPage()`).
+
 ### 3. Configure Routes
+
+DotCMS allows content authors to create pages without developer intervention. To support this, we use a catch-all route that handles all page requests through a single controller.
 
 In `config/routes.yaml`, add a catch-all route to handle DotCMS pages:
 
@@ -223,6 +239,10 @@ class CatchAllController extends AbstractController
     }
 }
 ```
+
+This controller serves as the central entry point for all DotCMS page requests. It retrieves the current request path, fetches the corresponding page from DotCMS via the service, and renders it using the page template.
+
+The controller also handles error cases by mapping DotCMS exceptions to appropriate Symfony HTTP exceptions, ensuring proper error responses.
 
 ### 5. Create Twig Extension
 
@@ -327,6 +347,8 @@ class DotCMSExtension extends AbstractExtension
     }
 }
 ```
+
+This Twig extension provides utility functions for rendering DotCMS content in templates - handling container data extraction, content-type HTML generation, and proper attribute formatting for DotCMS elements.
 
 ### 6. Create Templates
 
@@ -437,6 +459,26 @@ symfony server:start
 3. The page data is passed to the Twig templates for rendering.
 4. The Twig extension provides helper functions for rendering DotCMS containers and content.
 5. Content-type specific templates render each content type appropriately.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant Symfony as Symfony Router
+    participant Controller as CatchAllController
+    participant Service as DotCMSService
+    participant DotCMS as DotCMS API
+    participant Twig as Twig Templates
+    
+    User->>Symfony: Request URL
+    Symfony->>Controller: Route to show() method
+    Controller->>Service: getPage(path)
+    Service->>DotCMS: API Request
+    DotCMS-->>Service: Return PageAsset
+    Service-->>Controller: Return PageAsset
+    Controller->>Twig: Render with page data
+    Twig->>Twig: Process with Twig Extensions
+    Twig-->>User: Return rendered HTML
+```
 
 ## Error Handling
 
