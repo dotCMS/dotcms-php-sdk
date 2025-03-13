@@ -201,8 +201,8 @@ Represents a request to the dotCMS Page API.
 - `withPersonaId(string $personaId)`: Set the persona ID for personalization
 - `withHostId(string $hostId)`: Set the host ID (Site ID)
 - `withFireRules(bool $fireRules)`: Set whether to fire rules
-- `buildPath()`: Build the API path for the request
-- `buildQueryParams()`: Build the query parameters for the request
+- `buildPath()`: **(Internal)** Build the API path for the request
+- `buildQueryParams()`: **(Internal)** Build the query parameters for the request
 
 ### PageAsset
 

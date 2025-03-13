@@ -387,6 +387,7 @@ class PageRequest
     /**
      * Build the request URL path.
      *
+     * @internal This method is meant for internal use by the SDK
      * @return string The request URL path
      */
     public function buildPath(): string
@@ -397,6 +398,7 @@ class PageRequest
     /**
      * Build the query parameters.
      *
+     * @internal This method is meant for internal use by the SDK
      * @return array<string, string|int>
      */
     public function buildQueryParams(): array
