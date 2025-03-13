@@ -72,6 +72,7 @@ class NavigationService
             function (Response $response) {
                 $responseData = $response->toArray();
                 $this->validateResponse($responseData);
+
                 return $this->mapResponseToNavigationItem($responseData);
             },
             function (\Exception $e) {
@@ -96,7 +97,7 @@ class NavigationService
      */
     private function validateResponse(array $response): void
     {
-        if (!isset($response['entity'])) {
+        if (! isset($response['entity'])) {
             throw new ResponseException('Invalid response: entity missing');
         }
 
@@ -105,14 +106,15 @@ class NavigationService
         // Check for required fields
         $requiredFields = ['host', 'languageId', 'href', 'title', 'type', 'hash', 'target', 'order'];
         foreach ($requiredFields as $field) {
-            if (!isset($entity[$field])) {
+            if (! isset($entity[$field])) {
                 throw new ResponseException("Invalid response: {$field} missing");
             }
         }
 
         // Check for errors in the response
-        if (isset($response['errors']) && !empty($response['errors'])) {
+        if (isset($response['errors']) && ! empty($response['errors'])) {
             $errorMessages = implode(', ', $response['errors']);
+
             throw new ResponseException("API returned errors: {$errorMessages}");
         }
     }
@@ -141,4 +143,4 @@ class NavigationService
             $entity['children'] ?? null
         );
     }
-} 
+}

@@ -43,15 +43,15 @@ class NavigationRequest
      */
     private function validate(): void
     {
-        if (!v::stringType()->notEmpty()->validate($this->path)) {
+        if (! v::stringType()->notEmpty()->validate($this->path)) {
             throw new InvalidArgumentException("Path must be a non-empty string");
         }
-        
-        if (!v::intVal()->min(1)->validate($this->depth)) {
+
+        if (! v::intVal()->min(1)->validate($this->depth)) {
             throw new InvalidArgumentException("Depth must be a positive integer");
         }
-        
-        if (!v::intVal()->min(1)->validate($this->languageId)) {
+
+        if (! v::intVal()->min(1)->validate($this->languageId)) {
             throw new InvalidArgumentException("Language ID must be a positive integer");
         }
     }
@@ -93,8 +93,9 @@ class NavigationRequest
      */
     public function buildPath(): string
     {
-        return sprintf('/api/v1/nav%s', 
-            $this->path === '/' ? '/' : '/' . ltrim($this->path, '/')
+        return sprintf(
+            '/api/v1/nav%s',
+            $this->path === '/' ? '/' : '/' . trim($this->path, '/')
         );
     }
 
@@ -107,7 +108,7 @@ class NavigationRequest
     {
         return [
             'depth' => $this->depth,
-            'languageId' => $this->languageId
+            'languageId' => $this->languageId,
         ];
     }
-} 
+}
