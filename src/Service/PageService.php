@@ -215,9 +215,9 @@ class PageService
     {
         try {
             $data = $response['entity'] ?? [];
-            
+
             // Ensure $data is an array
-            if (!is_array($data)) {
+            if (! is_array($data)) {
                 $data = [];
             }
 
