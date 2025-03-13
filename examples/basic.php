@@ -40,7 +40,6 @@ try {
     echo "Page title: " . $page->page->title . "\n";
     echo "Page URL: " . $page->page->pageUrl . "\n";
     echo "Template name: " . $page->template->title . "\n";
-    echo "Is generated page: " . ($page->isGenerated() ? 'Yes' : 'No') . "\n";
     echo "Number of containers: " . count($page->containers) . "\n\n";
     
     // Example 2: Fetch a page asynchronously

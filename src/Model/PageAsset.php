@@ -30,14 +30,6 @@ class PageAsset implements \JsonSerializable
     }
 
     /**
-     * Check if this is a generated page (e.g., blog post, product page).
-     */
-    public function isGenerated(): bool
-    {
-        return $this->urlContentMap !== null;
-    }
-
-    /**
      * Specify data which should be serialized to JSON
      *
      * @return array<string, mixed>

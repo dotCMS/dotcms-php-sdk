@@ -213,7 +213,6 @@ Represents a complete page asset from dotCMS.
 - `template`: The Template object
 - `layout`: The Layout object
 - `containers`: Array of Container objects
-- `isGenerated()`: Check if the page is generated
 
 ## Error Handling
 

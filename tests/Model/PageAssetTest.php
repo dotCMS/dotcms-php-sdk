@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
-use Dotcms\PhpSdk\Model\Contentlet;
 use Dotcms\PhpSdk\Model\Layout\Layout;
 use Dotcms\PhpSdk\Model\Page;
 use Dotcms\PhpSdk\Model\PageAsset;
@@ -78,61 +77,6 @@ class PageAssetTest extends TestCase
         $this->assertEquals('page-id', $pageAsset->page->identifier);
         $this->assertEquals('Test Page', $pageAsset->page->title);
         $this->assertEquals('/test-page', $pageAsset->page->pageUrl);
-    }
-
-    public function testIsGenerated(): void
-    {
-        $pageAsset = $this->createPageAsset();
-        $this->assertFalse($pageAsset->isGenerated());
-
-        // Create a visitor for the ViewAs
-        $visitor = new Visitor(
-            [], // tags
-            'desktop', // device
-            true, // isNew
-            new UserAgent('Chrome', '120.0', 'Windows', false), // userAgent
-            'https://example.com', // referer
-            'test-dmid', // dmid
-            new GeoLocation('Miami', 'United States', 'US', 25.7743, -80.1937, 'Florida'), // geo
-            [] // personas
-        );
-
-        // Create a basic language
-        $language = [
-            'id' => 1,
-            'languageCode' => 'en',
-            'countryCode' => 'US',
-            'language' => 'English',
-            'country' => 'United States',
-        ];
-
-        // Create a page asset with a urlContentMap
-        $pageAssetWithContentMap = new PageAsset(
-            new Layout(),
-            new Template('template-id', 'Test Template', true), // drawed=true
-            new Page(
-                'page-id', // identifier
-                'page-inode', // inode
-                'Test Page', // title
-                'content', // contentType
-                '/test-page', // pageUrl
-                true, // live
-                true, // working
-                'demo.dotcms.com', // hostName
-                'site-id' // host
-            ),
-            [], // containers
-            new Site('site-id', 'demo.dotcms.com'),
-            new Contentlet(
-                'content-id', // identifier
-                'content-inode', // inode
-                'Test Content', // title
-                'content' // contentType
-            ),
-            new ViewAs($visitor, $language, 'PREVIEW')
-        );
-
-        $this->assertTrue($pageAssetWithContentMap->isGenerated());
     }
 
     public function testJsonSerialize(): void
