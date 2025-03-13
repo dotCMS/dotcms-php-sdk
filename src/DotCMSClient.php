@@ -6,8 +6,11 @@ namespace Dotcms\PhpSdk;
 
 use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\Http\HttpClient;
+use Dotcms\PhpSdk\Model\NavigationItem;
 use Dotcms\PhpSdk\Model\PageAsset;
+use Dotcms\PhpSdk\Request\NavigationRequest;
 use Dotcms\PhpSdk\Request\PageRequest;
+use Dotcms\PhpSdk\Service\NavigationService;
 use Dotcms\PhpSdk\Service\PageService;
 use GuzzleHttp\Promise\PromiseInterface;
 
@@ -20,6 +23,8 @@ class DotCMSClient
 
     private readonly PageService $pageService;
 
+    private readonly NavigationService $navigationService;
+
     /**
      * Create a new DotCMSClient instance
      *
@@ -29,6 +34,7 @@ class DotCMSClient
     {
         $this->httpClient = new HttpClient($config);
         $this->pageService = new PageService($this->httpClient);
+        $this->navigationService = new NavigationService($this->httpClient);
     }
 
     /**
@@ -63,5 +69,40 @@ class DotCMSClient
     public function createPageRequest(string $pagePath, string $format = 'json'): PageRequest
     {
         return new PageRequest($pagePath, $format);
+    }
+
+    /**
+     * Fetch navigation items from dotCMS
+     *
+     * @param NavigationRequest $request The navigation request
+     * @return NavigationItem The navigation item with optional children
+     */
+    public function getNavigation(NavigationRequest $request): NavigationItem
+    {
+        return $this->navigationService->getNavigation($request);
+    }
+
+    /**
+     * Fetch navigation items from dotCMS asynchronously
+     *
+     * @param NavigationRequest $request The navigation request
+     * @return PromiseInterface A promise that resolves to a NavigationItem
+     */
+    public function getNavigationAsync(NavigationRequest $request): PromiseInterface
+    {
+        return $this->navigationService->getNavigationAsync($request);
+    }
+
+    /**
+     * Create a new navigation request
+     *
+     * @param string $path The root path to begin traversing the folder tree
+     * @param int $depth The depth of the folder tree to return
+     * @param int $languageId The language ID of content to return
+     * @return NavigationRequest The navigation request
+     */
+    public function createNavigationRequest(string $path = '/', int $depth = 1, int $languageId = 1): NavigationRequest
+    {
+        return new NavigationRequest($path, $depth, $languageId);
     }
 }
