@@ -90,6 +90,32 @@ try {
 }
 ```
 
+### Fetching Navigation
+
+```php
+try {
+    // Create a navigation request
+    $navRequest = $client->createNavigationRequest('/about-us', 2);
+    
+    // Get the navigation
+    $nav = $client->getNavigation($navRequest);
+    
+    // Access navigation information
+    echo "Navigation title: " . $nav['title'] . "\n";
+    echo "Navigation URL: " . $nav['href'] . "\n";
+    
+    // Access children if available
+    if ($nav->hasChildren()) {
+        foreach ($nav->getChildren() as $child) {
+            echo "- " . $child['title'] . " (" . $child['href'] . ")\n";
+        }
+    }
+    
+} catch (\Exception $e) {
+    echo "Error: " . $e->getMessage() . "\n";
+}
+```
+
 ### Asynchronous Requests
 
 ```php
@@ -103,6 +129,34 @@ $promise = $client->getPageAsync($asyncPageRequest);
 $promise->then(
     function ($asyncPage) {
         echo "Async page title: " . $asyncPage->page->title . "\n";
+    },
+    function (\Exception $e) {
+        echo "Error: " . $e->getMessage() . "\n";
+    }
+);
+
+// Wait for the promise to complete
+$promise->wait();
+```
+
+### Asynchronous Navigation Requests
+
+```php
+// Create a navigation request
+$asyncNavRequest = $client->createNavigationRequest('/', 2);
+
+// Get the navigation asynchronously
+$promise = $client->getNavigationAsync($asyncNavRequest);
+
+// Add callbacks for success and failure
+$promise->then(
+    function ($nav) {
+        echo "Navigation title: " . $nav['title'] . "\n";
+        if ($nav->hasChildren()) {
+            foreach ($nav->getChildren() as $child) {
+                echo "- " . $child['title'] . "\n";
+            }
+        }
     },
     function (\Exception $e) {
         echo "Error: " . $e->getMessage() . "\n";
@@ -143,6 +197,22 @@ $pageRequest = $pageRequest->withHostId('48190c8c-42c4-46af-8d1a-0cd5db894797');
 
 Note that each method returns a new instance with the updated value, so you need to reassign the result.
 
+### Customizing Navigation Requests
+
+The `NavigationRequest` class allows you to customize your navigation requests:
+
+```php
+// Create a navigation request with custom parameters
+$navRequest = $client->createNavigationRequest(
+    path: '/about-us',  // The root path to begin traversing
+    depth: 2,           // The depth of the folder tree to return (1-3)
+    languageId: 2       // The language ID for content (e.g., 2 for Spanish)
+);
+
+// Get the navigation with the custom parameters
+$nav = $client->getNavigation($navRequest);
+```
+
 ### Working with Page Components
 
 Once you have a page, you can access its components:
@@ -179,6 +249,43 @@ foreach ($page->containers as $containerId => $container) {
 }
 ```
 
+### Working with Navigation Items
+
+The `NavigationItem` class extends `AbstractModel` and provides array access to its properties:
+
+```php
+// Check if the navigation item is a folder
+if ($nav->isFolder()) {
+    echo "This is a folder\n";
+}
+
+// Check if the navigation item is a page
+if ($nav->isPage()) {
+    echo "This is a page\n";
+}
+
+// Access navigation properties using array access
+echo "Title: " . $nav['title'] . "\n";
+echo "URL: " . $nav['href'] . "\n";
+echo "Type: " . $nav['type'] . "\n";
+echo "Target: " . $nav['target'] . "\n"; // e.g., "_self", "_blank"
+echo "Order: " . $nav['order'] . "\n";
+
+// Recursively process navigation tree
+function processNavigation($navItem, $level = 0) {
+    $indent = str_repeat("  ", $level);
+    echo $indent . "- " . $navItem['title'] . " (" . $navItem['href'] . ")\n";
+    
+    if ($navItem->hasChildren()) {
+        foreach ($navItem->getChildren() as $child) {
+            processNavigation($child, $level + 1);
+        }
+    }
+}
+
+processNavigation($nav);
+```
+
 ## API Reference
 
 ### DotCMSClient
@@ -191,6 +298,9 @@ The main client for interacting with the dotCMS API.
 | `getPage` | Fetch a page synchronously | `PageRequest $request` |
 | `getPageAsync` | Fetch a page asynchronously | `PageRequest $request` |
 | `createPageRequest` | Create a new page request | `string $pagePath, string $format = 'json'` |
+| `getNavigation` | Fetch navigation items synchronously | `NavigationRequest $request` |
+| `getNavigationAsync` | Fetch navigation items asynchronously | `NavigationRequest $request` |
+| `createNavigationRequest` | Create a new navigation request | `string $path = '/', int $depth = 1, int $languageId = 1` |
 
 ### PageRequest
 
@@ -208,6 +318,19 @@ Represents a request to the dotCMS Page API.
 | `buildPath` | **(Internal)** Build the API path for the request | None |
 | `buildQueryParams` | **(Internal)** Build the query parameters for the request | None |
 
+### NavigationRequest
+
+Represents a request to the dotCMS Navigation API.
+
+| Method | Description | Parameters |
+|--------|-------------|------------|
+| `__construct` | Create a new navigation request | `string $path = '/', int $depth = 1, int $languageId = 1` |
+| `getPath` | Get the path | None |
+| `getDepth` | Get the depth | None |
+| `getLanguageId` | Get the language ID | None |
+| `buildPath` | **(Internal)** Build the API path for the request | None |
+| `buildQueryParams` | **(Internal)** Build the query parameters for the request | None |
+
 ### PageAsset
 
 Represents a complete page asset from dotCMS.
@@ -219,6 +342,30 @@ Represents a complete page asset from dotCMS.
 | `template` | Template | The Template object |
 | `layout` | Layout | The Layout object |
 | `containers` | Array | Array of Container objects |
+
+### NavigationItem
+
+Represents a navigation item from the dotCMS Navigation API. Extends AbstractModel to provide array access to properties.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `code` | ?string | The code of the navigation item |
+| `folder` | ?string | The folder identifier |
+| `host` | string | The host identifier |
+| `languageId` | int | The language ID |
+| `href` | string | The URL of the navigation item |
+| `title` | string | The title of the navigation item |
+| `type` | string | The type of the navigation item (folder, htmlpage, etc.) |
+| `hash` | int | The hash of the navigation item |
+| `target` | string | The target attribute for links (_self, _blank, etc.) |
+| `order` | int | The order of the navigation item |
+
+| Method | Description | Return Type |
+|--------|-------------|-------------|
+| `isFolder` | Check if this navigation item is a folder | `bool` |
+| `isPage` | Check if this navigation item is a page | `bool` |
+| `hasChildren` | Check if this navigation item has children | `bool` |
+| `getChildren` | Get the children as NavigationItem objects | `?array` |
 
 ## Error Handling
 
@@ -252,7 +399,7 @@ try {
 
 ## Examples
 
-### Basic Example
+### Basic Page Example
 
 ```php
 <?php
@@ -280,6 +427,43 @@ $page = $client->getPage($pageRequest);
 // Display page information
 echo "Page title: " . $page->page->title . "\n";
 echo "Page URL: " . $page->page->pageUrl . "\n";
+```
+
+### Basic Navigation Example
+
+```php
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+use Dotcms\PhpSdk\Config\Config;
+use Dotcms\PhpSdk\DotCMSClient;
+
+// Create configuration
+$config = new Config(
+    host: 'https://demo.dotcms.com',
+    apiKey: 'YOUR_API_KEY'
+);
+
+// Create client
+$client = new DotCMSClient($config);
+
+// Create navigation request for the About Us section with depth=2
+$navRequest = $client->createNavigationRequest('/about-us', 2);
+
+// Get navigation
+$nav = $client->getNavigation($navRequest);
+
+// Display navigation information
+echo "Navigation title: " . $nav['title'] . "\n";
+
+// Display children if available
+if ($nav->hasChildren()) {
+    echo "Children:\n";
+    foreach ($nav->getChildren() as $child) {
+        echo "- " . $child['title'] . " (" . $child['href'] . ")\n";
+    }
+}
 ```
 
 ### Integration with Symfony

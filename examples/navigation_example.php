@@ -19,23 +19,23 @@ echo "Example 1: Top-level navigation\n";
 echo "--------------------------------\n";
 $navRequest = $client->createNavigationRequest('/', 1);
 $nav = $client->getNavigation($navRequest);
-echo "Title: " . $nav->getTitle() . "\n";
-echo "URL: " . $nav->getHref() . "\n";
-echo "Type: " . $nav->getType() . "\n\n";
+echo "Title: " . $nav['title'] . "\n";
+echo "URL: " . $nav['href'] . "\n";
+echo "Type: " . $nav['type'] . "\n\n";
 
 // Example 2: Get navigation with children (depth=2)
 echo "Example 2: Navigation with children (depth=2)\n";
 echo "------------------------------------------\n";
 $navWithChildrenRequest = $client->createNavigationRequest('/about-us', 2);
 $navWithChildren = $client->getNavigation($navWithChildrenRequest);
-echo "Title: " . $navWithChildren->getTitle() . "\n";
-echo "URL: " . $navWithChildren->getHref() . "\n";
-echo "Type: " . $navWithChildren->getType() . "\n";
+echo "Title: " . $navWithChildren['title'] . "\n";
+echo "URL: " . $navWithChildren['href'] . "\n";
+echo "Type: " . $navWithChildren['type'] . "\n";
 
 if ($navWithChildren->hasChildren()) {
     echo "Children:\n";
     foreach ($navWithChildren->getChildren() as $child) {
-        echo "- " . $child->getTitle() . " (" . $child->getHref() . ")\n";
+        echo "- " . $child['title'] . " (" . $child['href'] . ")\n";
     }
 }
 echo "\n";
@@ -45,9 +45,9 @@ echo "Example 3: Navigation in Spanish (languageId=2)\n";
 echo "-------------------------------------------\n";
 $navSpanishRequest = $client->createNavigationRequest('/', 1, 2);
 $navSpanish = $client->getNavigation($navSpanishRequest);
-echo "Title: " . $navSpanish->getTitle() . "\n";
-echo "URL: " . $navSpanish->getHref() . "\n";
-echo "Language ID: " . $navSpanish->getLanguageId() . "\n\n";
+echo "Title: " . $navSpanish['title'] . "\n";
+echo "URL: " . $navSpanish['href'] . "\n";
+echo "Language ID: " . $navSpanish['languageId'] . "\n\n";
 
 // Example 4: Async navigation request
 echo "Example 4: Async navigation request\n";
@@ -55,11 +55,11 @@ echo "--------------------------------\n";
 $asyncRequest = $client->createNavigationRequest('/about-us', 2);
 $client->getNavigationAsync($asyncRequest)->then(
     function ($nav) {
-        echo "Title: " . $nav->getTitle() . "\n";
+        echo "Title: " . $nav['title'] . "\n";
         if ($nav->hasChildren()) {
             echo "Children:\n";
             foreach ($nav->getChildren() as $child) {
-                echo "- " . $child->getTitle() . "\n";
+                echo "- " . $child['title'] . "\n";
             }
         }
     }

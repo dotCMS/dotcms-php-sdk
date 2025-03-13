@@ -66,126 +66,6 @@ class NavigationItem extends AbstractModel
     }
 
     /**
-     * Get the code
-     *
-     * @return string|null
-     */
-    public function getCode(): ?string
-    {
-        return $this->code;
-    }
-
-    /**
-     * Get the folder identifier
-     *
-     * @return string|null
-     */
-    public function getFolder(): ?string
-    {
-        return $this->folder;
-    }
-
-    /**
-     * Get the host identifier
-     *
-     * @return string
-     */
-    public function getHost(): string
-    {
-        return $this->host;
-    }
-
-    /**
-     * Get the language ID
-     *
-     * @return int
-     */
-    public function getLanguageId(): int
-    {
-        return $this->languageId;
-    }
-
-    /**
-     * Get the URL
-     *
-     * @return string
-     */
-    public function getHref(): string
-    {
-        return $this->href;
-    }
-
-    /**
-     * Get the title
-     *
-     * @return string
-     */
-    public function getTitle(): string
-    {
-        return $this->title;
-    }
-
-    /**
-     * Get the type
-     *
-     * @return string
-     */
-    public function getType(): string
-    {
-        return $this->type;
-    }
-
-    /**
-     * Get the hash
-     *
-     * @return int
-     */
-    public function getHash(): int
-    {
-        return $this->hash;
-    }
-
-    /**
-     * Get the target
-     *
-     * @return string
-     */
-    public function getTarget(): string
-    {
-        return $this->target;
-    }
-
-    /**
-     * Get the order
-     *
-     * @return int
-     */
-    public function getOrder(): int
-    {
-        return $this->order;
-    }
-
-    /**
-     * Get the raw children data
-     *
-     * @return array|null
-     */
-    public function getRawChildren(): ?array
-    {
-        return $this->children;
-    }
-
-    /**
-     * Get the children as NavigationItem objects
-     *
-     * @return NavigationItem[]|null
-     */
-    public function getChildren(): ?array
-    {
-        return $this->childrenItems;
-    }
-
-    /**
      * Check if this navigation item is a folder
      *
      * @return bool
@@ -213,6 +93,16 @@ class NavigationItem extends AbstractModel
     public function hasChildren(): bool
     {
         return $this->childrenItems !== null && count($this->childrenItems) > 0;
+    }
+
+    /**
+     * Get the children as NavigationItem objects
+     *
+     * @return NavigationItem[]|null
+     */
+    public function getChildren(): ?array
+    {
+        return $this->childrenItems;
     }
 
     /**
