@@ -185,43 +185,51 @@ foreach ($page->containers as $containerId => $container) {
 
 The main client for interacting with the dotCMS API.
 
-- `__construct(Config $config)`: Create a new client instance
-- `getPage(PageRequest $request)`: Fetch a page synchronously
-- `getPageAsync(PageRequest $request)`: Fetch a page asynchronously
-- `createPageRequest(string $pagePath, string $format = 'json')`: Create a new page request
+| Method | Description | Parameters |
+|--------|-------------|------------|
+| `__construct` | Create a new client instance | `Config $config` |
+| `getPage` | Fetch a page synchronously | `PageRequest $request` |
+| `getPageAsync` | Fetch a page asynchronously | `PageRequest $request` |
+| `createPageRequest` | Create a new page request | `string $pagePath, string $format = 'json'` |
 
 ### PageRequest
 
 Represents a request to the dotCMS Page API.
 
-- `__construct(string $pagePath, string $format = 'json')`: Create a new page request
-- `withLanguageId(int $languageId)`: Set the language ID for the request
-- `withMode(string $mode)`: Set the mode (LIVE, WORKING, EDIT_MODE)
-- `withDepth(int $depth)`: Set the depth of the content to retrieve (0-3)
-- `withPersonaId(string $personaId)`: Set the persona ID for personalization
-- `withHostId(string $hostId)`: Set the host ID (Site ID)
-- `withFireRules(bool $fireRules)`: Set whether to fire rules
-- `buildPath()`: **(Internal)** Build the API path for the request
-- `buildQueryParams()`: **(Internal)** Build the query parameters for the request
+| Method | Description | Parameters |
+|--------|-------------|------------|
+| `__construct` | Create a new page request | `string $pagePath, string $format = 'json'` |
+| `withLanguageId` | Set the language ID for the request | `int $languageId` |
+| `withMode` | Set the mode (LIVE, WORKING, EDIT_MODE) | `string $mode` |
+| `withDepth` | Set the depth of the content to retrieve (0-3) | `int $depth` |
+| `withPersonaId` | Set the persona ID for personalization | `string $personaId` |
+| `withHostId` | Set the host ID (Site ID) | `string $hostId` |
+| `withFireRules` | Set whether to fire rules | `bool $fireRules` |
+| `buildPath` | **(Internal)** Build the API path for the request | None |
+| `buildQueryParams` | **(Internal)** Build the query parameters for the request | None |
 
 ### PageAsset
 
 Represents a complete page asset from dotCMS.
 
-- `page`: The Page object
-- `site`: The Site object
-- `template`: The Template object
-- `layout`: The Layout object
-- `containers`: Array of Container objects
+| Property | Type | Description |
+|----------|------|-------------|
+| `page` | Page | The Page object |
+| `site` | Site | The Site object |
+| `template` | Template | The Template object |
+| `layout` | Layout | The Layout object |
+| `containers` | Array | Array of Container objects |
 
 ## Error Handling
 
 The SDK provides several exception classes for error handling:
 
-- `DotCMSException`: Base exception class for all SDK exceptions
-- `ConfigException`: Thrown when there's an issue with the configuration
-- `HttpException`: Thrown when there's an HTTP error
-- `ResponseException`: Thrown when there's an issue with the response
+| Exception | Description |
+|-----------|-------------|
+| `DotCMSException` | Base exception class for all SDK exceptions |
+| `ConfigException` | Thrown when there's an issue with the configuration |
+| `HttpException` | Thrown when there's an HTTP error |
+| `ResponseException` | Thrown when there's an issue with the response |
 
 Example error handling:
 
