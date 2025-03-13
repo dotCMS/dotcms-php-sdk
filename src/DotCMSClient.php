@@ -25,7 +25,7 @@ class DotCMSClient
      *
      * @param Config $config The configuration for the client
      */
-    public function __construct(private readonly Config $config)
+    public function __construct(Config $config)
     {
         $this->httpClient = new HttpClient($config);
         $this->pageService = new PageService($this->httpClient);
