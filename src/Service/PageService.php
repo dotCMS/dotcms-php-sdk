@@ -120,32 +120,31 @@ class PageService
     private function validateResponse(array $response): void
     {
         try {
-            $data = $response['entity'];
-
-
-            // Ensure $data is an array
-            if (! is_array($data)) {
-                throw new ResponseException('Response data is not an array');
+            // Check if entity exists in the response
+            if (! isset($response['entity']) || ! is_array($response['entity'])) {
+                throw new ResponseException('Entity data not found in response');
             }
 
+            $entity = $response['entity'];
+
             // Check if entity.page exists in the response
-            if (! isset($data['page'])) {
+            if (! isset($entity['page'])) {
                 throw new ResponseException('Page data not found in response: entity.page is missing');
             }
 
-            // Check if layout exists in the response
-            if (! isset($data['layout']) || empty($data['layout'])) {
+            // Check if entity.layout exists in the response
+            if (! isset($entity['layout']) || empty($entity['layout'])) {
                 throw new ResponseException("This page don't have a layout, maybe because you're using an advanced template");
             }
 
-            // Check if template exists in the response
-            if (! isset($data['template']) || empty($data['template'])) {
-                throw new ResponseException('Template data not found in response: template is missing');
+            // Check if entity.template exists in the response
+            if (! isset($entity['template']) || empty($entity['template'])) {
+                throw new ResponseException('Template data not found in response: entity.template is missing');
             }
 
-            // Check if site exists in the response
-            if (! isset($data['site']) || empty($data['site'])) {
-                throw new ResponseException('Site data not found in response: site is missing');
+            // Check if entity.site exists in the response
+            if (! isset($entity['site']) || empty($entity['site'])) {
+                throw new ResponseException('Site data not found in response: entity.site is missing');
             }
         } catch (ResponseException $e) {
             throw $e;
@@ -168,14 +167,12 @@ class PageService
     private function mapResponseToPage(array $response): Page
     {
         try {
-            $data = $response['entity'];
-
-            // Ensure $data is an array and entity is an array
-            if (! is_array($data)) {
-                throw new ResponseException('Can\'t map response to Page: Response data is not an array');
+            // Ensure entity is an array
+            if (! isset($response['entity']) || ! is_array($response['entity'])) {
+                throw new ResponseException('Can\'t map response to Page: Response entity is not an array');
             }
 
-            $pageData = $data['page'] ?? [];
+            $pageData = $response['entity']['page'] ?? [];
 
             if (! is_array($pageData)) {
                 $pageData = [];
@@ -214,26 +211,26 @@ class PageService
     private function mapResponseToPageAsset(array $response): PageAsset
     {
         try {
-            $data = $response['entity'] ?? [];
-
-            // Ensure $data is an array
-            if (! is_array($data)) {
-                $data = [];
+            // Ensure entity exists and is an array
+            if (! isset($response['entity']) || ! is_array($response['entity'])) {
+                throw new ResponseException('Entity data not found in response');
             }
+
+            $entity = $response['entity'];
 
             // Extract page data
             $page = $this->mapResponseToPage($response);
 
             // Extract layout data
-            $layoutData = isset($data['layout']) && is_array($data['layout']) ? $data['layout'] : [];
+            $layoutData = isset($entity['layout']) && is_array($entity['layout']) ? $entity['layout'] : [];
 
             $layout = new Layout(
                 width: $layoutData['width'] ?? null,
                 title: $layoutData['title'] ?? '',
-                header: $layoutData['header'] ?? true,
-                footer: $layoutData['footer'] ?? true,
-                body: is_array($layoutData['body'] ?? []) ? $layoutData['body'] : ['rows' => []],
-                sidebar: is_array($layoutData['sidebar'] ?? []) ? $layoutData['sidebar'] : [
+                header: $layoutData['header'] ?? false,
+                footer: $layoutData['footer'] ?? false,
+                body: $layoutData['body'] ?? ['rows' => []],
+                sidebar: $layoutData['sidebar'] ?? [
                     'containers' => [],
                     'location' => '',
                     'width' => 'small',
@@ -244,7 +241,7 @@ class PageService
             );
 
             // Extract template data
-            $templateData = isset($data['template']) && is_array($data['template']) ? $data['template'] : [];
+            $templateData = isset($entity['template']) && is_array($entity['template']) ? $entity['template'] : [];
 
             $template = new Template(
                 identifier: $templateData['identifier'] ?? '',
@@ -262,7 +259,7 @@ class PageService
             );
 
             // Extract site data
-            $siteData = isset($data['site']) && is_array($data['site']) ? $data['site'] : [];
+            $siteData = isset($entity['site']) && is_array($entity['site']) ? $entity['site'] : [];
 
             $site = new Site(
                 identifier: $siteData['identifier'] ?? '',
@@ -279,11 +276,11 @@ class PageService
             );
 
             // Extract containers
-            $containers = isset($data['containers']) && is_array($data['containers']) ? $data['containers'] : [];
+            $containers = isset($entity['containers']) && is_array($entity['containers']) ? $entity['containers'] : [];
 
             // Extract urlContentMap if available
             $urlContentMap = null;
-            $urlContentMapData = $data['urlContentMap'] ?? null;
+            $urlContentMapData = $entity['urlContentMap'] ?? null;
             if (is_array($urlContentMapData)) {
                 $urlContentMap = new Contentlet(
                     identifier: $urlContentMapData['identifier'] ?? '',
@@ -297,18 +294,14 @@ class PageService
             }
 
             // Extract viewAs data
-            $viewAsData = isset($data['viewAs']) && is_array($data['viewAs']) ? $data['viewAs'] : [];
+            $viewAsData = isset($entity['viewAs']) && is_array($entity['viewAs']) ? $entity['viewAs'] : [];
 
-            $visitorData = $viewAsData['visitor'] ?? [];
-            if (! is_array($visitorData)) {
-                $visitorData = [];
-            }
+            $visitorData = isset($viewAsData['visitor']) && is_array($viewAsData['visitor']) ? $viewAsData['visitor'] : [];
 
             // Create UserAgent
-            $userAgentData = $visitorData['userAgent'] ?? [];
-            if (! is_array($userAgentData)) {
-                $userAgentData = [];
-            }
+            $userAgentData = isset($visitorData['userAgent']) && is_array($visitorData['userAgent'])
+                ? $visitorData['userAgent']
+                : [];
 
             $userAgent = new UserAgent(
                 browser: $userAgentData['browser'] ?? '',
@@ -318,36 +311,33 @@ class PageService
             );
 
             // Create GeoLocation
-            $geoData = $visitorData['geo'] ?? [];
-            if (! is_array($geoData)) {
-                $geoData = [];
-            }
+            $geoData = isset($visitorData['geo']) && is_array($visitorData['geo']) ? $visitorData['geo'] : [];
 
             $geoLocation = new GeoLocation(
                 city: $geoData['city'] ?? '',
                 country: $geoData['country'] ?? '',
                 countryCode: $geoData['countryCode'] ?? '',
-                latitude: $geoData['latitude'] ?? '',
-                longitude: $geoData['longitude'] ?? '',
+                latitude: (float)($geoData['latitude'] ?? 0),
+                longitude: (float)($geoData['longitude'] ?? 0),
                 region: $geoData['region'] ?? ''
             );
 
             // Create Visitor
             $visitor = new Visitor(
-                tags: is_array($visitorData['tags'] ?? []) ? $visitorData['tags'] : [],
+                tags: [],
                 device: $visitorData['device'] ?? '',
                 isNew: $visitorData['isNew'] ?? false,
                 userAgent: $userAgent,
                 referer: $visitorData['referer'] ?? '',
                 dmid: $visitorData['dmid'] ?? '',
                 geo: $geoLocation,
-                personas: is_array($visitorData['personas'] ?? []) ? $visitorData['personas'] : []
+                personas: []
             );
 
             // Create ViewAs
             $viewAs = new ViewAs(
                 visitor: $visitor,
-                language: is_array($viewAsData['language'] ?? []) ? $viewAsData['language'] : [],
+                language: [],
                 mode: $viewAsData['mode'] ?? 'LIVE'
             );
 

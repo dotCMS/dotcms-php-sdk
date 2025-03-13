@@ -232,10 +232,12 @@ class PageServiceTest extends TestCase
                 200,
                 ['Content-Type' => 'application/json'],
                 json_encode([
-                    'entity' => ['page' => []],
-                    'layout' => ['title' => 'Test Layout', 'body' => ['rows' => []]],
-                    'template' => ['identifier' => 'test-template'],
-                    'site' => ['identifier' => 'test-site'],
+                    'entity' => [
+                        'page' => [],
+                        'layout' => ['title' => 'Test Layout', 'body' => ['rows' => []]],
+                        'template' => ['identifier' => 'test-template'],
+                        'site' => ['identifier' => 'test-site'],
+                    ],
                 ])
             )
         );
@@ -255,9 +257,11 @@ class PageServiceTest extends TestCase
                 200,
                 ['Content-Type' => 'application/json'],
                 json_encode([
-                    'entity' => ['page' => ['identifier' => 'test-page']],
-                    'template' => ['identifier' => 'test-template'],
-                    'site' => ['identifier' => 'test-site'],
+                    'entity' => [
+                        'page' => ['identifier' => 'test-page'],
+                        'template' => ['identifier' => 'test-template'],
+                        'site' => ['identifier' => 'test-site'],
+                    ],
                 ])
             )
         );
@@ -277,9 +281,11 @@ class PageServiceTest extends TestCase
                 200,
                 ['Content-Type' => 'application/json'],
                 json_encode([
-                    'entity' => ['page' => ['identifier' => 'test-page']],
-                    'layout' => ['title' => 'Test Layout', 'body' => ['rows' => []]],
-                    'site' => ['identifier' => 'test-site'],
+                    'entity' => [
+                        'page' => ['identifier' => 'test-page'],
+                        'layout' => ['title' => 'Test Layout', 'body' => ['rows' => []]],
+                        'site' => ['identifier' => 'test-site'],
+                    ],
                 ])
             )
         );
@@ -287,7 +293,7 @@ class PageServiceTest extends TestCase
         $request = new PageRequest('/about-us');
 
         $this->expectException(ResponseException::class);
-        $this->expectExceptionMessage('Template data not found in response: template is missing');
+        $this->expectExceptionMessage('Template data not found in response: entity.template is missing');
 
         $this->pageService->getPage($request);
     }
@@ -299,9 +305,11 @@ class PageServiceTest extends TestCase
                 200,
                 ['Content-Type' => 'application/json'],
                 json_encode([
-                    'entity' => ['page' => ['identifier' => 'test-page']],
-                    'layout' => ['title' => 'Test Layout', 'body' => ['rows' => []]],
-                    'template' => ['identifier' => 'test-template'],
+                    'entity' => [
+                        'page' => ['identifier' => 'test-page'],
+                        'layout' => ['title' => 'Test Layout', 'body' => ['rows' => []]],
+                        'template' => ['identifier' => 'test-template'],
+                    ],
                 ])
             )
         );
@@ -309,7 +317,7 @@ class PageServiceTest extends TestCase
         $request = new PageRequest('/about-us');
 
         $this->expectException(ResponseException::class);
-        $this->expectExceptionMessage('Site data not found in response: site is missing');
+        $this->expectExceptionMessage('Site data not found in response: entity.site is missing');
 
         $this->pageService->getPage($request);
     }

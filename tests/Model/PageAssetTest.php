@@ -28,7 +28,7 @@ class PageAssetTest extends TestCase
             new UserAgent('Chrome', '120.0', 'Windows', false), // userAgent
             'https://example.com', // referer
             'test-dmid', // dmid
-            new GeoLocation('US', 'United States', 'FL', 'Florida', 'Miami', '33101', 25.7743, -80.1937), // geo
+            new GeoLocation('Miami', 'United States', 'US', 25.7743, -80.1937, 'Florida'), // geo
             [] // personas
         );
 
@@ -93,7 +93,7 @@ class PageAssetTest extends TestCase
             new UserAgent('Chrome', '120.0', 'Windows', false), // userAgent
             'https://example.com', // referer
             'test-dmid', // dmid
-            new GeoLocation('US', 'United States', 'FL', 'Florida', 'Miami', '33101', 25.7743, -80.1937), // geo
+            new GeoLocation('Miami', 'United States', 'US', 25.7743, -80.1937, 'Florida'), // geo
             [] // personas
         );
 
