@@ -8,8 +8,15 @@
         "framework"
     ],
     "license": "MIT",
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../../"
+        }
+    ],
     "require": {
         "php": "^8.2",
+        "dotcms/php-sdk": "^1.0.0",
         "laravel/framework": "^12.0",
         "laravel/tinker": "^2.10.1"
     },
