@@ -38,7 +38,7 @@ class AppController extends Controller
             $pageRequest = $this->dotCMSClient->createPageRequest($path, 'json');
             
             // Get the page data
-            $page = $this->dotCMSClient->getPage($pageRequest);
+            $pageAsset = $this->dotCMSClient->getPage($pageRequest);
             
             // Create a navigation request with depth=2
             $navRequest = $this->dotCMSClient->createNavigationRequest('/', 2);
@@ -46,9 +46,25 @@ class AppController extends Controller
             // Get the navigation
             $nav = $this->dotCMSClient->getNavigation($navRequest);
 
+            // Check for entity wrapper in the response
+            if (isset($pageAsset->entity)) {
+                // Some dotCMS versions return data in an 'entity' wrapper
+                $page = $pageAsset;
+            } else {
+                // Standard structure already expected by our templates
+                $page = $pageAsset;
+            }
+
+            // Log the structure for debugging
+            Log::debug('DotCMS Page Structure', [
+                'hasEntity' => isset($pageAsset->entity) ? 'yes' : 'no',
+                'hasLayout' => isset($page->layout) ? 'yes' : 'no',
+                'hasContainers' => isset($page->containers) ? 'yes' : 'no'
+            ]);
+
             // Pass the data to the view
-            return view('app', [
-                'page' => $page,
+            return view('page', [
+                'pageAsset' => $page,
                 'navigation' => $nav
             ]);
         } catch (\Exception $e) {
