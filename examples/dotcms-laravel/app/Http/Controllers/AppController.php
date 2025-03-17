@@ -4,11 +4,23 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\DotCMSClient;
 
 class AppController extends Controller
 {
+    /**
+     * The DotCMS client instance.
+     */
+    protected $dotCMSClient;
+    
+    /**
+     * Create a new controller instance.
+     */
+    public function __construct(DotCMSClient $dotCMSClient)
+    {
+        $this->dotCMSClient = $dotCMSClient;
+    }
+    
     /**
      * Handle the SPA rendering with dotCMS page data
      *
@@ -17,31 +29,22 @@ class AppController extends Controller
      */
     public function index(Request $request)
     {
-        // Create dotCMS client configuration
-        $config = new Config(
-            host: env('DOTCMS_HOST', 'https://demo.dotcms.com'),
-            apiKey: env('DOTCMS_API_TOKEN', '')
-        );
-
-        // Create dotCMS client
-        $client = new DotCMSClient($config);
-
         try {
             // Get the current path from the request
             $path = $request->path();
             $path = $path === '/' ? '/' : '/' . $path;
 
             // Create a page request for the current path
-            $pageRequest = $client->createPageRequest($path);
+            $pageRequest = $this->dotCMSClient->createPageRequest($path, 'json');
             
             // Get the page data
-            $page = $client->getPage($pageRequest);
+            $page = $this->dotCMSClient->getPage($pageRequest);
             
             // Create a navigation request with depth=2
-            $navRequest = $client->createNavigationRequest('/', 2);
+            $navRequest = $this->dotCMSClient->createNavigationRequest('/', 2);
             
             // Get the navigation
-            $nav = $client->getNavigation($navRequest);
+            $nav = $this->dotCMSClient->getNavigation($navRequest);
 
             // Pass the data to the view
             return view('app', [
