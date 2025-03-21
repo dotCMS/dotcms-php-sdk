@@ -102,7 +102,7 @@ class NavigationRequest
     /**
      * Build the query parameters
      *
-     * @return array
+     * @return array<string, int>
      */
     public function buildQueryParams(): array
     {
