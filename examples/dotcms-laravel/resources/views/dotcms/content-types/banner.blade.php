@@ -1,16 +1,29 @@
 @php
-$imageHtml = '';
+$imagePath = null;
 if (isset($content['image'])) {
-    $imageHtml = '<img src="https://demo.dotcms.com/dA/' . $content['identifier'] . '/image" 
-                alt="' . htmlspecialchars($content['title'] ?? '', ENT_QUOTES, 'UTF-8') . '">';
+    $imagePath = 'https://demo.dotcms.com/dA/' . $content['identifier'] . '/image';
 }
+$title = $content['title'] ?? '';
+$caption = $content['caption'] ?? '';
+$buttonText = $content['buttonText'] ?? '';
+$link = $content['link'] ?? '#';
 @endphp
 
-<article>
-    {!! $imageHtml !!}
-    @if(isset($content['title']))<h2>{{ $content['title'] }}</h2>@endif
-    @if(isset($content['caption']))<p>{{ $content['caption'] }}</p>@endif
-    @if(isset($content['buttonText']))
-        <a href="{{ $content['link'] ?? '#' }}">{{ $content['buttonText'] }}</a>
+<div class="relative w-full p-4 bg-gray-200 h-96">
+    @if($imagePath)
+        <div class="absolute inset-0">
+            <img src="{{ $imagePath }}" class="object-cover w-full h-full" alt="{{ $title }}">
+        </div>
     @endif
-</article> 
+    <div class="absolute inset-0 flex flex-col items-center justify-center p-4 text-center text-white">
+        <h2 class="mb-2 text-6xl font-bold text-shadow">
+            {{ $title }}
+        </h2>
+        <p class="mb-4 text-xl text-shadow">{{ $caption }}</p>
+        <a 
+            class="p-4 text-xl transition duration-300 bg-purple-500 rounded hover:bg-purple-600"
+            href="{{ $link }}">
+            {{ $buttonText }}
+        </a>
+    </div>
+</div> 
