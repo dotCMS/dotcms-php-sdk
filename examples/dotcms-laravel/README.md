@@ -145,12 +145,14 @@ These registrations ensure the DotCMS service provider is loaded during applicat
 
 ### 2. Create Helper Functions
 
-Create helper functions for DotCMS rendering in `app/Helpers/DotCmsHelpers.php`:
+Create helper functions for DotCMS rendering in `app/Helpers/DotCmsHelpers.php`. This implementation leverages the helper utilities provided by the PHP SDK:
 
 ```php
 <?php
 
 namespace App\Helpers;
+
+use Dotcms\PhpSdk\Utils\DotCmsHelper;
 
 class DotCmsHelpers
 {
@@ -163,17 +165,7 @@ class DotCmsHelpers
      */
     public function getContainersData($containers, $container)
     {
-        if (empty($containers) || empty($container)) {
-            return null;
-        }
-
-        $identifier = $container['identifier'] ?? null;
-        
-        if (!$identifier || !isset($containers[$identifier])) {
-            return null;
-        }
-
-        return $containers[$identifier];
+        return DotCmsHelper::getContainerData($containers, $container);
     }
 
     /**
@@ -184,23 +176,7 @@ class DotCmsHelpers
      */
     public function htmlAttr($attributes)
     {
-        if (empty($attributes)) {
-            return '';
-        }
-
-        $html = '';
-        
-        foreach ($attributes as $key => $value) {
-            if (is_bool($value)) {
-                if ($value) {
-                    $html .= ' ' . $key;
-                }
-            } else {
-                $html .= ' ' . $key . '="' . htmlspecialchars($value, ENT_QUOTES, 'UTF-8') . '"';
-            }
-        }
-        
-        return $html;
+        return DotCmsHelper::htmlAttributes($attributes);
     }
 
     /**
@@ -224,17 +200,16 @@ class DotCmsHelpers
             }
         }
 
-        // Default rendering with title
-        $title = $content['title'] ?? $content['name'] ?? 'No Title';
-        return '<div class="content-wrapper"><h3>' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '</h3></div>';
+        // Fall back to the SDK simple HTML renderer
+        return DotCmsHelper::simpleContentHtml($content);
     }
 }
 ```
 
-The DotCMSHelpers class provides three key functions:
+The DotCMSHelpers class provides three key functions, all leveraging the SDK's `DotCmsHelper` utility class:
 - `getContainersData`: Retrieves container content from the DotCMS page structure
 - `htmlAttr`: Safely generates HTML attributes from arrays, handling special cases like boolean attributes
-- `generateHtmlBasedOnProperty`: Renders content intelligently by looking for type-specific templates or falling back to defaults
+- `generateHtmlBasedOnProperty`: Renders content intelligently by looking for type-specific templates or falling back to the SDK's default renderer
 
 Create a service provider to share the helpers with all views in `app/Providers/DotCmsHelpersServiceProvider.php`:
 

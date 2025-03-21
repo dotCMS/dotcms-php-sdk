@@ -46,6 +46,47 @@ dotcms-symfony/
             └── activity.twig
 ```
 
+## Using SDK Utilities
+
+This example leverages the utility helpers provided by the DotCMS PHP SDK. The SDK includes a `DotCmsHelper` class with common functions for rendering and working with DotCMS content:
+
+- `getContainerData()`: Retrieves container data by identifier
+- `htmlAttributes()`: Generates HTML attributes from an associative array
+- `simpleContentHtml()`: Provides fallback HTML rendering for content types
+
+These utilities are used in the Twig extension (`DotCMSExtension.php`) to simplify templating:
+
+```php
+<?php
+
+namespace App\Twig;
+
+use Dotcms\PhpSdk\Utils\DotCmsHelper;
+use Twig\Extension\AbstractExtension;
+use Twig\TwigFunction;
+
+class DotCMSExtension extends AbstractExtension
+{
+    // ...
+
+    public function htmlAttr(array $attrs): string 
+    {
+        return DotCmsHelper::htmlAttributes($attrs);
+    }
+
+    // ...
+
+    public function generateHtmlBasedOnProperty(array $content): string 
+    {
+        // Try to use Twig templates first
+        // ...
+
+        // Fall back to the SDK's simple content HTML renderer if no template is found
+        return DotCmsHelper::simpleContentHtml($content);
+    }
+}
+```
+
 ## Installation
 
 1. Clone this repository or create a new Symfony project:
@@ -258,6 +299,7 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use InvalidArgumentException;
 use RuntimeException;
+use Dotcms\PhpSdk\Utils\DotCmsHelper;
 
 class DotCMSExtension extends AbstractExtension
 {
@@ -278,13 +320,7 @@ class DotCMSExtension extends AbstractExtension
 
     public function htmlAttr(array $attrs): string 
     {
-        return implode(' ', array_map(
-            fn($key, $value) => is_bool($value) 
-                ? sprintf('%s="%s"', $key, $value ? 'true' : 'false')
-                : sprintf('%s="%s"', $key, htmlspecialchars((string)$value, ENT_QUOTES)),
-            array_keys($attrs),
-            $attrs
-        ));
+        return DotCmsHelper::htmlAttributes($attrs);
     }
 
     public function getGridClass(int $position, string $type = 'start'): string 
@@ -311,7 +347,7 @@ class DotCMSExtension extends AbstractExtension
         };
 
         if (empty($template)) {
-            return '';
+            return DotCmsHelper::simpleContentHtml($content);
         }
 
         try {
