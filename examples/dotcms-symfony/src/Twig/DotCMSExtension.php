@@ -2,6 +2,7 @@
 
 namespace App\Twig;
 
+use Dotcms\PhpSdk\Utils\DotCmsHelper;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -27,13 +28,7 @@ class DotCMSExtension extends AbstractExtension
 
     public function htmlAttr(array $attrs): string 
     {
-        return implode(' ', array_map(
-            fn($key, $value) => is_bool($value) 
-                ? sprintf('%s="%s"', $key, $value ? 'true' : 'false')
-                : sprintf('%s="%s"', $key, htmlspecialchars((string)$value, ENT_QUOTES)),
-            array_keys($attrs),
-            $attrs
-        ));
+        return DotCmsHelper::htmlAttributes($attrs);
     }
 
     public function getGridClass(int $position, string $type = 'start'): string 
@@ -60,22 +55,30 @@ class DotCMSExtension extends AbstractExtension
         };
 
         if (empty($template)) {
-            return '';
+            // Fall back to the SDK simple content HTML renderer if no template is found
+            return DotCmsHelper::simpleContentHtml($content);
         }
 
         try {
             return $twig->render($template, ['content' => $content]);
         } catch (\Exception $e) {
-            return '';
+            // Fall back to the SDK simple content HTML renderer if rendering fails
+            return DotCmsHelper::simpleContentHtml($content);
         }
     }
 
     public function getContainersData(array $containers, array $containerRef): array 
     {
+        // First try to get the container data using the SDK helper
+        $containerData = DotCmsHelper::getContainerData($containers, $containerRef);
+        
+        if (!$containerData) {
+            throw new RuntimeException("Container not found: " . ($containerRef['identifier'] ?? 'unknown'));
+        }
+        
         $identifier = $containerRef['identifier'] ?? throw new RuntimeException("Missing container identifier");
         $uuid = $containerRef['uuid'] ?? throw new RuntimeException("Missing container UUID");
         
-        $containerData = $containers[$identifier] ?? throw new RuntimeException("Container not found: $identifier");
         $structures = $containerData['containerStructures'] ?? [];
         $container = $containerData['container'] ?? [];
         
