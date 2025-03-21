@@ -82,9 +82,9 @@ class NavigationServiceTest extends TestCase
     }
 
     /**
-     * Test that getNavigation throws an exception when entity is missing
+     * Test that getNavigation returns a NavigationItem with default values when entity is missing
      */
-    public function testGetNavigationThrowsExceptionWhenEntityIsMissing(): void
+    public function testGetNavigationReturnsNavigationItemWithDefaultValuesWhenEntityIsMissing(): void
     {
         $this->mockHandler->append(
             new GuzzleResponse(200, ['Content-Type' => 'application/json'], json_encode([
@@ -93,40 +93,57 @@ class NavigationServiceTest extends TestCase
             ]))
         );
 
-        $this->expectException(ResponseException::class);
-        $this->expectExceptionMessage('Invalid response: entity missing');
-
         $request = new NavigationRequest('/test');
-        $this->service->getNavigation($request);
+        $result = $this->service->getNavigation($request);
+
+        $this->assertInstanceOf(NavigationItem::class, $result);
+        $this->assertEquals('', $result->title);
+        $this->assertEquals('', $result->href);
+        $this->assertEquals('folder', $result->type);
+        $this->assertEquals('', $result->host);
+        $this->assertEquals(1, $result->languageId);
+        $this->assertEquals(0, $result->hash);
+        $this->assertEquals('_self', $result->target);
+        $this->assertEquals(0, $result->order);
+        $this->assertFalse($result->hasChildren());
     }
 
     /**
-     * Test that getNavigation throws an exception when required fields are missing
+     * Test that getNavigation returns a NavigationItem with default values when fields are missing
      */
-    public function testGetNavigationThrowsExceptionWhenRequiredFieldsAreMissing(): void
+    public function testGetNavigationReturnsNavigationItemWithDefaultValuesWhenFieldsAreMissing(): void
     {
         $this->mockHandler->append(
             new GuzzleResponse(200, ['Content-Type' => 'application/json'], json_encode([
                 'entity' => [
                     'title' => 'Test Title',
-                    // Missing required fields
+                    // Missing other fields
                 ],
                 'errors' => [],
                 'messages' => [],
             ]))
         );
 
-        $this->expectException(ResponseException::class);
-        $this->expectExceptionMessage('Invalid response: host missing');
-
         $request = new NavigationRequest('/test');
-        $this->service->getNavigation($request);
+        $result = $this->service->getNavigation($request);
+
+        $this->assertInstanceOf(NavigationItem::class, $result);
+        $this->assertEquals('Test Title', $result->title);
+        $this->assertEquals('', $result->href);
+        $this->assertEquals('folder', $result->type);
+        $this->assertEquals('', $result->host);
+        $this->assertEquals(1, $result->languageId);
+        $this->assertEquals(0, $result->hash);
+        $this->assertEquals('_self', $result->target);
+        $this->assertEquals(0, $result->order);
+        $this->assertNull($result->code);
+        $this->assertNull($result->folder);
     }
 
     /**
-     * Test that getNavigation throws an exception when API returns errors
+     * Test that getNavigation returns a NavigationItem even when API returns errors
      */
-    public function testGetNavigationThrowsExceptionWhenApiReturnsErrors(): void
+    public function testGetNavigationReturnsNavigationItemEvenWhenApiReturnsErrors(): void
     {
         $this->mockHandler->append(
             new GuzzleResponse(200, ['Content-Type' => 'application/json'], json_encode([
@@ -147,11 +164,13 @@ class NavigationServiceTest extends TestCase
             ]))
         );
 
-        $this->expectException(ResponseException::class);
-        $this->expectExceptionMessage('API returned errors: Error 1, Error 2');
-
         $request = new NavigationRequest('/test');
-        $this->service->getNavigation($request);
+        $result = $this->service->getNavigation($request);
+
+        $this->assertInstanceOf(NavigationItem::class, $result);
+        $this->assertEquals('Test Title', $result->title);
+        $this->assertEquals('/test', $result->href);
+        $this->assertEquals('folder', $result->type);
     }
 
     /**

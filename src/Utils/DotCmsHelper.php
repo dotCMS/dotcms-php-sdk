@@ -26,6 +26,10 @@ class DotCmsHelper
             return null;
         }
 
+        if (! is_array($containers[$identifier])) {
+            return null;
+        }
+
         return $containers[$identifier];
     }
 
@@ -49,7 +53,17 @@ class DotCmsHelper
                     $html .= ' ' . $key;
                 }
             } else {
-                $html .= ' ' . $key . '="' . htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8') . '"';
+                // Convert value to string safely
+                if (is_scalar($value)) {
+                    $stringValue = (string)$value;
+                } elseif (is_null($value)) {
+                    $stringValue = '';
+                } else {
+                    $encoded = json_encode($value);
+                    $stringValue = $encoded !== false ? $encoded : '[complex value]';
+                }
+
+                $html .= ' ' . $key . '="' . htmlspecialchars($stringValue, ENT_QUOTES, 'UTF-8') . '"';
             }
         }
 
@@ -68,10 +82,22 @@ class DotCmsHelper
             return '';
         }
 
-        $title = $content['title'] ?? $content['name'] ?? 'No Title';
+        $title = '';
+        if (isset($content['title']) && is_string($content['title'])) {
+            $title = $content['title'];
+        } elseif (isset($content['name']) && is_string($content['name'])) {
+            $title = $content['name'];
+        } else {
+            $title = 'No Title';
+        }
+
+        $contentType = 'unknown';
+        if (isset($content['contentType']) && is_string($content['contentType'])) {
+            $contentType = $content['contentType'];
+        }
 
         return '<div class="dotcms-content" data-content-type="' .
-            htmlspecialchars($content['contentType'] ?? 'unknown', ENT_QUOTES, 'UTF-8') .
+            htmlspecialchars($contentType, ENT_QUOTES, 'UTF-8') .
             '"><h3>' . htmlspecialchars($title, ENT_QUOTES, 'UTF-8') . '</h3></div>';
     }
 }

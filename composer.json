@@ -2,7 +2,6 @@
     "name": "dotcms/php-sdk",
     "description": "The `dotcms-php-sdk` is a PHP library designed to simplify interaction with the dotCMS Page API",
     "type": "library",
-    "version": "1.0.0",
     "require": {
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.9",

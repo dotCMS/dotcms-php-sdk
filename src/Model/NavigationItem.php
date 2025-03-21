@@ -33,7 +33,7 @@ class NavigationItem implements \JsonSerializable
      * @param int $hash The hash of the navigation item
      * @param string $target The target attribute for links (_self, _blank, etc.)
      * @param int $order The order of the navigation item
-     * @param array|null $children Array of child navigation items data
+     * @param array<int, array<string, mixed>>|null $children Array of child navigation items data
      */
     public function __construct(
         public readonly ?string $code,
@@ -46,24 +46,82 @@ class NavigationItem implements \JsonSerializable
         public readonly int $hash,
         public readonly string $target,
         public readonly int $order,
+        /** @var array<int, array<string, mixed>>|null Array of raw child navigation items data */
         private readonly ?array $children = null
     ) {
         // Map children to NavigationItem objects if they exist
         if ($this->children !== null) {
             $this->childrenItems = array_map(
-                fn ($child) => new self(
-                    $child['code'] ?? null,
-                    $child['folder'] ?? null,
-                    $child['host'],
-                    $child['languageId'],
-                    $child['href'],
-                    $child['title'],
-                    $child['type'],
-                    $child['hash'],
-                    $child['target'],
-                    $child['order'],
-                    $child['children'] ?? null
-                ),
+                function (array $child): NavigationItem {
+                    $code = null;
+                    if (isset($child['code']) && (is_string($child['code']) || is_null($child['code']))) {
+                        $code = $child['code'];
+                    }
+
+                    $folder = null;
+                    if (isset($child['folder']) && (is_string($child['folder']) || is_null($child['folder']))) {
+                        $folder = $child['folder'];
+                    }
+
+                    $host = '';
+                    if (isset($child['host']) && is_string($child['host'])) {
+                        $host = $child['host'];
+                    }
+
+                    $languageId = 1; // Default value
+                    if (isset($child['languageId']) && is_numeric($child['languageId'])) {
+                        $languageId = (int)$child['languageId'];
+                    }
+
+                    $href = '';
+                    if (isset($child['href']) && is_string($child['href'])) {
+                        $href = $child['href'];
+                    }
+
+                    $title = '';
+                    if (isset($child['title']) && is_string($child['title'])) {
+                        $title = $child['title'];
+                    }
+
+                    $type = '';
+                    if (isset($child['type']) && is_string($child['type'])) {
+                        $type = $child['type'];
+                    }
+
+                    $hash = 0; // Default value
+                    if (isset($child['hash']) && is_numeric($child['hash'])) {
+                        $hash = (int)$child['hash'];
+                    }
+
+                    $target = '_self'; // Default value
+                    if (isset($child['target']) && is_string($child['target'])) {
+                        $target = $child['target'];
+                    }
+
+                    $order = 0; // Default value
+                    if (isset($child['order']) && is_numeric($child['order'])) {
+                        $order = (int)$child['order'];
+                    }
+
+                    $children = null;
+                    if (isset($child['children']) && is_array($child['children'])) {
+                        $children = $child['children'];
+                    }
+
+                    return new self(
+                        $code,
+                        $folder,
+                        $host,
+                        $languageId,
+                        $href,
+                        $title,
+                        $type,
+                        $hash,
+                        $target,
+                        $order,
+                        $children
+                    );
+                },
                 $this->children
             );
         }

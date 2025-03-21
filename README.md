@@ -2,6 +2,8 @@
 
 A PHP library designed to simplify interaction with the dotCMS Page API. This SDK provides a clean, object-oriented interface for retrieving and working with dotCMS pages and their components.
 
+[![PHP Code Quality Checks](https://github.com/dotCMS/dotcms-php-sdk/actions/workflows/php-quality-checks.yml/badge.svg)](https://github.com/dotCMS/dotcms-php-sdk/actions/workflows/php-quality-checks.yml)
+
 ## Requirements
 
 - PHP 8.2 or higher
