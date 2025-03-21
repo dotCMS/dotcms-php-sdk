@@ -4,14 +4,52 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Service;
 
+use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\Exception\ResponseException;
+use Dotcms\PhpSdk\Http\HttpClient;
+use Dotcms\PhpSdk\Http\Response as DotcmsResponse;
 use Dotcms\PhpSdk\Model\NavigationItem;
 use Dotcms\PhpSdk\Request\NavigationRequest;
 use Dotcms\PhpSdk\Service\NavigationService;
+use GuzzleHttp\Client;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use PHPUnit\Framework\TestCase;
+use Psr\Http\Message\ResponseInterface;
+
+/**
+ * Test-specific HttpClient that allows injecting a mock client
+ */
+class TestHttpClient extends HttpClient
+{
+    private MockHandler $mockHandler;
+
+    public function __construct(MockHandler $mockHandler)
+    {
+        $config = new Config(
+            'https://demo.dotcms.com/api/v1',
+            'test-api-key',
+            [
+                'headers' => ['Content-Type' => 'application/json'],
+                'verify' => false,
+                'timeout' => 30,
+                'connect_timeout' => 5,
+                'http_errors' => false,
+            ]
+        );
+        $this->mockHandler = $mockHandler;
+        parent::__construct($config);
+    }
+
+    protected function createClient(): Client
+    {
+        $handlerStack = HandlerStack::create($this->mockHandler);
+
+        return new Client(['handler' => $handlerStack]);
+    }
+}
 
 class NavigationServiceTest extends TestCase
 {
@@ -82,9 +120,9 @@ class NavigationServiceTest extends TestCase
     }
 
     /**
-     * Test that getNavigation throws an exception when entity is missing
+     * Test that getNavigation returns a NavigationItem with default values when entity is missing
      */
-    public function testGetNavigationThrowsExceptionWhenEntityIsMissing(): void
+    public function testGetNavigationReturnsNavigationItemWithDefaultValuesWhenEntityIsMissing(): void
     {
         $this->mockHandler->append(
             new GuzzleResponse(200, ['Content-Type' => 'application/json'], json_encode([
@@ -93,40 +131,57 @@ class NavigationServiceTest extends TestCase
             ]))
         );
 
-        $this->expectException(ResponseException::class);
-        $this->expectExceptionMessage('Invalid response: entity missing');
-
         $request = new NavigationRequest('/test');
-        $this->service->getNavigation($request);
+        $result = $this->service->getNavigation($request);
+
+        $this->assertInstanceOf(NavigationItem::class, $result);
+        $this->assertEquals('', $result->title);
+        $this->assertEquals('', $result->href);
+        $this->assertEquals('folder', $result->type);
+        $this->assertEquals('', $result->host);
+        $this->assertEquals(1, $result->languageId);
+        $this->assertEquals(0, $result->hash);
+        $this->assertEquals('_self', $result->target);
+        $this->assertEquals(0, $result->order);
+        $this->assertFalse($result->hasChildren());
     }
 
     /**
-     * Test that getNavigation throws an exception when required fields are missing
+     * Test that getNavigation returns a NavigationItem with default values when fields are missing
      */
-    public function testGetNavigationThrowsExceptionWhenRequiredFieldsAreMissing(): void
+    public function testGetNavigationReturnsNavigationItemWithDefaultValuesWhenFieldsAreMissing(): void
     {
         $this->mockHandler->append(
             new GuzzleResponse(200, ['Content-Type' => 'application/json'], json_encode([
                 'entity' => [
                     'title' => 'Test Title',
-                    // Missing required fields
+                    // Missing other fields
                 ],
                 'errors' => [],
                 'messages' => [],
             ]))
         );
 
-        $this->expectException(ResponseException::class);
-        $this->expectExceptionMessage('Invalid response: host missing');
-
         $request = new NavigationRequest('/test');
-        $this->service->getNavigation($request);
+        $result = $this->service->getNavigation($request);
+
+        $this->assertInstanceOf(NavigationItem::class, $result);
+        $this->assertEquals('Test Title', $result->title);
+        $this->assertEquals('', $result->href);
+        $this->assertEquals('folder', $result->type);
+        $this->assertEquals('', $result->host);
+        $this->assertEquals(1, $result->languageId);
+        $this->assertEquals(0, $result->hash);
+        $this->assertEquals('_self', $result->target);
+        $this->assertEquals(0, $result->order);
+        $this->assertNull($result->code);
+        $this->assertNull($result->folder);
     }
 
     /**
-     * Test that getNavigation throws an exception when API returns errors
+     * Test that getNavigation returns a NavigationItem even when API returns errors
      */
-    public function testGetNavigationThrowsExceptionWhenApiReturnsErrors(): void
+    public function testGetNavigationReturnsNavigationItemEvenWhenApiReturnsErrors(): void
     {
         $this->mockHandler->append(
             new GuzzleResponse(200, ['Content-Type' => 'application/json'], json_encode([
@@ -147,11 +202,13 @@ class NavigationServiceTest extends TestCase
             ]))
         );
 
-        $this->expectException(ResponseException::class);
-        $this->expectExceptionMessage('API returned errors: Error 1, Error 2');
-
         $request = new NavigationRequest('/test');
-        $this->service->getNavigation($request);
+        $result = $this->service->getNavigation($request);
+
+        $this->assertInstanceOf(NavigationItem::class, $result);
+        $this->assertEquals('Test Title', $result->title);
+        $this->assertEquals('/test', $result->href);
+        $this->assertEquals('folder', $result->type);
     }
 
     /**
