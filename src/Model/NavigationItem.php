@@ -57,57 +57,57 @@ class NavigationItem implements \JsonSerializable
                     if (isset($child['code']) && (is_string($child['code']) || is_null($child['code']))) {
                         $code = $child['code'];
                     }
-                    
+
                     $folder = null;
                     if (isset($child['folder']) && (is_string($child['folder']) || is_null($child['folder']))) {
                         $folder = $child['folder'];
                     }
-                    
+
                     $host = '';
                     if (isset($child['host']) && is_string($child['host'])) {
                         $host = $child['host'];
                     }
-                    
+
                     $languageId = 1; // Default value
                     if (isset($child['languageId']) && is_numeric($child['languageId'])) {
                         $languageId = (int)$child['languageId'];
                     }
-                    
+
                     $href = '';
                     if (isset($child['href']) && is_string($child['href'])) {
                         $href = $child['href'];
                     }
-                    
+
                     $title = '';
                     if (isset($child['title']) && is_string($child['title'])) {
                         $title = $child['title'];
                     }
-                    
+
                     $type = '';
                     if (isset($child['type']) && is_string($child['type'])) {
                         $type = $child['type'];
                     }
-                    
+
                     $hash = 0; // Default value
                     if (isset($child['hash']) && is_numeric($child['hash'])) {
                         $hash = (int)$child['hash'];
                     }
-                    
+
                     $target = '_self'; // Default value
                     if (isset($child['target']) && is_string($child['target'])) {
                         $target = $child['target'];
                     }
-                    
+
                     $order = 0; // Default value
                     if (isset($child['order']) && is_numeric($child['order'])) {
                         $order = (int)$child['order'];
                     }
-                    
+
                     $children = null;
                     if (isset($child['children']) && is_array($child['children'])) {
                         $children = $child['children'];
                     }
-                    
+
                     return new self(
                         $code,
                         $folder,

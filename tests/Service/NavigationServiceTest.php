@@ -7,17 +7,15 @@ namespace Dotcms\PhpSdk\Tests\Service;
 use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\Exception\ResponseException;
 use Dotcms\PhpSdk\Http\HttpClient;
-use Dotcms\PhpSdk\Http\Response as DotcmsResponse;
 use Dotcms\PhpSdk\Model\NavigationItem;
 use Dotcms\PhpSdk\Request\NavigationRequest;
 use Dotcms\PhpSdk\Service\NavigationService;
 use GuzzleHttp\Client;
-use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Handler\MockHandler;
+use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use PHPUnit\Framework\TestCase;
-use Psr\Http\Message\ResponseInterface;
 
 /**
  * Test-specific HttpClient that allows injecting a mock client
