@@ -26,7 +26,7 @@ class DotCmsHelper
             return null;
         }
 
-        if (!is_array($containers[$identifier])) {
+        if (! is_array($containers[$identifier])) {
             return null;
         }
 
@@ -62,7 +62,7 @@ class DotCmsHelper
                     $encoded = json_encode($value);
                     $stringValue = $encoded !== false ? $encoded : '[complex value]';
                 }
-                
+
                 $html .= ' ' . $key . '="' . htmlspecialchars($stringValue, ENT_QUOTES, 'UTF-8') . '"';
             }
         }
@@ -90,7 +90,7 @@ class DotCmsHelper
         } else {
             $title = 'No Title';
         }
-        
+
         $contentType = 'unknown';
         if (isset($content['contentType']) && is_string($content['contentType'])) {
             $contentType = $content['contentType'];
