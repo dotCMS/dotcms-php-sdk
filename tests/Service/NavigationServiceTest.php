@@ -4,50 +4,14 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Service;
 
-use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\Exception\ResponseException;
-use Dotcms\PhpSdk\Http\HttpClient;
 use Dotcms\PhpSdk\Model\NavigationItem;
 use Dotcms\PhpSdk\Request\NavigationRequest;
 use Dotcms\PhpSdk\Service\NavigationService;
-use GuzzleHttp\Client;
 use GuzzleHttp\Handler\MockHandler;
-use GuzzleHttp\HandlerStack;
 use GuzzleHttp\Promise\PromiseInterface;
 use GuzzleHttp\Psr7\Response as GuzzleResponse;
 use PHPUnit\Framework\TestCase;
-
-/**
- * Test-specific HttpClient that allows injecting a mock client
- */
-class TestHttpClient extends HttpClient
-{
-    private MockHandler $mockHandler;
-
-    public function __construct(MockHandler $mockHandler)
-    {
-        $config = new Config(
-            'https://demo.dotcms.com/api/v1',
-            'test-api-key',
-            [
-                'headers' => ['Content-Type' => 'application/json'],
-                'verify' => false,
-                'timeout' => 30,
-                'connect_timeout' => 5,
-                'http_errors' => false,
-            ]
-        );
-        $this->mockHandler = $mockHandler;
-        parent::__construct($config);
-    }
-
-    protected function createClient(): Client
-    {
-        $handlerStack = HandlerStack::create($this->mockHandler);
-
-        return new Client(['handler' => $handlerStack]);
-    }
-}
 
 class NavigationServiceTest extends TestCase
 {
