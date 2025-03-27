@@ -69,32 +69,16 @@ class DotCMSExtension extends AbstractExtension
 
     public function getContainersData(array $containers, array $containerRef): array 
     {
-        // First try to get the container data using the SDK helper
         $containerData = DotCmsHelper::getContainerData($containers, $containerRef);
         
         if (!$containerData) {
             throw new RuntimeException("Container not found: " . ($containerRef['identifier'] ?? 'unknown'));
         }
         
-        $identifier = $containerRef['identifier'] ?? throw new RuntimeException("Missing container identifier");
-        $uuid = $containerRef['uuid'] ?? throw new RuntimeException("Missing container UUID");
-        
-        $structures = $containerData['containerStructures'] ?? [];
-        $container = $containerData['container'] ?? [];
-        
-        $contentlets = $containerData['contentlets']["uuid-$uuid"] 
-            ?? $containerData['contentlets']["uuid-dotParser_$uuid"] 
-            ?? [];
-        
-        if (empty($contentlets)) {
-            error_log("No contentlets found for container: $identifier, uuid: $uuid");
+        if (empty($containerData['contentlets'])) {
+            error_log("No contentlets found for container: " . ($containerRef['identifier'] ?? 'unknown') . ", uuid: " . ($containerRef['uuid'] ?? 'unknown'));
         }
         
-        return [
-            ...$container,
-            'acceptTypes' => implode(',', array_column($structures, 'contentTypeVar')),
-            'contentlets' => $contentlets,
-            'variantId' => $container['parentPermissionable']['variantId'] ?? null
-        ];
+        return $containerData;
     }
 } 

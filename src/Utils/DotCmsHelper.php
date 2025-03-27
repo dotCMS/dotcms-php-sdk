@@ -21,6 +21,7 @@ class DotCmsHelper
         }
 
         $identifier = $container['identifier'] ?? null;
+        $uuid = $container['uuid'] ?? null;
 
         if (! $identifier || ! isset($containers[$identifier])) {
             return null;
@@ -30,7 +31,21 @@ class DotCmsHelper
             return null;
         }
 
-        return $containers[$identifier];
+        $containerData = $containers[$identifier];
+        $structures = $containerData['containerStructures'] ?? [];
+        $container = $containerData['container'] ?? [];
+        
+        $contentlets = $containerData['contentlets']["uuid-$uuid"] 
+            ?? $containerData['contentlets']["uuid-dotParser_$uuid"] 
+            ?? [];
+
+        return [
+            ...$container,
+            'acceptTypes' => implode(',', array_column($structures, 'contentTypeVar')),
+            'contentlets' => $contentlets,
+            'maxContentlets' => $container['maxContentlets'] ?? 0,
+            'variantId' => $container['parentPermissionable']['variantId'] ?? null
+        ];
     }
 
     /**

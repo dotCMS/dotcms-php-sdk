@@ -16,7 +16,6 @@ class DotCmsHelpers
      */
     public function getContainersData($containers, $container)
     {
-        // First try to get the container data using the SDK helper
         $containerData = DotCmsHelper::getContainerData($containers, $container);
         
         if (!$containerData) {
@@ -28,26 +27,11 @@ class DotCmsHelpers
             ];
         }
         
-        $identifier = $container['identifier'] ?? '';
-        $uuid = $container['uuid'] ?? '';
-        
-        $structures = $containerData['containerStructures'] ?? [];
-        $container = $containerData['container'] ?? [];
-        
-        $contentlets = $containerData['contentlets']["uuid-$uuid"] 
-            ?? $containerData['contentlets']["uuid-dotParser_$uuid"] 
-            ?? [];
-        
-        if (empty($contentlets)) {
-            Log::warning("No contentlets found for container: $identifier, uuid: $uuid");
+        if (empty($containerData['contentlets'])) {
+            Log::warning("No contentlets found for container: " . ($container['identifier'] ?? 'unknown') . ", uuid: " . ($container['uuid'] ?? 'unknown'));
         }
         
-        return [
-            ...$container,
-            'acceptTypes' => implode(',', array_column($structures, 'contentTypeVar')),
-            'contentlets' => $contentlets,
-            'variantId' => $container['parentPermissionable']['variantId'] ?? null
-        ];
+        return $containerData;
     }
 
     /**
