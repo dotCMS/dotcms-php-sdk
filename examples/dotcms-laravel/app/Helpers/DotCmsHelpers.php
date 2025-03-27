@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Dotcms\PhpSdk\Utils\DotCmsHelper;
+use Illuminate\Support\Facades\Log;
 
 class DotCmsHelpers
 {
@@ -15,7 +16,22 @@ class DotCmsHelpers
      */
     public function getContainersData($containers, $container)
     {
-        return DotCmsHelper::getContainerData($containers, $container);
+        $containerData = DotCmsHelper::getContainerData($containers, $container);
+        
+        if (!$containerData) {
+            return [
+                'contentlets' => [],
+                'acceptTypes' => '',
+                'maxContentlets' => 0,
+                'variantId' => null
+            ];
+        }
+        
+        if (empty($containerData['contentlets'])) {
+            Log::warning("No contentlets found for container: " . ($container['identifier'] ?? 'unknown') . ", uuid: " . ($container['uuid'] ?? 'unknown'));
+        }
+        
+        return $containerData;
     }
 
     /**
