@@ -1,9 +1,6 @@
 @php
 $containerObject = $dotCmsHelpers->getContainersData($containers, $container);
-$containerContentKey = 'uuid-' . $container['uuid'];
-$containerContent = isset($containerObject['contentlets'][$containerContentKey]) 
-    ? $containerObject['contentlets'][$containerContentKey] 
-    : [];
+$containerContent = $containerObject['contentlets'] ?? [];
 
 $containerAttrs = [
     'data-dot-object' => 'container',
