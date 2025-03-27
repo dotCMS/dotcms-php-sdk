@@ -34,9 +34,9 @@ class DotCmsHelper
         $containerData = $containers[$identifier];
         $structures = $containerData['containerStructures'] ?? [];
         $container = $containerData['container'] ?? [];
-        
-        $contentlets = $containerData['contentlets']["uuid-$uuid"] 
-            ?? $containerData['contentlets']["uuid-dotParser_$uuid"] 
+
+        $contentlets = $containerData['contentlets']["uuid-$uuid"]
+            ?? $containerData['contentlets']["uuid-dotParser_$uuid"]
             ?? [];
 
         return [
@@ -44,7 +44,7 @@ class DotCmsHelper
             'acceptTypes' => implode(',', array_column($structures, 'contentTypeVar')),
             'contentlets' => $contentlets,
             'maxContentlets' => $container['maxContentlets'] ?? 0,
-            'variantId' => $container['parentPermissionable']['variantId'] ?? null
+            'variantId' => $container['parentPermissionable']['variantId'] ?? null,
         ];
     }
 
