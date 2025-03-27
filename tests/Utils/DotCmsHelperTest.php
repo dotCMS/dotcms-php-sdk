@@ -10,13 +10,34 @@ class DotCmsHelperTest extends TestCase
     public function testGetContainerData(): void
     {
         $containers = [
-            'abc123' => ['title' => 'Test Container'],
+            'abc123' => [
+                'container' => ['title' => 'Test Container'],
+                'containerStructures' => [
+                    ['contentTypeVar' => 'Banner'],
+                    ['contentTypeVar' => 'Widget'],
+                ],
+                'contentlets' => [
+                    'uuid-123' => [
+                        ['title' => 'Test Content'],
+                    ],
+                ],
+            ],
             'def456' => ['title' => 'Another Container'],
         ];
 
-        $container = ['identifier' => 'abc123'];
+        // Test with valid container
+        $container = [
+            'identifier' => 'abc123',
+            'uuid' => '123',
+        ];
         $result = DotCmsHelper::getContainerData($containers, $container);
-        $this->assertEquals(['title' => 'Test Container'], $result);
+        $this->assertEquals([
+            'title' => 'Test Container',
+            'acceptTypes' => 'Banner,Widget',
+            'contentlets' => [['title' => 'Test Content']],
+            'maxContentlets' => 0,
+            'variantId' => null,
+        ], $result);
 
         // Test with non-existent identifier
         $container = ['identifier' => 'nonexistent'];

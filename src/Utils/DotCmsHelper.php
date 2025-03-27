@@ -35,9 +35,13 @@ class DotCmsHelper
         $structures = $containerData['containerStructures'] ?? [];
         $container = $containerData['container'] ?? [];
 
-        $contentlets = $containerData['contentlets']["uuid-$uuid"]
-            ?? $containerData['contentlets']["uuid-dotParser_$uuid"]
-            ?? [];
+        $contentlets = [];
+        if ($uuid !== null && (is_string($uuid) || is_numeric($uuid))) {
+            $uuidStr = (string) $uuid;
+            $contentlets = $containerData['contentlets']["uuid-$uuidStr"]
+                ?? $containerData['contentlets']["uuid-dotParser_$uuidStr"]
+                ?? [];
+        }
 
         return [
             ...$container,
