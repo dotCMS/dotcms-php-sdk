@@ -10,6 +10,7 @@
 
         {% block javascripts %}
             {% block importmap %}{{ importmap('app') }}{% endblock %}
+            <script src="{{ app.request.server.get('DOTCMS_HOST') }}/ext/uve/dot-uve.js"></script>
         {% endblock %}
     </head>
     <body>
