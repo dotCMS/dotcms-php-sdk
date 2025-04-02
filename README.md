@@ -232,6 +232,7 @@ echo "Layout header: " . $page->layout->header . "\n";
 // Access containers and contentlets
 foreach ($page->containers as $containerId => $container) {
     echo "Container ID: " . $containerId . "\n";
+    echo "Max Contentlets: " . ($container->maxContentlets ?? 0) . "\n";
     
     if (!empty($container->contentlets)) {
         foreach ($container->contentlets as $uuid => $contentletArray) {
