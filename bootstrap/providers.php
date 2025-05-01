@@ -1,1 +1,0 @@
-App\Providers\DotCMSHelpersServiceProvider::class, 
