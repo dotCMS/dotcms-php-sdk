@@ -8,6 +8,7 @@ use Dotcms\PhpSdk\Model\Container\ContainerPage;
 use Dotcms\PhpSdk\Model\Content\Contentlet;
 use Dotcms\PhpSdk\Model\Layout\Layout;
 use Dotcms\PhpSdk\Model\Site\Site;
+use Dotcms\PhpSdk\Model\Site\VanityUrl;
 use Dotcms\PhpSdk\Model\View\ViewAs;
 
 class PageAsset
@@ -20,6 +21,7 @@ class PageAsset
      * @param Site $site Site information
      * @param Contentlet|null $urlContentMap Content map for generated pages
      * @param ViewAs $viewAs Visitor context
+     * @param VanityUrl|null $vanityUrl Optional vanity URL configuration
      */
     public function __construct(
         public readonly Layout $layout,
@@ -29,6 +31,7 @@ class PageAsset
         public readonly Site $site,
         public readonly ?Contentlet $urlContentMap,
         public readonly ViewAs $viewAs,
+        public readonly ?VanityUrl $vanityUrl = null,
     ) {
     }
 }
