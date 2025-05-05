@@ -816,6 +816,58 @@ $containerAttrs = [
     ?>
 </div>
 ```
+### Step 18.4: Adding UVE JavaScript Integration
+
+To enable real-time communication between the Universal Visual Editor and your web application, add the following JavaScript code to your layout template. Update `templates/layout.php` to include the UVE script and subscription:
+
+```php
+<!DOCTYPE html>
+<html>
+<head>
+    <title><?= htmlspecialchars($pageAsset->page->title ?? 'dotCMS Page') ?></title>
+    <link rel="stylesheet" href="/css/app.css">
+    <link rel="stylesheet" href="/css/layout.css">
+</head>
+<body>
+    <?php if ($pageAsset->layout->header): ?>
+    <header>
+        <?php include __DIR__ . '/navigation.php'; ?>
+    </header>
+    <?php endif; ?>
+    
+    <main>
+        <?php include __DIR__ . '/page.php'; ?>
+    </main>
+    
+    <?php if ($pageAsset->layout->footer): ?>
+    <footer>
+        <div class="footer-content container">
+            <p>&copy; <?= date('Y') ?> Your Company Name. All rights reserved.</p>
+        </div>
+    </footer>
+    <?php endif; ?>
+
+    <!-- UVE JavaScript Integration -->
+    <script src="https://demo.dotcms.com/ext/uve/dot-uve.js"></script>
+    <script>
+        if (window.dotUVE) {
+            window.dotUVE.createSubscription('changes', (changes) => {
+                window.location.reload();
+            });
+        }
+    </script>
+</body>
+</html>
+```
+
+This JavaScript integration:
+1. Loads the UVE script from your dotCMS instance
+2. Creates a subscription to listen for content changes
+3. Automatically reloads the page when changes are made in the UVE
+4. Ensures content authors see their changes immediately
+
+The UVE script must be loaded from your dotCMS instance (replace `demo.dotcms.com` with your instance URL). The subscription to 'changes' ensures your page stays in sync with the content being edited in the UVE.
+
 ### Important Notes About UVE Implementation
 
 1. **Data Attributes**: All UVE data attributes start with `data-dot-` prefix
@@ -824,6 +876,8 @@ $containerAttrs = [
 4. **Error Handling**: Always validate data before outputting attributes
 5. **Content Type Templates**: Keep content type templates focused on rendering content only
 6. **Inheritance**: The UVE attributes follow the same hierarchy as the page structure
+7. **JavaScript Integration**: The UVE script must be loaded from your dotCMS instance
+8. **Real-time Updates**: The page will automatically reload when content is changed in the UVE
 
 ## Troubleshooting
 

@@ -13,7 +13,10 @@ if (isset($column->styleClass)) {
     $columnClasses .= ' ' . htmlspecialchars($column->styleClass);
 }
 ?>
-<div class="<?= $columnClasses ?>">
+<div 
+    data-dot-object="column"
+    class="<?= $columnClasses ?>"
+>
     <?php
     if (isset($column->containers) && is_array($column->containers)) {
         foreach ($column->containers as $containerRef) {

@@ -7,7 +7,10 @@ if (!isset($row)) {
 $rowStyleClass = isset($row->styleClass) ? ' ' . htmlspecialchars($row->styleClass) : '';
 ?>
 <div class="container">
-    <div class="row<?= $rowStyleClass ?>">
+    <div 
+        data-dot-object="row"
+        class="row<?= $rowStyleClass ?>"
+    >
         <?php
         if (isset($row->columns) && is_array($row->columns)) {
             foreach ($row->columns as $column) {

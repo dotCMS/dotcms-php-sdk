@@ -23,5 +23,14 @@
         </div>
     </footer>
     <?php endif; ?>
+
+    <script src="https://demo.dotcms.com/ext/uve/dot-uve.js"></script>
+    <script>
+        if (window.dotUVE) {
+            window.dotUVE.createSubscription('changes', (changes) => {
+                window.location.reload();
+            })
+        }
+    </script>
 </body>
 </html>
