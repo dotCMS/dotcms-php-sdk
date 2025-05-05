@@ -244,16 +244,16 @@ if ($page->vanityUrl !== null) {
 // Access containers and contentlets
 foreach ($page->containers as $containerId => $container) {
     echo "Container ID: " . $containerId . "\n";
-    echo "Max Contentlets: " . ($container->maxContentlets ?? 0) . "\n";
+    echo "Max Contentlets: " . $container->maxContentlets . "\n";
     
     if (!empty($container->contentlets)) {
-        foreach ($container->contentlets as $uuid => $contentletArray) {
-            foreach ($contentletArray as $contentlet) {
+        foreach ($container->contentlets as $uuid => $contentlets) {
+            foreach ($contentlets as $contentlet) {
                 echo "Contentlet type: " . $contentlet->contentType . "\n";
                 echo "Contentlet title: " . ($contentlet->title ?? 'N/A') . "\n";
                 
-                // Access additional fields using array access
-                foreach ($contentlet as $fieldName => $fieldValue) {
+                // Access additional fields using object properties
+                foreach ($contentlet->getAdditionalProperties() as $fieldName => $fieldValue) {
                     if (is_scalar($fieldValue)) {
                         echo "$fieldName: $fieldValue\n";
                     }
@@ -300,6 +300,44 @@ function processNavigation($navItem, $level = 0) {
 
 processNavigation($nav);
 ```
+
+### Using SDK Utilities
+
+The SDK includes a `DotCmsHelper` class with common functions for rendering and working with DotCMS content:
+
+```php
+use Dotcms\PhpSdk\Utils\DotCmsHelper;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
+
+// Generate HTML attributes from an associative array
+$attrs = [
+    'class' => 'my-class',
+    'data-id' => '123',
+    'disabled' => true
+];
+$htmlAttrs = DotCmsHelper::htmlAttributes($attrs);
+
+// Generate simple HTML for a contentlet
+$contentlet = new Contentlet(
+    identifier: 'abc123',
+    inode: 'inode123',
+    title: 'My Content',
+    contentType: 'Banner'
+);
+$html = DotCmsHelper::simpleContentHtml($contentlet->jsonSerialize());
+
+// Extract accept types from container structures
+$acceptTypes = DotCmsHelper::extractAcceptTypes($containerStructures);
+
+// Extract contentlets from container page
+$contentlets = DotCmsHelper::extractContentlets($containerPage, $uuid);
+```
+
+These utilities help with common tasks like:
+- Generating HTML attributes safely
+- Rendering contentlets with basic HTML
+- Working with container structures and contentlets
+- Extracting data from container pages
 
 ## API Reference
 
@@ -356,52 +394,49 @@ Represents a complete page asset from dotCMS.
 | `site` | Site | The Site object |
 | `template` | Template | The Template object |
 | `layout` | Layout | The Layout object |
-| `containers` | Array | Array of Container objects |
+| `containers` | array<ContainerPage> | Array of ContainerPage objects |
 | `urlContentMap` | Contentlet\|null | Content map for generated pages |
 | `viewAs` | ViewAs | Visitor context information |
 | `vanityUrl` | VanityUrl\|null | Optional vanity URL configuration |
 
-### VanityUrl
+### ContainerPage
 
-Represents a vanity URL configuration in dotCMS.
-
-| Property | Type | Description |
-|----------|------|-------------|
-| `pattern` | string | The URL pattern to match |
-| `vanityUrlId` | string | The unique identifier for the vanity URL |
-| `url` | string | The vanity URL path |
-| `siteId` | string | The site identifier |
-| `languageId` | int | The language ID |
-| `forwardTo` | string | The URL to forward to |
-| `response` | int | The HTTP response code |
-| `order` | int | The order of the vanity URL |
-| `forward` | bool | Whether to forward the request |
-| `temporaryRedirect` | bool | Whether to use temporary redirect |
-| `permanentRedirect` | bool | Whether to use permanent redirect |
-
-### NavigationItem
-
-Represents a navigation item from the dotCMS Navigation API.
+Represents a container page from dotCMS.
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `code` | ?string | The code of the navigation item |
-| `folder` | ?string | The folder identifier |
-| `host` | string | The host identifier |
-| `languageId` | int | The language ID |
-| `href` | string | The URL of the navigation item |
-| `title` | string | The title of the navigation item |
-| `type` | string | The type of the navigation item (folder, htmlpage, etc.) |
-| `hash` | int | The hash of the navigation item |
-| `target` | string | The target attribute for links (_self, _blank, etc.) |
-| `order` | int | The order of the navigation item |
+| `container` | Container | The Container object |
+| `containerStructures` | array<ContainerStructure> | Array of ContainerStructure objects |
+| `rendered` | array<string, string> | Rendered content keyed by UUID |
+| `contentlets` | array<string, array<Contentlet>> | Contentlets keyed by UUID |
+
+### Contentlet
+
+Represents a content item from dotCMS.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `identifier` | string | The content identifier |
+| `inode` | string | The content inode |
+| `title` | string | The content title |
+| `contentType` | string | The content type |
+| `additionalProperties` | array<string, mixed> | Additional content properties |
 
 | Method | Description | Return Type |
 |--------|-------------|-------------|
-| `isFolder` | Check if this navigation item is a folder | `bool` |
-| `isPage` | Check if this navigation item is a page | `bool` |
-| `hasChildren` | Check if this navigation item has children | `bool` |
-| `getChildren` | Get the children as NavigationItem objects | `?array` |
+| `getAdditionalProperties` | Get additional properties | `array<string, mixed>` |
+| `jsonSerialize` | Convert to array for JSON serialization | `array<string, mixed>` |
+
+### DotCmsHelper
+
+Utility class for common DotCMS operations.
+
+| Method | Description | Parameters | Return Type |
+|--------|-------------|------------|-------------|
+| `htmlAttributes` | Generate HTML attributes | `array<string, mixed>` | `string` |
+| `simpleContentHtml` | Generate simple HTML for content | `array<string, mixed>` | `string` |
+| `extractAcceptTypes` | Extract accept types from structures | `array<ContainerStructure>` | `string` |
+| `extractContentlets` | Extract contentlets from container | `ContainerPage, string` | `array<Contentlet>` |
 
 ## Error Handling
 
