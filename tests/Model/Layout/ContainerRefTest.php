@@ -27,7 +27,7 @@ class ContainerRefTest extends TestCase
             contentlets: [$contentlet],
             acceptTypes: 'test-type,other-type',
             maxContentlets: 5,
-            variantId: 123
+            variantId: '123'
         );
 
         $this->assertEquals('container-1', $container->identifier);
@@ -41,7 +41,7 @@ class ContainerRefTest extends TestCase
         $this->assertInstanceOf(Contentlet::class, $container->contentlets[0]);
         $this->assertEquals('test-type,other-type', $container->acceptTypes);
         $this->assertEquals(5, $container->maxContentlets);
-        $this->assertEquals(123, $container->variantId);
+        $this->assertEquals('123', $container->variantId);
 
         // Test container with minimal properties
         $containerMinimal = new ContainerRef(

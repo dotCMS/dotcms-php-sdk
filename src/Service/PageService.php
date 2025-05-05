@@ -326,16 +326,28 @@ class PageService
                     $containersRefs = array_map(function ($containerRef) use ($containers) {
                         $uuid = $containerRef['uuid'] ?? '';
                         $identifier = $containerRef['identifier'] ?? '';
-                        $containerPage = $containers[$identifier];
+                        $containerPage = $containers[$identifier] ?? null;
+
+                        if (!$containerPage) {
+                            return new ContainerRef(
+                                identifier: $identifier,
+                                uuid: $uuid,
+                                historyUUIDs: $containerRef['historyUUIDs'] ?? [],
+                                contentlets: [],
+                                acceptTypes: '',
+                                maxContentlets: 0,
+                                variantId: null
+                            );
+                        }
 
                         return new ContainerRef(
                             identifier: $identifier,
                             uuid: $uuid,
                             historyUUIDs: $containerRef['historyUUIDs'] ?? [],
-                            maxContentlets: $containerPage->container->maxContentlets ?? 0,
-                            variantId: (int)($containerPage->container['parentPermissionable']['variantId'] ?? 0),
                             contentlets: DotCmsHelper::extractContentlets($containerPage, $uuid),
-                            acceptTypes: DotCmsHelper::extractAcceptTypes($containerPage->containerStructures ?? []),
+                            acceptTypes: DotCmsHelper::extractAcceptTypes($containerPage->containerStructures),
+                            maxContentlets: $containerPage->container->maxContentlets,
+                            variantId: $containerPage->container['parentPermissionable']['variantId'] ?? null
                         );
                     }, $columnData['containers'] ?? []);
 

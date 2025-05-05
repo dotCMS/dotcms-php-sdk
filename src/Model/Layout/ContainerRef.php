@@ -24,7 +24,7 @@ class ContainerRef
         public readonly array $contentlets = [],
         public readonly string $acceptTypes = '',
         public readonly int $maxContentlets = 0,
-        public readonly ?int $variantId = null,
+        public readonly ?string $variantId = null,
     ) {
     }
 }
