@@ -35,11 +35,12 @@ class ViewAsTest extends TestCase
             isoCode: 'en-US'
         );
 
-        $viewAs = new ViewAs($visitor, $language, 'PREVIEW');
+        $viewAs = new ViewAs($visitor, $language, 'PREVIEW', 'variant-123');
 
         $this->assertInstanceOf(Visitor::class, $viewAs->visitor);
         $this->assertInstanceOf(Language::class, $viewAs->language);
         $this->assertEquals('PREVIEW', $viewAs->mode);
+        $this->assertEquals('variant-123', $viewAs->variantId);
 
         // Test visitor properties
         $this->assertEquals('desktop', $viewAs->visitor->device);
@@ -70,5 +71,31 @@ class ViewAsTest extends TestCase
         $this->assertEquals('English', $viewAs->language->language);
         $this->assertEquals('United States', $viewAs->language->country);
         $this->assertEquals('en-US', $viewAs->language->isoCode);
+    }
+
+    public function testDefaultVariantId(): void
+    {
+        $visitor = new Visitor(
+            [], // tags
+            'desktop', // device
+            true, // isNew
+            new UserAgent('Chrome', '120.0', 'Windows', false), // userAgent
+            'https://example.com', // referer
+            'test-dmid', // dmid
+            new GeoLocation('Miami', 'United States', 'US', 25.7743, -80.1937, 'Florida'), // geo
+            [] // personas
+        );
+
+        $language = new Language(
+            id: 1,
+            languageCode: 'en',
+            countryCode: 'US',
+            language: 'English',
+            country: 'United States',
+            isoCode: 'en-US'
+        );
+
+        $viewAs = new ViewAs($visitor, $language, 'PREVIEW');
+        $this->assertEquals('', $viewAs->variantId);
     }
 }

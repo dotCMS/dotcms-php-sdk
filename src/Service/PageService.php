@@ -381,7 +381,8 @@ class PageService
             $viewAs = new ViewAs(
                 visitor: $visitor,
                 language: $language,
-                mode: $viewAsData['mode'] ?? 'LIVE'
+                mode: $viewAsData['mode'] ?? 'LIVE',
+                variantId: $viewAsData['variantId'] ?? ''
             );
 
             return new PageAsset(
