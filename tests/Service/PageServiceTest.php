@@ -5,12 +5,15 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Tests\Service;
 
 use Dotcms\PhpSdk\Exception\ResponseException;
+use Dotcms\PhpSdk\Model\Language;
 use Dotcms\PhpSdk\Model\Layout\Body;
 use Dotcms\PhpSdk\Model\Layout\Column;
 use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 use Dotcms\PhpSdk\Model\Layout\Layout;
 use Dotcms\PhpSdk\Model\Layout\Row;
 use Dotcms\PhpSdk\Model\PageAsset;
+use Dotcms\PhpSdk\Model\ViewAs;
+use Dotcms\PhpSdk\Model\ViewAs\Visitor;
 use Dotcms\PhpSdk\Request\PageRequest;
 use Dotcms\PhpSdk\Service\PageService;
 use GuzzleHttp\Handler\MockHandler;
@@ -80,6 +83,13 @@ class PageServiceTest extends TestCase
         $this->assertTrue($page->site->working);
         $this->assertFalse($page->site->locked);
         $this->assertFalse($page->site->archived);
+
+        // Test viewAs
+        $this->assertInstanceOf(ViewAs::class, $page->viewAs);
+        $this->assertEquals('LIVE', $page->viewAs->mode);
+        $this->assertEquals('variant-123', $page->viewAs->variantId);
+        $this->assertInstanceOf(Visitor::class, $page->viewAs->visitor);
+        $this->assertInstanceOf(Language::class, $page->viewAs->language);
     }
 
     public function testGetPageAsync(): void
@@ -126,6 +136,13 @@ class PageServiceTest extends TestCase
         $this->assertTrue($page->site->working);
         $this->assertFalse($page->site->locked);
         $this->assertFalse($page->site->archived);
+
+        // Test viewAs
+        $this->assertInstanceOf(ViewAs::class, $page->viewAs);
+        $this->assertEquals('LIVE', $page->viewAs->mode);
+        $this->assertEquals('variant-123', $page->viewAs->variantId);
+        $this->assertInstanceOf(Visitor::class, $page->viewAs->visitor);
+        $this->assertInstanceOf(Language::class, $page->viewAs->language);
     }
 
     public function testGetPageWithInvalidResponse(): void
