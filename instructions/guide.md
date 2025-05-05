@@ -764,15 +764,8 @@ $containerAttrs = [
     'data-max-contentlets' => $container->maxContentlets ?? 0
 ];
 
-// Build HTML attributes string
-$htmlAttrs = '';
-foreach ($containerAttrs as $attr => $value) {
-    if ($value !== null && $value !== '') {
-        $htmlAttrs .= ' ' . $attr . '="' . htmlspecialchars($value) . '"';
-    }
-}
 ?>
-<div<?= $htmlAttrs ?>>
+<div<?= $containerAttrs ?>>
     <?php
     // Note: dotCMS stores contentlets with a "uuid-" prefix in lowercase
     $contentlets = $pageAsset->containers[$identifier]->contentlets[strtolower("uuid-" . $uuid)] ?? null;
