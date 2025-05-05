@@ -287,10 +287,7 @@ class PageService
                 header: $templateData['header'] ?? true,
                 footer: $templateData['footer'] ?? true,
                 working: $templateData['working'] ?? false,
-                live: $templateData['live'] ?? false,
-                additionalProperties: array_diff_key($templateData, array_flip([
-                    'identifier', 'title', 'drawed', 'inode', 'friendlyName', 'header', 'footer', 'working', 'live',
-                ]))
+                live: $templateData['live'] ?? false
             );
 
             // Extract site data

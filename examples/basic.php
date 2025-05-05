@@ -36,7 +36,7 @@ try {
     // Get the page
     $page = $client->getPage($pageRequest);
 
-    $test = $page->layout;
+    $test = $page->template->title;
     $test1 = $page->layout['rows'][0];
 
     $test2 = $page->layout->body->rows[0]->columns[0]->containers[0];
