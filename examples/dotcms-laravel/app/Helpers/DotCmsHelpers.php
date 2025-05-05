@@ -3,8 +3,6 @@
 namespace App\Helpers;
 
 use Dotcms\PhpSdk\Utils\DotCmsHelper;
-use Dotcms\PhpSdk\Model\Container\ContainerPage;
-use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 use Dotcms\PhpSdk\Model\Content\Contentlet;
 
 class DotCmsHelpers
