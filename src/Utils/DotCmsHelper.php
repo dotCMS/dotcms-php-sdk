@@ -50,7 +50,6 @@ class DotCmsHelper
             'maxContentlets' => $container["maxContentlets"] ?? 0,
             'variantId' => $container["parentPermissionable"]["variantId"] ?? null,
         ];
-        return $result;
     }
 
     /**
