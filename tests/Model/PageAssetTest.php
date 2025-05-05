@@ -59,7 +59,7 @@ class PageAssetTest extends TestCase
             [], // containers
             new Site('site-id', 'demo.dotcms.com'),
             null, // urlContentMap
-            new ViewAs($visitor, $language, 'PREVIEW')
+            new ViewAs($visitor, $language, 'PREVIEW', 'variant-123')
         );
     }
 
@@ -74,6 +74,7 @@ class PageAssetTest extends TestCase
         $this->assertInstanceOf(Site::class, $pageAsset->site);
         $this->assertNull($pageAsset->urlContentMap);
         $this->assertInstanceOf(ViewAs::class, $pageAsset->viewAs);
+        $this->assertEquals('variant-123', $pageAsset->viewAs->variantId);
 
         // Check page properties
         $this->assertEquals('page-id', $pageAsset->page->identifier);

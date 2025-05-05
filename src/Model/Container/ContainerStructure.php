@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Container;
 
-class ContainerStructure implements \JsonSerializable
+class ContainerStructure
 {
     /**
      * @param string $id Container structure ID
@@ -22,22 +22,5 @@ class ContainerStructure implements \JsonSerializable
         public readonly string $code,
         public readonly string $contentTypeVar,
     ) {
-    }
-
-    /**
-     * Specify data which should be serialized to JSON
-     *
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): array
-    {
-        return [
-            'id' => $this->id,
-            'structureId' => $this->structureId,
-            'containerInode' => $this->containerInode,
-            'containerId' => $this->containerId,
-            'code' => $this->code,
-            'contentTypeVar' => $this->contentTypeVar,
-        ];
     }
 }
