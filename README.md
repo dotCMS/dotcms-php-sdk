@@ -700,8 +700,6 @@ We're working on a comprehensive template rendering system that will make it eas
 #### Blade Templates
 - Ready-to-use Blade components for DotCMS content
 - Blade directives for DotCMS-specific functionality
-
-The template system will include:
 - Standard layouts for common page structures
 - SEO-friendly markup and metadata handling
 
@@ -709,6 +707,11 @@ The template system will include:
 - Full Content API integration for content management
 - ElasticSearch Support
 - Advanced search capabilities
+
+### Logging System
+- Configurable log levels (DEBUG, INFO, WARNING, ERROR, etc.)
+- Multiple logging handlers (file, console, syslog)
+- Context-aware logging with request/response details
 
 ### Data Validation Layer
 - Schema-based validation for content types
