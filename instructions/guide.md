@@ -530,10 +530,12 @@ if (!isset($row)) {
     return;
 }
 
-$rowStyleClass = isset($row['styleClass']) ? ' ' . htmlspecialchars($row['styleClass']) : '';
+$rowStyleClass = isset($row->styleClass) ? ' ' . htmlspecialchars($row->styleClass) : '';
 ?>
 <div class="container">
-    <div class="row<?= $rowStyleClass ?>">
+    <div class="row<?= $rowStyleClass ?>" 
+         data-dot-object="row"
+         data-dot-layout-row>
         <?php
         if (isset($row->columns) && is_array($row->columns)) {
             foreach ($row->columns as $column) {
@@ -664,6 +666,176 @@ $buttonText = $contentlet['buttonText'] ?? 'Learn More';
 The /dA/ path is dotCMS's image API for delivery image with top performance.
 
 Create similar templates for other content types based on their fields.
+
+## Step 18: Implementing Universal Visual Editor Support
+
+The Universal Visual Editor (UVE) in dotCMS requires specific data attributes to enable in-context editing. We'll implement these attributes in a top-down approach: rows, columns, containers, and contentlets.
+
+### Step 18.1: Adding UVE Support for Rows
+
+Update `templates/partials/row.php` to include UVE data attributes:
+
+```php
+<?php
+if (!isset($row)) {
+    echo "<!-- Error: Row data missing -->";
+    return;
+}
+
+$rowStyleClass = isset($row->styleClass) ? ' ' . htmlspecialchars($row->styleClass) : '';
+?>
+<div class="container">
+    <div 
+        data-dot-object="row"
+        class="row<?= $rowStyleClass ?>"
+    >
+        <?php
+        if (isset($row->columns) && is_array($row->columns)) {
+            foreach ($row->columns as $column) {
+                include __DIR__ . '/column.php';
+            }
+        } else {
+            echo "<!-- No Columns found in this Row -->";
+        }
+        ?>
+    </div>
+</div>
+```
+
+The `data-dot-object="row"` attribute identifies this element as a row in the UVE.
+
+### Step 18.2: Adding UVE Support for Columns
+
+Update `templates/partials/column.php` to include UVE data attributes:
+
+```php
+<?php
+if (!isset($column)) {
+    echo "<!-- Error: Column data missing -->";
+    return;
+}
+
+// Calculate grid classes based on dotCMS layout properties
+$leftOffset = $column->leftOffset ?? 1;
+$width = $column->width ?? 12;
+$columnClasses = 'col-start-' . $leftOffset . ' col-end-' . ($width + $leftOffset);
+
+if (isset($column->styleClass)) {
+    $columnClasses .= ' ' . htmlspecialchars($column->styleClass);
+}
+?>
+<div 
+    data-dot-object="column"
+    class="<?= $columnClasses ?>"
+>
+    <?php
+    if (isset($column->containers) && is_array($column->containers)) {
+        foreach ($column->containers as $containerRef) {
+            include __DIR__ . '/container.php';
+        }
+    } else {
+        echo "<!-- No Containers found in this Column -->";
+    }
+    ?>
+</div>
+```
+
+The `data-dot-object="column"` attribute identifies this element as a column in the UVE.
+
+### Step 18.3: Adding UVE Support for Containers and Contentlets
+
+Update `templates/partials/container.php` to include UVE data attributes for both containers and contentlets:
+
+```php
+<?php
+if (!isset($containerRef)) {
+    echo "<!-- Error: Container identifier missing -->";
+    return;
+}
+
+global $pageAsset;
+
+$identifier = $containerRef->identifier ?? null;
+$uuid = $containerRef->uuid ?? null;
+$container = $pageAsset->containers[$identifier] ?? null;
+
+// Container attributes for UVE
+$containerAttrs = [
+    'data-dot-object' => 'container',
+    'data-dot-identifier' => $identifier,
+    'data-dot-uuid' => $uuid,
+    'data-dot-accept-types' => $container->acceptTypes ?? '',
+    'data-max-contentlets' => $container->maxContentlets ?? 0
+];
+
+// Build HTML attributes string
+$htmlAttrs = '';
+foreach ($containerAttrs as $attr => $value) {
+    if ($value !== null && $value !== '') {
+        $htmlAttrs .= ' ' . $attr . '="' . htmlspecialchars($value) . '"';
+    }
+}
+?>
+<div<?= $htmlAttrs ?>>
+    <?php
+    // Note: dotCMS stores contentlets with a "uuid-" prefix in lowercase
+    $contentlets = $pageAsset->containers[$identifier]->contentlets[strtolower("uuid-" . $uuid)] ?? null;
+
+    if ($contentlets) {
+        foreach ($contentlets as $contentlet) {
+            // Contentlet attributes for UVE
+            $contentletAttrs = [
+                'data-dot-object' => 'contentlet',
+                'data-dot-identifier' => $contentlet->identifier ?? '',
+                'data-dot-inode' => $contentlet->inode ?? '',
+                'data-dot-type' => $contentlet->contentType ?? '',
+                'data-dot-basetype' => $contentlet->baseType ?? '',
+                'data-dot-title' => $contentlet->title ?? '',
+                'data-dot-container' => json_encode([
+                    'identifier' => $identifier,
+                    'uuid' => $uuid,
+                    'acceptTypes' => $container->acceptTypes ?? [],
+                    'maxContentlets' => $container->maxContentlets ?? 0,
+                    'variantId' => $containerRef->variantId ?? null
+                ])
+            ];
+
+            // Build contentlet HTML attributes string
+            $contentletHtmlAttrs = '';
+            foreach ($contentletAttrs as $attr => $value) {
+                if ($value !== null && $value !== '') {
+                    $contentletHtmlAttrs .= ' ' . $attr . '="' . htmlspecialchars($value) . '"';
+                }
+            }
+
+            $contentTypeVar = $contentlet->contentType ?? 'unknown';
+            $templatePath = dirname(__DIR__) . '/content-type/' . strtolower($contentTypeVar) . '.php';
+            ?>
+            <div<?= $contentletHtmlAttrs ?>>
+                <?php
+                if (file_exists($templatePath)) {
+                    include $templatePath;
+                } else {
+                    include dirname(__DIR__) . '/content-type/content-type-not-found.php';
+                }
+                ?>
+            </div>
+            <?php
+        }
+    } else {
+        echo "<!-- Container $identifier doesn't have contentlets -->";
+    }
+    ?>
+</div>
+```
+### Important Notes About UVE Implementation
+
+1. **Data Attributes**: All UVE data attributes start with `data-dot-` prefix
+2. **Container JSON**: The container data in contentlets must be JSON-encoded
+3. **Unique Identifiers**: Make sure all identifiers (uuid, inode) are properly passed
+4. **Error Handling**: Always validate data before outputting attributes
+5. **Content Type Templates**: Keep content type templates focused on rendering content only
+6. **Inheritance**: The UVE attributes follow the same hierarchy as the page structure
 
 ## Troubleshooting
 
