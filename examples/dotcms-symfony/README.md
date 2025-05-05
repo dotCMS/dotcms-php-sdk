@@ -298,8 +298,8 @@ use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use InvalidArgumentException;
-use RuntimeException;
 use Dotcms\PhpSdk\Utils\DotCmsHelper;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
 
 class DotCMSExtension extends AbstractExtension
 {
@@ -312,7 +312,6 @@ class DotCMSExtension extends AbstractExtension
     {
         return [
             new TwigFunction('getGridClass', [$this, 'getGridClass']),
-            new TwigFunction('getContainersData', [$this, 'getContainersData']),
             new TwigFunction('generateHtmlBasedOnProperty', [$this, 'generateHtmlBasedOnProperty'], ['is_safe' => ['html']]),
             new TwigFunction('htmlAttr', [$this, 'htmlAttr'], ['is_safe' => ['html']])
         ];
@@ -332,59 +331,27 @@ class DotCMSExtension extends AbstractExtension
         };
     }
 
-    public function generateHtmlBasedOnProperty(array $content): string 
+    public function generateHtmlBasedOnProperty(Contentlet $content): string 
     {
-        if (!isset($content['contentType'])) {
+        if (empty($content)) {
             return '';
         }
 
-        $twig = $this->twig;
-        $template = match($content['contentType']) {
-            'Banner' => 'dotcms/content-types/banner.twig',
-            'Product' => 'dotcms/content-types/product.twig',
-            'Activity' => 'dotcms/content-types/activity.twig',
-            default => ''
-        };
-
-        if (empty($template)) {
-            return DotCmsHelper::simpleContentHtml($content);
+        $contentType = $content->contentType;
+        if ($contentType) {
+            $template = 'dotcms/content-types/' . strtolower($contentType) . '.twig';
+            if ($this->twig->getLoader()->exists($template)) {
+                return $this->twig->render($template, ['content' => $content]);
+            }
         }
 
-        try {
-            return $twig->render($template, ['content' => $content]);
-        } catch (\Exception $e) {
-            return '';
-        }
-    }
-
-    public function getContainersData(array $containers, array $containerRef): array 
-    {
-        $identifier = $containerRef['identifier'] ?? throw new RuntimeException("Missing container identifier");
-        $uuid = $containerRef['uuid'] ?? throw new RuntimeException("Missing container UUID");
-        
-        $containerData = $containers[$identifier] ?? throw new RuntimeException("Container not found: $identifier");
-        $structures = $containerData['containerStructures'] ?? [];
-        $container = $containerData['container'] ?? [];
-        
-        $contentlets = $containerData['contentlets']["uuid-$uuid"] 
-            ?? $containerData['contentlets']["uuid-dotParser_$uuid"] 
-            ?? [];
-        
-        if (empty($contentlets)) {
-            error_log("No contentlets found for container: $identifier, uuid: $uuid");
-        }
-        
-        return [
-            ...$container,
-            'acceptTypes' => implode(',', array_column($structures, 'contentTypeVar')),
-            'contentlets' => $contentlets,
-            'variantId' => $container['parentPermissionable']['variantId'] ?? null
-        ];
+        // Fall back to the SDK simple HTML renderer
+        return DotCmsHelper::simpleContentHtml($content->jsonSerialize());
     }
 }
 ```
 
-This Twig extension provides utility functions for rendering DotCMS content in templates - handling container data extraction, content-type HTML generation, and proper attribute formatting for DotCMS elements.
+This Twig extension provides utility functions for rendering DotCMS content in templates - handling content-type HTML generation and proper attribute formatting for DotCMS elements.
 
 ### 6. Create Templates
 
@@ -414,8 +381,7 @@ Create the necessary Twig templates to render DotCMS content:
                                 {% if column.containers is defined and column.containers is not empty %}
                                     {% for container in column.containers %}
                                         {% include 'dotcms/container.twig' with {
-                                            'container': container,
-                                            'containers': containers
+                                            'container': container
                                         } %}
                                     {% endfor %}
                                 {% endif %}
@@ -442,19 +408,16 @@ Create the necessary Twig templates to render DotCMS content:
 #### Container Template (`templates/dotcms/container.twig`):
 
 ```twig
-{% set containerObject = getContainersData(containers, container) %}
-{% set containerContent = containers[container.identifier].contentlets['uuid-' ~ container.uuid]|default([]) %}
-
 {% set containerAttrs = {
     'data-dot-object': 'container',
-    'data-dot-identifier': containerObject.path|default(containerObject.identifier),
-    'data-dot-accept-types': containerObject.acceptTypes,
-    'data-max-contentlets': containerObject.maxContentlets,
+    'data-dot-identifier': container.identifier,
+    'data-dot-accept-types': container.acceptTypes,
+    'data-max-contentlets': container.maxContentlets,
     'data-dot-uuid': container.uuid
 } %}
 
 <div {{ htmlAttr(containerAttrs) }}>
-    {% for content in containerContent %}
+    {% for content in container.contentlets %}
         {% set contentAttrs = {
             'data-dot-object': 'contentlet',
             'data-dot-identifier': content.identifier,
@@ -463,10 +426,10 @@ Create the necessary Twig templates to render DotCMS content:
             'data-dot-inode': content.inode,
             'data-dot-type': content.contentType,
             'data-dot-container': {
-                'acceptTypes': containerObject.acceptTypes,
-                'identifier': containerObject.path|default(containerObject.identifier),
-                'maxContentlets': containerObject.maxContentlets,
-                'variantId': containerObject.variantId,
+                'acceptTypes': container.acceptTypes,
+                'identifier': container.identifier,
+                'maxContentlets': container.maxContentlets,
+                'variantId': container.variantId,
                 'uuid': container.uuid
             }|json_encode
         } %}
