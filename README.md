@@ -550,9 +550,45 @@ if ($nav->hasChildren()) {
 
 The SDK can be easily integrated with Symfony. See the `examples/dotcms-symfony` directory for a complete example.
 
+## We Need Your Feedback!
+
+The SDK is in active development, and your feedback is crucial to its success. We're particularly interested in:
+
+- Use cases and real-world scenarios
+- Feature requests and improvements
+- Performance feedback
+- Integration challenges
+- Documentation suggestions
+
+Feel free to:
+- Open issues for bugs or feature requests
+- Join our community discussions
+- Share your implementation experiences
+- Suggest improvements to the API design
+
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions of all kinds! Whether you're fixing bugs, adding features, or improving documentation, your help makes the SDK better for everyone.
+
+### How to Contribute
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run the test suite (`composer check`)
+5. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+### Pull Requests
+
+We actively review and merge pull requests. To ensure a smooth process:
+
+- Follow our coding standards
+- Add tests for new features
+- Update documentation
+- Use conventional commit messages
+- Keep PRs focused and manageable
 
 ### Development Setup
 
@@ -580,6 +616,47 @@ composer phpstan
 ```bash
 composer check
 ```
+
+## What's Next
+
+The SDK is actively being developed with several exciting features planned:
+
+### Template Rendering System
+
+We're working on a comprehensive template rendering system that will make it easier to integrate DotCMS with popular PHP frameworks:
+
+#### Twig Templates
+- Pre-built templates for DotCMS layouts, containers, and content types
+- Twig extensions for common DotCMS operations
+
+#### Blade Templates
+- Ready-to-use Blade components for DotCMS content
+- Blade directives for DotCMS-specific functionality
+
+The template system will include:
+- Standard layouts for common page structures
+- SEO-friendly markup and metadata handling
+
+### Content API Support
+- Full Content API integration for content management
+- ElasticSearch Support
+- Advanced search capabilities
+
+### Data Validation Layer
+- Schema-based validation for content types
+- Custom validation rules
+- Validation error handling
+- Type conversion and normalization
+- Cross-field validation
+- Validation caching
+
+### Additional Features
+- Enhanced caching mechanisms
+- Additional framework integrations
+- Performance optimizations
+- Extended documentation and examples
+
+Stay tuned for updates and feel free to contribute to these upcoming features!
 
 ## License
 
