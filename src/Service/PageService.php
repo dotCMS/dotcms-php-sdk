@@ -23,6 +23,10 @@ use Dotcms\PhpSdk\Model\ViewAs\GeoLocation;
 use Dotcms\PhpSdk\Model\ViewAs\UserAgent;
 use Dotcms\PhpSdk\Model\ViewAs\Visitor;
 use Dotcms\PhpSdk\Request\PageRequest;
+use Dotcms\PhpSdk\Model\Container\Container;
+use Dotcms\PhpSdk\Model\Container\ContainerStructure;
+use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Utils\DotCmsHelper;
 use GuzzleHttp\Promise\PromiseInterface;
 
 /**
@@ -35,8 +39,7 @@ class PageService
      */
     public function __construct(
         private readonly HttpClient $httpClient
-    ) {
-    }
+    ) {}
 
     /**
      * Fetch a page from dotCMS
@@ -194,7 +197,15 @@ class PageService
                 hostName: $pageData['hostName'] ?? '',
                 host: $pageData['host'] ?? '',
                 additionalProperties: array_diff_key($pageData, array_flip([
-                    'identifier', 'inode', 'title', 'contentType', 'pageUrl', 'live', 'working', 'hostName', 'host',
+                    'identifier',
+                    'inode',
+                    'title',
+                    'contentType',
+                    'pageUrl',
+                    'live',
+                    'working',
+                    'hostName',
+                    'host',
                 ]))
             );
         } catch (\Throwable $e) {
@@ -230,19 +241,106 @@ class PageService
             $layoutData = isset($entity['layout']) && is_array($entity['layout']) ? $entity['layout'] : [];
             $rowsData = $layoutData['body']['rows'] ?? [];
 
+            // Extract page asset containers
+            $containers = [];
+            if (isset($entity['containers']) && is_array($entity['containers'])) {
+                foreach ($entity['containers'] as $identifier => $containerData) {
+                    if (!isset($containerData['container']) || !is_array($containerData['container'])) {
+                        continue;
+                    }
+
+                    $container = new Container(
+                        identifier: $containerData['container']['identifier'] ?? '',
+                        inode: $containerData['container']['inode'] ?? '',
+                        title: $containerData['container']['title'] ?? '',
+                        path: $containerData['container']['path'] ?? '',
+                        live: $containerData['container']['live'] ?? false,
+                        working: $containerData['container']['working'] ?? false,
+                        locked: $containerData['container']['locked'] ?? false,
+                        hostId: $containerData['container']['hostId'] ?? '',
+                        hostName: $containerData['container']['hostName'] ?? '',
+                        maxContentlets: $containerData['container']['maxContentlets'] ?? 0,
+                        notes: $containerData['container']['notes'] ?? '',
+                        additionalProperties: array_diff_key($containerData['container'], array_flip([
+                            'identifier',
+                            'inode',
+                            'title',
+                            'path',
+                            'live',
+                            'working',
+                            'locked',
+                            'hostId',
+                            'hostName',
+                            'maxContentlets',
+                            'notes',
+                        ]))
+                    );
+
+                    $containerStructures = [];
+                    if (isset($containerData['containerStructures']) && is_array($containerData['containerStructures'])) {
+                        foreach ($containerData['containerStructures'] as $structureData) {
+                            $containerStructures[] = new ContainerStructure(
+                                id: $structureData['id'] ?? '',
+                                structureId: $structureData['structureId'] ?? '',
+                                containerInode: $structureData['containerInode'] ?? '',
+                                containerId: $structureData['containerId'] ?? '',
+                                code: $structureData['code'] ?? '',
+                                contentTypeVar: $structureData['contentTypeVar'] ?? ''
+                            );
+                        }
+                    }
+
+                    $rendered = $containerData['rendered'] ?? [];
+                    $contentlets = [];
+                    if (isset($containerData['contentlets']) && is_array($containerData['contentlets'])) {
+                        foreach ($containerData['contentlets'] as $uuid => $contentletData) {
+                            $contentlets[$uuid] = array_map(function ($contentlet) {
+                                return new Contentlet(
+                                    identifier: $contentlet['identifier'] ?? '',
+                                    inode: $contentlet['inode'] ?? '',
+                                    title: $contentlet['title'] ?? '',
+                                    contentType: $contentlet['contentType'] ?? '',
+                                    additionalProperties: array_diff_key($contentlet, array_flip([
+                                        'identifier',
+                                        'inode',
+                                        'title',
+                                        'contentType',
+                                    ]))
+                                );
+                            }, is_array($contentletData) ? $contentletData : []);
+                        }
+                    }
+
+                    $containers[$identifier] = new ContainerPage(
+                        container: $container,
+                        containerStructures: $containerStructures,
+                        rendered: $rendered,
+                        contentlets: $contentlets
+                    );
+                }
+            }
+
             // Map rows and columns
-            $rows = array_map(function ($rowData) {
-                $columns = array_map(function ($columnData) {
-                    $containers = array_map(function ($containerData) {
+            $rows = array_map(function ($rowData) use ($containers) {
+                $columns = array_map(function ($columnData) use ($containers) {
+                    $containersRefs = array_map(function ($containerRef) use ($containers) {
+                        $uuid = $containerRef['uuid'] ?? '';
+                        $identifier = $containerRef['identifier'] ?? '';
+                        $containerPage = $containers[$identifier];
+
                         return new ContainerRef(
-                            identifier: $containerData['identifier'] ?? '',
-                            uuid: $containerData['uuid'] ?? '',
-                            historyUUIDs: $containerData['historyUUIDs'] ?? []
+                            identifier: $identifier,
+                            uuid: $uuid,
+                            historyUUIDs: $containerRef['historyUUIDs'] ?? [],
+                            maxContentlets: $containerPage->container->maxContentlets ?? 0,
+                            variantId: (int)($containerPage->container['parentPermissionable']['variantId'] ?? 0),
+                            contentlets: DotCmsHelper::extractContentlets($containerPage, $uuid),
+                            acceptTypes: DotCmsHelper::extractAcceptTypes($containerPage->containerStructures ?? []),
                         );
                     }, $columnData['containers'] ?? []);
 
                     return new Column(
-                        containers: $containers,
+                        containers: $containersRefs,
                         width: $columnData['width'] ?? 0,
                         widthPercent: $columnData['widthPercent'] ?? 0,
                         leftOffset: $columnData['leftOffset'] ?? 0,
@@ -307,9 +405,6 @@ class PageService
                     'identifier', 'hostname', 'inode', 'working', 'folder', 'locked', 'archived', 'live',
                 ]))
             );
-
-            // Extract containers
-            $containers = isset($entity['containers']) && is_array($entity['containers']) ? $entity['containers'] : [];
 
             // Extract urlContentMap if available
             $urlContentMap = null;

@@ -11,6 +11,37 @@ use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 class DotCmsHelper
 {
     /**
+     * Extract accept types from container structures
+     *
+     * @param array $containerStructures Array of container structures
+     * @return string Comma-separated list of content type variables
+     */
+    public static function extractAcceptTypes(array $containerStructures): string
+    {
+        return implode(',', array_column($containerStructures, 'contentTypeVar'));
+    }
+
+    /**
+     * Extract contentlets from container page based on UUID
+     *
+     * @param ContainerPage $containerPage Container page data
+     * @param string|null $uuid UUID to look up contentlets for
+     * @return array<string, mixed> Array of contentlets
+     */
+    public static function extractContentlets(ContainerPage $containerPage, ?string $uuid): array
+    {
+        if ($uuid === null || !(is_string($uuid) || is_numeric($uuid))) {
+            return [];
+        }
+
+        $uuidStr = (string) $uuid;
+
+        return $containerPage->contentlets["uuid-$uuidStr"]
+            ?? $containerPage->contentlets["uuid-dotParser_$uuidStr"]
+            ?? [];
+    }
+
+    /**
      * Get container data from the containers array
      *
      * @param array<string, ContainerPage> $containers Array of containers indexed by identifier
@@ -19,7 +50,6 @@ class DotCmsHelper
      */
     public static function getContainerData(array $containers, ContainerRef $containerRef): ?array
     {
-
         if (empty($containers) || empty($containerRef)) {
             return null;
         }
@@ -32,23 +62,15 @@ class DotCmsHelper
         }
 
         $containerPage = $containers[$identifier];
-        $structures = $containerPage["containerStructures"] ?? [];
-        $container = $containerPage["container"] ?? null;
-
-        $contentlets = [];
-        if ($uuid !== null && (is_string($uuid) || is_numeric($uuid))) {
-            $uuidStr = (string) $uuid;
-            $contentlets = $containerPage["contentlets"]["uuid-$uuidStr"]
-                ?? $containerPage["contentlets"]["uuid-dotParser_$uuidStr"]
-                ?? [];
-        }
+        $structures = $containerPage->containerStructures;
+        $container = $containerPage->container;
 
         return [
-            ...$container,
-            'acceptTypes' => implode(',', array_column($structures, 'contentTypeVar')),
-            'contentlets' => $contentlets,
-            'maxContentlets' => $container["maxContentlets"] ?? 0,
-            'variantId' => $container["parentPermissionable"]["variantId"] ?? null,
+            ...$container->jsonSerialize(),
+            'acceptTypes' => self::extractAcceptTypes($structures),
+            'contentlets' => self::extractContentlets($containerPage, $uuid),
+            'maxContentlets' => $container->maxContentlets,
+            'variantId' => $container->additionalProperties['parentPermissionable']['variantId'] ?? null,
         ];
     }
 

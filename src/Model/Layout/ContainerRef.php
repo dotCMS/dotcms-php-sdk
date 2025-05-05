@@ -15,6 +15,10 @@ class ContainerRef
         public readonly string $identifier,
         public readonly string $uuid,
         public readonly array $historyUUIDs = [],
+        public readonly array $contentlets = [],
+        public readonly string $acceptTypes = '',
+        public readonly int $maxContentlets = 0,
+        public readonly ?int $variantId = null,
     ) {
     }
 }

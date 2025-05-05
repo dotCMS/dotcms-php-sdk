@@ -5,6 +5,7 @@ namespace App\Helpers;
 use Dotcms\PhpSdk\Utils\DotCmsHelper;
 use Dotcms\PhpSdk\Model\Container\ContainerPage;
 use Dotcms\PhpSdk\Model\Layout\ContainerRef;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
 
 class DotCmsHelpers
 {
@@ -45,17 +46,17 @@ class DotCmsHelpers
     /**
      * Generate HTML based on contentlet properties
      * 
-     * @param array $content
+     * @param Contentlet $content
      * @return string
      */
-    public function generateHtmlBasedOnProperty($content)
+    public function generateHtmlBasedOnProperty(Contentlet $content)
     {
         if (empty($content)) {
             return '';
         }
 
         // Check if we have a template to render
-        $contentType = $content['contentType'] ?? '';
+        $contentType = $content->contentType;
         if ($contentType) {
             $viewPath = 'dotcms.content-types.' . strtolower($contentType);
             if (view()->exists($viewPath)) {
@@ -64,6 +65,6 @@ class DotCmsHelpers
         }
 
         // Fall back to the SDK simple HTML renderer
-        return DotCmsHelper::simpleContentHtml($content);
+        return DotCmsHelper::simpleContentHtml($content->jsonSerialize());
     }
 } 
