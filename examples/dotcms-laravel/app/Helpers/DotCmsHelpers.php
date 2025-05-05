@@ -10,29 +10,6 @@ use Dotcms\PhpSdk\Model\Content\Contentlet;
 class DotCmsHelpers
 {
     /**
-     * Get container data from the containers array
-     * 
-     * @param array<string, ContainerPage> $containers Array of containers indexed by identifier
-     * @param ContainerRef $containerRef Container reference with identifier
-     * @return array|null
-     */
-    public function getContainerData(array $containers, ContainerRef $containerRef)
-    {
-        $containerData = DotCmsHelper::getContainerData($containers, $containerRef);
-
-        if (!$containerData) {
-            return [
-                'contentlets' => [],
-                'acceptTypes' => '',
-                'maxContentlets' => 0,
-                'variantId' => null
-            ];
-        }
-        
-        return $containerData;
-    }
-
-    /**
      * Generate HTML attributes from an associative array
      * 
      * @param array $attributes
