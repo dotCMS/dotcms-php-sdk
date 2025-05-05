@@ -329,19 +329,6 @@ class PageService
                         $identifier = $containerRef['identifier'] ?? '';
                         $containerPage = $containers[$identifier] ?? null;
 
-                        if (! $containerPage) {
-                            return new ContainerRef(
-                                identifier: $identifier,
-                                uuid: $uuid,
-                                historyUUIDs: $containerRef['historyUUIDs'] ?? [],
-                                contentlets: [],
-                                acceptTypes: '',
-                                maxContentlets: 0,
-                                variantId: null
-                            );
-                        }
-
-                        $contentlets = DotCmsHelper::extractContentlets($containerPage, $uuid);
                         $variantId = null;
                         if (isset($containerPage->container['parentPermissionable'])
                             && is_array($containerPage->container['parentPermissionable'])
@@ -349,55 +336,13 @@ class PageService
                             $variantId = (string)$containerPage->container['parentPermissionable']['variantId'];
                         }
 
-                        /** @var array<array<string, mixed>|Contentlet> $contentlets */
-                        $contentlets = is_array($contentlets) ? $contentlets : [];
-
-                        /** @var array<Contentlet> $mappedContentlets */
-                        $mappedContentlets = array_map(
-                            function ($contentlet): Contentlet {
-                                if ($contentlet instanceof Contentlet) {
-                                    return $contentlet;
-                                }
-
-                                if (! is_array($contentlet)) {
-                                    return new Contentlet(
-                                        identifier: '',
-                                        inode: '',
-                                        title: '',
-                                        contentType: '',
-                                        additionalProperties: []
-                                    );
-                                }
-
-                                $identifier = isset($contentlet['identifier']) && (is_string($contentlet['identifier']) || is_numeric($contentlet['identifier']))
-                                    ? (string)$contentlet['identifier']
-                                    : '';
-                                $inode = isset($contentlet['inode']) && (is_string($contentlet['inode']) || is_numeric($contentlet['inode']))
-                                    ? (string)$contentlet['inode']
-                                    : '';
-                                $title = isset($contentlet['title']) && (is_string($contentlet['title']) || is_numeric($contentlet['title']))
-                                    ? (string)$contentlet['title']
-                                    : '';
-                                $contentType = isset($contentlet['contentType']) && (is_string($contentlet['contentType']) || is_numeric($contentlet['contentType']))
-                                    ? (string)$contentlet['contentType']
-                                    : '';
-
-                                return new Contentlet(
-                                    identifier: $identifier,
-                                    inode: $inode,
-                                    title: $title,
-                                    contentType: $contentType,
-                                    additionalProperties: array_diff_key($contentlet, array_flip(['identifier', 'inode', 'title', 'contentType']))
-                                );
-                            },
-                            $contentlets
-                        );
+                        $contentlets = DotCmsHelper::extractContentlets($containerPage, $uuid);
 
                         return new ContainerRef(
                             identifier: $identifier,
                             uuid: $uuid,
                             historyUUIDs: $containerRef['historyUUIDs'] ?? [],
-                            contentlets: $mappedContentlets,
+                            contentlets: $contentlets,
                             acceptTypes: DotCmsHelper::extractAcceptTypes($containerPage->containerStructures),
                             maxContentlets: $containerPage->container->maxContentlets,
                             variantId: $variantId

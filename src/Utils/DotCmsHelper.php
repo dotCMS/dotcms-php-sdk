@@ -4,6 +4,7 @@ namespace Dotcms\PhpSdk\Utils;
 
 use Dotcms\PhpSdk\Model\Container\ContainerPage;
 use Dotcms\PhpSdk\Model\Container\ContainerStructure;
+use Dotcms\PhpSdk\Model\Contentlet\Contentlet;
 use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 
 /**
@@ -27,7 +28,7 @@ class DotCmsHelper
      *
      * @param ContainerPage $containerPage Container page data
      * @param string|null $uuid UUID to look up contentlets for
-     * @return array<string, mixed> Array of contentlets
+     * @return array<Contentlet> Array of contentlets
      */
     public static function extractContentlets(ContainerPage $containerPage, ?string $uuid): array
     {
@@ -36,10 +37,11 @@ class DotCmsHelper
         }
 
         $uuidStr = (string) $uuid;
-
-        return $containerPage->contentlets["uuid-$uuidStr"]
+        $contentlets = $containerPage->contentlets["uuid-$uuidStr"]
             ?? $containerPage->contentlets["uuid-dotParser_$uuidStr"]
             ?? [];
+
+        return is_array($contentlets) ? $contentlets : [];
     }
 
     /**

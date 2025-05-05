@@ -13,11 +13,11 @@ $containerAttrs = [
         @php
         $contentAttrs = [
             'data-dot-object' => 'contentlet',
-            'data-dot-identifier' => $content['identifier'] ?? '',
-            'data-dot-basetype' => $content['baseType'] ?? '',
-            'data-dot-title' => $content['widgetTitle'] ?? $content['title'] ?? '',
-            'data-dot-inode' => $content['inode'] ?? '',
-            'data-dot-type' => $content['contentType'] ?? '',
+            'data-dot-identifier' => $content->identifier ?? '',
+            'data-dot-basetype' => $content->baseType ?? '',
+            'data-dot-title' => $content->widgetTitle ?? $content->title ?? '',
+            'data-dot-inode' => $content->inode ?? '',
+            'data-dot-type' => $content->contentType ?? '',
             'data-dot-container' => json_encode([
                 'acceptTypes' => $containerRef->acceptTypes ?? '',
                 'identifier' => $containerRef->identifier ?? '',
