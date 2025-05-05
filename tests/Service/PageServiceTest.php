@@ -5,6 +5,11 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Tests\Service;
 
 use Dotcms\PhpSdk\Exception\ResponseException;
+use Dotcms\PhpSdk\Model\Layout\Body;
+use Dotcms\PhpSdk\Model\Layout\Column;
+use Dotcms\PhpSdk\Model\Layout\ContainerRef;
+use Dotcms\PhpSdk\Model\Layout\Layout;
+use Dotcms\PhpSdk\Model\Layout\Row;
 use Dotcms\PhpSdk\Model\PageAsset;
 use Dotcms\PhpSdk\Request\PageRequest;
 use Dotcms\PhpSdk\Service\PageService;
@@ -236,5 +241,118 @@ class PageServiceTest extends TestCase
         $this->expectExceptionMessage('Site data not found in response: entity.site is missing');
 
         $this->pageService->getPage($request);
+    }
+
+    public function testGetPageWithDifferentLayoutFormat(): void
+    {
+        $this->mockHandler->append(
+            new GuzzleResponse(
+                200,
+                ['Content-Type' => 'application/json'],
+                json_encode([
+                    'entity' => [
+                        'page' => ['identifier' => 'test-page'],
+                        'layout' => [
+                            'title' => 'Test Layout',
+                            'body' => [
+                                'rows' => [
+                                    [
+                                        'columns' => [
+                                            ['width' => 12, 'containers' => []],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                        'template' => ['identifier' => 'test-template'],
+                        'site' => ['identifier' => 'test-site'],
+                    ],
+                ])
+            )
+        );
+
+        $request = new PageRequest('/about-us');
+        $page = $this->pageService->getPage($request);
+
+        $this->assertInstanceOf(PageAsset::class, $page);
+        $this->assertEquals('Test Layout', $page->layout->title);
+        $this->assertIsArray($page->layout->body->rows);
+        $this->assertCount(1, $page->layout->body->rows);
+        $this->assertIsArray($page->layout->body->rows[0]->columns);
+        $this->assertCount(1, $page->layout->body->rows[0]->columns);
+        $this->assertEquals(12, $page->layout->body->rows[0]->columns[0]->width);
+    }
+
+    public function testLayoutJsonSerialization(): void
+    {
+        $containerRef = new ContainerRef('//demo.dotcms.com/application/containers/banner/', '1', ['1']);
+        $column = new Column(
+            containers: [$containerRef],
+            width: 12,
+            widthPercent: 100,
+            leftOffset: 1,
+            styleClass: 'banner-tall'
+        );
+        $row = new Row(
+            columns: [$column],
+            styleClass: 'p-0 banner-tall'
+        );
+
+        $body = new Body([$row]);
+
+        $layout = new Layout(
+            title: 'anonymouslayout1600437132653',
+            body: $body
+        );
+
+        // Test direct rows access
+        $this->assertCount(1, $layout->body->rows);
+        $this->assertInstanceOf(Row::class, $layout->body->rows[0]);
+        $this->assertEquals('p-0 banner-tall', $layout->body->rows[0]->styleClass);
+
+        // Test body access
+        $this->assertInstanceOf(Body::class, $layout->body);
+        $this->assertCount(1, $layout->body->rows);
+        $this->assertInstanceOf(Row::class, $layout->body->rows[0]);
+        $this->assertEquals('p-0 banner-tall', $layout->body->rows[0]->styleClass);
+
+        $json = $layout->jsonSerialize();
+
+        $this->assertNull($json['width']);
+        $this->assertEquals('anonymouslayout1600437132653', $json['title']);
+        $this->assertTrue($json['header']);
+        $this->assertTrue($json['footer']);
+        $this->assertArrayHasKey('body', $json);
+        $this->assertArrayHasKey('rows', $json['body']);
+        $this->assertCount(1, $json['body']['rows']);
+
+        $firstRow = $json['body']['rows'][0];
+        $this->assertEquals('p-0 banner-tall', $firstRow['styleClass']);
+        $this->assertArrayHasKey('columns', $firstRow);
+        $this->assertCount(1, $firstRow['columns']);
+
+        $firstColumn = $firstRow['columns'][0];
+        $this->assertEquals(12, $firstColumn['width']);
+        $this->assertEquals(100, $firstColumn['widthPercent']);
+        $this->assertEquals(1, $firstColumn['leftOffset']);
+        $this->assertEquals('banner-tall', $firstColumn['styleClass']);
+        $this->assertFalse($firstColumn['preview']);
+        $this->assertEquals(0, $firstColumn['left']);
+        $this->assertArrayHasKey('containers', $firstColumn);
+        $this->assertCount(1, $firstColumn['containers']);
+
+        $firstContainer = $firstColumn['containers'][0];
+        $this->assertEquals('//demo.dotcms.com/application/containers/banner/', $firstContainer['identifier']);
+        $this->assertEquals('1', $firstContainer['uuid']);
+        $this->assertEquals(['1'], $firstContainer['historyUUIDs']);
+
+        $this->assertEquals([
+            'containers' => [],
+            'location' => '',
+            'width' => 'small',
+            'widthPercent' => 20,
+            'preview' => false,
+        ], $json['sidebar']);
+        $this->assertEquals(1, $json['version']);
     }
 }

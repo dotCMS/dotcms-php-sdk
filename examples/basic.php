@@ -35,7 +35,12 @@ try {
     
     // Get the page
     $page = $client->getPage($pageRequest);
-    
+
+    $test = $page->layout->body;
+    $test1 = $page->layout['rows'][0];
+
+    $test2 = $page->layout->body->rows[0]->columns[0]->containers[0];
+
     // Display some information about the page
     echo "Page title: " . $page->page->title . "\n";
     echo "Page URL: " . $page->page->pageUrl . "\n";

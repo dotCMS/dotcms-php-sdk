@@ -8,7 +8,11 @@ use Dotcms\PhpSdk\Exception\ResponseException;
 use Dotcms\PhpSdk\Http\HttpClient;
 use Dotcms\PhpSdk\Http\Response;
 use Dotcms\PhpSdk\Model\Contentlet;
+use Dotcms\PhpSdk\Model\Layout\Body;
+use Dotcms\PhpSdk\Model\Layout\Column;
+use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 use Dotcms\PhpSdk\Model\Layout\Layout;
+use Dotcms\PhpSdk\Model\Layout\Row;
 use Dotcms\PhpSdk\Model\Page;
 use Dotcms\PhpSdk\Model\PageAsset;
 use Dotcms\PhpSdk\Model\Site;
@@ -223,13 +227,44 @@ class PageService
 
             // Extract layout data
             $layoutData = isset($entity['layout']) && is_array($entity['layout']) ? $entity['layout'] : [];
+            $rowsData = $layoutData['body']['rows'] ?? [];
+
+            // Map rows and columns
+            $rows = array_map(function ($rowData) {
+                $columns = array_map(function ($columnData) {
+                    $containers = array_map(function ($containerData) {
+                        return new ContainerRef(
+                            identifier: $containerData['identifier'] ?? '',
+                            uuid: $containerData['uuid'] ?? '',
+                            historyUUIDs: $containerData['historyUUIDs'] ?? []
+                        );
+                    }, $columnData['containers'] ?? []);
+
+                    return new Column(
+                        containers: $containers,
+                        width: $columnData['width'] ?? 0,
+                        widthPercent: $columnData['widthPercent'] ?? 0,
+                        leftOffset: $columnData['leftOffset'] ?? 0,
+                        styleClass: $columnData['styleClass'] ?? '',
+                        preview: $columnData['preview'] ?? false,
+                        left: $columnData['left'] ?? 0
+                    );
+                }, $rowData['columns'] ?? []);
+
+                return new Row(
+                    columns: $columns,
+                    styleClass: $rowData['styleClass'] ?? null
+                );
+            }, $rowsData);
+
+            $body = new Body($rows);
 
             $layout = new Layout(
                 width: $layoutData['width'] ?? null,
                 title: $layoutData['title'] ?? '',
                 header: $layoutData['header'] ?? false,
                 footer: $layoutData['footer'] ?? false,
-                body: $layoutData['body'] ?? ['rows' => []],
+                body: $body,
                 sidebar: $layoutData['sidebar'] ?? [
                     'containers' => [],
                     'location' => '',

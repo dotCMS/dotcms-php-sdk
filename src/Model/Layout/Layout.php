@@ -4,23 +4,26 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Layout;
 
-class Layout implements \JsonSerializable
+use Dotcms\PhpSdk\Model\AbstractModel;
+
+class Layout extends AbstractModel
 {
     /**
      * @param string|null $width Layout width
      * @param string $title Layout title
      * @param bool $header Whether to show header
      * @param bool $footer Whether to show footer
-     * @param array{rows: Row[]} $body Layout body containing rows
+     * @param Body $body The body containing rows
      * @param array{containers: ContainerRef[], location: string, width: string, widthPercent: int, preview: bool} $sidebar Sidebar configuration
      * @param int $version Layout version
+     * @param array<string, mixed> $additionalProperties Additional properties
      */
     public function __construct(
         public readonly ?string $width = null,
         public readonly string $title = '',
         public readonly bool $header = true,
         public readonly bool $footer = true,
-        public readonly array $body = ['rows' => []],
+        public readonly Body $body = new Body(),
         public readonly array $sidebar = [
             'containers' => [],
             'location' => '',
@@ -29,17 +32,9 @@ class Layout implements \JsonSerializable
             'preview' => false,
         ],
         public readonly int $version = 1,
+        array $additionalProperties = [],
     ) {
-    }
-
-    /**
-     * Get rows from the body
-     *
-     * @return Row[] Array of rows
-     */
-    public function getRows(): array
-    {
-        return $this->body['rows'] ?? [];
+        $this->setAdditionalProperties($additionalProperties);
     }
 
     /**
@@ -59,14 +54,17 @@ class Layout implements \JsonSerializable
      */
     public function jsonSerialize(): array
     {
-        return [
-            'width' => $this->width,
-            'title' => $this->title,
-            'header' => $this->header,
-            'footer' => $this->footer,
-            'body' => $this->body,
-            'sidebar' => $this->sidebar,
-            'version' => $this->version,
-        ];
+        return array_merge(
+            [
+                'width' => $this->width,
+                'title' => $this->title,
+                'header' => $this->header,
+                'footer' => $this->footer,
+                'body' => $this->body,
+                'sidebar' => $this->sidebar,
+                'version' => $this->version,
+            ],
+            $this->getAdditionalProperties()
+        );
     }
 }

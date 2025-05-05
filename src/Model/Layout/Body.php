@@ -6,18 +6,14 @@ namespace Dotcms\PhpSdk\Model\Layout;
 
 use Dotcms\PhpSdk\Model\AbstractModel;
 
-class ContainerRef extends AbstractModel
+class Body extends AbstractModel
 {
     /**
-     * @param string $identifier The container identifier
-     * @param string $uuid The container UUID
-     * @param string[] $historyUUIDs Array of history UUIDs
+     * @param Row[] $rows Array of rows
      * @param array<string, mixed> $additionalProperties Additional properties
      */
     public function __construct(
-        public readonly string $identifier,
-        public readonly string $uuid,
-        public readonly array $historyUUIDs = [],
+        public readonly array $rows = [],
         array $additionalProperties = [],
     ) {
         $this->setAdditionalProperties($additionalProperties);
@@ -32,9 +28,7 @@ class ContainerRef extends AbstractModel
     {
         return array_merge(
             [
-                'identifier' => $this->identifier,
-                'uuid' => $this->uuid,
-                'historyUUIDs' => $this->historyUUIDs,
+                'rows' => $this->rows,
             ],
             $this->getAdditionalProperties()
         );

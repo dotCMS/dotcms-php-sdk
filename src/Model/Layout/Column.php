@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Layout;
 
-class Column implements \JsonSerializable
+use Dotcms\PhpSdk\Model\AbstractModel;
+
+class Column extends AbstractModel
 {
     /**
      * @param ContainerRef[] $containers Array of container references
@@ -14,6 +16,7 @@ class Column implements \JsonSerializable
      * @param string $styleClass CSS class for styling
      * @param bool $preview Whether the column is in preview mode
      * @param int $left Left position
+     * @param array<string, mixed> $additionalProperties Additional properties
      */
     public function __construct(
         /** @var ContainerRef[] */
@@ -24,7 +27,9 @@ class Column implements \JsonSerializable
         public readonly string $styleClass,
         public readonly bool $preview = false,
         public readonly int $left = 0,
+        array $additionalProperties = [],
     ) {
+        $this->setAdditionalProperties($additionalProperties);
     }
 
     /**
@@ -34,14 +39,17 @@ class Column implements \JsonSerializable
      */
     public function jsonSerialize(): array
     {
-        return [
-            'containers' => $this->containers,
-            'width' => $this->width,
-            'widthPercent' => $this->widthPercent,
-            'leftOffset' => $this->leftOffset,
-            'styleClass' => $this->styleClass,
-            'preview' => $this->preview,
-            'left' => $this->left,
-        ];
+        return array_merge(
+            [
+                'containers' => $this->containers,
+                'width' => $this->width,
+                'widthPercent' => $this->widthPercent,
+                'leftOffset' => $this->leftOffset,
+                'styleClass' => $this->styleClass,
+                'preview' => $this->preview,
+                'left' => $this->left,
+            ],
+            $this->getAdditionalProperties()
+        );
     }
 }
