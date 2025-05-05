@@ -7,7 +7,7 @@ namespace Dotcms\PhpSdk\Tests\Model\Container;
 use Dotcms\PhpSdk\Model\Container\Container;
 use Dotcms\PhpSdk\Model\Container\ContainerPage;
 use Dotcms\PhpSdk\Model\Container\ContainerStructure;
-use Dotcms\PhpSdk\Model\Contentlet;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
 use PHPUnit\Framework\TestCase;
 
 class ContainerPageTest extends TestCase

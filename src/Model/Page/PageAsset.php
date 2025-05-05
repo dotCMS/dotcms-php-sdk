@@ -2,10 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Model;
+namespace Dotcms\PhpSdk\Model\Page;
 
 use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
 use Dotcms\PhpSdk\Model\Layout\Layout;
+use Dotcms\PhpSdk\Model\Site\Site;
+use Dotcms\PhpSdk\Model\View\ViewAs;
 
 class PageAsset
 {

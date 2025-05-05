@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
-use Dotcms\PhpSdk\Model\Language;
+use Dotcms\PhpSdk\Model\Core\Language;
 use PHPUnit\Framework\TestCase;
 
 class LanguageTest extends TestCase

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
-use Dotcms\PhpSdk\Model\NavigationItem;
+use Dotcms\PhpSdk\Model\Content\NavigationItem;
 use PHPUnit\Framework\TestCase;
 
 class NavigationItemTest extends TestCase
@@ -186,7 +186,7 @@ class NavigationItemTest extends TestCase
         $this->assertEquals(12345, $item->hash);
         $this->assertEquals('_self', $item->target);
         $this->assertEquals(1, $item->order);
-        
+
         $this->assertNotNull($item->children);
         $this->assertCount(1, $item->children);
         $this->assertInstanceOf(NavigationItem::class, $item->children[0]);

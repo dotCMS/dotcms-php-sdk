@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Container;
 
-use Dotcms\PhpSdk\Model\Contentlet;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
 
 class ContainerPage
 {

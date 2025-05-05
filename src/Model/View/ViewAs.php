@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Model;
+namespace Dotcms\PhpSdk\Model\View;
 
+use Dotcms\PhpSdk\Model\Core\Language;
 use Dotcms\PhpSdk\Model\ViewAs\Visitor;
 
 class ViewAs

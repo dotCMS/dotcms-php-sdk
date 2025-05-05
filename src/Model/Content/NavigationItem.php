@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Model;
+namespace Dotcms\PhpSdk\Model\Content;
 
 /**
  * Class NavigationItem
@@ -24,7 +24,7 @@ class NavigationItem
      * @param int $hash The hash of the navigation item
      * @param string $target The target attribute for links (_self, _blank, etc.)
      * @param int $order The order of the navigation item
-     * @param array<int, array<string, mixed>>|null $children Array of child navigation items data
+     * @param array<int, array<string, mixed>>|null $rawChildren Array of child navigation items data
      */
     public function __construct(
         public readonly ?string $code,
@@ -72,7 +72,7 @@ class NavigationItem
 
     /**
      * Map raw children data to NavigationItem objects
-     * 
+     *
      * @return NavigationItem[]|null
      */
     private function mapChildren(): ?array

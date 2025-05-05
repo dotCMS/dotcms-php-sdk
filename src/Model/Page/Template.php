@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Model;
+namespace Dotcms\PhpSdk\Model\Page;
+
+use Dotcms\PhpSdk\Model\Layout\Layout;
 
 class Template
 {

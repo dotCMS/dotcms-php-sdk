@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Tests\Service;
 
 use Dotcms\PhpSdk\Exception\ResponseException;
-use Dotcms\PhpSdk\Model\Language;
+use Dotcms\PhpSdk\Model\Core\Language;
 use Dotcms\PhpSdk\Model\Layout\Body;
 use Dotcms\PhpSdk\Model\Layout\Column;
 use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 use Dotcms\PhpSdk\Model\Layout\Layout;
 use Dotcms\PhpSdk\Model\Layout\Row;
-use Dotcms\PhpSdk\Model\PageAsset;
-use Dotcms\PhpSdk\Model\ViewAs;
+use Dotcms\PhpSdk\Model\Page\PageAsset;
+use Dotcms\PhpSdk\Model\View\ViewAs;
 use Dotcms\PhpSdk\Model\ViewAs\Visitor;
 use Dotcms\PhpSdk\Request\PageRequest;
 use Dotcms\PhpSdk\Service\PageService;

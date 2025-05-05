@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Container;
 
-use Dotcms\PhpSdk\Model\AbstractModel;
+use Dotcms\PhpSdk\Model\Core\AbstractModel;
 
 class Container extends AbstractModel
 {

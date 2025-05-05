@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
-use Dotcms\PhpSdk\Model\Language;
-use Dotcms\PhpSdk\Model\ViewAs;
+use Dotcms\PhpSdk\Model\Core\Language;
+use Dotcms\PhpSdk\Model\View\ViewAs;
 use Dotcms\PhpSdk\Model\ViewAs\GeoLocation;
 use Dotcms\PhpSdk\Model\ViewAs\UserAgent;
 use Dotcms\PhpSdk\Model\ViewAs\Visitor;
