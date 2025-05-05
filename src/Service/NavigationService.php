@@ -7,7 +7,7 @@ namespace Dotcms\PhpSdk\Service;
 use Dotcms\PhpSdk\Exception\ResponseException;
 use Dotcms\PhpSdk\Http\HttpClient;
 use Dotcms\PhpSdk\Http\Response;
-use Dotcms\PhpSdk\Model\NavigationItem;
+use Dotcms\PhpSdk\Model\Content\NavigationItem;
 use Dotcms\PhpSdk\Request\NavigationRequest;
 use GuzzleHttp\Promise\PromiseInterface;
 
@@ -90,66 +90,74 @@ class NavigationService
     /**
      * Map the API response to a NavigationItem
      *
-     * @param array<string, mixed> $response The response from the API
-     * @return NavigationItem
+     * @param array<string, mixed> $response
      */
     private function mapResponseToNavigationItem(array $response): NavigationItem
     {
-        $entity = [];
-        if (isset($response['entity']) && is_array($response['entity'])) {
-            $entity = $response['entity'];
-        }
+        /** @var array<string, mixed> $entity */
+        $entity = $response['entity'] ?? [];
 
+        /** @var string|null $code */
         $code = null;
         if (isset($entity['code']) && (is_string($entity['code']) || is_null($entity['code']))) {
             $code = $entity['code'];
         }
 
+        /** @var string|null $folder */
         $folder = null;
         if (isset($entity['folder']) && (is_string($entity['folder']) || is_null($entity['folder']))) {
             $folder = $entity['folder'];
         }
 
+        /** @var string $host */
         $host = '';
         if (isset($entity['host']) && is_string($entity['host'])) {
             $host = $entity['host'];
         }
 
-        $languageId = 1; // Default languageId
+        /** @var int $languageId */
+        $languageId = 1; // Default value
         if (isset($entity['languageId']) && is_numeric($entity['languageId'])) {
             $languageId = (int)$entity['languageId'];
         }
 
+        /** @var string $href */
         $href = '';
         if (isset($entity['href']) && is_string($entity['href'])) {
             $href = $entity['href'];
         }
 
+        /** @var string $title */
         $title = '';
         if (isset($entity['title']) && is_string($entity['title'])) {
             $title = $entity['title'];
         }
 
-        $type = 'folder'; // Default type
+        /** @var string $type */
+        $type = 'folder'; // Default value
         if (isset($entity['type']) && is_string($entity['type'])) {
             $type = $entity['type'];
         }
 
-        $hash = 0;
+        /** @var int $hash */
+        $hash = 0; // Default value
         if (isset($entity['hash']) && is_numeric($entity['hash'])) {
             $hash = (int)$entity['hash'];
         }
 
-        $target = '_self'; // Default target
+        /** @var string $target */
+        $target = '_self'; // Default value
         if (isset($entity['target']) && is_string($entity['target'])) {
             $target = $entity['target'];
         }
 
-        $order = 0;
+        /** @var int $order */
+        $order = 0; // Default value
         if (isset($entity['order']) && is_numeric($entity['order'])) {
             $order = (int)$entity['order'];
         }
 
+        /** @var array<int, array<string, mixed>>|null $children */
         $children = null;
         if (isset($entity['children']) && is_array($entity['children'])) {
             $children = $entity['children'];

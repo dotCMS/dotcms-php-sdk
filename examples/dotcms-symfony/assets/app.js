@@ -11,7 +11,7 @@ console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
 // dotUVE is a global variable that is set by the dotCMS UVE JavaScript API
 if (window.dotUVE) {
-    window.dotUVE.createUVESubscription('changes', (changes) => {
+    window.dotUVE.createSubscription('changes', (changes) => {
         window.location.reload();
     })
 } else {

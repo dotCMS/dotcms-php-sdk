@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Tests\Service;
 
 use Dotcms\PhpSdk\Exception\ResponseException;
-use Dotcms\PhpSdk\Model\NavigationItem;
+use Dotcms\PhpSdk\Model\Content\NavigationItem;
 use Dotcms\PhpSdk\Request\NavigationRequest;
 use Dotcms\PhpSdk\Service\NavigationService;
 use GuzzleHttp\Handler\MockHandler;
@@ -77,8 +77,8 @@ class NavigationServiceTest extends TestCase
         $this->assertEquals('/test', $result->href);
         $this->assertEquals('folder', $result->type);
         $this->assertTrue($result->hasChildren());
-        $this->assertCount(1, $result->getChildren());
-        $this->assertEquals('Child Title', $result->getChildren()[0]->title);
+        $this->assertCount(1, $result->children);
+        $this->assertEquals('Child Title', $result->children[0]->title);
     }
 
     /**

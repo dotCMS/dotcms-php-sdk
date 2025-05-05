@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
-use Dotcms\PhpSdk\Model\NavigationItem;
+use Dotcms\PhpSdk\Model\Content\NavigationItem;
 use PHPUnit\Framework\TestCase;
 
 class NavigationItemTest extends TestCase
@@ -102,7 +102,7 @@ class NavigationItemTest extends TestCase
         );
 
         $this->assertFalse($item->hasChildren());
-        $this->assertNull($item->getChildren());
+        $this->assertNull($item->children);
     }
 
     /**
@@ -121,7 +121,7 @@ class NavigationItemTest extends TestCase
             hash: 12345,
             target: '_self',
             order: 1,
-            children: [
+            rawChildren: [
                 [
                     'code' => null,
                     'folder' => null,
@@ -138,16 +138,16 @@ class NavigationItemTest extends TestCase
         );
 
         $this->assertTrue($item->hasChildren());
-        $this->assertCount(1, $item->getChildren());
-        $this->assertInstanceOf(NavigationItem::class, $item->getChildren()[0]);
-        $this->assertEquals('Child Title', $item->getChildren()[0]->title);
-        $this->assertEquals('/test/child', $item->getChildren()[0]->href);
+        $this->assertCount(1, $item->children);
+        $this->assertInstanceOf(NavigationItem::class, $item->children[0]);
+        $this->assertEquals('Child Title', $item->children[0]->title);
+        $this->assertEquals('/test/child', $item->children[0]->href);
     }
 
     /**
-     * Test that jsonSerialize returns the correct structure
+     * Test that the object properties are accessible
      */
-    public function testJsonSerializeReturnsCorrectStructure(): void
+    public function testObjectPropertiesAreAccessible(): void
     {
         $item = new NavigationItem(
             code: 'test-code',
@@ -160,7 +160,7 @@ class NavigationItemTest extends TestCase
             hash: 12345,
             target: '_self',
             order: 1,
-            children: [
+            rawChildren: [
                 [
                     'code' => null,
                     'folder' => null,
@@ -176,22 +176,22 @@ class NavigationItemTest extends TestCase
             ]
         );
 
-        $json = $item->jsonSerialize();
+        $this->assertEquals('test-code', $item->code);
+        $this->assertEquals('test-folder', $item->folder);
+        $this->assertEquals('test-host', $item->host);
+        $this->assertEquals(1, $item->languageId);
+        $this->assertEquals('/test', $item->href);
+        $this->assertEquals('Test Title', $item->title);
+        $this->assertEquals('folder', $item->type);
+        $this->assertEquals(12345, $item->hash);
+        $this->assertEquals('_self', $item->target);
+        $this->assertEquals(1, $item->order);
 
-        $this->assertIsArray($json);
-        $this->assertEquals('test-code', $json['code']);
-        $this->assertEquals('test-folder', $json['folder']);
-        $this->assertEquals('test-host', $json['host']);
-        $this->assertEquals(1, $json['languageId']);
-        $this->assertEquals('/test', $json['href']);
-        $this->assertEquals('Test Title', $json['title']);
-        $this->assertEquals('folder', $json['type']);
-        $this->assertEquals(12345, $json['hash']);
-        $this->assertEquals('_self', $json['target']);
-        $this->assertEquals(1, $json['order']);
-        $this->assertIsArray($json['children']);
-        $this->assertCount(1, $json['children']);
-        $this->assertInstanceOf(NavigationItem::class, $json['children'][0]);
+        $this->assertNotNull($item->children);
+        $this->assertCount(1, $item->children);
+        $this->assertInstanceOf(NavigationItem::class, $item->children[0]);
+        $this->assertEquals('Child Title', $item->children[0]->title);
+        $this->assertEquals('/test/child', $item->children[0]->href);
     }
 
     /**
@@ -210,7 +210,7 @@ class NavigationItemTest extends TestCase
             hash: 12345,
             target: '_self',
             order: 1,
-            children: [
+            rawChildren: [
                 [
                     'code' => null,
                     'folder' => 'child-folder',
@@ -241,13 +241,13 @@ class NavigationItemTest extends TestCase
         );
 
         $this->assertTrue($item->hasChildren());
-        $this->assertCount(1, $item->getChildren());
+        $this->assertCount(1, $item->children);
 
-        $child = $item->getChildren()[0];
+        $child = $item->children[0];
         $this->assertTrue($child->hasChildren());
-        $this->assertCount(1, $child->getChildren());
+        $this->assertCount(1, $child->children);
 
-        $grandchild = $child->getChildren()[0];
+        $grandchild = $child->children[0];
         $this->assertFalse($grandchild->hasChildren());
         $this->assertEquals('Grandchild Title', $grandchild->title);
         $this->assertEquals('/test/child/grandchild', $grandchild->href);

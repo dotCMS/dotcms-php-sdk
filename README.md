@@ -23,7 +23,6 @@ The SDK requires configuration to connect to your dotCMS instance:
 
 ```php
 use Dotcms\PhpSdk\Config\Config;
-use Dotcms\PhpSdk\Config\LogLevel;
 
 // Create a configuration for the client
 $config = new Config(
@@ -31,10 +30,6 @@ $config = new Config(
     apiKey: 'YOUR_API_KEY',
     clientOptions: [
         'timeout' => 30
-    ],
-    logConfig: [
-        'level' => LogLevel::INFO,
-        'console' => true, // Output logs to console
     ]
 );
 ```
@@ -80,12 +75,18 @@ try {
     $pageRequest = $client->createPageRequest('/', 'json');
     
     // Get the page
-    $page = $client->getPage($pageRequest);
+    $pageAsset = $client->getPage($pageRequest);
     
     // Access page information
-    echo "Page title: " . $page->page->title . "\n";
-    echo "Page URL: " . $page->page->pageUrl . "\n";
-    echo "Template name: " . $page->template->title . "\n";
+    echo "Page title: " . $pageAsset->page->title . "\n";
+    echo "Page URL: " . $pageAsset->page->pageUrl . "\n";
+    echo "Template name: " . $pageAsset->template->title . "\n";
+    
+    // Check if page has vanity URL
+    if ($pageAsset->vanityUrl !== null) {
+        echo "Vanity URL: " . $pageAsset->vanityUrl->url . "\n";
+        echo "Forward to: " . $pageAsset->vanityUrl->forwardTo . "\n";
+    }
     
 } catch (\Exception $e) {
     echo "Error: " . $e->getMessage() . "\n";
@@ -103,13 +104,13 @@ try {
     $nav = $client->getNavigation($navRequest);
     
     // Access navigation information
-    echo "Navigation title: " . $nav['title'] . "\n";
-    echo "Navigation URL: " . $nav['href'] . "\n";
+    echo "Navigation title: " . $nav->title . "\n";
+    echo "Navigation URL: " . $nav->href . "\n";
     
     // Access children if available
     if ($nav->hasChildren()) {
         foreach ($nav->getChildren() as $child) {
-            echo "- " . $child['title'] . " (" . $child['href'] . ")\n";
+            echo "- " . $child->title . " (" . $child->href . ")\n";
         }
     }
     
@@ -131,6 +132,9 @@ $promise = $client->getPageAsync($asyncPageRequest);
 $promise->then(
     function ($asyncPage) {
         echo "Async page title: " . $asyncPage->page->title . "\n";
+        if ($asyncPage->vanityUrl !== null) {
+            echo "Vanity URL: " . $asyncPage->vanityUrl->url . "\n";
+        }
     },
     function (\Exception $e) {
         echo "Error: " . $e->getMessage() . "\n";
@@ -229,19 +233,27 @@ echo "Template title: " . $page->template->title . "\n";
 // Access layout information
 echo "Layout header: " . $page->layout->header . "\n";
 
+// Access vanity URL if present
+if ($page->vanityUrl !== null) {
+    echo "Vanity URL pattern: " . $page->vanityUrl->pattern . "\n";
+    echo "Forward to: " . $page->vanityUrl->forwardTo . "\n";
+    echo "Response code: " . $page->vanityUrl->response . "\n";
+    echo "Is temporary redirect: " . ($page->vanityUrl->temporaryRedirect ? 'Yes' : 'No') . "\n";
+}
+
 // Access containers and contentlets
 foreach ($page->containers as $containerId => $container) {
     echo "Container ID: " . $containerId . "\n";
-    echo "Max Contentlets: " . ($container->maxContentlets ?? 0) . "\n";
+    echo "Max Contentlets: " . $container->maxContentlets . "\n";
     
     if (!empty($container->contentlets)) {
-        foreach ($container->contentlets as $uuid => $contentletArray) {
-            foreach ($contentletArray as $contentlet) {
+        foreach ($container->contentlets as $uuid => $contentlets) {
+            foreach ($contentlets as $contentlet) {
                 echo "Contentlet type: " . $contentlet->contentType . "\n";
                 echo "Contentlet title: " . ($contentlet->title ?? 'N/A') . "\n";
                 
-                // Access additional fields using array access
-                foreach ($contentlet as $fieldName => $fieldValue) {
+                // Access additional fields using object properties
+                foreach ($contentlet->getAdditionalProperties() as $fieldName => $fieldValue) {
                     if (is_scalar($fieldValue)) {
                         echo "$fieldName: $fieldValue\n";
                     }
@@ -254,7 +266,7 @@ foreach ($page->containers as $containerId => $container) {
 
 ### Working with Navigation Items
 
-The `NavigationItem` class extends `AbstractModel` and provides array access to its properties:
+The `NavigationItem` class provides array access to its properties:
 
 ```php
 // Check if the navigation item is a folder
@@ -267,17 +279,17 @@ if ($nav->isPage()) {
     echo "This is a page\n";
 }
 
-// Access navigation properties using array access
-echo "Title: " . $nav['title'] . "\n";
-echo "URL: " . $nav['href'] . "\n";
-echo "Type: " . $nav['type'] . "\n";
-echo "Target: " . $nav['target'] . "\n"; // e.g., "_self", "_blank"
-echo "Order: " . $nav['order'] . "\n";
+// Access navigation properties
+echo "Title: " . $nav->title . "\n";
+echo "URL: " . $nav->href . "\n";
+echo "Type: " . $nav->type . "\n";
+echo "Target: " . $nav->target . "\n"; // e.g., "_self", "_blank"
+echo "Order: " . $nav->order . "\n";
 
 // Recursively process navigation tree
 function processNavigation($navItem, $level = 0) {
     $indent = str_repeat("  ", $level);
-    echo $indent . "- " . $navItem['title'] . " (" . $navItem['href'] . ")\n";
+    echo $indent . "- " . $navItem->title . " (" . $navItem->href . ")\n";
     
     if ($navItem->hasChildren()) {
         foreach ($navItem->getChildren() as $child) {
@@ -288,6 +300,112 @@ function processNavigation($navItem, $level = 0) {
 
 processNavigation($nav);
 ```
+
+### Using SDK Utilities
+
+The SDK includes a `DotCmsHelper` class with common functions for rendering and working with DotCMS content:
+
+```php
+use Dotcms\PhpSdk\Utils\DotCmsHelper;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
+
+// Generate HTML attributes from an associative array
+$attrs = [
+    'class' => 'my-class',
+    'data-id' => '123',
+    'disabled' => true
+];
+$htmlAttrs = DotCmsHelper::htmlAttributes($attrs);
+
+// Generate simple HTML for a contentlet
+$contentlet = new Contentlet(
+    identifier: 'abc123',
+    inode: 'inode123',
+    title: 'My Content',
+    contentType: 'Banner'
+);
+$html = DotCmsHelper::simpleContentHtml($contentlet->jsonSerialize());
+
+// Extract accept types from container structures
+$acceptTypes = DotCmsHelper::extractAcceptTypes($containerStructures);
+
+// Extract contentlets from container page
+$contentlets = DotCmsHelper::extractContentlets($containerPage, $uuid);
+```
+
+These utilities help with common tasks like:
+- Generating HTML attributes safely
+- Rendering contentlets with basic HTML
+- Working with container structures and contentlets
+- Extracting data from container pages
+
+## Data Access Patterns
+
+The SDK provides two ways to access data: object notation and array access. Here's when to use each:
+
+### Object Notation (->)
+
+Use object notation for accessing standard properties of these classes:
+
+```php
+// Page and Site properties
+$page->title
+$page->pageUrl
+$site->hostname
+
+// Container properties
+$container->identifier
+$container->title
+$container->maxContentlets
+
+// Contentlet properties
+$contentlet->identifier
+$contentlet->title
+$contentlet->contentType
+
+// Navigation properties
+$nav->title
+$nav->href
+$nav->type
+```
+
+### Array Access ([])
+
+Use array access for:
+1. Additional properties not explicitly defined in the class
+2. Accessing container contentlets by UUID
+3. Accessing rendered content by UUID
+
+```php
+// Additional properties
+$contentlet['customField']
+$page['metadata']
+
+// Container contentlets
+$container->contentlets['uuid-123']
+
+// Rendered content
+$container->rendered['uuid-123']
+```
+
+### Classes That Support Both
+
+These classes support both object and array access:
+- `Page`
+- `Site`
+- `Contentlet`
+- `Container`
+- Any class extending `AbstractModel`
+
+### Classes That Only Support Object Access
+
+These classes only support object notation:
+- `PageAsset`
+- `ContainerPage`
+- `NavigationItem`
+- `Layout`
+- `Template`
+- `VanityUrl`
 
 ## API Reference
 
@@ -344,31 +462,49 @@ Represents a complete page asset from dotCMS.
 | `site` | Site | The Site object |
 | `template` | Template | The Template object |
 | `layout` | Layout | The Layout object |
-| `containers` | Array | Array of Container objects |
+| `containers` | array<ContainerPage> | Array of ContainerPage objects |
+| `urlContentMap` | Contentlet\|null | Content map for generated pages |
+| `viewAs` | ViewAs | Visitor context information |
+| `vanityUrl` | VanityUrl\|null | Optional vanity URL configuration |
 
-### NavigationItem
+### ContainerPage
 
-Represents a navigation item from the dotCMS Navigation API. Extends AbstractModel to provide array access to properties.
+Represents a container page from dotCMS.
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `code` | ?string | The code of the navigation item |
-| `folder` | ?string | The folder identifier |
-| `host` | string | The host identifier |
-| `languageId` | int | The language ID |
-| `href` | string | The URL of the navigation item |
-| `title` | string | The title of the navigation item |
-| `type` | string | The type of the navigation item (folder, htmlpage, etc.) |
-| `hash` | int | The hash of the navigation item |
-| `target` | string | The target attribute for links (_self, _blank, etc.) |
-| `order` | int | The order of the navigation item |
+| `container` | Container | The Container object |
+| `containerStructures` | array<ContainerStructure> | Array of ContainerStructure objects |
+| `rendered` | array<string, string> | Rendered content keyed by UUID |
+| `contentlets` | array<string, array<Contentlet>> | Contentlets keyed by UUID |
+
+### Contentlet
+
+Represents a content item from dotCMS.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `identifier` | string | The content identifier |
+| `inode` | string | The content inode |
+| `title` | string | The content title |
+| `contentType` | string | The content type |
+| `additionalProperties` | array<string, mixed> | Additional content properties |
 
 | Method | Description | Return Type |
 |--------|-------------|-------------|
-| `isFolder` | Check if this navigation item is a folder | `bool` |
-| `isPage` | Check if this navigation item is a page | `bool` |
-| `hasChildren` | Check if this navigation item has children | `bool` |
-| `getChildren` | Get the children as NavigationItem objects | `?array` |
+| `getAdditionalProperties` | Get additional properties | `array<string, mixed>` |
+| `jsonSerialize` | Convert to array for JSON serialization | `array<string, mixed>` |
+
+### DotCmsHelper
+
+Utility class for common DotCMS operations.
+
+| Method | Description | Parameters | Return Type |
+|--------|-------------|------------|-------------|
+| `htmlAttributes` | Generate HTML attributes | `array<string, mixed>` | `string` |
+| `simpleContentHtml` | Generate simple HTML for content | `array<string, mixed>` | `string` |
+| `extractAcceptTypes` | Extract accept types from structures | `array<ContainerStructure>` | `string` |
+| `extractContentlets` | Extract contentlets from container | `ContainerPage, string` | `array<Contentlet>` |
 
 ## Error Handling
 
@@ -385,7 +521,7 @@ Example error handling:
 
 ```php
 try {
-    $page = $client->getPage($pageRequest);
+    $pageAsset = $client->getPage($pageRequest);
 } catch (ConfigException $e) {
     echo "Configuration error: " . $e->getMessage() . "\n";
 } catch (HttpException $e) {
@@ -411,6 +547,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\DotCMSClient;
+use Dotcms\PhpSdk\Model\Page\PageAsset;
+use Dotcms\PhpSdk\Model\Page\VanityUrl;
 
 // Create configuration
 $config = new Config(
@@ -425,11 +563,17 @@ $client = new DotCMSClient($config);
 $pageRequest = $client->createPageRequest('/', 'json');
 
 // Get page
-$page = $client->getPage($pageRequest);
+$pageAsset = $client->getPage($pageRequest);
 
 // Display page information
-echo "Page title: " . $page->page->title . "\n";
-echo "Page URL: " . $page->page->pageUrl . "\n";
+echo "Page title: " . $pageAsset->page->title . "\n";
+echo "Page URL: " . $pageAsset->page->pageUrl . "\n";
+
+// Check for vanity URL
+if ($pageAsset->vanityUrl !== null) {
+    echo "Vanity URL: " . $pageAsset->vanityUrl->url . "\n";
+    echo "Forward to: " . $pageAsset->vanityUrl->forwardTo . "\n";
+}
 ```
 
 ### Basic Navigation Example
@@ -441,6 +585,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\DotCMSClient;
+use Dotcms\PhpSdk\Model\Navigation\NavigationItem;
 
 // Create configuration
 $config = new Config(
@@ -458,13 +603,13 @@ $navRequest = $client->createNavigationRequest('/about-us', 2);
 $nav = $client->getNavigation($navRequest);
 
 // Display navigation information
-echo "Navigation title: " . $nav['title'] . "\n";
+echo "Navigation title: " . $nav->title . "\n";
 
 // Display children if available
 if ($nav->hasChildren()) {
     echo "Children:\n";
     foreach ($nav->getChildren() as $child) {
-        echo "- " . $child['title'] . " (" . $child['href'] . ")\n";
+        echo "- " . $child->title . " (" . $child->href . ")\n";
     }
 }
 ```
@@ -473,9 +618,45 @@ if ($nav->hasChildren()) {
 
 The SDK can be easily integrated with Symfony. See the `examples/dotcms-symfony` directory for a complete example.
 
+## We Need Your Feedback!
+
+The SDK is in active development, and your feedback is crucial to its success. We're particularly interested in:
+
+- Use cases and real-world scenarios
+- Feature requests and improvements
+- Performance feedback
+- Integration challenges
+- Documentation suggestions
+
+Feel free to:
+- Open issues for bugs or feature requests
+- Join our community discussions
+- Share your implementation experiences
+- Suggest improvements to the API design
+
 ## Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+We welcome contributions of all kinds! Whether you're fixing bugs, adding features, or improving documentation, your help makes the SDK better for everyone.
+
+### How to Contribute
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Make your changes
+4. Run the test suite (`composer check`)
+5. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+6. Push to the branch (`git push origin feature/amazing-feature`)
+7. Open a Pull Request
+
+### Pull Requests
+
+We actively review and merge pull requests. To ensure a smooth process:
+
+- Follow our coding standards
+- Add tests for new features
+- Update documentation
+- Use conventional commit messages
+- Keep PRs focused and manageable
 
 ### Development Setup
 
@@ -503,6 +684,50 @@ composer phpstan
 ```bash
 composer check
 ```
+
+## What's Next
+
+The SDK is actively being developed with several exciting features planned:
+
+### Template Rendering System
+
+We're working on a comprehensive template rendering system that will make it easier to integrate DotCMS with popular PHP frameworks:
+
+#### Twig Templates
+- Pre-built templates for DotCMS layouts, containers, and content types
+- Twig extensions for common DotCMS operations
+
+#### Blade Templates
+- Ready-to-use Blade components for DotCMS content
+- Blade directives for DotCMS-specific functionality
+- Standard layouts for common page structures
+- SEO-friendly markup and metadata handling
+
+### Content API Support
+- Full Content API integration for content management
+- ElasticSearch Support
+- Advanced search capabilities
+
+### Logging System
+- Configurable log levels (DEBUG, INFO, WARNING, ERROR, etc.)
+- Multiple logging handlers (file, console, syslog)
+- Context-aware logging with request/response details
+
+### Data Validation Layer
+- Schema-based validation for content types
+- Custom validation rules
+- Validation error handling
+- Type conversion and normalization
+- Cross-field validation
+- Validation caching
+
+### Additional Features
+- Enhanced caching mechanisms
+- Additional framework integrations
+- Performance optimizations
+- Extended documentation and examples
+
+Stay tuned for updates and feel free to contribute to these upcoming features!
 
 ## License
 

@@ -6,8 +6,8 @@ namespace Dotcms\PhpSdk;
 
 use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\Http\HttpClient;
-use Dotcms\PhpSdk\Model\NavigationItem;
-use Dotcms\PhpSdk\Model\PageAsset;
+use Dotcms\PhpSdk\Model\Content\NavigationItem;
+use Dotcms\PhpSdk\Model\Page\PageAsset;
 use Dotcms\PhpSdk\Request\NavigationRequest;
 use Dotcms\PhpSdk\Request\PageRequest;
 use Dotcms\PhpSdk\Service\NavigationService;

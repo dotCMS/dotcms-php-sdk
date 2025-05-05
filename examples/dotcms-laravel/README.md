@@ -153,21 +153,10 @@ Create helper functions for DotCMS rendering in `app/Helpers/DotCmsHelpers.php`.
 namespace App\Helpers;
 
 use Dotcms\PhpSdk\Utils\DotCmsHelper;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
 
 class DotCmsHelpers
 {
-    /**
-     * Get container data from the containers array
-     * 
-     * @param array $containers
-     * @param array $container
-     * @return array|null
-     */
-    public function getContainersData($containers, $container)
-    {
-        return DotCmsHelper::getContainerData($containers, $container);
-    }
-
     /**
      * Generate HTML attributes from an associative array
      * 
@@ -182,17 +171,17 @@ class DotCmsHelpers
     /**
      * Generate HTML based on contentlet properties
      * 
-     * @param array $content
+     * @param Contentlet $content
      * @return string
      */
-    public function generateHtmlBasedOnProperty($content)
+    public function generateHtmlBasedOnProperty(Contentlet $content)
     {
         if (empty($content)) {
             return '';
         }
 
         // Check if we have a template to render
-        $contentType = $content['contentType'] ?? '';
+        $contentType = $content->contentType;
         if ($contentType) {
             $viewPath = 'dotcms.content-types.' . strtolower($contentType);
             if (view()->exists($viewPath)) {
@@ -201,13 +190,12 @@ class DotCmsHelpers
         }
 
         // Fall back to the SDK simple HTML renderer
-        return DotCmsHelper::simpleContentHtml($content);
+        return DotCmsHelper::simpleContentHtml($content->jsonSerialize());
     }
 }
 ```
 
-The DotCMSHelpers class provides three key functions, all leveraging the SDK's `DotCmsHelper` utility class:
-- `getContainersData`: Retrieves container content from the DotCMS page structure
+The DotCMSHelpers class provides two key functions, all leveraging the SDK's `DotCmsHelper` utility class:
 - `htmlAttr`: Safely generates HTML attributes from arrays, handling special cases like boolean attributes
 - `generateHtmlBasedOnProperty`: Renders content intelligently by looking for type-specific templates or falling back to the SDK's default renderer
 
@@ -446,37 +434,31 @@ This page template:
 
 ```php
 @php
-$containerObject = $dotCmsHelpers->getContainersData($containers, $container);
-$containerContentKey = 'uuid-' . $container['uuid'];
-$containerContent = isset($containerObject['contentlets'][$containerContentKey]) 
-    ? $containerObject['contentlets'][$containerContentKey] 
-    : [];
-
 $containerAttrs = [
     'data-dot-object' => 'container',
-    'data-dot-identifier' => $container['identifier'] ?? '',
-    'data-dot-accept-types' => $containerObject['acceptTypes'] ?? '',
-    'data-max-contentlets' => $containerObject['maxContentlets'] ?? '',
-    'data-dot-uuid' => $container['uuid'] ?? ''
+    'data-dot-identifier' => $container->identifier,
+    'data-dot-accept-types' => $container->acceptTypes,
+    'data-max-contentlets' => $container->maxContentlets,
+    'data-dot-uuid' => $container->uuid
 ];
 @endphp
 
 <div {!! $dotCmsHelpers->htmlAttr($containerAttrs) !!}>
-    @foreach($containerContent as $content)
+    @foreach($container->contentlets as $content)
         @php
         $contentAttrs = [
             'data-dot-object' => 'contentlet',
-            'data-dot-identifier' => $content['identifier'] ?? '',
-            'data-dot-basetype' => $content['baseType'] ?? '',
-            'data-dot-title' => $content['widgetTitle'] ?? $content['title'] ?? '',
-            'data-dot-inode' => $content['inode'] ?? '',
-            'data-dot-type' => $content['contentType'] ?? '',
+            'data-dot-identifier' => $content->identifier,
+            'data-dot-basetype' => $content->baseType,
+            'data-dot-title' => $content->widgetTitle ?? $content->title,
+            'data-dot-inode' => $content->inode,
+            'data-dot-type' => $content->contentType,
             'data-dot-container' => json_encode([
-                'acceptTypes' => $containerObject['acceptTypes'] ?? '',
-                'identifier' => $container['identifier'] ?? '',
-                'maxContentlets' => $containerObject['maxContentlets'] ?? '',
-                'variantId' => $containerObject['variantId'] ?? '',
-                'uuid' => $container['uuid'] ?? ''
+                'acceptTypes' => $container->acceptTypes,
+                'identifier' => $container->identifier,
+                'maxContentlets' => $container->maxContentlets,
+                'variantId' => $container->variantId,
+                'uuid' => $container->uuid
             ])
         ];
         @endphp
@@ -489,7 +471,6 @@ $containerAttrs = [
 ```
 
 The container template:
-- Extracts container data using helper functions
 - Sets up data attributes for DotCMS integration and edit-mode functionality
 - Iterates through content items in the container
 - Adds necessary metadata attributes to each content element

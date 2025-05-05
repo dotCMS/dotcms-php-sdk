@@ -4,12 +4,17 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
+use Dotcms\PhpSdk\Model\Container\Container;
+use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Container\ContainerStructure;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
+use Dotcms\PhpSdk\Model\Core\Language;
 use Dotcms\PhpSdk\Model\Layout\Layout;
-use Dotcms\PhpSdk\Model\Page;
-use Dotcms\PhpSdk\Model\PageAsset;
-use Dotcms\PhpSdk\Model\Site;
-use Dotcms\PhpSdk\Model\Template;
-use Dotcms\PhpSdk\Model\ViewAs;
+use Dotcms\PhpSdk\Model\Page\Page;
+use Dotcms\PhpSdk\Model\Page\PageAsset;
+use Dotcms\PhpSdk\Model\Page\Template;
+use Dotcms\PhpSdk\Model\Site\Site;
+use Dotcms\PhpSdk\Model\View\ViewAs;
 use Dotcms\PhpSdk\Model\ViewAs\GeoLocation;
 use Dotcms\PhpSdk\Model\ViewAs\UserAgent;
 use Dotcms\PhpSdk\Model\ViewAs\Visitor;
@@ -32,13 +37,50 @@ class PageAssetTest extends TestCase
         );
 
         // Create a basic language
-        $language = [
-            'id' => 1,
-            'languageCode' => 'en',
-            'countryCode' => 'US',
-            'language' => 'English',
-            'country' => 'United States',
-        ];
+        $language = new Language(
+            id: 1,
+            languageCode: 'en',
+            countryCode: 'US',
+            language: 'English',
+            country: 'United States',
+            isoCode: 'en-us'
+        );
+
+        // Create container structure
+        $containerStructure = new ContainerStructure(
+            id: 'structure-123',
+            structureId: 'struct-456',
+            containerInode: 'inode-789',
+            containerId: 'container-101',
+            code: 'test-container',
+            contentTypeVar: 'content-type-var'
+        );
+
+        // Create container
+        $container = new Container(
+            identifier: 'container-101',
+            inode: 'inode-789',
+            title: 'Test Container',
+            path: '/test-container',
+            working: true,
+            live: true
+        );
+
+        // Create contentlet
+        $contentlet = new Contentlet(
+            identifier: 'content-123',
+            inode: 'content-inode-456',
+            title: 'Test Content',
+            contentType: 'content-type'
+        );
+
+        // Create container page
+        $containerPage = new ContainerPage(
+            container: $container,
+            containerStructures: [$containerStructure],
+            rendered: ['uuid-123' => '<div>Test Content</div>'],
+            contentlets: ['uuid-123' => [$contentlet]]
+        );
 
         return new PageAsset(
             new Layout(),
@@ -54,10 +96,10 @@ class PageAssetTest extends TestCase
                 'demo.dotcms.com', // hostName
                 'site-id' // host
             ),
-            [], // containers
+            [$containerPage], // containers
             new Site('site-id', 'demo.dotcms.com'),
             null, // urlContentMap
-            new ViewAs($visitor, $language, 'PREVIEW')
+            new ViewAs($visitor, $language, 'PREVIEW', 'variant-123')
         );
     }
 
@@ -72,55 +114,90 @@ class PageAssetTest extends TestCase
         $this->assertInstanceOf(Site::class, $pageAsset->site);
         $this->assertNull($pageAsset->urlContentMap);
         $this->assertInstanceOf(ViewAs::class, $pageAsset->viewAs);
+        $this->assertEquals('variant-123', $pageAsset->viewAs->variantId);
 
         // Check page properties
         $this->assertEquals('page-id', $pageAsset->page->identifier);
         $this->assertEquals('Test Page', $pageAsset->page->title);
         $this->assertEquals('/test-page', $pageAsset->page->pageUrl);
+
+        // Check container page properties
+        $this->assertCount(1, $pageAsset->containers);
+        $containerPage = $pageAsset->containers[0];
+        $this->assertInstanceOf(ContainerPage::class, $containerPage);
+
+        // Check container
+        $this->assertEquals('container-101', $containerPage->container->identifier);
+        $this->assertEquals('Test Container', $containerPage->container->title);
+        $this->assertTrue($containerPage->container->working);
+        $this->assertTrue($containerPage->container->live);
+
+        // Check container structure
+        $this->assertCount(1, $containerPage->containerStructures);
+        $structure = $containerPage->containerStructures[0];
+        $this->assertEquals('structure-123', $structure->id);
+        $this->assertEquals('test-container', $structure->code);
+
+        // Check rendered content
+        $this->assertArrayHasKey('uuid-123', $containerPage->rendered);
+        $this->assertEquals('<div>Test Content</div>', $containerPage->rendered['uuid-123']);
+
+        // Check contentlets
+        $this->assertArrayHasKey('uuid-123', $containerPage->contentlets);
+        $this->assertCount(1, $containerPage->contentlets['uuid-123']);
+        $contentlet = $containerPage->contentlets['uuid-123'][0];
+        $this->assertEquals('content-123', $contentlet->identifier);
+        $this->assertEquals('Test Content', $contentlet->title);
     }
 
     public function testJsonSerialize(): void
     {
         $pageAsset = $this->createPageAsset();
 
-        $json = $pageAsset->jsonSerialize();
-
-        // Check that the layout property exists and is a JsonSerializable object
-        $this->assertArrayHasKey('layout', $json);
-        $this->assertInstanceOf(\JsonSerializable::class, $pageAsset->layout);
-
-        // Check that the template property exists and is a JsonSerializable object
-        $this->assertArrayHasKey('template', $json);
-        $this->assertInstanceOf(\JsonSerializable::class, $pageAsset->template);
-
-        // Check that the page property exists and is a JsonSerializable object
-        $this->assertArrayHasKey('page', $json);
-        $this->assertInstanceOf(\JsonSerializable::class, $pageAsset->page);
-
-        $this->assertIsArray($json['containers']);
-
-        // Check that the site property exists and is a JsonSerializable object
-        $this->assertArrayHasKey('site', $json);
-        $this->assertInstanceOf(\JsonSerializable::class, $pageAsset->site);
-
-        $this->assertNull($json['urlContentMap']);
-
-        // Check that the viewAs property exists and is a JsonSerializable object
-        $this->assertArrayHasKey('viewAs', $json);
-        $this->assertInstanceOf(\JsonSerializable::class, $pageAsset->viewAs);
+        // Check that properties exist and are of correct type
+        $this->assertInstanceOf(Layout::class, $pageAsset->layout);
+        $this->assertInstanceOf(Template::class, $pageAsset->template);
+        $this->assertInstanceOf(Page::class, $pageAsset->page);
+        $this->assertIsArray($pageAsset->containers);
+        $this->assertInstanceOf(Site::class, $pageAsset->site);
+        $this->assertNull($pageAsset->urlContentMap);
+        $this->assertInstanceOf(ViewAs::class, $pageAsset->viewAs);
 
         // Test that nested objects have the expected properties
-        $templateJson = $pageAsset->template->jsonSerialize();
-        $this->assertEquals('template-id', $templateJson['identifier']);
-        $this->assertEquals('Test Template', $templateJson['title']);
+        $this->assertEquals('template-id', $pageAsset->template->identifier);
+        $this->assertEquals('Test Template', $pageAsset->template->title);
 
-        $pageJson = $pageAsset->page->jsonSerialize();
-        $this->assertEquals('page-id', $pageJson['identifier']);
-        $this->assertEquals('Test Page', $pageJson['title']);
-        $this->assertEquals('/test-page', $pageJson['pageUrl']);
+        $this->assertEquals('page-id', $pageAsset->page->identifier);
+        $this->assertEquals('Test Page', $pageAsset->page->title);
+        $this->assertEquals('/test-page', $pageAsset->page->pageUrl);
 
-        $siteJson = $pageAsset->site->jsonSerialize();
-        $this->assertEquals('site-id', $siteJson['identifier']);
-        $this->assertEquals('demo.dotcms.com', $siteJson['hostname']);
+        $this->assertEquals('site-id', $pageAsset->site->identifier);
+        $this->assertEquals('demo.dotcms.com', $pageAsset->site->hostname);
+
+        // Test container page properties
+        $this->assertCount(1, $pageAsset->containers);
+        $containerPage = $pageAsset->containers[0];
+        $this->assertInstanceOf(ContainerPage::class, $containerPage);
+
+        // Check container
+        $this->assertEquals('container-101', $containerPage->container->identifier);
+        $this->assertEquals('Test Container', $containerPage->container->title);
+
+        // Check container structure
+        $this->assertCount(1, $containerPage->containerStructures);
+        $structure = $containerPage->containerStructures[0];
+        $this->assertEquals('structure-123', $structure->id);
+        $this->assertEquals('test-container', $structure->code);
+
+        // Check rendered content
+        $this->assertArrayHasKey('uuid-123', $containerPage->rendered);
+        $this->assertEquals('<div>Test Content</div>', $containerPage->rendered['uuid-123']);
+
+        // Check contentlets
+        $this->assertArrayHasKey('uuid-123', $containerPage->contentlets);
+        $this->assertCount(1, $containerPage->contentlets['uuid-123']);
+        $contentlet = $containerPage->contentlets['uuid-123'][0];
+        $this->assertEquals('content-123', $contentlet->identifier);
+        $this->assertEquals('Test Content', $contentlet->title);
     }
 }

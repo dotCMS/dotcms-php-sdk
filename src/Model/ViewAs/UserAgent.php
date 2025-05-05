@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\ViewAs;
 
-class UserAgent implements \JsonSerializable
+class UserAgent
 {
     /**
      * @param string $browser Browser name
@@ -18,20 +18,5 @@ class UserAgent implements \JsonSerializable
         public readonly string $os,
         public readonly bool $mobile,
     ) {
-    }
-
-    /**
-     * Specify data which should be serialized to JSON
-     *
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): array
-    {
-        return [
-            'browser' => $this->browser,
-            'version' => $this->version,
-            'os' => $this->os,
-            'mobile' => $this->mobile,
-        ];
     }
 }

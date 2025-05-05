@@ -5,6 +5,7 @@
     "require": {
         "php": "^8.2",
         "guzzlehttp/guzzle": "^7.9",
+        "guzzlehttp/promises": "^2.2",
         "monolog/monolog": "^3.8",
         "respect/validation": "^2.4",
         "symfony/property-access": "^7.2",

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
-use Dotcms\PhpSdk\Model\AbstractModel;
+use Dotcms\PhpSdk\Model\Core\AbstractModel;
 use PHPUnit\Framework\TestCase;
 
 class AbstractModelTest extends TestCase

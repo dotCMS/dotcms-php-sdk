@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
-use Dotcms\PhpSdk\Model\Site;
+use Dotcms\PhpSdk\Model\Site\Site;
 use PHPUnit\Framework\TestCase;
 
 class SiteTest extends TestCase

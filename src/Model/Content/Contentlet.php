@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Model;
+namespace Dotcms\PhpSdk\Model\Content;
+
+use Dotcms\PhpSdk\Model\Core\AbstractModel;
 
 class Contentlet extends AbstractModel
 {

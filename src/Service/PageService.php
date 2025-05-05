@@ -7,17 +7,26 @@ namespace Dotcms\PhpSdk\Service;
 use Dotcms\PhpSdk\Exception\ResponseException;
 use Dotcms\PhpSdk\Http\HttpClient;
 use Dotcms\PhpSdk\Http\Response;
-use Dotcms\PhpSdk\Model\Contentlet;
+use Dotcms\PhpSdk\Model\Container\Container;
+use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Container\ContainerStructure;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
+use Dotcms\PhpSdk\Model\Core\Language;
+use Dotcms\PhpSdk\Model\Layout\Body;
+use Dotcms\PhpSdk\Model\Layout\Column;
+use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 use Dotcms\PhpSdk\Model\Layout\Layout;
-use Dotcms\PhpSdk\Model\Page;
-use Dotcms\PhpSdk\Model\PageAsset;
-use Dotcms\PhpSdk\Model\Site;
-use Dotcms\PhpSdk\Model\Template;
-use Dotcms\PhpSdk\Model\ViewAs;
+use Dotcms\PhpSdk\Model\Layout\Row;
+use Dotcms\PhpSdk\Model\Page\Page;
+use Dotcms\PhpSdk\Model\Page\PageAsset;
+use Dotcms\PhpSdk\Model\Page\Template;
+use Dotcms\PhpSdk\Model\Site\Site;
+use Dotcms\PhpSdk\Model\View\ViewAs;
 use Dotcms\PhpSdk\Model\ViewAs\GeoLocation;
 use Dotcms\PhpSdk\Model\ViewAs\UserAgent;
 use Dotcms\PhpSdk\Model\ViewAs\Visitor;
 use Dotcms\PhpSdk\Request\PageRequest;
+use Dotcms\PhpSdk\Utils\DotCmsHelper;
 use GuzzleHttp\Promise\PromiseInterface;
 
 /**
@@ -189,7 +198,15 @@ class PageService
                 hostName: $pageData['hostName'] ?? '',
                 host: $pageData['host'] ?? '',
                 additionalProperties: array_diff_key($pageData, array_flip([
-                    'identifier', 'inode', 'title', 'contentType', 'pageUrl', 'live', 'working', 'hostName', 'host',
+                    'identifier',
+                    'inode',
+                    'title',
+                    'contentType',
+                    'pageUrl',
+                    'live',
+                    'working',
+                    'hostName',
+                    'host',
                 ]))
             );
         } catch (\Throwable $e) {
@@ -223,13 +240,141 @@ class PageService
 
             // Extract layout data
             $layoutData = isset($entity['layout']) && is_array($entity['layout']) ? $entity['layout'] : [];
+            $rowsData = $layoutData['body']['rows'] ?? [];
+
+            // Extract page asset containers
+            $containers = [];
+            if (isset($entity['containers']) && is_array($entity['containers'])) {
+                foreach ($entity['containers'] as $identifier => $containerData) {
+                    if (! isset($containerData['container']) || ! is_array($containerData['container'])) {
+                        continue;
+                    }
+
+                    $container = new Container(
+                        identifier: $containerData['container']['identifier'] ?? '',
+                        inode: $containerData['container']['inode'] ?? '',
+                        title: $containerData['container']['title'] ?? '',
+                        path: $containerData['container']['path'] ?? '',
+                        live: $containerData['container']['live'] ?? false,
+                        working: $containerData['container']['working'] ?? false,
+                        locked: $containerData['container']['locked'] ?? false,
+                        hostId: $containerData['container']['hostId'] ?? '',
+                        hostName: $containerData['container']['hostName'] ?? '',
+                        maxContentlets: $containerData['container']['maxContentlets'] ?? 0,
+                        notes: $containerData['container']['notes'] ?? '',
+                        additionalProperties: array_diff_key($containerData['container'], array_flip([
+                            'identifier',
+                            'inode',
+                            'title',
+                            'path',
+                            'live',
+                            'working',
+                            'locked',
+                            'hostId',
+                            'hostName',
+                            'maxContentlets',
+                            'notes',
+                        ]))
+                    );
+
+                    $containerStructures = [];
+                    if (isset($containerData['containerStructures']) && is_array($containerData['containerStructures'])) {
+                        foreach ($containerData['containerStructures'] as $structureData) {
+                            $containerStructures[] = new ContainerStructure(
+                                id: $structureData['id'] ?? '',
+                                structureId: $structureData['structureId'] ?? '',
+                                containerInode: $structureData['containerInode'] ?? '',
+                                containerId: $structureData['containerId'] ?? '',
+                                code: $structureData['code'] ?? '',
+                                contentTypeVar: $structureData['contentTypeVar'] ?? ''
+                            );
+                        }
+                    }
+
+                    $rendered = $containerData['rendered'] ?? [];
+                    $contentlets = [];
+                    if (isset($containerData['contentlets']) && is_array($containerData['contentlets'])) {
+                        foreach ($containerData['contentlets'] as $uuid => $contentletData) {
+                            $contentlets[$uuid] = array_map(function ($contentlet) {
+                                return new Contentlet(
+                                    identifier: $contentlet['identifier'] ?? '',
+                                    inode: $contentlet['inode'] ?? '',
+                                    title: $contentlet['title'] ?? '',
+                                    contentType: $contentlet['contentType'] ?? '',
+                                    additionalProperties: array_diff_key($contentlet, array_flip([
+                                        'identifier',
+                                        'inode',
+                                        'title',
+                                        'contentType',
+                                    ]))
+                                );
+                            }, is_array($contentletData) ? $contentletData : []);
+                        }
+                    }
+
+                    $containers[$identifier] = new ContainerPage(
+                        container: $container,
+                        containerStructures: $containerStructures,
+                        rendered: $rendered,
+                        contentlets: $contentlets
+                    );
+                }
+            }
+
+            // Map rows and columns
+            $rows = array_map(function ($rowData) use ($containers) {
+                $columns = array_map(function ($columnData) use ($containers) {
+                    $containersRefs = array_map(function ($containerRef) use ($containers) {
+                        $uuid = $containerRef['uuid'] ?? '';
+                        $identifier = $containerRef['identifier'] ?? '';
+                        $containerPage = $containers[$identifier] ?? null;
+
+                        $variantId = null;
+                        if ($containerPage !== null
+                            && isset($containerPage->container['parentPermissionable'])
+                            && is_array($containerPage->container['parentPermissionable'])
+                            && isset($containerPage->container['parentPermissionable']['variantId'])) {
+                            $variantId = (string)$containerPage->container['parentPermissionable']['variantId'];
+                        }
+
+                        $contentlets = DotCmsHelper::extractContentlets($containerPage, $uuid);
+
+                        return new ContainerRef(
+                            identifier: $identifier,
+                            uuid: $uuid,
+                            historyUUIDs: $containerRef['historyUUIDs'] ?? [],
+                            contentlets: $contentlets,
+                            acceptTypes: $containerPage !== null ? DotCmsHelper::extractAcceptTypes($containerPage->containerStructures) : '',
+                            maxContentlets: $containerPage !== null ? $containerPage->container->maxContentlets : 0,
+                            variantId: $variantId
+                        );
+                    }, $columnData['containers'] ?? []);
+
+                    return new Column(
+                        containers: $containersRefs,
+                        width: $columnData['width'] ?? 0,
+                        widthPercent: $columnData['widthPercent'] ?? 0,
+                        leftOffset: $columnData['leftOffset'] ?? 0,
+                        styleClass: $columnData['styleClass'] ?? '',
+                        preview: $columnData['preview'] ?? false,
+                        left: $columnData['left'] ?? 0
+                    );
+                }, $rowData['columns'] ?? []);
+
+                return new Row(
+                    columns: $columns,
+                    styleClass: $rowData['styleClass'] ?? null
+                );
+            }, $rowsData);
+
+            $body = new Body($rows);
 
             $layout = new Layout(
                 width: $layoutData['width'] ?? null,
                 title: $layoutData['title'] ?? '',
                 header: $layoutData['header'] ?? false,
                 footer: $layoutData['footer'] ?? false,
-                body: $layoutData['body'] ?? ['rows' => []],
+                body: $body,
                 sidebar: $layoutData['sidebar'] ?? [
                     'containers' => [],
                     'location' => '',
@@ -252,10 +397,7 @@ class PageService
                 header: $templateData['header'] ?? true,
                 footer: $templateData['footer'] ?? true,
                 working: $templateData['working'] ?? false,
-                live: $templateData['live'] ?? false,
-                additionalProperties: array_diff_key($templateData, array_flip([
-                    'identifier', 'title', 'drawed', 'inode', 'friendlyName', 'header', 'footer', 'working', 'live',
-                ]))
+                live: $templateData['live'] ?? false
             );
 
             // Extract site data
@@ -274,9 +416,6 @@ class PageService
                     'identifier', 'hostname', 'inode', 'working', 'folder', 'locked', 'archived', 'live',
                 ]))
             );
-
-            // Extract containers
-            $containers = isset($entity['containers']) && is_array($entity['containers']) ? $entity['containers'] : [];
 
             // Extract urlContentMap if available
             $urlContentMap = null;
@@ -335,10 +474,21 @@ class PageService
             );
 
             // Create ViewAs
+            $languageData = isset($viewAsData['language']) && is_array($viewAsData['language']) ? $viewAsData['language'] : [];
+            $language = new Language(
+                id: $languageData['id'] ?? 0,
+                languageCode: $languageData['languageCode'] ?? '',
+                countryCode: $languageData['countryCode'] ?? '',
+                language: $languageData['language'] ?? '',
+                country: $languageData['country'] ?? '',
+                isoCode: $languageData['isoCode'] ?? ''
+            );
+
             $viewAs = new ViewAs(
                 visitor: $visitor,
-                language: [],
-                mode: $viewAsData['mode'] ?? 'LIVE'
+                language: $language,
+                mode: $viewAsData['mode'] ?? 'LIVE',
+                variantId: $viewAsData['variantId'] ?? ''
             );
 
             return new PageAsset(

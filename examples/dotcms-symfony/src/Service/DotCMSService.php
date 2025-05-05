@@ -3,8 +3,8 @@
 namespace App\Service;
 
 use Dotcms\PhpSdk\DotCMSClient;
-use Dotcms\PhpSdk\Model\PageAsset;
-use Dotcms\PhpSdk\Model\NavigationItem;
+use Dotcms\PhpSdk\Model\Page\PageAsset;
+use Dotcms\PhpSdk\Model\Content\NavigationItem;
 
 class DotCMSService
 {

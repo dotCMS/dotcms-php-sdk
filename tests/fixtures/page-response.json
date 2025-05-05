@@ -80,9 +80,11 @@
         "languageCode": "en",
         "countryCode": "US",
         "language": "English",
-        "country": "United States"
+        "country": "United States",
+        "isoCode": "en-US"
       },
-      "mode": "LIVE"
+      "mode": "LIVE",
+      "variantId": "variant-123"
     }
   }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Model;
+namespace Dotcms\PhpSdk\Model\Core;
 
 use Symfony\Component\Serializer\Annotation\Ignore;
 

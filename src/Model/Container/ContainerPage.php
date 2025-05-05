@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Container;
 
-use Dotcms\PhpSdk\Model\Contentlet;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
 
-class ContainerPage implements \JsonSerializable
+class ContainerPage
 {
     /**
      * @param Container $container Container details
@@ -20,20 +20,5 @@ class ContainerPage implements \JsonSerializable
         public readonly array $rendered = [],
         public readonly array $contentlets = [],
     ) {
-    }
-
-    /**
-     * Specify data which should be serialized to JSON
-     *
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): array
-    {
-        return [
-            'containerStructures' => $this->containerStructures,
-            'rendered' => $this->rendered,
-            'contentlets' => $this->contentlets,
-            'container' => $this->container,
-        ];
     }
 }

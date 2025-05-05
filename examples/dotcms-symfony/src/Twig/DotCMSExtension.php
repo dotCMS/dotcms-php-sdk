@@ -3,6 +3,7 @@
 namespace App\Twig;
 
 use Dotcms\PhpSdk\Utils\DotCmsHelper;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
 use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
@@ -20,7 +21,6 @@ class DotCMSExtension extends AbstractExtension
     {
         return [
             new TwigFunction('getGridClass', [$this, 'getGridClass']),
-            new TwigFunction('getContainersData', [$this, 'getContainersData']),
             new TwigFunction('generateHtmlBasedOnProperty', [$this, 'generateHtmlBasedOnProperty'], ['is_safe' => ['html']]),
             new TwigFunction('htmlAttr', [$this, 'htmlAttr'], ['is_safe' => ['html']])
         ];
@@ -40,31 +40,22 @@ class DotCMSExtension extends AbstractExtension
         };
     }
 
-    public function generateHtmlBasedOnProperty(array $content): string 
+    public function generateHtmlBasedOnProperty(Contentlet $content): string 
     {
-        if (!isset($content['contentType'])) {
+        if (empty($content)) {
             return '';
         }
 
-        $twig = $this->twig;
-        $template = match($content['contentType']) {
-            'Banner' => 'dotcms/content-types/banner.twig',
-            'Product' => 'dotcms/content-types/product.twig',
-            'Activity' => 'dotcms/content-types/activity.twig',
-            default => ''
-        };
-
-        if (empty($template)) {
-            // Fall back to the SDK simple content HTML renderer if no template is found
-            return DotCmsHelper::simpleContentHtml($content);
+        $contentType = $content->contentType;
+        if ($contentType) {
+            $template = 'dotcms/content-types/' . strtolower($contentType) . '.twig';
+            if ($this->twig->getLoader()->exists($template)) {
+                return $this->twig->render($template, ['content' => $content]);
+            }
         }
 
-        try {
-            return $twig->render($template, ['content' => $content]);
-        } catch (\Exception $e) {
-            // Fall back to the SDK simple content HTML renderer if rendering fails
-            return DotCmsHelper::simpleContentHtml($content);
-        }
+        // Fall back to the SDK simple HTML renderer
+        return DotCmsHelper::simpleContentHtml($content->jsonSerialize());
     }
 
     public function getContainersData(array $containers, array $containerRef): array 

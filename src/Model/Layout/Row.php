@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Layout;
 
-class Row implements \JsonSerializable
+class Row
 {
     /**
      * @param Column[] $columns Array of Column objects
@@ -14,18 +14,5 @@ class Row implements \JsonSerializable
         public readonly array $columns,
         public readonly ?string $styleClass = null,
     ) {
-    }
-
-    /**
-     * Specify data which should be serialized to JSON
-     *
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): array
-    {
-        return [
-            'columns' => $this->columns,
-            'styleClass' => $this->styleClass,
-        ];
     }
 }

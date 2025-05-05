@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Layout;
 
-class Column implements \JsonSerializable
+class Column
 {
     /**
      * @param ContainerRef[] $containers Array of container references
@@ -25,23 +25,5 @@ class Column implements \JsonSerializable
         public readonly bool $preview = false,
         public readonly int $left = 0,
     ) {
-    }
-
-    /**
-     * Specify data which should be serialized to JSON
-     *
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): array
-    {
-        return [
-            'containers' => $this->containers,
-            'width' => $this->width,
-            'widthPercent' => $this->widthPercent,
-            'leftOffset' => $this->leftOffset,
-            'styleClass' => $this->styleClass,
-            'preview' => $this->preview,
-            'left' => $this->left,
-        ];
     }
 }
