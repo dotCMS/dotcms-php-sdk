@@ -339,6 +339,74 @@ These utilities help with common tasks like:
 - Working with container structures and contentlets
 - Extracting data from container pages
 
+## Data Access Patterns
+
+The SDK provides two ways to access data: object notation and array access. Here's when to use each:
+
+### Object Notation (->)
+
+Use object notation for accessing standard properties of these classes:
+
+```php
+// Page and Site properties
+$page->title
+$page->pageUrl
+$site->hostname
+
+// Container properties
+$container->identifier
+$container->title
+$container->maxContentlets
+
+// Contentlet properties
+$contentlet->identifier
+$contentlet->title
+$contentlet->contentType
+
+// Navigation properties
+$nav->title
+$nav->href
+$nav->type
+```
+
+### Array Access ([])
+
+Use array access for:
+1. Additional properties not explicitly defined in the class
+2. Accessing container contentlets by UUID
+3. Accessing rendered content by UUID
+
+```php
+// Additional properties
+$contentlet['customField']
+$page['metadata']
+
+// Container contentlets
+$container->contentlets['uuid-123']
+
+// Rendered content
+$container->rendered['uuid-123']
+```
+
+### Classes That Support Both
+
+These classes support both object and array access:
+- `Page`
+- `Site`
+- `Contentlet`
+- `Container`
+- Any class extending `AbstractModel`
+
+### Classes That Only Support Object Access
+
+These classes only support object notation:
+- `PageAsset`
+- `ContainerPage`
+- `NavigationItem`
+- `Layout`
+- `Template`
+- `VanityUrl`
+
 ## API Reference
 
 ### DotCMSClient
