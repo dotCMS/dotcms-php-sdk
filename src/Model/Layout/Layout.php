@@ -60,7 +60,9 @@ class Layout extends AbstractModel
                 'title' => $this->title,
                 'header' => $this->header,
                 'footer' => $this->footer,
-                'body' => $this->body,
+                'body' => [
+                    'rows' => $this->body->rows,
+                ],
                 'sidebar' => $this->sidebar,
                 'version' => $this->version,
             ],

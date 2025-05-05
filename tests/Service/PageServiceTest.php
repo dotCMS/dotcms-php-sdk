@@ -322,29 +322,30 @@ class PageServiceTest extends TestCase
         $this->assertEquals('anonymouslayout1600437132653', $json['title']);
         $this->assertTrue($json['header']);
         $this->assertTrue($json['footer']);
-        $this->assertArrayHasKey('body', $json);
+        $this->assertIsArray($json['body']);
         $this->assertArrayHasKey('rows', $json['body']);
         $this->assertCount(1, $json['body']['rows']);
+        $this->assertEquals('p-0 banner-tall', $json['body']['rows'][0]->styleClass);
 
         $firstRow = $json['body']['rows'][0];
-        $this->assertEquals('p-0 banner-tall', $firstRow['styleClass']);
-        $this->assertArrayHasKey('columns', $firstRow);
-        $this->assertCount(1, $firstRow['columns']);
+        $this->assertEquals('p-0 banner-tall', $firstRow->styleClass);
+        $this->assertIsArray($firstRow->columns);
+        $this->assertCount(1, $firstRow->columns);
 
-        $firstColumn = $firstRow['columns'][0];
-        $this->assertEquals(12, $firstColumn['width']);
-        $this->assertEquals(100, $firstColumn['widthPercent']);
-        $this->assertEquals(1, $firstColumn['leftOffset']);
-        $this->assertEquals('banner-tall', $firstColumn['styleClass']);
-        $this->assertFalse($firstColumn['preview']);
-        $this->assertEquals(0, $firstColumn['left']);
-        $this->assertArrayHasKey('containers', $firstColumn);
-        $this->assertCount(1, $firstColumn['containers']);
+        $firstColumn = $firstRow->columns[0];
+        $this->assertEquals(12, $firstColumn->width);
+        $this->assertEquals(100, $firstColumn->widthPercent);
+        $this->assertEquals(1, $firstColumn->leftOffset);
+        $this->assertEquals('banner-tall', $firstColumn->styleClass);
+        $this->assertFalse($firstColumn->preview);
+        $this->assertEquals(0, $firstColumn->left);
+        $this->assertIsArray($firstColumn->containers);
+        $this->assertCount(1, $firstColumn->containers);
 
-        $firstContainer = $firstColumn['containers'][0];
-        $this->assertEquals('//demo.dotcms.com/application/containers/banner/', $firstContainer['identifier']);
-        $this->assertEquals('1', $firstContainer['uuid']);
-        $this->assertEquals(['1'], $firstContainer['historyUUIDs']);
+        $firstContainer = $firstColumn->containers[0];
+        $this->assertEquals('//demo.dotcms.com/application/containers/banner/', $firstContainer->identifier);
+        $this->assertEquals('1', $firstContainer->uuid);
+        $this->assertEquals(['1'], $firstContainer->historyUUIDs);
 
         $this->assertEquals([
             'containers' => [],
