@@ -83,44 +83,24 @@ class PageAssetTest extends TestCase
     {
         $pageAsset = $this->createPageAsset();
 
-        $json = $pageAsset->jsonSerialize();
-
-        // Check that the layout property exists and is a Layout object
-        $this->assertArrayHasKey('layout', $json);
-        $this->assertInstanceOf(Layout::class, $json['layout']);
-
-        // Check that the template property exists and is a JsonSerializable object
-        $this->assertArrayHasKey('template', $json);
-        $this->assertInstanceOf(\JsonSerializable::class, $pageAsset->template);
-
-        // Check that the page property exists and is a JsonSerializable object
-        $this->assertArrayHasKey('page', $json);
-        $this->assertInstanceOf(\JsonSerializable::class, $pageAsset->page);
-
-        $this->assertIsArray($json['containers']);
-
-        // Check that the site property exists and is a JsonSerializable object
-        $this->assertArrayHasKey('site', $json);
-        $this->assertInstanceOf(\JsonSerializable::class, $pageAsset->site);
-
-        $this->assertNull($json['urlContentMap']);
-
-        // Check that the viewAs property exists and is a JsonSerializable object
-        $this->assertArrayHasKey('viewAs', $json);
-        $this->assertInstanceOf(\JsonSerializable::class, $pageAsset->viewAs);
+        // Check that properties exist and are of correct type
+        $this->assertInstanceOf(Layout::class, $pageAsset->layout);
+        $this->assertInstanceOf(Template::class, $pageAsset->template);
+        $this->assertInstanceOf(Page::class, $pageAsset->page);
+        $this->assertIsArray($pageAsset->containers);
+        $this->assertInstanceOf(Site::class, $pageAsset->site);
+        $this->assertNull($pageAsset->urlContentMap);
+        $this->assertInstanceOf(ViewAs::class, $pageAsset->viewAs);
 
         // Test that nested objects have the expected properties
-        $templateJson = $pageAsset->template->jsonSerialize();
-        $this->assertEquals('template-id', $templateJson['identifier']);
-        $this->assertEquals('Test Template', $templateJson['title']);
+        $this->assertEquals('template-id', $pageAsset->template->identifier);
+        $this->assertEquals('Test Template', $pageAsset->template->title);
 
-        $pageJson = $pageAsset->page->jsonSerialize();
-        $this->assertEquals('page-id', $pageJson['identifier']);
-        $this->assertEquals('Test Page', $pageJson['title']);
-        $this->assertEquals('/test-page', $pageJson['pageUrl']);
+        $this->assertEquals('page-id', $pageAsset->page->identifier);
+        $this->assertEquals('Test Page', $pageAsset->page->title);
+        $this->assertEquals('/test-page', $pageAsset->page->pageUrl);
 
-        $siteJson = $pageAsset->site->jsonSerialize();
-        $this->assertEquals('site-id', $siteJson['identifier']);
-        $this->assertEquals('demo.dotcms.com', $siteJson['hostname']);
+        $this->assertEquals('site-id', $pageAsset->site->identifier);
+        $this->assertEquals('demo.dotcms.com', $pageAsset->site->hostname);
     }
 }
