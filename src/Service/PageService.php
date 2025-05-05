@@ -330,7 +330,7 @@ class PageService
                         $containerPage = $containers[$identifier] ?? null;
 
                         $variantId = null;
-                        if ($containerPage !== null 
+                        if ($containerPage !== null
                             && isset($containerPage->container['parentPermissionable'])
                             && is_array($containerPage->container['parentPermissionable'])
                             && isset($containerPage->container['parentPermissionable']['variantId'])) {
