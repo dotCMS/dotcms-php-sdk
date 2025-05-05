@@ -330,7 +330,8 @@ class PageService
                         $containerPage = $containers[$identifier] ?? null;
 
                         $variantId = null;
-                        if (isset($containerPage->container['parentPermissionable'])
+                        if ($containerPage !== null 
+                            && isset($containerPage->container['parentPermissionable'])
                             && is_array($containerPage->container['parentPermissionable'])
                             && isset($containerPage->container['parentPermissionable']['variantId'])) {
                             $variantId = (string)$containerPage->container['parentPermissionable']['variantId'];
@@ -343,8 +344,8 @@ class PageService
                             uuid: $uuid,
                             historyUUIDs: $containerRef['historyUUIDs'] ?? [],
                             contentlets: $contentlets,
-                            acceptTypes: DotCmsHelper::extractAcceptTypes($containerPage->containerStructures),
-                            maxContentlets: $containerPage->container->maxContentlets,
+                            acceptTypes: $containerPage !== null ? DotCmsHelper::extractAcceptTypes($containerPage->containerStructures) : '',
+                            maxContentlets: $containerPage !== null ? $containerPage->container->maxContentlets : 0,
                             variantId: $variantId
                         );
                     }, $columnData['containers'] ?? []);
