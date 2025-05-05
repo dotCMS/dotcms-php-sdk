@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
+use Dotcms\PhpSdk\Model\Container\Container;
+use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Container\ContainerStructure;
+use Dotcms\PhpSdk\Model\Contentlet;
 use Dotcms\PhpSdk\Model\Language;
 use Dotcms\PhpSdk\Model\Layout\Layout;
 use Dotcms\PhpSdk\Model\Page;
@@ -42,6 +46,42 @@ class PageAssetTest extends TestCase
             isoCode: 'en-us'
         );
 
+        // Create container structure
+        $containerStructure = new ContainerStructure(
+            id: 'structure-123',
+            structureId: 'struct-456',
+            containerInode: 'inode-789',
+            containerId: 'container-101',
+            code: 'test-container',
+            contentTypeVar: 'content-type-var'
+        );
+
+        // Create container
+        $container = new Container(
+            identifier: 'container-101',
+            inode: 'inode-789',
+            title: 'Test Container',
+            path: '/test-container',
+            working: true,
+            live: true
+        );
+
+        // Create contentlet
+        $contentlet = new Contentlet(
+            identifier: 'content-123',
+            inode: 'content-inode-456',
+            title: 'Test Content',
+            contentType: 'content-type'
+        );
+
+        // Create container page
+        $containerPage = new ContainerPage(
+            container: $container,
+            containerStructures: [$containerStructure],
+            rendered: ['uuid-123' => '<div>Test Content</div>'],
+            contentlets: ['uuid-123' => [$contentlet]]
+        );
+
         return new PageAsset(
             new Layout(),
             new Template('template-id', 'Test Template', true), // drawed=true
@@ -56,7 +96,7 @@ class PageAssetTest extends TestCase
                 'demo.dotcms.com', // hostName
                 'site-id' // host
             ),
-            [], // containers
+            [$containerPage], // containers
             new Site('site-id', 'demo.dotcms.com'),
             null, // urlContentMap
             new ViewAs($visitor, $language, 'PREVIEW', 'variant-123')
@@ -80,6 +120,34 @@ class PageAssetTest extends TestCase
         $this->assertEquals('page-id', $pageAsset->page->identifier);
         $this->assertEquals('Test Page', $pageAsset->page->title);
         $this->assertEquals('/test-page', $pageAsset->page->pageUrl);
+
+        // Check container page properties
+        $this->assertCount(1, $pageAsset->containers);
+        $containerPage = $pageAsset->containers[0];
+        $this->assertInstanceOf(ContainerPage::class, $containerPage);
+
+        // Check container
+        $this->assertEquals('container-101', $containerPage->container->identifier);
+        $this->assertEquals('Test Container', $containerPage->container->title);
+        $this->assertTrue($containerPage->container->working);
+        $this->assertTrue($containerPage->container->live);
+
+        // Check container structure
+        $this->assertCount(1, $containerPage->containerStructures);
+        $structure = $containerPage->containerStructures[0];
+        $this->assertEquals('structure-123', $structure->id);
+        $this->assertEquals('test-container', $structure->code);
+
+        // Check rendered content
+        $this->assertArrayHasKey('uuid-123', $containerPage->rendered);
+        $this->assertEquals('<div>Test Content</div>', $containerPage->rendered['uuid-123']);
+
+        // Check contentlets
+        $this->assertArrayHasKey('uuid-123', $containerPage->contentlets);
+        $this->assertCount(1, $containerPage->contentlets['uuid-123']);
+        $contentlet = $containerPage->contentlets['uuid-123'][0];
+        $this->assertEquals('content-123', $contentlet->identifier);
+        $this->assertEquals('Test Content', $contentlet->title);
     }
 
     public function testJsonSerialize(): void
@@ -105,5 +173,31 @@ class PageAssetTest extends TestCase
 
         $this->assertEquals('site-id', $pageAsset->site->identifier);
         $this->assertEquals('demo.dotcms.com', $pageAsset->site->hostname);
+
+        // Test container page properties
+        $this->assertCount(1, $pageAsset->containers);
+        $containerPage = $pageAsset->containers[0];
+        $this->assertInstanceOf(ContainerPage::class, $containerPage);
+
+        // Check container
+        $this->assertEquals('container-101', $containerPage->container->identifier);
+        $this->assertEquals('Test Container', $containerPage->container->title);
+
+        // Check container structure
+        $this->assertCount(1, $containerPage->containerStructures);
+        $structure = $containerPage->containerStructures[0];
+        $this->assertEquals('structure-123', $structure->id);
+        $this->assertEquals('test-container', $structure->code);
+
+        // Check rendered content
+        $this->assertArrayHasKey('uuid-123', $containerPage->rendered);
+        $this->assertEquals('<div>Test Content</div>', $containerPage->rendered['uuid-123']);
+
+        // Check contentlets
+        $this->assertArrayHasKey('uuid-123', $containerPage->contentlets);
+        $this->assertCount(1, $containerPage->contentlets['uuid-123']);
+        $contentlet = $containerPage->contentlets['uuid-123'][0];
+        $this->assertEquals('content-123', $contentlet->identifier);
+        $this->assertEquals('Test Content', $contentlet->title);
     }
 }

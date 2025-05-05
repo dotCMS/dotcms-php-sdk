@@ -27,4 +27,4 @@ class ContainerStructureTest extends TestCase
         $this->assertEquals('test-container', $containerStructure->code);
         $this->assertEquals('content-type-var', $containerStructure->contentTypeVar);
     }
-} 
+}
