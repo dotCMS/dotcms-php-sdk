@@ -1,16 +1,13 @@
-{% set containerObject = getContainersData(containers, container) %}
-{% set containerContent = containers[container.identifier].contentlets['uuid-' ~ container.uuid]|default([]) %}
-
 {% set containerAttrs = {
     'data-dot-object': 'container',
-    'data-dot-identifier': containerObject.path|default(containerObject.identifier),
-    'data-dot-accept-types': containerObject.acceptTypes,
-    'data-max-contentlets': containerObject.maxContentlets,
+    'data-dot-identifier': container.identifier,
+    'data-dot-accept-types': container.acceptTypes,
+    'data-max-contentlets': container.maxContentlets,
     'data-dot-uuid': container.uuid
 } %}
 
 <div {{ htmlAttr(containerAttrs) }}>
-    {% for content in containerContent %}
+    {% for content in container.contentlets %}
         {% set contentAttrs = {
             'data-dot-object': 'contentlet',
             'data-dot-identifier': content.identifier,
@@ -19,10 +16,10 @@
             'data-dot-inode': content.inode,
             'data-dot-type': content.contentType,
             'data-dot-container': {
-                'acceptTypes': containerObject.acceptTypes,
-                'identifier': containerObject.path|default(containerObject.identifier),
-                'maxContentlets': containerObject.maxContentlets,
-                'variantId': containerObject.variantId,
+                'acceptTypes': container.acceptTypes,
+                'identifier': container.identifier,
+                'maxContentlets': container.maxContentlets,
+                'variantId': container.variantId,
                 'uuid': container.uuid
             }|json_encode
         } %}
