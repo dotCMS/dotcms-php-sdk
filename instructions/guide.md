@@ -760,15 +760,14 @@ $containerAttrs = [
     'data-dot-object' => 'container',
     'data-dot-identifier' => $identifier,
     'data-dot-uuid' => $uuid,
-    'data-dot-accept-types' => $container->acceptTypes ?? '',
-    'data-max-contentlets' => $container->maxContentlets ?? 0
+    'data-dot-accept-types' => $containerRef->acceptTypes ?? '',
+    'data-max-contentlets' => $containerRef->maxContentlets ?? 0
 ];
 
 ?>
 <div<?= $containerAttrs ?>>
     <?php
-    // Note: dotCMS stores contentlets with a "uuid-" prefix in lowercase
-    $contentlets = $pageAsset->containers[$identifier]->contentlets[strtolower("uuid-" . $uuid)] ?? null;
+    $contentlets = $containerRef->contentlets
 
     if ($contentlets) {
         foreach ($contentlets as $contentlet) {
