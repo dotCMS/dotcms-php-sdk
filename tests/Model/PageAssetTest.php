@@ -85,9 +85,9 @@ class PageAssetTest extends TestCase
 
         $json = $pageAsset->jsonSerialize();
 
-        // Check that the layout property exists and is a JsonSerializable object
+        // Check that the layout property exists and is a Layout object
         $this->assertArrayHasKey('layout', $json);
-        $this->assertInstanceOf(\JsonSerializable::class, $pageAsset->layout);
+        $this->assertInstanceOf(Layout::class, $json['layout']);
 
         // Check that the template property exists and is a JsonSerializable object
         $this->assertArrayHasKey('template', $json);

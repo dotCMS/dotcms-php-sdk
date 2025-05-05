@@ -4,9 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\Layout;
 
-use Dotcms\PhpSdk\Model\AbstractModel;
-
-class Layout extends AbstractModel
+class Layout
 {
     /**
      * @param string|null $width Layout width
@@ -16,7 +14,6 @@ class Layout extends AbstractModel
      * @param Body $body The body containing rows
      * @param array{containers: ContainerRef[], location: string, width: string, widthPercent: int, preview: bool} $sidebar Sidebar configuration
      * @param int $version Layout version
-     * @param array<string, mixed> $additionalProperties Additional properties
      */
     public function __construct(
         public readonly ?string $width = null,
@@ -32,9 +29,7 @@ class Layout extends AbstractModel
             'preview' => false,
         ],
         public readonly int $version = 1,
-        array $additionalProperties = [],
     ) {
-        $this->setAdditionalProperties($additionalProperties);
     }
 
     /**
@@ -45,28 +40,5 @@ class Layout extends AbstractModel
     public function getSidebarContainers(): array
     {
         return $this->sidebar['containers'] ?? [];
-    }
-
-    /**
-     * Specify data which should be serialized to JSON
-     *
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): array
-    {
-        return array_merge(
-            [
-                'width' => $this->width,
-                'title' => $this->title,
-                'header' => $this->header,
-                'footer' => $this->footer,
-                'body' => [
-                    'rows' => $this->body->rows,
-                ],
-                'sidebar' => $this->sidebar,
-                'version' => $this->version,
-            ],
-            $this->getAdditionalProperties()
-        );
     }
 }

@@ -316,18 +316,15 @@ class PageServiceTest extends TestCase
         $this->assertInstanceOf(Row::class, $layout->body->rows[0]);
         $this->assertEquals('p-0 banner-tall', $layout->body->rows[0]->styleClass);
 
-        $json = $layout->jsonSerialize();
+        $this->assertNull($layout->width);
+        $this->assertEquals('anonymouslayout1600437132653', $layout->title);
+        $this->assertTrue($layout->header);
+        $this->assertTrue($layout->footer);
+        $this->assertInstanceOf(Body::class, $layout->body);
+        $this->assertCount(1, $layout->body->rows);
+        $this->assertEquals('p-0 banner-tall', $layout->body->rows[0]->styleClass);
 
-        $this->assertNull($json['width']);
-        $this->assertEquals('anonymouslayout1600437132653', $json['title']);
-        $this->assertTrue($json['header']);
-        $this->assertTrue($json['footer']);
-        $this->assertIsArray($json['body']);
-        $this->assertArrayHasKey('rows', $json['body']);
-        $this->assertCount(1, $json['body']['rows']);
-        $this->assertEquals('p-0 banner-tall', $json['body']['rows'][0]->styleClass);
-
-        $firstRow = $json['body']['rows'][0];
+        $firstRow = $layout->body->rows[0];
         $this->assertEquals('p-0 banner-tall', $firstRow->styleClass);
         $this->assertIsArray($firstRow->columns);
         $this->assertCount(1, $firstRow->columns);
@@ -353,7 +350,7 @@ class PageServiceTest extends TestCase
             'width' => 'small',
             'widthPercent' => 20,
             'preview' => false,
-        ], $json['sidebar']);
-        $this->assertEquals(1, $json['version']);
+        ], $layout->sidebar);
+        $this->assertEquals(1, $layout->version);
     }
 }

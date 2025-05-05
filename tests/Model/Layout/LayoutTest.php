@@ -156,23 +156,20 @@ class LayoutTest extends TestCase
             version: 2
         );
 
-        $json = $layout->jsonSerialize();
-
-        $this->assertEquals('100%', $json['width']);
-        $this->assertEquals('Test Layout', $json['title']);
-        $this->assertFalse($json['header']);
-        $this->assertFalse($json['footer']);
-        $this->assertIsArray($json['body']);
-        $this->assertArrayHasKey('rows', $json['body']);
-        $this->assertCount(1, $json['body']['rows']);
-        $this->assertEquals('p-0 banner-tall', $json['body']['rows'][0]->styleClass);
+        $this->assertEquals('100%', $layout->width);
+        $this->assertEquals('Test Layout', $layout->title);
+        $this->assertFalse($layout->header);
+        $this->assertFalse($layout->footer);
+        $this->assertInstanceOf(Body::class, $layout->body);
+        $this->assertCount(1, $layout->body->rows);
+        $this->assertEquals('p-0 banner-tall', $layout->body->rows[0]->styleClass);
         $this->assertEquals([
             'containers' => [$containerRef],
             'location' => 'left',
             'width' => 'medium',
             'widthPercent' => 30,
             'preview' => true,
-        ], $json['sidebar']);
-        $this->assertEquals(2, $json['version']);
+        ], $layout->sidebar);
+        $this->assertEquals(2, $layout->version);
     }
 }
