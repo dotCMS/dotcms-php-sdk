@@ -600,10 +600,7 @@ if (!isset($containerRef)) {
 global $pageAsset;
 
 $identifier = $containerRef->identifier ?? null;
-$uuid = $containerRef->uuid ?? null;
-
-// Note: dotCMS stores contentlets with a "uuid-" prefix in lowercase
-$contentlets = $pageAsset->containers[$identifier]->contentlets[strtolower("uuid-" . $uuid)] ?? null;
+$contentlets = $containerRef->contentlets ?? null
 
 if ($contentlets) {
     foreach ($contentlets as $contentlet) {
@@ -756,8 +753,7 @@ if (!isset($containerRef)) {
 global $pageAsset;
 
 $identifier = $containerRef->identifier ?? null;
-$uuid = $containerRef->uuid ?? null;
-$container = $pageAsset->containers[$identifier] ?? null;
+$contentlets = $containerRef->contentlets ?? null
 
 // Container attributes for UVE
 $containerAttrs = [
