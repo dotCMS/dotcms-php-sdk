@@ -23,10 +23,10 @@ $containerAttrs = [
             'data-dot-type' => $content['contentType'] ?? '',
             'data-dot-container' => json_encode([
                 'acceptTypes' => $containerObject['acceptTypes'] ?? '',
-                'identifier' => $container['identifier'] ?? '',
+                'identifier' => $containerRef->identifier ?? '',
                 'maxContentlets' => $containerObject['maxContentlets'] ?? '',
                 'variantId' => $containerObject['variantId'] ?? '',
-                'uuid' => $container['uuid'] ?? ''
+                'uuid' => $containerRef->uuid ?? ''
             ])
         ];
         @endphp
