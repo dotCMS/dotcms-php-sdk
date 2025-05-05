@@ -61,4 +61,4 @@ class ViewAsTest extends TestCase
         $this->assertEquals(-80.1937, $viewAs->visitor->geo->longitude);
         $this->assertEquals('Florida', $viewAs->visitor->geo->region);
     }
-} 
+}
