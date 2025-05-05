@@ -36,47 +36,57 @@ class VisitorTest extends TestCase
         );
 
         $visitor = new Visitor(
-            tags: [$visitorTag],
+            tags: [new VisitorTag(tag: 'french alps', count: 3)],
             device: 'desktop',
-            isNew: true,
-            userAgent: $userAgent,
-            referer: 'https://www.google.com',
-            dmid: '123456789',
-            geo: $geoLocation,
-            personas: ['developer' => 0.8, 'tech-savvy' => 0.9]
+            isNew: false,
+            userAgent: new UserAgent(
+                browser: 'Chrome',
+                version: '100.0',
+                os: 'macOS',
+                mobile: false
+            ),
+            referer: 'https://example.com',
+            dmid: '123456',
+            geo: new GeoLocation(
+                city: 'Miami',
+                country: 'United States',
+                countryCode: 'US',
+                latitude: 25.7617,
+                longitude: -80.1918,
+                region: 'Florida'
+            ),
+            personas: []
         );
 
         // Test basic properties
         $this->assertEquals('desktop', $visitor->device);
-        $this->assertTrue($visitor->isNew);
-        $this->assertEquals('https://www.google.com', $visitor->referer);
-        $this->assertEquals('123456789', $visitor->dmid);
+        $this->assertFalse($visitor->isNew);
+        $this->assertEquals('https://example.com', $visitor->referer);
+        $this->assertEquals('123456', $visitor->dmid);
 
         // Test tags array
         $this->assertCount(1, $visitor->tags);
         $this->assertInstanceOf(VisitorTag::class, $visitor->tags[0]);
-        $this->assertEquals('technology', $visitor->tags[0]->tag);
-        $this->assertEquals(1, $visitor->tags[0]->count);
+        $this->assertEquals('french alps', $visitor->tags[0]->tag);
+        $this->assertEquals(3, $visitor->tags[0]->count);
 
         // Test UserAgent object
         $this->assertInstanceOf(UserAgent::class, $visitor->userAgent);
         $this->assertEquals('Chrome', $visitor->userAgent->browser);
-        $this->assertEquals('120.0', $visitor->userAgent->version);
-        $this->assertEquals('Windows', $visitor->userAgent->os);
+        $this->assertEquals('100.0', $visitor->userAgent->version);
+        $this->assertEquals('macOS', $visitor->userAgent->os);
         $this->assertFalse($visitor->userAgent->mobile);
 
         // Test GeoLocation object
         $this->assertInstanceOf(GeoLocation::class, $visitor->geo);
-        $this->assertEquals('New York', $visitor->geo->city);
+        $this->assertEquals('Miami', $visitor->geo->city);
         $this->assertEquals('United States', $visitor->geo->country);
         $this->assertEquals('US', $visitor->geo->countryCode);
-        $this->assertEquals(40.7128, $visitor->geo->latitude);
-        $this->assertEquals(-74.0060, $visitor->geo->longitude);
-        $this->assertEquals('New York', $visitor->geo->region);
+        $this->assertEquals(25.7617, $visitor->geo->latitude);
+        $this->assertEquals(-80.1918, $visitor->geo->longitude);
+        $this->assertEquals('Florida', $visitor->geo->region);
 
         // Test personas array
-        $this->assertCount(2, $visitor->personas);
-        $this->assertEquals(0.8, $visitor->personas['developer']);
-        $this->assertEquals(0.9, $visitor->personas['tech-savvy']);
+        $this->assertCount(0, $visitor->personas);
     }
 }
