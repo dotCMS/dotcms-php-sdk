@@ -3,6 +3,7 @@
 namespace Dotcms\PhpSdk\Utils;
 
 use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Container\ContainerStructure;
 use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 
 /**
@@ -13,12 +14,12 @@ class DotCmsHelper
     /**
      * Extract accept types from container structures
      *
-     * @param array $containerStructures Array of container structures
+     * @param array<ContainerStructure> $containerStructures Array of container structures
      * @return string Comma-separated list of content type variables
      */
     public static function extractAcceptTypes(array $containerStructures): string
     {
-        return implode(',', array_column($containerStructures, 'contentTypeVar'));
+        return implode(',', array_map(fn (ContainerStructure $structure) => $structure->contentTypeVar, $containerStructures));
     }
 
     /**
@@ -30,7 +31,7 @@ class DotCmsHelper
      */
     public static function extractContentlets(ContainerPage $containerPage, ?string $uuid): array
     {
-        if ($uuid === null || !(is_string($uuid) || is_numeric($uuid))) {
+        if ($uuid === null || ! (is_string($uuid) || is_numeric($uuid))) {
             return [];
         }
 
@@ -50,7 +51,7 @@ class DotCmsHelper
      */
     public static function getContainerData(array $containers, ContainerRef $containerRef): ?array
     {
-        if (empty($containers) || empty($containerRef)) {
+        if (empty($containers)) {
             return null;
         }
 

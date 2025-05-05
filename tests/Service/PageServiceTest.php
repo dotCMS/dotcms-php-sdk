@@ -5,6 +5,12 @@ declare(strict_types=1);
 namespace Dotcms\PhpSdk\Tests\Service;
 
 use Dotcms\PhpSdk\Exception\ResponseException;
+use Dotcms\PhpSdk\Http\HttpClient;
+use Dotcms\PhpSdk\Http\Response;
+use Dotcms\PhpSdk\Model\Container\Container;
+use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Container\ContainerStructure;
+use Dotcms\PhpSdk\Model\Content\Contentlet;
 use Dotcms\PhpSdk\Model\Core\Language;
 use Dotcms\PhpSdk\Model\Layout\Body;
 use Dotcms\PhpSdk\Model\Layout\Column;
@@ -18,15 +24,8 @@ use Dotcms\PhpSdk\Request\PageRequest;
 use Dotcms\PhpSdk\Service\PageService;
 use GuzzleHttp\Handler\MockHandler;
 use GuzzleHttp\Promise\PromiseInterface;
-use GuzzleHttp\Psr7\Response as GuzzleResponse;
-use PHPUnit\Framework\TestCase;
-use Dotcms\PhpSdk\Http\HttpClient;
-use Dotcms\PhpSdk\Http\Response;
-use Dotcms\PhpSdk\Model\Container\Container;
-use Dotcms\PhpSdk\Model\Container\ContainerPage;
-use Dotcms\PhpSdk\Model\Container\ContainerStructure;
-use Dotcms\PhpSdk\Model\Content\Contentlet;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 
 class PageServiceTest extends TestCase
 {
@@ -57,7 +56,7 @@ class PageServiceTest extends TestCase
                     'host' => '48190c8c-42c4-46af-8d1a-0cd5db894797',
                     'contentType' => 'WebPageContent',
                     'live' => true,
-                    'working' => true
+                    'working' => true,
                 ],
                 'layout' => [
                     'title' => 'Default Layout',
@@ -65,8 +64,8 @@ class PageServiceTest extends TestCase
                     'header' => true,
                     'footer' => true,
                     'body' => [
-                        'rows' => []
-                    ]
+                        'rows' => [],
+                    ],
                 ],
                 'template' => [
                     'identifier' => 'c541abb1-69b3-4bc5-8430-5e09e5239cc8',
@@ -75,7 +74,7 @@ class PageServiceTest extends TestCase
                     'header' => true,
                     'footer' => true,
                     'live' => true,
-                    'working' => true
+                    'working' => true,
                 ],
                 'site' => [
                     'identifier' => '48190c8c-42c4-46af-8d1a-0cd5db894797',
@@ -83,20 +82,20 @@ class PageServiceTest extends TestCase
                     'live' => true,
                     'working' => true,
                     'locked' => false,
-                    'archived' => false
+                    'archived' => false,
                 ],
                 'viewAs' => [
                     'mode' => 'LIVE',
                     'variantId' => 'variant-123',
                     'visitor' => [
-                        'isNew' => true
+                        'isNew' => true,
                     ],
                     'language' => [
                         'id' => 1,
-                        'languageCode' => 'en'
-                    ]
-                ]
-            ]
+                        'languageCode' => 'en',
+                    ],
+                ],
+            ],
         ];
 
         $response = $this->createMock(Response::class);
@@ -159,7 +158,7 @@ class PageServiceTest extends TestCase
                 'page' => [
                     'identifier' => 'about-us',
                     'title' => 'About Us',
-                    'pageUrl' => 'about-us'
+                    'pageUrl' => 'about-us',
                 ],
                 'layout' => [
                     'title' => 'Default Layout',
@@ -167,28 +166,28 @@ class PageServiceTest extends TestCase
                     'header' => true,
                     'footer' => true,
                     'body' => [
-                        'rows' => []
-                    ]
+                        'rows' => [],
+                    ],
                 ],
                 'template' => [
                     'identifier' => 'test-template',
-                    'title' => 'Test Template'
+                    'title' => 'Test Template',
                 ],
                 'site' => [
                     'identifier' => 'test-site',
-                    'hostname' => 'test.com'
+                    'hostname' => 'test.com',
                 ],
                 'viewAs' => [
                     'mode' => 'LIVE',
                     'visitor' => [
-                        'isNew' => true
+                        'isNew' => true,
                     ],
                     'language' => [
                         'id' => 1,
-                        'languageCode' => 'en'
-                    ]
-                ]
-            ]
+                        'languageCode' => 'en',
+                    ],
+                ],
+            ],
         ];
 
         $response = $this->createMock(Response::class);
@@ -240,28 +239,28 @@ class PageServiceTest extends TestCase
                 'layout' => [
                     'title' => 'Test Layout',
                     'body' => [
-                        'rows' => []
-                    ]
+                        'rows' => [],
+                    ],
                 ],
                 'template' => [
                     'identifier' => 'test-template',
-                    'title' => 'Test Template'
+                    'title' => 'Test Template',
                 ],
                 'site' => [
                     'identifier' => 'test-site',
-                    'hostname' => 'test.com'
+                    'hostname' => 'test.com',
                 ],
                 'viewAs' => [
                     'mode' => 'LIVE',
                     'visitor' => [
-                        'isNew' => true
+                        'isNew' => true,
                     ],
                     'language' => [
                         'id' => 1,
-                        'languageCode' => 'en'
-                    ]
-                ]
-            ]
+                        'languageCode' => 'en',
+                    ],
+                ],
+            ],
         ];
 
         $response = $this->createMock(Response::class);
@@ -286,25 +285,25 @@ class PageServiceTest extends TestCase
         $responseData = [
             'entity' => [
                 'page' => [
-                    'identifier' => 'test-page'
+                    'identifier' => 'test-page',
                 ],
                 'template' => [
-                    'identifier' => 'test-template'
+                    'identifier' => 'test-template',
                 ],
                 'site' => [
-                    'identifier' => 'test-site'
+                    'identifier' => 'test-site',
                 ],
                 'viewAs' => [
                     'mode' => 'LIVE',
                     'visitor' => [
-                        'isNew' => true
+                        'isNew' => true,
                     ],
                     'language' => [
                         'id' => 1,
-                        'languageCode' => 'en'
-                    ]
-                ]
-            ]
+                        'languageCode' => 'en',
+                    ],
+                ],
+            ],
         ];
 
         $response = $this->createMock(Response::class);
@@ -329,28 +328,28 @@ class PageServiceTest extends TestCase
         $responseData = [
             'entity' => [
                 'page' => [
-                    'identifier' => 'test-page'
+                    'identifier' => 'test-page',
                 ],
                 'layout' => [
                     'title' => 'Test Layout',
                     'body' => [
-                        'rows' => []
-                    ]
+                        'rows' => [],
+                    ],
                 ],
                 'site' => [
-                    'identifier' => 'test-site'
+                    'identifier' => 'test-site',
                 ],
                 'viewAs' => [
                     'mode' => 'LIVE',
                     'visitor' => [
-                        'isNew' => true
+                        'isNew' => true,
                     ],
                     'language' => [
                         'id' => 1,
-                        'languageCode' => 'en'
-                    ]
-                ]
-            ]
+                        'languageCode' => 'en',
+                    ],
+                ],
+            ],
         ];
 
         $response = $this->createMock(Response::class);
@@ -375,28 +374,28 @@ class PageServiceTest extends TestCase
         $responseData = [
             'entity' => [
                 'page' => [
-                    'identifier' => 'test-page'
+                    'identifier' => 'test-page',
                 ],
                 'layout' => [
                     'title' => 'Test Layout',
                     'body' => [
-                        'rows' => []
-                    ]
+                        'rows' => [],
+                    ],
                 ],
                 'template' => [
-                    'identifier' => 'test-template'
+                    'identifier' => 'test-template',
                 ],
                 'viewAs' => [
                     'mode' => 'LIVE',
                     'visitor' => [
-                        'isNew' => true
+                        'isNew' => true,
                     ],
                     'language' => [
                         'id' => 1,
-                        'languageCode' => 'en'
-                    ]
-                ]
-            ]
+                        'languageCode' => 'en',
+                    ],
+                ],
+            ],
         ];
 
         $response = $this->createMock(Response::class);
@@ -421,7 +420,7 @@ class PageServiceTest extends TestCase
         $responseData = [
             'entity' => [
                 'page' => [
-                    'identifier' => 'test-page'
+                    'identifier' => 'test-page',
                 ],
                 'layout' => [
                     'title' => 'Test Layout',
@@ -431,32 +430,32 @@ class PageServiceTest extends TestCase
                                 'columns' => [
                                     [
                                         'width' => 12,
-                                        'containers' => []
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+                                        'containers' => [],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
                 'template' => [
                     'identifier' => 'test-template',
-                    'title' => 'Test Template'
+                    'title' => 'Test Template',
                 ],
                 'site' => [
                     'identifier' => 'test-site',
-                    'hostname' => 'test.com'
+                    'hostname' => 'test.com',
                 ],
                 'viewAs' => [
                     'mode' => 'LIVE',
                     'visitor' => [
-                        'isNew' => true
+                        'isNew' => true,
                     ],
                     'language' => [
                         'id' => 1,
-                        'languageCode' => 'en'
-                    ]
-                ]
-            ]
+                        'languageCode' => 'en',
+                    ],
+                ],
+            ],
         ];
 
         $response = $this->createMock(Response::class);
@@ -559,7 +558,7 @@ class PageServiceTest extends TestCase
                 'page' => [
                     'identifier' => 'test-page',
                     'title' => 'Test Page',
-                    'pageUrl' => '/test-page'
+                    'pageUrl' => '/test-page',
                 ],
                 'layout' => [
                     'body' => [
@@ -571,14 +570,14 @@ class PageServiceTest extends TestCase
                                             [
                                                 'identifier' => 'test-container',
                                                 'uuid' => 'test-uuid',
-                                                'historyUUIDs' => ['history-1']
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+                                                'historyUUIDs' => ['history-1'],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
                 'containers' => [
                     'test-container' => [
@@ -589,8 +588,8 @@ class PageServiceTest extends TestCase
                             'path' => '/test-container',
                             'maxContentlets' => 5,
                             'parentPermissionable' => [
-                                'variantId' => 123
-                            ]
+                                'variantId' => 123,
+                            ],
                         ],
                         'containerStructures' => [
                             [
@@ -599,8 +598,8 @@ class PageServiceTest extends TestCase
                                 'containerInode' => 'test-inode',
                                 'containerId' => 'test-container',
                                 'code' => '<div>Test</div>',
-                                'contentTypeVar' => 'test-type'
-                            ]
+                                'contentTypeVar' => 'test-type',
+                            ],
                         ],
                         'contentlets' => [
                             'uuid-test-uuid' => [
@@ -608,31 +607,31 @@ class PageServiceTest extends TestCase
                                     'identifier' => 'content-1',
                                     'inode' => 'content-inode-1',
                                     'title' => 'Test Content',
-                                    'contentType' => 'test-type'
-                                ]
-                            ]
-                        ]
-                    ]
+                                    'contentType' => 'test-type',
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
                 'template' => [
                     'identifier' => 'test-template',
-                    'title' => 'Test Template'
+                    'title' => 'Test Template',
                 ],
                 'site' => [
                     'identifier' => 'test-site',
-                    'hostname' => 'test.com'
+                    'hostname' => 'test.com',
                 ],
                 'viewAs' => [
                     'mode' => 'LIVE',
                     'visitor' => [
-                        'isNew' => true
+                        'isNew' => true,
                     ],
                     'language' => [
                         'id' => 1,
-                        'languageCode' => 'en'
-                    ]
-                ]
-            ]
+                        'languageCode' => 'en',
+                    ],
+                ],
+            ],
         ];
 
         // Mock HTTP client response
@@ -699,7 +698,7 @@ class PageServiceTest extends TestCase
                 'page' => [
                     'identifier' => 'test-page',
                     'title' => 'Test Page',
-                    'pageUrl' => '/test-page'
+                    'pageUrl' => '/test-page',
                 ],
                 'layout' => [
                     'body' => [
@@ -711,35 +710,35 @@ class PageServiceTest extends TestCase
                                             [
                                                 'identifier' => 'missing-container',
                                                 'uuid' => 'test-uuid',
-                                                'historyUUIDs' => ['history-1']
-                                            ]
-                                        ]
-                                    ]
-                                ]
-                            ]
-                        ]
-                    ]
+                                                'historyUUIDs' => ['history-1'],
+                                            ],
+                                        ],
+                                    ],
+                                ],
+                            ],
+                        ],
+                    ],
                 ],
                 'containers' => [],
                 'template' => [
                     'identifier' => 'test-template',
-                    'title' => 'Test Template'
+                    'title' => 'Test Template',
                 ],
                 'site' => [
                     'identifier' => 'test-site',
-                    'hostname' => 'test.com'
+                    'hostname' => 'test.com',
                 ],
                 'viewAs' => [
                     'mode' => 'LIVE',
                     'visitor' => [
-                        'isNew' => true
+                        'isNew' => true,
                     ],
                     'language' => [
                         'id' => 1,
-                        'languageCode' => 'en'
-                    ]
-                ]
-            ]
+                        'languageCode' => 'en',
+                    ],
+                ],
+            ],
         ];
 
         // Mock HTTP client response

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model\Layout;
 
-use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 use Dotcms\PhpSdk\Model\Content\Contentlet;
+use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 use PHPUnit\Framework\TestCase;
 
 class ContainerRefTest extends TestCase

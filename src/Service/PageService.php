@@ -7,6 +7,9 @@ namespace Dotcms\PhpSdk\Service;
 use Dotcms\PhpSdk\Exception\ResponseException;
 use Dotcms\PhpSdk\Http\HttpClient;
 use Dotcms\PhpSdk\Http\Response;
+use Dotcms\PhpSdk\Model\Container\Container;
+use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Container\ContainerStructure;
 use Dotcms\PhpSdk\Model\Content\Contentlet;
 use Dotcms\PhpSdk\Model\Core\Language;
 use Dotcms\PhpSdk\Model\Layout\Body;
@@ -23,9 +26,6 @@ use Dotcms\PhpSdk\Model\ViewAs\GeoLocation;
 use Dotcms\PhpSdk\Model\ViewAs\UserAgent;
 use Dotcms\PhpSdk\Model\ViewAs\Visitor;
 use Dotcms\PhpSdk\Request\PageRequest;
-use Dotcms\PhpSdk\Model\Container\Container;
-use Dotcms\PhpSdk\Model\Container\ContainerStructure;
-use Dotcms\PhpSdk\Model\Container\ContainerPage;
 use Dotcms\PhpSdk\Utils\DotCmsHelper;
 use GuzzleHttp\Promise\PromiseInterface;
 
@@ -39,7 +39,8 @@ class PageService
      */
     public function __construct(
         private readonly HttpClient $httpClient
-    ) {}
+    ) {
+    }
 
     /**
      * Fetch a page from dotCMS
@@ -245,7 +246,7 @@ class PageService
             $containers = [];
             if (isset($entity['containers']) && is_array($entity['containers'])) {
                 foreach ($entity['containers'] as $identifier => $containerData) {
-                    if (!isset($containerData['container']) || !is_array($containerData['container'])) {
+                    if (! isset($containerData['container']) || ! is_array($containerData['container'])) {
                         continue;
                     }
 
@@ -328,7 +329,7 @@ class PageService
                         $identifier = $containerRef['identifier'] ?? '';
                         $containerPage = $containers[$identifier] ?? null;
 
-                        if (!$containerPage) {
+                        if (! $containerPage) {
                             return new ContainerRef(
                                 identifier: $identifier,
                                 uuid: $uuid,
@@ -340,14 +341,66 @@ class PageService
                             );
                         }
 
+                        $contentlets = DotCmsHelper::extractContentlets($containerPage, $uuid);
+                        $variantId = null;
+                        if (isset($containerPage->container['parentPermissionable'])
+                            && is_array($containerPage->container['parentPermissionable'])
+                            && isset($containerPage->container['parentPermissionable']['variantId'])) {
+                            $variantId = (string)$containerPage->container['parentPermissionable']['variantId'];
+                        }
+
+                        /** @var array<array<string, mixed>|Contentlet> $contentlets */
+                        $contentlets = is_array($contentlets) ? $contentlets : [];
+
+                        /** @var array<Contentlet> $mappedContentlets */
+                        $mappedContentlets = array_map(
+                            function ($contentlet): Contentlet {
+                                if ($contentlet instanceof Contentlet) {
+                                    return $contentlet;
+                                }
+
+                                if (! is_array($contentlet)) {
+                                    return new Contentlet(
+                                        identifier: '',
+                                        inode: '',
+                                        title: '',
+                                        contentType: '',
+                                        additionalProperties: []
+                                    );
+                                }
+
+                                $identifier = isset($contentlet['identifier']) && (is_string($contentlet['identifier']) || is_numeric($contentlet['identifier']))
+                                    ? (string)$contentlet['identifier']
+                                    : '';
+                                $inode = isset($contentlet['inode']) && (is_string($contentlet['inode']) || is_numeric($contentlet['inode']))
+                                    ? (string)$contentlet['inode']
+                                    : '';
+                                $title = isset($contentlet['title']) && (is_string($contentlet['title']) || is_numeric($contentlet['title']))
+                                    ? (string)$contentlet['title']
+                                    : '';
+                                $contentType = isset($contentlet['contentType']) && (is_string($contentlet['contentType']) || is_numeric($contentlet['contentType']))
+                                    ? (string)$contentlet['contentType']
+                                    : '';
+
+                                return new Contentlet(
+                                    identifier: $identifier,
+                                    inode: $inode,
+                                    title: $title,
+                                    contentType: $contentType,
+                                    additionalProperties: array_diff_key($contentlet, array_flip(['identifier', 'inode', 'title', 'contentType']))
+                                );
+                            },
+                            $contentlets
+                        );
+
                         return new ContainerRef(
                             identifier: $identifier,
                             uuid: $uuid,
                             historyUUIDs: $containerRef['historyUUIDs'] ?? [],
-                            contentlets: DotCmsHelper::extractContentlets($containerPage, $uuid),
+                            contentlets: $mappedContentlets,
                             acceptTypes: DotCmsHelper::extractAcceptTypes($containerPage->containerStructures),
                             maxContentlets: $containerPage->container->maxContentlets,
-                            variantId: $containerPage->container['parentPermissionable']['variantId'] ?? null
+                            variantId: $variantId
                         );
                     }, $columnData['containers'] ?? []);
 

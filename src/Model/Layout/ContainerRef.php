@@ -15,7 +15,7 @@ class ContainerRef
      * @param Contentlet[] $contentlets Array of contentlets in this container
      * @param string $acceptTypes Comma-separated list of accepted content types
      * @param int $maxContentlets Maximum number of contentlets allowed
-     * @param int|null $variantId Optional variant ID for personalization
+     * @param string|null $variantId Optional variant ID for personalization
      */
     public function __construct(
         public readonly string $identifier,

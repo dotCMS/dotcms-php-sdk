@@ -2,6 +2,10 @@
 
 namespace Dotcms\PhpSdk\Tests\Utils;
 
+use Dotcms\PhpSdk\Model\Container\Container;
+use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Container\ContainerStructure;
+use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 use Dotcms\PhpSdk\Utils\DotCmsHelper;
 use PHPUnit\Framework\TestCase;
 
@@ -9,45 +13,94 @@ class DotCmsHelperTest extends TestCase
 {
     public function testGetContainerData(): void
     {
+        $container = new Container(
+            identifier: 'abc123',
+            inode: 'inode123',
+            title: 'Test Container',
+            path: '/test',
+            maxContentlets: 0,
+            additionalProperties: [
+                'parentPermissionable' => ['variantId' => null],
+            ]
+        );
+
+        $containerStructures = [
+            new ContainerStructure(
+                id: 'struct1',
+                structureId: 'struct1',
+                containerInode: 'inode123',
+                containerId: 'abc123',
+                code: '',
+                contentTypeVar: 'Banner'
+            ),
+            new ContainerStructure(
+                id: 'struct2',
+                structureId: 'struct2',
+                containerInode: 'inode123',
+                containerId: 'abc123',
+                code: '',
+                contentTypeVar: 'Widget'
+            ),
+        ];
+
+        $containerPage = new ContainerPage(
+            container: $container,
+            containerStructures: $containerStructures,
+            rendered: [],
+            contentlets: [
+                'uuid-123' => [
+                    ['title' => 'Test Content'],
+                ],
+            ]
+        );
+
         $containers = [
-            'abc123' => [
-                'container' => ['title' => 'Test Container'],
-                'containerStructures' => [
-                    ['contentTypeVar' => 'Banner'],
-                    ['contentTypeVar' => 'Widget'],
-                ],
-                'contentlets' => [
-                    'uuid-123' => [
-                        ['title' => 'Test Content'],
-                    ],
-                ],
-            ],
-            'def456' => ['title' => 'Another Container'],
+            'abc123' => $containerPage,
         ];
 
         // Test with valid container
-        $container = [
-            'identifier' => 'abc123',
-            'uuid' => '123',
-        ];
-        $result = DotCmsHelper::getContainerData($containers, $container);
+        $containerRef = new ContainerRef(
+            identifier: 'abc123',
+            uuid: '123',
+            historyUUIDs: [],
+            contentlets: [],
+            acceptTypes: '',
+            maxContentlets: 0
+        );
+
+        $result = DotCmsHelper::getContainerData($containers, $containerRef);
         $this->assertEquals([
+            'identifier' => 'abc123',
+            'inode' => 'inode123',
             'title' => 'Test Container',
+            'path' => '/test',
+            'live' => false,
+            'working' => false,
+            'locked' => false,
+            'hostId' => '',
+            'hostName' => '',
+            'maxContentlets' => 0,
+            'notes' => '',
+            'parentPermissionable' => ['variantId' => null],
             'acceptTypes' => 'Banner,Widget',
             'contentlets' => [['title' => 'Test Content']],
-            'maxContentlets' => 0,
             'variantId' => null,
         ], $result);
 
         // Test with non-existent identifier
-        $container = ['identifier' => 'nonexistent'];
-        $result = DotCmsHelper::getContainerData($containers, $container);
+        $nonExistentRef = new ContainerRef(
+            identifier: 'nonexistent',
+            uuid: '',
+            historyUUIDs: [],
+            contentlets: [],
+            acceptTypes: '',
+            maxContentlets: 0
+        );
+        $result = DotCmsHelper::getContainerData($containers, $nonExistentRef);
         $this->assertNull($result);
 
-        // Test with empty inputs
-        $this->assertNull(DotCmsHelper::getContainerData([], []));
-        $this->assertNull(DotCmsHelper::getContainerData($containers, []));
-        $this->assertNull(DotCmsHelper::getContainerData([], $container));
+        // Test with empty containers
+        $this->assertNull(DotCmsHelper::getContainerData([], $containerRef));
     }
 
     public function testHtmlAttributes(): void
