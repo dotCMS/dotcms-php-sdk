@@ -8,6 +8,7 @@ use Dotcms\PhpSdk\Exception\ResponseException;
 use Dotcms\PhpSdk\Http\HttpClient;
 use Dotcms\PhpSdk\Http\Response;
 use Dotcms\PhpSdk\Model\Contentlet;
+use Dotcms\PhpSdk\Model\Language;
 use Dotcms\PhpSdk\Model\Layout\Body;
 use Dotcms\PhpSdk\Model\Layout\Column;
 use Dotcms\PhpSdk\Model\Layout\ContainerRef;
@@ -367,9 +368,19 @@ class PageService
             );
 
             // Create ViewAs
+            $languageData = isset($viewAsData['language']) && is_array($viewAsData['language']) ? $viewAsData['language'] : [];
+            $language = new Language(
+                id: $languageData['id'] ?? 0,
+                languageCode: $languageData['languageCode'] ?? '',
+                countryCode: $languageData['countryCode'] ?? '',
+                language: $languageData['language'] ?? '',
+                country: $languageData['country'] ?? '',
+                isoCode: $languageData['isoCode'] ?? ''
+            );
+
             $viewAs = new ViewAs(
                 visitor: $visitor,
-                language: [],
+                language: $language,
                 mode: $viewAsData['mode'] ?? 'LIVE'
             );
 

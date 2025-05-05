@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
+use Dotcms\PhpSdk\Model\Language;
 use Dotcms\PhpSdk\Model\ViewAs;
 use Dotcms\PhpSdk\Model\ViewAs\GeoLocation;
 use Dotcms\PhpSdk\Model\ViewAs\UserAgent;
@@ -25,18 +26,19 @@ class ViewAsTest extends TestCase
             [] // personas
         );
 
-        $language = [
-            'id' => 1,
-            'languageCode' => 'en',
-            'countryCode' => 'US',
-            'language' => 'English',
-            'country' => 'United States',
-        ];
+        $language = new Language(
+            id: 1,
+            languageCode: 'en',
+            countryCode: 'US',
+            language: 'English',
+            country: 'United States',
+            isoCode: 'en-US'
+        );
 
         $viewAs = new ViewAs($visitor, $language, 'PREVIEW');
 
         $this->assertInstanceOf(Visitor::class, $viewAs->visitor);
-        $this->assertEquals($language, $viewAs->language);
+        $this->assertInstanceOf(Language::class, $viewAs->language);
         $this->assertEquals('PREVIEW', $viewAs->mode);
 
         // Test visitor properties
@@ -60,5 +62,13 @@ class ViewAsTest extends TestCase
         $this->assertEquals(25.7743, $viewAs->visitor->geo->latitude);
         $this->assertEquals(-80.1937, $viewAs->visitor->geo->longitude);
         $this->assertEquals('Florida', $viewAs->visitor->geo->region);
+
+        // Test language
+        $this->assertEquals(1, $viewAs->language->id);
+        $this->assertEquals('en', $viewAs->language->languageCode);
+        $this->assertEquals('US', $viewAs->language->countryCode);
+        $this->assertEquals('English', $viewAs->language->language);
+        $this->assertEquals('United States', $viewAs->language->country);
+        $this->assertEquals('en-US', $viewAs->language->isoCode);
     }
 }

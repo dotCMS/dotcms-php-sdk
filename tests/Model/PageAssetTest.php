@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Tests\Model;
 
+use Dotcms\PhpSdk\Model\Language;
 use Dotcms\PhpSdk\Model\Layout\Layout;
 use Dotcms\PhpSdk\Model\Page;
 use Dotcms\PhpSdk\Model\PageAsset;
@@ -32,13 +33,14 @@ class PageAssetTest extends TestCase
         );
 
         // Create a basic language
-        $language = [
-            'id' => 1,
-            'languageCode' => 'en',
-            'countryCode' => 'US',
-            'language' => 'English',
-            'country' => 'United States',
-        ];
+        $language = new Language(
+            id: 1,
+            languageCode: 'en',
+            countryCode: 'US',
+            language: 'English',
+            country: 'United States',
+            isoCode: 'en-us'
+        );
 
         return new PageAsset(
             new Layout(),

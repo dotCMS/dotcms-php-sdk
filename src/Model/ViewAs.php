@@ -10,12 +10,12 @@ class ViewAs
 {
     /**
      * @param Visitor $visitor Visitor context information
-     * @param array<string, mixed> $language Language details
+     * @param Language $language Language details
      * @param string $mode The view mode (LIVE, PREVIEW, EDIT_MODE)
      */
     public function __construct(
         public readonly Visitor $visitor,
-        public readonly array $language,
+        public readonly Language $language,
         public readonly string $mode,
     ) {
     }
