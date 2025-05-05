@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Dotcms\PhpSdk\Model\ViewAs;
 
-class GeoLocation implements \JsonSerializable
+class GeoLocation
 {
     /**
      * @param string $city City name
@@ -22,22 +22,5 @@ class GeoLocation implements \JsonSerializable
         public readonly float $longitude,
         public readonly string $region,
     ) {
-    }
-
-    /**
-     * Specify data which should be serialized to JSON
-     *
-     * @return array<string, mixed>
-     */
-    public function jsonSerialize(): array
-    {
-        return [
-            'city' => $this->city,
-            'country' => $this->country,
-            'countryCode' => $this->countryCode,
-            'latitude' => $this->latitude,
-            'longitude' => $this->longitude,
-            'region' => $this->region,
-        ];
     }
 }
