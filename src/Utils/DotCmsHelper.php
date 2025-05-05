@@ -2,6 +2,9 @@
 
 namespace Dotcms\PhpSdk\Utils;
 
+use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Layout\ContainerRef;
+
 /**
  * Helper class for dotCMS content operations
  */
@@ -10,36 +13,33 @@ class DotCmsHelper
     /**
      * Get container data from the containers array
      *
-     * @param array<string, mixed> $containers Array of containers indexed by identifier
-     * @param array<string, mixed> $container Container reference with identifier
+     * @param array<string, ContainerPage> $containers Array of containers indexed by identifier
+     * @param ContainerRef $containerRef Container reference with identifier
      * @return array<string, mixed>|null The container data or null if not found
      */
-    public static function getContainerData(array $containers, array $container): ?array
+    public static function getContainerData(array $containers, ContainerRef $containerRef): ?array
     {
-        if (empty($containers) || empty($container)) {
+
+        if (empty($containers) || empty($containerRef)) {
             return null;
         }
 
-        $identifier = $container['identifier'] ?? null;
-        $uuid = $container['uuid'] ?? null;
+        $identifier = $containerRef->identifier ?? null;
+        $uuid = $containerRef->uuid ?? null;
 
         if (! $identifier || ! isset($containers[$identifier])) {
             return null;
         }
 
-        if (! is_array($containers[$identifier])) {
-            return null;
-        }
-
-        $containerData = $containers[$identifier];
-        $structures = $containerData['containerStructures'] ?? [];
-        $container = $containerData['container'] ?? [];
+        $containerPage = $containers[$identifier];
+        $structures = $containerPage["containerStructures"] ?? [];
+        $container = $containerPage["container"] ?? null;
 
         $contentlets = [];
         if ($uuid !== null && (is_string($uuid) || is_numeric($uuid))) {
             $uuidStr = (string) $uuid;
-            $contentlets = $containerData['contentlets']["uuid-$uuidStr"]
-                ?? $containerData['contentlets']["uuid-dotParser_$uuidStr"]
+            $contentlets = $containerPage["contentlets"]["uuid-$uuidStr"]
+                ?? $containerPage["contentlets"]["uuid-dotParser_$uuidStr"]
                 ?? [];
         }
 
@@ -47,9 +47,10 @@ class DotCmsHelper
             ...$container,
             'acceptTypes' => implode(',', array_column($structures, 'contentTypeVar')),
             'contentlets' => $contentlets,
-            'maxContentlets' => $container['maxContentlets'] ?? 0,
-            'variantId' => $container['parentPermissionable']['variantId'] ?? null,
+            'maxContentlets' => $container["maxContentlets"] ?? 0,
+            'variantId' => $container["parentPermissionable"]["variantId"] ?? null,
         ];
+        return $result;
     }
 
     /**

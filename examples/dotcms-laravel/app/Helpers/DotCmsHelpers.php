@@ -3,21 +3,22 @@
 namespace App\Helpers;
 
 use Dotcms\PhpSdk\Utils\DotCmsHelper;
-use Illuminate\Support\Facades\Log;
+use Dotcms\PhpSdk\Model\Container\ContainerPage;
+use Dotcms\PhpSdk\Model\Layout\ContainerRef;
 
 class DotCmsHelpers
 {
     /**
      * Get container data from the containers array
      * 
-     * @param array $containers
-     * @param array $container
+     * @param array<string, ContainerPage> $containers Array of containers indexed by identifier
+     * @param ContainerRef $containerRef Container reference with identifier
      * @return array|null
      */
-    public function getContainersData($containers, $container)
+    public function getContainerData(array $containers, ContainerRef $containerRef)
     {
-        $containerData = DotCmsHelper::getContainerData($containers, $container);
-        
+        $containerData = DotCmsHelper::getContainerData($containers, $containerRef);
+
         if (!$containerData) {
             return [
                 'contentlets' => [],
@@ -25,10 +26,6 @@ class DotCmsHelpers
                 'maxContentlets' => 0,
                 'variantId' => null
             ];
-        }
-        
-        if (empty($containerData['contentlets'])) {
-            Log::warning("No contentlets found for container: " . ($container['identifier'] ?? 'unknown') . ", uuid: " . ($container['uuid'] ?? 'unknown'));
         }
         
         return $containerData;

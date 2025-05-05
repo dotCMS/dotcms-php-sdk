@@ -5,22 +5,22 @@
 @section('content')
 
     {{-- Page Content --}}
-    @if(isset($pageAsset->layout) && isset($pageAsset->layout->body) && isset($pageAsset->layout->body['rows']))
-        @foreach($pageAsset->layout->body['rows'] as $row)
+    @if(isset($pageAsset->layout) && isset($pageAsset->layout->body) && isset($pageAsset->layout->body->rows))
+        @foreach($pageAsset->layout->body->rows as $row)
             <div class="container">
-                <div data-dot-object="row" class="row{{ isset($row['styleClass']) ? ' ' . $row['styleClass'] : '' }}">
-                    @if(isset($row['columns']) && !empty($row['columns']))
-                        @foreach($row['columns'] as $column)
+                <div data-dot-object="row" class="row{{ isset($row->styleClass) ? ' ' . $row->styleClass : '' }}">
+                    @if(isset($row->columns) && !empty($row->columns))
+                        @foreach($row->columns as $column)
                             @php
-                                $startClass = 'col-start-' . ($column['leftOffset'] ?? 0);
-                                $endClass = 'col-end-' . (($column['width'] ?? 12) + ($column['leftOffset'] ?? 0));
+                                $startClass = 'col-start-' . ($column->leftOffset ?? 0);
+                                $endClass = 'col-end-' . (($column->width ?? 12) + ($column->leftOffset ?? 0));
                             @endphp
                             
-                            <div data-dot-object="column" class="{{ $startClass }} {{ $endClass }}{{ isset($column['styleClass']) ? ' ' . $column['styleClass'] : '' }}">
-                                @if(isset($column['containers']) && !empty($column['containers']))
-                                    @foreach($column['containers'] as $container)
+                            <div data-dot-object="column" class="{{ $startClass }} {{ $endClass }}{{ isset($column->styleClass) ? ' ' . $column->styleClass : '' }}">
+                                @if(isset($column->containers) && !empty($column->containers))
+                                    @foreach($column->containers as $containerRef)
                                         @include('layouts.container', [
-                                            'container' => $container,
+                                            'containerRef' => $containerRef,
                                             'containers' => $pageAsset->containers ?? []
                                         ])
                                     @endforeach

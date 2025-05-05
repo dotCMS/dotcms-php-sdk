@@ -1,13 +1,13 @@
 @php
-$containerObject = $dotCmsHelpers->getContainersData($containers, $container);
+$containerObject = $dotCmsHelpers->getContainerData($containers, $containerRef);
 $containerContent = $containerObject['contentlets'] ?? [];
 
 $containerAttrs = [
     'data-dot-object' => 'container',
-    'data-dot-identifier' => $container['identifier'] ?? '',
+    'data-dot-identifier' => $containerRef->identifier ?? '',
     'data-dot-accept-types' => $containerObject['acceptTypes'] ?? '',
     'data-max-contentlets' => $containerObject['maxContentlets'] ?? '',
-    'data-dot-uuid' => $container['uuid'] ?? ''
+    'data-dot-uuid' => $containerRef->uuid ?? ''
 ];
 @endphp
 

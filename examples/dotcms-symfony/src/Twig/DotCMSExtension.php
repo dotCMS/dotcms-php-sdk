@@ -42,12 +42,12 @@ class DotCMSExtension extends AbstractExtension
 
     public function generateHtmlBasedOnProperty(array $content): string 
     {
-        if (!isset($content['contentType'])) {
+        if (!isset($content->contentType)) {
             return '';
         }
 
         $twig = $this->twig;
-        $template = match($content['contentType']) {
+        $template = match($content->contentType) {
             'Banner' => 'dotcms/content-types/banner.twig',
             'Product' => 'dotcms/content-types/product.twig',
             'Activity' => 'dotcms/content-types/activity.twig',
