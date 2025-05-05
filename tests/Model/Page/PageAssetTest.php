@@ -10,8 +10,8 @@ use Dotcms\PhpSdk\Model\Layout\Layout;
 use Dotcms\PhpSdk\Model\Page\Page;
 use Dotcms\PhpSdk\Model\Page\PageAsset;
 use Dotcms\PhpSdk\Model\Page\Template;
+use Dotcms\PhpSdk\Model\Page\VanityUrl;
 use Dotcms\PhpSdk\Model\Site\Site;
-use Dotcms\PhpSdk\Model\Site\VanityUrl;
 use Dotcms\PhpSdk\Model\View\ViewAs;
 use PHPUnit\Framework\TestCase;
 

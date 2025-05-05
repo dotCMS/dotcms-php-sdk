@@ -23,7 +23,6 @@ The SDK requires configuration to connect to your dotCMS instance:
 
 ```php
 use Dotcms\PhpSdk\Config\Config;
-use Dotcms\PhpSdk\Config\LogLevel;
 
 // Create a configuration for the client
 $config = new Config(
@@ -31,10 +30,6 @@ $config = new Config(
     apiKey: 'YOUR_API_KEY',
     clientOptions: [
         'timeout' => 30
-    ],
-    logConfig: [
-        'level' => LogLevel::INFO,
-        'console' => true, // Output logs to console
     ]
 );
 ```
@@ -80,12 +75,18 @@ try {
     $pageRequest = $client->createPageRequest('/', 'json');
     
     // Get the page
-    $page = $client->getPage($pageRequest);
+    $pageAsset = $client->getPage($pageRequest);
     
     // Access page information
-    echo "Page title: " . $page->page->title . "\n";
-    echo "Page URL: " . $page->page->pageUrl . "\n";
-    echo "Template name: " . $page->template->title . "\n";
+    echo "Page title: " . $pageAsset->page->title . "\n";
+    echo "Page URL: " . $pageAsset->page->pageUrl . "\n";
+    echo "Template name: " . $pageAsset->template->title . "\n";
+    
+    // Check if page has vanity URL
+    if ($pageAsset->vanityUrl !== null) {
+        echo "Vanity URL: " . $pageAsset->vanityUrl->url . "\n";
+        echo "Forward to: " . $pageAsset->vanityUrl->forwardTo . "\n";
+    }
     
 } catch (\Exception $e) {
     echo "Error: " . $e->getMessage() . "\n";
@@ -103,13 +104,13 @@ try {
     $nav = $client->getNavigation($navRequest);
     
     // Access navigation information
-    echo "Navigation title: " . $nav['title'] . "\n";
-    echo "Navigation URL: " . $nav['href'] . "\n";
+    echo "Navigation title: " . $nav->title . "\n";
+    echo "Navigation URL: " . $nav->href . "\n";
     
     // Access children if available
     if ($nav->hasChildren()) {
         foreach ($nav->getChildren() as $child) {
-            echo "- " . $child['title'] . " (" . $child['href'] . ")\n";
+            echo "- " . $child->title . " (" . $child->href . ")\n";
         }
     }
     
@@ -131,6 +132,9 @@ $promise = $client->getPageAsync($asyncPageRequest);
 $promise->then(
     function ($asyncPage) {
         echo "Async page title: " . $asyncPage->page->title . "\n";
+        if ($asyncPage->vanityUrl !== null) {
+            echo "Vanity URL: " . $asyncPage->vanityUrl->url . "\n";
+        }
     },
     function (\Exception $e) {
         echo "Error: " . $e->getMessage() . "\n";
@@ -229,6 +233,14 @@ echo "Template title: " . $page->template->title . "\n";
 // Access layout information
 echo "Layout header: " . $page->layout->header . "\n";
 
+// Access vanity URL if present
+if ($page->vanityUrl !== null) {
+    echo "Vanity URL pattern: " . $page->vanityUrl->pattern . "\n";
+    echo "Forward to: " . $page->vanityUrl->forwardTo . "\n";
+    echo "Response code: " . $page->vanityUrl->response . "\n";
+    echo "Is temporary redirect: " . ($page->vanityUrl->temporaryRedirect ? 'Yes' : 'No') . "\n";
+}
+
 // Access containers and contentlets
 foreach ($page->containers as $containerId => $container) {
     echo "Container ID: " . $containerId . "\n";
@@ -254,7 +266,7 @@ foreach ($page->containers as $containerId => $container) {
 
 ### Working with Navigation Items
 
-The `NavigationItem` class extends `AbstractModel` and provides array access to its properties:
+The `NavigationItem` class provides array access to its properties:
 
 ```php
 // Check if the navigation item is a folder
@@ -267,17 +279,17 @@ if ($nav->isPage()) {
     echo "This is a page\n";
 }
 
-// Access navigation properties using array access
-echo "Title: " . $nav['title'] . "\n";
-echo "URL: " . $nav['href'] . "\n";
-echo "Type: " . $nav['type'] . "\n";
-echo "Target: " . $nav['target'] . "\n"; // e.g., "_self", "_blank"
-echo "Order: " . $nav['order'] . "\n";
+// Access navigation properties
+echo "Title: " . $nav->title . "\n";
+echo "URL: " . $nav->href . "\n";
+echo "Type: " . $nav->type . "\n";
+echo "Target: " . $nav->target . "\n"; // e.g., "_self", "_blank"
+echo "Order: " . $nav->order . "\n";
 
 // Recursively process navigation tree
 function processNavigation($navItem, $level = 0) {
     $indent = str_repeat("  ", $level);
-    echo $indent . "- " . $navItem['title'] . " (" . $navItem['href'] . ")\n";
+    echo $indent . "- " . $navItem->title . " (" . $navItem->href . ")\n";
     
     if ($navItem->hasChildren()) {
         foreach ($navItem->getChildren() as $child) {
@@ -345,10 +357,31 @@ Represents a complete page asset from dotCMS.
 | `template` | Template | The Template object |
 | `layout` | Layout | The Layout object |
 | `containers` | Array | Array of Container objects |
+| `urlContentMap` | Contentlet\|null | Content map for generated pages |
+| `viewAs` | ViewAs | Visitor context information |
+| `vanityUrl` | VanityUrl\|null | Optional vanity URL configuration |
+
+### VanityUrl
+
+Represents a vanity URL configuration in dotCMS.
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `pattern` | string | The URL pattern to match |
+| `vanityUrlId` | string | The unique identifier for the vanity URL |
+| `url` | string | The vanity URL path |
+| `siteId` | string | The site identifier |
+| `languageId` | int | The language ID |
+| `forwardTo` | string | The URL to forward to |
+| `response` | int | The HTTP response code |
+| `order` | int | The order of the vanity URL |
+| `forward` | bool | Whether to forward the request |
+| `temporaryRedirect` | bool | Whether to use temporary redirect |
+| `permanentRedirect` | bool | Whether to use permanent redirect |
 
 ### NavigationItem
 
-Represents a navigation item from the dotCMS Navigation API. Extends AbstractModel to provide array access to properties.
+Represents a navigation item from the dotCMS Navigation API.
 
 | Property | Type | Description |
 |----------|------|-------------|
@@ -385,7 +418,7 @@ Example error handling:
 
 ```php
 try {
-    $page = $client->getPage($pageRequest);
+    $pageAsset = $client->getPage($pageRequest);
 } catch (ConfigException $e) {
     echo "Configuration error: " . $e->getMessage() . "\n";
 } catch (HttpException $e) {
@@ -411,6 +444,8 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\DotCMSClient;
+use Dotcms\PhpSdk\Model\Page\PageAsset;
+use Dotcms\PhpSdk\Model\Page\VanityUrl;
 
 // Create configuration
 $config = new Config(
@@ -425,11 +460,17 @@ $client = new DotCMSClient($config);
 $pageRequest = $client->createPageRequest('/', 'json');
 
 // Get page
-$page = $client->getPage($pageRequest);
+$pageAsset = $client->getPage($pageRequest);
 
 // Display page information
-echo "Page title: " . $page->page->title . "\n";
-echo "Page URL: " . $page->page->pageUrl . "\n";
+echo "Page title: " . $pageAsset->page->title . "\n";
+echo "Page URL: " . $pageAsset->page->pageUrl . "\n";
+
+// Check for vanity URL
+if ($pageAsset->vanityUrl !== null) {
+    echo "Vanity URL: " . $pageAsset->vanityUrl->url . "\n";
+    echo "Forward to: " . $pageAsset->vanityUrl->forwardTo . "\n";
+}
 ```
 
 ### Basic Navigation Example
@@ -441,6 +482,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 use Dotcms\PhpSdk\Config\Config;
 use Dotcms\PhpSdk\DotCMSClient;
+use Dotcms\PhpSdk\Model\Navigation\NavigationItem;
 
 // Create configuration
 $config = new Config(
@@ -458,13 +500,13 @@ $navRequest = $client->createNavigationRequest('/about-us', 2);
 $nav = $client->getNavigation($navRequest);
 
 // Display navigation information
-echo "Navigation title: " . $nav['title'] . "\n";
+echo "Navigation title: " . $nav->title . "\n";
 
 // Display children if available
 if ($nav->hasChildren()) {
     echo "Children:\n";
     foreach ($nav->getChildren() as $child) {
-        echo "- " . $child['title'] . " (" . $child['href'] . ")\n";
+        echo "- " . $child->title . " (" . $child->href . ")\n";
     }
 }
 ```

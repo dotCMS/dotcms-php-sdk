@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Dotcms\PhpSdk\Tests\Model\Site;
+namespace Dotcms\PhpSdk\Tests\Model\Page;
 
-use Dotcms\PhpSdk\Model\Site\VanityUrl;
+use Dotcms\PhpSdk\Model\Page\VanityUrl;
 use PHPUnit\Framework\TestCase;
 
 class VanityUrlTest extends TestCase
