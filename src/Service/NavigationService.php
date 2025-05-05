@@ -90,15 +90,11 @@ class NavigationService
     /**
      * Map the API response to a NavigationItem
      *
-     * @param array<string, mixed> $response The response from the API
-     * @return NavigationItem
+     * @param array<string, mixed> $response
      */
     private function mapResponseToNavigationItem(array $response): NavigationItem
     {
-        $entity = [];
-        if (isset($response['entity']) && is_array($response['entity'])) {
-            $entity = $response['entity'];
-        }
+        $entity = $response['entity'] ?? [];
 
         $code = null;
         if (isset($entity['code']) && (is_string($entity['code']) || is_null($entity['code']))) {
@@ -115,7 +111,7 @@ class NavigationService
             $host = $entity['host'];
         }
 
-        $languageId = 1; // Default languageId
+        $languageId = 1; // Default value
         if (isset($entity['languageId']) && is_numeric($entity['languageId'])) {
             $languageId = (int)$entity['languageId'];
         }
@@ -130,22 +126,22 @@ class NavigationService
             $title = $entity['title'];
         }
 
-        $type = 'folder'; // Default type
+        $type = 'folder'; // Default value
         if (isset($entity['type']) && is_string($entity['type'])) {
             $type = $entity['type'];
         }
 
-        $hash = 0;
+        $hash = 0; // Default value
         if (isset($entity['hash']) && is_numeric($entity['hash'])) {
             $hash = (int)$entity['hash'];
         }
 
-        $target = '_self'; // Default target
+        $target = '_self'; // Default value
         if (isset($entity['target']) && is_string($entity['target'])) {
             $target = $entity['target'];
         }
 
-        $order = 0;
+        $order = 0; // Default value
         if (isset($entity['order']) && is_numeric($entity['order'])) {
             $order = (int)$entity['order'];
         }
