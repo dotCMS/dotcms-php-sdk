@@ -8,12 +8,6 @@
         "framework"
     ],
     "license": "MIT",
-    "repositories": [
-        {
-            "type": "path",
-            "url": "../../"
-        }
-    ],
     "require": {
         "php": "^8.2",
         "dotcms/php-sdk": "^1.0.0",
