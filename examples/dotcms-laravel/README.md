@@ -488,6 +488,34 @@ This command starts Laravel's built-in development server on port 8000, providin
 
 2. Visit `http://localhost:8000` in your browser. The application will fetch and render pages from your DotCMS instance.
 
+## Enable Universal Visual Editor (UVE)
+
+To enable the Universal Visual Editor (UVE) for in-context editing:
+
+1. Install the UVE package:
+
+```bash
+npm install @dotcms/uve
+```
+
+2. Update your `resources/js/app.js` to initialize UVE:
+
+```javascript
+import {createUVESubscription} from '@dotcms/uve';
+
+import './bootstrap';
+
+try {
+    createUVESubscription('changes', (changes) => {
+        window.location.reload();
+    });
+} catch (error) {
+    console.warn('dotUVE is not available, you might experience issues with the the Universal Visual Editor', error);
+}
+```
+
+This setup enables real-time updates when content is edited through the Universal Visual Editor.
+
 ## How It Works
 
 1. When a user visits a URL, the catch-all route directs the request to `AppController::index()`.
@@ -495,6 +523,7 @@ This command starts Laravel's built-in development server on port 8000, providin
 3. The page data is passed to the Blade templates for rendering.
 4. DotCMS-specific helper functions assist with rendering containers and content.
 5. Content-type specific templates render each content type appropriately.
+6. The `createUVESubscription` is to subscribe to the pages changes that the user performs inside the UVE.
 
 ```mermaid
 sequenceDiagram
