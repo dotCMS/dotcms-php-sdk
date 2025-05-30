@@ -16,7 +16,7 @@ class DotCMSServiceProvider extends ServiceProvider
         $this->app->singleton(DotCMSClient::class, function ($app) {
             $config = new Config(
                 host: env('DOTCMS_HOST', 'https://demo.dotcms.com'),
-                apiKey: env('DOTCMS_API_TOKEN', '')
+                apiKey: env('DOTCMS_API_KEY', '')
             );
             
             return new DotCMSClient($config);

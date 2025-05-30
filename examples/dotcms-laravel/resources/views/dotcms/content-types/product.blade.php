@@ -1,7 +1,7 @@
 @php
 $imagePath = null;
 if (isset($content['image'])) {
-    $imagePath = 'https://demo.dotcms.com/dA/' . $content['identifier'] . '/image';
+    $imagePath = env('DOTCMS_HOST') . '/dA/' . $content['identifier'] . '/image';
 }
 $title = $content['title'] ?? '';
 $retailPrice = $content['retailPrice'] ?? null;

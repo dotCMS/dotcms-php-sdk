@@ -75,7 +75,7 @@ This adds the official DotCMS PHP SDK to your project, providing the necessary m
 
 ```
 DOTCMS_HOST=https://demo.dotcms.com
-DOTCMS_API_TOKEN=your-api-key-here
+DOTCMS_API_KEY=your-api-key-here
 ```
 
 These environment variables define the connection to your DotCMS instance, allowing the SDK to authenticate and make API calls.
@@ -107,7 +107,7 @@ class DotCMSServiceProvider extends ServiceProvider
         $this->app->singleton(DotCMSClient::class, function ($app) {
             $config = new Config(
                 host: env('DOTCMS_HOST', 'https://demo.dotcms.com'),
-                apiKey: env('DOTCMS_API_TOKEN', '')
+                apiKey: env('DOTCMS_API_KEY', '')
             );
             
             return new DotCMSClient($config);
