@@ -50,7 +50,10 @@ class DotCMSExtension extends AbstractExtension
         if ($contentType) {
             $template = 'dotcms/content-types/' . strtolower($contentType) . '.twig';
             if ($this->twig->getLoader()->exists($template)) {
-                return $this->twig->render($template, ['content' => $content]);
+                return $this->twig->render($template, [
+                    'content' => $content,
+                    'dotcms_host' => $_ENV['DOTCMS_HOST'] ?? 'https://demo.dotcms.com'
+                ]);
             }
         }
 
