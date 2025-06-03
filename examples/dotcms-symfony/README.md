@@ -109,6 +109,27 @@ DOTCMS_HOST=https://demo.dotcms.com
 DOTCMS_API_KEY=your-api-key-here
 ```
 
+### Using Local SDK Development Setup
+
+If you want to test the Symfony example with a local version of the PHP SDK (for development or testing new changes), you can use the `composer.dev.json` configuration:
+
+1. First, ensure you're in the Symfony example directory:
+```bash
+cd examples/dotcms-symfony
+```
+
+2. If you have previously run `composer install`, remove the vendor directory:
+```bash
+rm -rf vendor
+```
+
+3. Install dependencies using the development configuration:
+```bash
+COMPOSER=composer.dev.json composer install
+```
+
+This will use the local SDK from the parent directory instead of the published package version.
+
 ## Configuration
 
 All the configuration described below is already implemented in this example project. The following sections explain the key components and how they work together to integrate DotCMS with Symfony.
