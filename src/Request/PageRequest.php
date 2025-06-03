@@ -49,7 +49,7 @@ class PageRequest
     /**
      * @var string|null The mode (LIVE, WORKING, EDIT_MODE)
      */
-    private ?string $mode = null;
+    private ?string $mode = self::MODE_LIVE;
 
     /**
      * @var string|null The host ID (Site ID)

@@ -85,7 +85,7 @@ class PageRequestTest extends TestCase
         $request2 = $request1->withMode('PREVIEW_MODE');
 
         $this->assertNotSame($request1, $request2);
-        $this->assertNull($request1->getMode());
+        $this->assertEquals('LIVE', $request1->getMode());
         $this->assertEquals('PREVIEW_MODE', $request2->getMode());
     }
 
@@ -236,7 +236,7 @@ class PageRequestTest extends TestCase
     {
         $request = new PageRequest('/test');
 
-        $this->assertEquals([], $request->buildQueryParams());
+        $this->assertEquals(['mode' => 'LIVE'], $request->buildQueryParams());
     }
 
     /**
