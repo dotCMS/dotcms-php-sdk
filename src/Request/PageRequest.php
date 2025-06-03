@@ -411,7 +411,7 @@ class PageRequest
     {
         // Regex for strict ISO 8601 UTC: YYYY-MM-DDTHH:MM:SSZ
         $pattern = '/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/';
-        if (!preg_match($pattern, $publishDate)) {
+        if (! preg_match($pattern, $publishDate)) {
             throw new InvalidArgumentException(
                 sprintf('Invalid publish date "%s". Date must be in ISO 8601 UTC format (e.g., 2025-07-01T17:30:39Z)', $publishDate)
             );
