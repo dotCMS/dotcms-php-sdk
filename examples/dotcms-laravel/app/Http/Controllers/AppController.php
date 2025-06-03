@@ -34,8 +34,29 @@ class AppController extends Controller
             $path = $request->path();
             $path = $path === '/' ? '/' : '/' . $path;
 
+            // Get query parameters
+            $languageId = $request->query('language_id');
+            $mode = $request->query('mode');
+            $publishDate = $request->query('publishDate');
+            $personaId = $request->query('personaId');
+
             // Create a page request for the current path
             $pageRequest = $this->dotCMSClient->createPageRequest($path, 'json');
+            
+            // Add query parameters if they exist
+            if ($languageId) {
+                $pageRequest = $pageRequest->withLanguageId((int)$languageId);
+            }
+            if ($mode) {
+                $pageRequest = $pageRequest->withMode($mode);
+            }
+            if ($personaId) {
+                $pageRequest = $pageRequest->withPersonaId($personaId);
+            }
+
+            if ($publishDate) {
+                $pageRequest = $pageRequest->withPublishDate($publishDate);
+            }
             
             // Get the page data
             $pageAsset = $this->dotCMSClient->getPage($pageRequest);
@@ -65,7 +86,8 @@ class AppController extends Controller
             // Pass the data to the view
             return view('page', [
                 'pageAsset' => $page,
-                'navigation' => $nav
+                'navigation' => $nav,
+                'publishDate' => $publishDate
             ]);
         } catch (\Exception $e) {
             // Log the error

@@ -26,9 +26,9 @@ class PageRequest
      * Valid mode values
      */
     private const MODE_LIVE = 'LIVE';
-    private const MODE_WORKING = 'WORKING';
+    private const MODE_PREVIEW = 'PREVIEW_MODE';
     private const MODE_EDIT = 'EDIT_MODE';
-    private const VALID_MODES = [self::MODE_LIVE, self::MODE_WORKING, self::MODE_EDIT];
+    private const VALID_MODES = [self::MODE_LIVE, self::MODE_PREVIEW, self::MODE_EDIT];
 
     /**
      * Valid depth values
@@ -75,6 +75,11 @@ class PageRequest
      * @var int|null The depth of related content to retrieve (0-3)
      */
     private ?int $depth = null;
+
+    /**
+     * @var string|null The publish date in ISO 8601 format
+     */
+    private ?string $publishDate = null;
 
     /**
      * PageRequest constructor.
@@ -233,6 +238,16 @@ class PageRequest
     }
 
     /**
+     * Get the publish date.
+     *
+     * @return string|null
+     */
+    public function getPublishDate(): ?string
+    {
+        return $this->publishDate;
+    }
+
+    /**
      * Set the mode.
      *
      * @param string $mode The mode (LIVE, WORKING, EDIT_MODE)
@@ -385,6 +400,30 @@ class PageRequest
     }
 
     /**
+     * Set the publish date.
+     *
+     * @param string $publishDate The publish date in ISO 8601 format (e.g., 2025-07-01T17:30:39Z)
+     *
+     * @return self A new instance with the updated publish date
+     * @throws InvalidArgumentException If the publish date is invalid
+     */
+    public function withPublishDate(string $publishDate): self
+    {
+        // Regex for strict ISO 8601 UTC: YYYY-MM-DDTHH:MM:SSZ
+        $pattern = '/^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}Z$/';
+        if (!preg_match($pattern, $publishDate)) {
+            throw new InvalidArgumentException(
+                sprintf('Invalid publish date "%s". Date must be in ISO 8601 UTC format (e.g., 2025-07-01T17:30:39Z)', $publishDate)
+            );
+        }
+
+        $clone = clone $this;
+        $clone->publishDate = $publishDate;
+
+        return $clone;
+    }
+
+    /**
      * Build the request URL path.
      *
      * @internal This method is meant for internal use by the SDK
@@ -427,6 +466,10 @@ class PageRequest
 
         if ($this->depth !== null) {
             $params['depth'] = $this->depth;
+        }
+
+        if ($this->publishDate !== null) {
+            $params['publishDate'] = $this->publishDate;
         }
 
         return $params;
