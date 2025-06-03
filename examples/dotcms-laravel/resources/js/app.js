@@ -1,8 +1,9 @@
-import {createUVESubscription} from '@dotcms/uve';
+import {createUVESubscription, initUVE} from '@dotcms/uve';
 
 import './bootstrap';
 
 try {
+    initUVE();
     createUVESubscription('changes', (changes) => {
         window.location.reload();
     });
