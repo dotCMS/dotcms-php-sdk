@@ -80,6 +80,27 @@ DOTCMS_API_KEY=your-api-key-here
 
 These environment variables define the connection to your DotCMS instance, allowing the SDK to authenticate and make API calls.
 
+### Using Local SDK Development Setup
+
+If you want to test the Laravel example with a local version of the PHP SDK (for development or testing new changes), you can use the `composer.dev.json` configuration:
+
+1. First, ensure you're in the Laravel example directory:
+```bash
+cd examples/dotcms-laravel
+```
+
+2. If you have previously run `composer install`, remove the vendor directory:
+```bash
+rm -rf vendor
+```
+
+3. Install dependencies using the development configuration:
+```bash
+COMPOSER=composer.dev.json composer install
+```
+
+This will use the local SDK from the parent directory instead of the published package version.
+
 ## Configuration
 
 All the configuration described below is already implemented in this example project. The following sections explain the key components and how they work together to integrate DotCMS with Laravel.

@@ -20,11 +20,37 @@ class DotCMSService
         return $this->client;
     }
     
-    // Add any common DotCMS operations here as methods
-    // For example:
-    public function getPage(string $path): PageAsset
-    {
+    /**
+     * Get a page from DotCMS
+     *
+     * @param string $path The path of the page
+     * @param int|null $languageId The language ID
+     * @param string|null $mode The mode (live, edit, preview)
+     * @param string|null $personaId The persona ID
+     * @param string|null $publishDate The publish date
+     * @return PageAsset
+     */
+    public function getPage(
+        string $path,
+        ?int $languageId = null,
+        ?string $mode = null,
+        ?string $personaId = null,
+        ?string $publishDate = null
+    ): PageAsset {
         $pageRequest = $this->client->createPageRequest($path, 'json');
+        
+        if ($languageId) {
+            $pageRequest = $pageRequest->withLanguageId($languageId);
+        }
+        if ($mode) {
+            $pageRequest = $pageRequest->withMode($mode);
+        }
+        if ($personaId) {
+            $pageRequest = $pageRequest->withPersonaId($personaId);
+        }
+        if ($publishDate) {
+            $pageRequest = $pageRequest->withPublishDate($publishDate);
+        }
         
         return $this->client->getPage($pageRequest);
     }

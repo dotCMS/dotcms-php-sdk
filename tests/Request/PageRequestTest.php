@@ -82,11 +82,11 @@ class PageRequestTest extends TestCase
     public function testWithModeReturnsNewInstance(): void
     {
         $request1 = new PageRequest('/test');
-        $request2 = $request1->withMode('WORKING');
+        $request2 = $request1->withMode('PREVIEW_MODE');
 
         $this->assertNotSame($request1, $request2);
-        $this->assertNull($request1->getMode());
-        $this->assertEquals('WORKING', $request2->getMode());
+        $this->assertEquals('LIVE', $request1->getMode());
+        $this->assertEquals('PREVIEW_MODE', $request2->getMode());
     }
 
     /**
@@ -97,7 +97,7 @@ class PageRequestTest extends TestCase
         $request = new PageRequest('/test');
 
         $this->expectException(InvalidArgumentException::class);
-        $this->expectExceptionMessage('Invalid mode "INVALID". Valid modes are: LIVE, WORKING, EDIT_MODE');
+        $this->expectExceptionMessage('Invalid mode "INVALID". Valid modes are: LIVE, PREVIEW_MODE, EDIT_MODE');
 
         $request->withMode('INVALID');
     }
@@ -236,7 +236,33 @@ class PageRequestTest extends TestCase
     {
         $request = new PageRequest('/test');
 
-        $this->assertEquals([], $request->buildQueryParams());
+        $this->assertEquals(['mode' => 'LIVE'], $request->buildQueryParams());
+    }
+
+    /**
+     * Test that withPublishDate sets the publish date and returns a new instance
+     */
+    public function testWithPublishDateReturnsNewInstance(): void
+    {
+        $request1 = new PageRequest('/test');
+        $request2 = $request1->withPublishDate('2025-07-01T17:30:39Z');
+
+        $this->assertNotSame($request1, $request2);
+        $this->assertNull($request1->getPublishDate());
+        $this->assertEquals('2025-07-01T17:30:39Z', $request2->getPublishDate());
+    }
+
+    /**
+     * Test that withPublishDate throws an exception for invalid format
+     */
+    public function testWithPublishDateThrowsExceptionForInvalidFormat(): void
+    {
+        $request = new PageRequest('/test');
+
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Invalid publish date "2025-07-01 17:30:39". Date must be in ISO 8601 UTC format (e.g., 2025-07-01T17:30:39Z)');
+
+        $request->withPublishDate('2025-07-01 17:30:39');
     }
 
     /**
@@ -246,20 +272,22 @@ class PageRequestTest extends TestCase
     {
         $request = new PageRequest('/test');
         $request = $request
-            ->withMode('WORKING')
+            ->withMode('PREVIEW_MODE')
             ->withHostId(self::VALID_UUID)
             ->withLanguageId(1)
             ->withPersonaId('persona123')
             ->withFireRules(true)
-            ->withDepth(2);
+            ->withDepth(2)
+            ->withPublishDate('2025-07-01T17:30:39Z');
 
         $expectedParams = [
-            'mode' => 'WORKING',
+            'mode' => 'PREVIEW_MODE',
             'host_id' => self::VALID_UUID,
             'language_id' => 1,
             'com.dotmarketing.persona.id' => 'persona123',
             'fireRules' => 'true',
             'depth' => 2,
+            'publishDate' => '2025-07-01T17:30:39Z',
         ];
 
         $this->assertEquals($expectedParams, $request->buildQueryParams());
@@ -271,7 +299,7 @@ class PageRequestTest extends TestCase
     public function testMethodChainingWorksCorrectly(): void
     {
         $request = (new PageRequest('/test'))
-            ->withMode('WORKING')
+            ->withMode('PREVIEW_MODE')
             ->withHostId(self::VALID_UUID)
             ->withLanguageId(1)
             ->withPersonaId('persona123')
@@ -280,7 +308,7 @@ class PageRequestTest extends TestCase
 
         $this->assertEquals('json', $request->getFormat());
         $this->assertEquals('/test', $request->getPagePath());
-        $this->assertEquals('WORKING', $request->getMode());
+        $this->assertEquals('PREVIEW_MODE', $request->getMode());
         $this->assertEquals(self::VALID_UUID, $request->getHostId());
         $this->assertEquals(1, $request->getLanguageId());
         $this->assertEquals('persona123', $request->getPersonaId());

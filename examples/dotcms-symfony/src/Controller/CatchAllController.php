@@ -27,7 +27,19 @@ class CatchAllController extends AbstractController
         try {
             $request = $this->container->get('request_stack')->getCurrentRequest();
             $actualPath = $request->getPathInfo();
-            $pageAsset = $this->dotCMSService->getPage($actualPath);
+            
+            $languageId = $request->query->get('language_id');
+            $mode = $request->query->get('mode');
+            $personaId = $request->query->get('personaId');
+            $publishDate = $request->query->get('publishDate');
+            
+            $pageAsset = $this->dotCMSService->getPage(
+                $actualPath,
+                $languageId ? (int)$languageId : null,
+                $mode,
+                $personaId,
+                $publishDate
+            );
             
             if (!$pageAsset || !isset($pageAsset->page)) {
                 throw new NotFoundHttpException('Page not found');
