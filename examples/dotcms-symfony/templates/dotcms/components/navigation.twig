@@ -4,12 +4,12 @@
         {% if navigation is defined and navigation is not null %}
             {% for item in navigation.children %}
                 <li>
-                    <a href="{{ item.href }}" target="{{ item.target }}">{{ item.title }}</a>
+                    <a href="{{ item.href }}" target="{{ item.target }}">{{ item.title|title }}</a>
                     {% if item.children is defined and item.children is not empty %}
                         <ul>
                             {% for child in item.children %}
                                 <li>
-                                    <a href="{{ child.href }}" target="{{ child.target }}">{{ child.title }}</a>
+                                    <a href="{{ child.href }}" target="{{ child.target }}">{{ child.title|title }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
