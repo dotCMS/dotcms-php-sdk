@@ -109,6 +109,40 @@ class AbstractModelTest extends TestCase
         // Test JSON encoding
         $this->assertEquals(json_encode($expected), json_encode($model));
     }
+
+    public function testMagicGetMethod(): void
+    {
+        $additionalProps = ['buttonText' => 'Click Me', 'caption' => 'Test Caption'];
+        $model = $this->createConcreteModel($additionalProps);
+
+        // Test accessing existing properties
+        $this->assertEquals('test-id', $model->identifier);
+        $this->assertEquals('Test Title', $model->title);
+
+        // Test accessing additional properties via magic __get
+        $this->assertEquals('Click Me', $model->buttonText);
+        $this->assertEquals('Test Caption', $model->caption);
+
+        // Test accessing non-existent property
+        $this->assertNull($model->nonExistentProp);
+    }
+
+    public function testMagicIssetMethod(): void
+    {
+        $additionalProps = ['buttonText' => 'Click Me', 'emptyProp' => ''];
+        $model = $this->createConcreteModel($additionalProps);
+
+        // Test isset on existing properties
+        $this->assertTrue(isset($model->identifier));
+        $this->assertTrue(isset($model->title));
+
+        // Test isset on additional properties
+        $this->assertTrue(isset($model->buttonText));
+        $this->assertTrue(isset($model->emptyProp)); // Even empty string should return true for isset
+
+        // Test isset on non-existent property
+        $this->assertFalse(isset($model->nonExistentProp));
+    }
 }
 
 /**

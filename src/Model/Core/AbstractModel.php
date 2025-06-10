@@ -56,6 +56,30 @@ abstract class AbstractModel implements \ArrayAccess, \JsonSerializable
     }
 
     /**
+     * Magic method to get property values
+     * This enables property access syntax (e.g., $obj->propertyName) for additional properties
+     *
+     * @param string $name Property name
+     * @return mixed Property value or null if not found
+     */
+    public function __get(string $name): mixed
+    {
+        return $this->get($name);
+    }
+
+    /**
+     * Magic method to check if a property exists
+     * This enables isset() checks on additional properties
+     *
+     * @param string $name Property name
+     * @return bool True if the property exists
+     */
+    public function __isset(string $name): bool
+    {
+        return $this->has($name);
+    }
+
+    /**
      * @inheritDoc
      */
     public function offsetExists(mixed $offset): bool

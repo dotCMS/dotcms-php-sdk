@@ -8,8 +8,8 @@
 <article>
     {{ imageHtml|default('')|raw }}
     {% if content.title %}<h2>{{ content.title }}</h2>{% endif %}
-    {% if content.caption %}<p>{{ content.caption }}</p>{% endif %}
-    {% if content.buttonText %}
+    {% if content.caption|default('') %}<p>{{ content.caption }}</p>{% endif %}
+    {% if content.buttonText|default('') %}
         <a href="{{ content.link|default('#') }}">{{ content.buttonText }}</a>
     {% endif %}
 </article> 
