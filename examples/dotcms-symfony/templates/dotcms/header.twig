@@ -1,10 +1,12 @@
-<header class="container">
-    <div class="grid">
-        <div>
-            <h1><a href="/" style="text-decoration:none; color:inherit;">TravelLux in Symfony</a></h1>
+<header class="header-primary">
+    <div class="header-container">
+        <div class="header-logo">
+            <h2>
+                <a href="/" class="header-logo-link">TravelLux in Symfony</a>
+            </h2>
             {# or page title via {{ pageAsset.page.title }} #}
         </div>
-        <div>
+        <div class="header-nav">
             {% include 'dotcms/components/navigation.twig' with { 'navigation': navigation } %}
         </div>
     </div>

@@ -65,3 +65,320 @@ nav ul ul li {
 header .grid {
     align-items: center;
 }
+
+/* Banner Hero Component */
+.banner-hero {
+    position: relative;
+    width: 100%;
+    height: 24rem; /* 384px - equivalent to h-96 in Tailwind */
+    background-color: #e5e7eb; /* Light gray fallback */
+    overflow: hidden;
+    border-radius: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.banner-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.banner-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.3); /* Semi-transparent dark overlay */
+}
+
+.banner-content {
+    text-align: center;
+    color: white;
+    padding: 2rem;
+    max-width: 800px;
+}
+
+.banner-title {
+    font-size: 3.75rem; /* 60px - equivalent to text-6xl */
+    font-weight: bold;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+    line-height: 1.1;
+}
+
+.banner-caption {
+    font-size: 1.25rem; /* 20px - equivalent to text-xl */
+    margin-bottom: 2rem;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    line-height: 1.4;
+}
+
+.banner-button {
+    display: inline-block;
+    background-color: #8b5cf6; /* Purple-500 */
+    color: white;
+    padding: 1rem 2rem;
+    font-size: 1.25rem; /* 20px - equivalent to text-xl */
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: background-color 0.3s ease;
+    font-weight: 600;
+    text-shadow: none;
+}
+
+.banner-button:hover {
+    background-color: #7c3aed; /* Purple-600 */
+    text-decoration: none;
+    color: white;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .banner-hero {
+        height: 18rem; /* Smaller height on mobile */
+    }
+    
+    .banner-title {
+        font-size: 2.5rem; /* 40px */
+    }
+    
+    .banner-caption {
+        font-size: 1.125rem; /* 18px */
+    }
+    
+    .banner-button {
+        font-size: 1rem;
+        padding: 0.75rem 1.5rem;
+    }
+    
+    .banner-content {
+        padding: 1rem;
+    }
+}
+
+/* Header Styles - Improved sizing and spacing to match Laravel proportions */
+.header-primary {
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb; /* Light border for definition */
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header-logo h2 {
+    font-size: 1.875rem; /* 30px - equivalent to text-3xl to match Laravel scale */
+    font-weight: bold;
+    margin: 0;
+}
+
+.header-logo-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.header-logo-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Header Navigation - Improved spacing and typography */
+.header-navigation {
+    /* Remove any existing navigation styles that conflict */
+}
+
+.nav-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    gap: 1.5rem; /* Increased spacing between items to match Laravel proportions */
+}
+
+.nav-item {
+    position: relative;
+    margin: 0;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 1rem; /* Standard readable size */
+    font-weight: 500;
+    padding: 0.5rem 0;
+    transition: opacity 0.2s ease;
+}
+
+.nav-link:hover {
+    text-decoration: none;
+    opacity: 0.7;
+}
+
+/* Dropdown Navigation - Keeping original styling approach */
+.nav-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.375rem;
+    padding: 0.5rem;
+    list-style: none;
+    min-width: 200px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+    margin: 0;
+    flex-direction: column;
+}
+
+.nav-item:hover .nav-dropdown {
+    display: flex;
+}
+
+.nav-dropdown-item {
+    margin: 0;
+}
+
+.nav-dropdown-link {
+    text-decoration: none;
+    font-size: 0.875rem;
+    padding: 0.5rem 0.75rem;
+    display: block;
+    border-radius: 0.25rem;
+    transition: background-color 0.2s ease;
+}
+
+.nav-dropdown-link:hover {
+    text-decoration: none;
+    background-color: #f3f4f6;
+}
+
+/* Override legacy nav styles that might conflict */
+nav > ul > li {
+    position: relative;
+    margin-right: 0; /* Reset old margin */
+}
+
+nav ul ul {
+    display: none; /* Will be overridden by .nav-dropdown styles */
+}
+
+/* Responsive Header */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+    }
+    
+    .nav-list {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem; /* Slightly reduced gap on mobile */
+    }
+    
+    .header-logo h2 {
+        font-size: 1.5rem; /* Proportionally smaller on mobile */
+    }
+}
+
+/* Activity Card Component - Typography to match Laravel proportions */
+.activity-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.activity-image-container {
+    width: 100%;
+}
+
+.activity-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.activity-content {
+    padding: 0.5rem 0.5rem 0 0.5rem; /* px-6 py-4 equivalent */
+}
+
+.activity-title {
+    font-size: 1.25rem; /* 20px - equivalent to text-xl to match Laravel */
+    font-weight: bold;
+    color: #1f2937; /* Dark gray for strong contrast against white background */
+    margin: 0 0 0.5rem 0;
+    line-height: 1.2;
+    /* Prevent line breaks and handle overflow */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+.activity-description {
+    font-size: 1rem; /* 16px - equivalent to text-base */
+    line-height: 1.5;
+    margin: 0;
+    color: #4b5563; /* Gray-600 for subtle description text */
+    /* Text clamping to prevent overflow like Laravel's line-clamp-3 */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.activity-actions {
+    padding: 1rem 1.5rem 0.5rem 1.5rem; /* pt-4 pb-2 px-6 equivalent */
+}
+
+.activity-link {
+    display: inline-block;
+    background-color: #6b7280; /* Neutral gray instead of purple to maintain Symfony identity */
+    color: white;
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 9999px; /* Fully rounded like Laravel */
+    font-size: 0.875rem;
+    transition: background-color 0.2s ease;
+}
+
+.activity-link:hover {
+    background-color: #4b5563; /* Darker gray on hover */
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive adjustments for activity cards */
+@media (max-width: 768px) {
+    .activity-title {
+        font-size: 1.125rem; /* Slightly smaller on mobile */
+    }
+    
+    .activity-content {
+        padding: 1rem;
+    }
+    
+    .activity-actions {
+        padding: 0.75rem 1rem 0.5rem 1rem;
+    }
+}

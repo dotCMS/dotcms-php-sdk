@@ -5,11 +5,25 @@
     {% endset %}
 {% endif %}
 
-<article>
-    {{ imageHtml|default('')|raw }}
-    {% if content.title %}<h2>{{ content.title }}</h2>{% endif %}
-    {% if content.caption|default('') %}<p>{{ content.caption }}</p>{% endif %}
-    {% if content.buttonText|default('') %}
-        <a href="{{ content.link|default('#') }}">{{ content.buttonText }}</a>
+<div class="banner-hero">
+    {% if content.image %}
+        <div class="banner-image">
+            {{ imageHtml|raw }}
+        </div>
     {% endif %}
-</article> 
+    <div class="banner-overlay">
+        <div class="banner-content">
+            {% if content.title %}
+                <h1 class="banner-title">{{ content.title }}</h1>
+            {% endif %}
+            {% if content.caption|default('') %}
+                <p class="banner-caption">{{ content.caption }}</p>
+            {% endif %}
+            {% if content.buttonText|default('') %}
+                <a href="{{ content.link|default('#') }}" class="banner-button">
+                    {{ content.buttonText }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</div> 
