@@ -1,15 +1,24 @@
 {% if content.image %}
     {% set imageHtml %}
         <img src="{{ dotcms_host }}/dA/{{ content.identifier }}/image" 
-             alt="{{ content.title|default('')|e('html_attr') }}">
+             alt="{{ content.title|default('')|e('html_attr') }}"
+             class="activity-image">
     {% endset %}
 {% endif %}
 
-<article>
-    {{ imageHtml|default('')|raw }}
-    <div>
-        <h3>{{ content.title|default('') }}</h3>
-        <p>{{ content.description|default('') }}</p>
-        <a href="/activities/{{ content.urlTitle|default('#') }}">Link to detail →</a>
+<article class="activity-card">
+    {% if content.image %}
+        <div class="activity-image-container">
+            {{ imageHtml|raw }}
+        </div>
+    {% endif %}
+    <div class="activity-content">
+        <h3 class="activity-title">{{ content.title|default('') }}</h3>
+        <p class="activity-description">{{ content.description|default('') }}</p>
+    </div>
+    <div class="activity-actions">
+        <a href="/activities/{{ content.urlTitle|default('#') }}" class="activity-link">
+            Link to detail →
+        </a>
     </div>
 </article> 

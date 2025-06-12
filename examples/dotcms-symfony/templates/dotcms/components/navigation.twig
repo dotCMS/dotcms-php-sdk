@@ -1,15 +1,15 @@
 {# Navigation component for DotCMS #}
-<nav class="container">
-    <ul>
+<nav class="header-navigation">
+    <ul class="nav-list">
         {% if navigation is defined and navigation is not null %}
             {% for item in navigation.children %}
-                <li>
-                    <a href="{{ item.href }}" target="{{ item.target }}">{{ item.title|title }}</a>
+                <li class="nav-item">
+                    <a href="{{ item.href }}" target="{{ item.target }}" class="nav-link">{{ item.title|title }}</a>
                     {% if item.children is defined and item.children is not empty %}
-                        <ul>
+                        <ul class="nav-dropdown">
                             {% for child in item.children %}
-                                <li>
-                                    <a href="{{ child.href }}" target="{{ child.target }}">{{ child.title|title }}</a>
+                                <li class="nav-dropdown-item">
+                                    <a href="{{ child.href }}" target="{{ child.target }}" class="nav-dropdown-link">{{ child.title|title }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
