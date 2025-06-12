@@ -382,3 +382,98 @@ nav ul ul {
         padding: 0.75rem 1rem 0.5rem 1rem;
     }
 }
+
+/* Product Card Component - Structure matching Laravel with Symfony aesthetic */
+.product-card {
+    background-color: white;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+}
+
+.product-image-container {
+    padding: 1rem;
+}
+
+.product-image {
+    width: 100%;
+    max-height: 15rem; /* 240px - equivalent to max-h-60 */
+    object-fit: contain;
+    display: block;
+}
+
+.product-content {
+    padding: 1.5rem 1.5rem 1rem 1.5rem; /* px-6 py-4 equivalent */
+    background-color: #f8fafc; /* Light gray background instead of slate-100 */
+}
+
+.product-title {
+    font-size: 1.25rem; /* 20px - equivalent to text-xl */
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.product-pricing {
+    margin-bottom: 1rem;
+}
+
+.product-retail-price {
+    color: #6b7280; /* Gray-500 */
+    text-decoration: line-through;
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.product-sale-price,
+.product-main-price {
+    font-size: 1.875rem; /* 30px - equivalent to text-3xl */
+    font-weight: bold;
+    color: #1f2937;
+    line-height: 1.2;
+}
+
+.product-spacer {
+    min-height: 1.5rem; /* 24px - equivalent to min-h-6 */
+}
+
+.product-button {
+    display: inline-block;
+    background-color: #6b7280; /* Neutral gray instead of green to maintain Symfony identity */
+    color: white;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+    transition: background-color 0.2s ease;
+}
+
+.product-button:hover {
+    background-color: #4b5563; /* Darker gray on hover */
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive adjustments for product cards */
+@media (max-width: 768px) {
+    .product-title {
+        font-size: 1.125rem; /* Slightly smaller on mobile */
+    }
+    
+    .product-sale-price,
+    .product-main-price {
+        font-size: 1.5rem; /* Smaller on mobile */
+    }
+    
+    .product-content {
+        padding: 1rem;
+    }
+    
+    .product-image {
+        max-height: 12rem; /* Smaller image on mobile */
+    }
+}
