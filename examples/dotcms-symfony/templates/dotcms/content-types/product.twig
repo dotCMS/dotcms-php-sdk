@@ -1,16 +1,43 @@
 {% if content.image %}
     {% set imageHtml %}
         <img src="{{ dotcms_host }}/dA/{{ content.identifier }}/image" 
-             alt="{{ content.title|default('')|e('html_attr') }}">
+             alt="{{ content.title|default('')|e('html_attr') }}"
+             class="product-image">
     {% endset %}
 {% endif %}
 
-<article>
-    {{ imageHtml|default('')|raw }}
-    <div>
-        <h3>{{ content.title|default('') }}</h3>
-        <div>{{ content.retailPrice|default('') }}</div>
-        <div>{{ content.salePrice|default('') }}</div>
-        <a href="/store/products/{{ content.urlTitle|default('#') }}">Buy Now</a>
+<div class="product-card">
+    <div class="product-image-container">
+        {% if content.image %}
+            {{ imageHtml|raw }}
+        {% endif %}
     </div>
-</article> 
+    <div class="product-content">
+        <div class="product-title">{{ content.title|default('') }}</div>
+        
+        <div class="product-pricing">
+            {% set retailPrice = content.retailPrice|default('') %}
+            {% set salePrice = content.salePrice|default('') %}
+            
+            {% if retailPrice and salePrice %}
+                <div class="product-retail-price">{{ retailPrice }}</div>
+                <div class="product-sale-price">{{ salePrice }}</div>
+            {% else %}
+                <div class="product-spacer"></div>
+                <div class="product-main-price">
+                    {% if retailPrice %}
+                        {{ retailPrice }}
+                    {% elseif salePrice %}
+                        {{ salePrice }}
+                    {% else %}
+                        $0.00
+                    {% endif %}
+                </div>
+            {% endif %}
+        </div>
+        
+        <a href="/store/products/{{ content.urlTitle|default('#') }}" class="product-button">
+            Buy Now
+        </a>
+    </div>
+</div> 
