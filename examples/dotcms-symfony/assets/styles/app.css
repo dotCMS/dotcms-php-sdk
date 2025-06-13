@@ -32,6 +32,17 @@
 .col-end-12 { grid-column-end: 12; }
 .col-end-13 { grid-column-end: 13; }
 
+/* Global Dark Theme */
+html, body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    background-color: #1a1a1a; /* Dark background */
+    color: #e5e5e5; /* Light text */
+}
+
 /* Navigation styles */
 nav ul {
     display: flex;
@@ -71,7 +82,7 @@ header .grid {
     position: relative;
     width: 100%;
     height: 24rem; /* 384px - equivalent to h-96 in Tailwind */
-    background-color: #e5e7eb; /* Light gray fallback */
+    background-color: #2d2d2d; /* Dark gray fallback */
     overflow: hidden;
     border-radius: 0.5rem;
     margin-bottom: 2rem;
@@ -168,10 +179,12 @@ header .grid {
     }
 }
 
-/* Header Styles - Improved sizing and spacing to match Laravel proportions */
+/* Header Styles - Dark theme */
 .header-primary {
     padding: 1rem;
-    border-bottom: 1px solid #e5e7eb; /* Light border for definition */
+    background-color: #2d2d2d; /* Dark header background */
+    border-bottom: 1px solid #404040; /* Dark border */
+    color: #e5e5e5; /* Light text */
 }
 
 .header-container {
@@ -186,19 +199,20 @@ header .grid {
     font-size: 1.875rem; /* 30px - equivalent to text-3xl to match Laravel scale */
     font-weight: bold;
     margin: 0;
+    color: #e5e5e5; /* Light text */
 }
 
 .header-logo-link {
     text-decoration: none;
-    color: inherit;
+    color: #e5e5e5; /* Light text */
 }
 
 .header-logo-link:hover {
     text-decoration: none;
-    color: inherit;
+    color: #ffffff; /* Brighter on hover */
 }
 
-/* Header Navigation - Improved spacing and typography */
+/* Header Navigation - Dark theme */
 .header-navigation {
     /* Remove any existing navigation styles that conflict */
 }
@@ -222,26 +236,28 @@ header .grid {
     font-weight: 500;
     padding: 0.5rem 0;
     transition: opacity 0.2s ease;
+    color: #e5e5e5; /* Light text */
 }
 
 .nav-link:hover {
     text-decoration: none;
-    opacity: 0.7;
+    color: #ffffff; /* Brighter on hover */
+    opacity: 0.9;
 }
 
-/* Dropdown Navigation - Keeping original styling approach */
+/* Dropdown Navigation - Dark theme */
 .nav-dropdown {
     display: none;
     position: absolute;
     top: 100%;
     left: 0;
-    background-color: white;
-    border: 1px solid #e5e7eb;
+    background-color: #2d2d2d; /* Dark dropdown background */
+    border: 1px solid #404040; /* Dark border */
     border-radius: 0.375rem;
     padding: 0.5rem;
     list-style: none;
     min-width: 200px;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
     z-index: 100;
     margin: 0;
     flex-direction: column;
@@ -262,11 +278,13 @@ header .grid {
     display: block;
     border-radius: 0.25rem;
     transition: background-color 0.2s ease;
+    color: #e5e5e5; /* Light text */
 }
 
 .nav-dropdown-link:hover {
     text-decoration: none;
-    background-color: #f3f4f6;
+    background-color: #404040; /* Dark hover background */
+    color: #ffffff; /* Brighter text on hover */
 }
 
 /* Override legacy nav styles that might conflict */
@@ -298,13 +316,14 @@ nav ul ul {
     }
 }
 
-/* Activity Card Component - Typography to match Laravel proportions */
+/* Activity Card Component - Dark theme */
 .activity-card {
-    background-color: white;
+    background-color: #2d2d2d; /* Dark card background */
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     margin-bottom: 1.5rem;
+    border: 1px solid #404040; /* Dark border */
 }
 
 .activity-image-container {
@@ -318,14 +337,14 @@ nav ul ul {
 }
 
 .activity-content {
-    padding: 0.5rem 0.5rem 0 0.5rem; /* px-6 py-4 equivalent */
+    padding: 1rem 1.5rem; /* Increased from 0.5rem - much more spacious like Laravel px-6 py-4 */
 }
 
 .activity-title {
     font-size: 1.25rem; /* 20px - equivalent to text-xl to match Laravel */
     font-weight: bold;
-    color: #1f2937; /* Dark gray for strong contrast against white background */
-    margin: 0 0 0.5rem 0;
+    color: #e5e5e5; /* Light text for dark background */
+    margin: 0 0 0.75rem 0; /* Increased bottom margin for better spacing */
     line-height: 1.2;
     /* Prevent line breaks and handle overflow */
     overflow: hidden;
@@ -337,8 +356,8 @@ nav ul ul {
 .activity-description {
     font-size: 1rem; /* 16px - equivalent to text-base */
     line-height: 1.5;
-    margin: 0;
-    color: #4b5563; /* Gray-600 for subtle description text */
+    margin: 0 0 1rem 0; /* Add bottom margin for spacing before actions */
+    color: #b0b0b0; /* Light gray for description text */
     /* Text clamping to prevent overflow like Laravel's line-clamp-3 */
     display: -webkit-box;
     -webkit-line-clamp: 3;
@@ -347,14 +366,14 @@ nav ul ul {
 }
 
 .activity-actions {
-    padding: 1rem 1.5rem 0.5rem 1.5rem; /* pt-4 pb-2 px-6 equivalent */
+    padding: 0 1.5rem 1.5rem 1.5rem; /* Consistent with content padding, more bottom space */
 }
 
 .activity-link {
     display: inline-block;
-    background-color: #6b7280; /* Neutral gray instead of purple to maintain Symfony identity */
+    background-color: #6b7280; /* Neutral gray to maintain Symfony identity */
     color: white;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.25rem; /* Increased padding for better touch targets */
     font-weight: bold;
     text-decoration: none;
     border-radius: 9999px; /* Fully rounded like Laravel */
@@ -375,25 +394,27 @@ nav ul ul {
     }
     
     .activity-content {
-        padding: 1rem;
+        padding: 1rem; /* Still spacious on mobile */
     }
     
     .activity-actions {
-        padding: 0.75rem 1rem 0.5rem 1rem;
+        padding: 0 1rem 1rem 1rem; /* Consistent mobile spacing */
     }
 }
 
-/* Product Card Component - Structure matching Laravel with Symfony aesthetic */
+/* Product Card Component - Dark theme */
 .product-card {
-    background-color: white;
+    background-color: #2d2d2d; /* Dark card background */
     border-radius: 0.5rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     margin-bottom: 1.5rem;
+    border: 1px solid #404040; /* Dark border */
 }
 
 .product-image-container {
-    padding: 1rem;
+    padding: 1.5rem; /* Increased padding around product images */
+    background-color: #404040; /* Slightly lighter background for image area */
 }
 
 .product-image {
@@ -404,34 +425,34 @@ nav ul ul {
 }
 
 .product-content {
-    padding: 1.5rem 1.5rem 1rem 1.5rem; /* px-6 py-4 equivalent */
-    background-color: #f8fafc; /* Light gray background instead of slate-100 */
+    padding: 1.5rem; /* Simplified and consistent padding */
+    background-color: #333333; /* Slightly different dark shade for content area */
 }
 
 .product-title {
     font-size: 1.25rem; /* 20px - equivalent to text-xl */
     font-weight: bold;
-    color: #1f2937;
-    margin-bottom: 0.5rem;
+    color: #e5e5e5; /* Light text */
+    margin-bottom: 0.75rem; /* Increased spacing below title */
     line-height: 1.3;
 }
 
 .product-pricing {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem; /* More space before button */
 }
 
 .product-retail-price {
-    color: #6b7280; /* Gray-500 */
+    color: #888888; /* Light gray for crossed out price */
     text-decoration: line-through;
     font-size: 1rem;
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.5rem; /* Increased margin */
 }
 
 .product-sale-price,
 .product-main-price {
     font-size: 1.875rem; /* 30px - equivalent to text-3xl */
     font-weight: bold;
-    color: #1f2937;
+    color: #e5e5e5; /* Light text */
     line-height: 1.2;
 }
 
@@ -441,10 +462,9 @@ nav ul ul {
 
 .product-button {
     display: inline-block;
-    background-color: #6b7280; /* Neutral gray instead of green to maintain Symfony identity */
+    background-color: #6b7280; /* Neutral gray to maintain Symfony identity */
     color: white;
-    padding: 0.5rem 1rem;
-    margin-top: 1rem;
+    padding: 0.75rem 1.25rem; /* Increased padding for better touch targets */
     font-weight: 600;
     text-decoration: none;
     border-radius: 0.25rem;
@@ -469,11 +489,87 @@ nav ul ul {
         font-size: 1.5rem; /* Smaller on mobile */
     }
     
-    .product-content {
-        padding: 1rem;
+    .product-content,
+    .product-image-container {
+        padding: 1rem; /* Consistent mobile spacing */
     }
     
     .product-image {
         max-height: 12rem; /* Smaller image on mobile */
     }
+}
+
+/* DotCMS SDK Empty Container Styles - Dark Theme */
+.empty-container-placeholder {
+    padding: 2rem;
+    border: 2px dashed #666666; /* Dark dashed border */
+    border-radius: 0.5rem;
+    text-align: center;
+    color: #b0b0b0; /* Light gray text */
+    font-style: italic;
+    margin: 0;
+    background-color: #2d2d2d; /* Dark background */
+    transition: all 0.2s ease;
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-container-placeholder:hover {
+    border-color: #888888; /* Lighter border on hover */
+    background-color: #333333; /* Slightly lighter dark background on hover */
+    color: #e5e5e5; /* Brighter text on hover */
+}
+
+/* UVE Ghost Contentlet - wrapper that UVE can detect but is visually transparent */
+.uve-ghost-contentlet {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 6rem; /* Ensure adequate hover target for UVE */
+}
+
+/* Fallback Content Type Template Styling - Dark theme */
+.content-fallback {
+    background-color: #2d2d2d; /* Dark background */
+    border: 1px solid #404040; /* Dark border */
+    border-radius: 0.375rem;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.content-fallback h3 {
+    color: #e5e5e5; /* Light text */
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.content-fallback p {
+    margin-bottom: 0.5rem;
+    color: #b0b0b0; /* Light gray text */
+}
+
+.content-fallback details {
+    margin-top: 1rem;
+}
+
+.content-fallback summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: #b0b0b0; /* Light gray text */
+    margin-bottom: 0.5rem;
+}
+
+.content-fallback pre {
+    background-color: #1a1a1a; /* Very dark background for code */
+    border: 1px solid #404040; /* Dark border */
+    border-radius: 0.25rem;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+    overflow-x: auto;
+    max-height: 300px;
+    overflow-y: auto;
+    color: #e5e5e5; /* Light text for code */
 }

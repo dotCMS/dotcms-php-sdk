@@ -25,4 +25,13 @@ return [
     '@hotwired/turbo' => [
         'version' => '7.3.0',
     ],
+    '@dotcms/uve' => [
+        'version' => '0.0.1-beta.40',
+    ],
+    '@dotcms/types' => [
+        'version' => '0.0.1-beta.40',
+    ],
+    '@dotcms/types/internal' => [
+        'version' => '0.0.1-beta.40',
+    ],
 ];

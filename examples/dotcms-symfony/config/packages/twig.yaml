@@ -1,5 +1,10 @@
 twig:
     file_name_pattern: '*.twig'
+    globals:
+        dotcms_host: '%env(default:demo_dotcms_host:DOTCMS_HOST)%'
+
+parameters:
+    demo_dotcms_host: 'https://demo.dotcms.com'
 
 when@test:
     twig:

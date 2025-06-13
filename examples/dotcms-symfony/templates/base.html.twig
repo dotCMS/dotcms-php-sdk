@@ -2,18 +2,53 @@
 <html>
     <head>
         <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text><text y=%221.3em%22 x=%220.2em%22 font-size=%2276%22 fill=%22%23fff%22>sf</text></svg>">
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        
         {% block stylesheets %}
-            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+            {# CSS is imported in app.js via AssetMapper #}
+            
+            {# SDK empty container styles are now included in app.css with dark theme #}
         {% endblock %}
 
         {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-            <script src="{{ app.request.server.get('DOTCMS_HOST') }}/ext/uve/dot-uve.js"></script>
+            {# Symfony AssetMapper JavaScript #}
+            {{ importmap('app') }}
         {% endblock %}
+        
+        {# Set dynamic dotcms_host if provided, otherwise use the global #}
+        {% set dynamic_dotcms_host = dotCMSHost|default(dotcms_host) %}
+        
+        {# Debug info for UVE troubleshooting #}
+        {% if mode == 'EDIT_MODE' %}
+            <script type="text/javascript">
+                console.log('🔧 UVE Debug Info:');
+                console.log('Mode:', '{{ mode|default("not set") }}');
+                console.log('DotCMS Host (dynamic):', '{{ dynamic_dotcms_host }}');
+                console.log('DotCMS Host (env):', '{{ dotcms_host }}');
+                console.log('Page Identifier (FIXED):', '{{ page.identifier|default(pageAsset.page.identifier|default("not set")) }}');
+                console.log('Page Inode (FIXED):', '{{ page.inode|default(pageAsset.page.inode|default("not set")) }}');
+                
+                // Additional debug for page data structure
+                console.log('🔍 Data Structure Debug:');
+                {% if pageAsset %}
+                console.log('pageAsset keys:', {{ pageAsset|keys|json_encode|raw }});
+                {% endif %}
+                {% if page %}
+                console.log('page keys:', {{ page|keys|json_encode|raw }});
+                console.log('page.identifier:', '{{ page.identifier|default("not set") }}');
+                console.log('page.inode:', '{{ page.inode|default("not set") }}');
+                {% endif %}
+                {% if pageAsset.page %}
+                console.log('pageAsset.page keys:', {{ pageAsset.page|keys|json_encode|raw }});
+                console.log('pageAsset.page.identifier:', '{{ pageAsset.page.identifier|default("not set") }}');
+                console.log('pageAsset.page.inode:', '{{ pageAsset.page.inode|default("not set") }}');
+                {% endif %}
+            </script>
+        {% endif %}
     </head>
-    <body>
+    <body data-dotcms-host="{{ dynamic_dotcms_host }}">
         {% block body %}{% endblock %}
     </body>
 </html>

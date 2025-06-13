@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TravelLux - Your Destination for Exclusive Experiences</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        
+                                
+                        <style>
+/* DotCMS SDK - Empty Container Placeholder for UVE */
+.empty-container-placeholder {
+    padding: 2rem;
+    border: 2px dashed #d1d5db;
+    border-radius: 0.5rem;
+    text-align: center;
+    color: #6b7280;
+    font-style: italic;
+    margin: 0;
+    background-color: #f9fafb;
+    transition: all 0.2s ease;
+    min-height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-container-placeholder:hover {
+    border-color: #9ca3af;
+    background-color: #f3f4f6;
+}
+
+/* UVE Ghost Contentlet - wrapper that UVE can detect but is visually transparent */
+.uve-ghost-contentlet {
+    display: block;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    min-height: 6rem; /* Ensure adequate hover target for UVE */
+}
+</style>
+        
+                                
+<link rel="stylesheet" href="/assets/styles/app-XEvRP0f.css">
+<script type="importmap" data-turbo-track="reload">
+{
+    "imports": {
+        "app": "/assets/app-7JshC3Y.js",
+        "/assets/bootstrap.js": "/assets/bootstrap-xCO4u8H.js",
+        "/assets/styles/app.css": "data:application/javascript,",
+        "@symfony/stimulus-bundle": "/assets/@symfony/stimulus-bundle/loader-kxG46ja.js",
+        "@hotwired/stimulus": "/assets/vendor/@hotwired/stimulus/stimulus.index-S4zNcea.js",
+        "/assets/@symfony/stimulus-bundle/controllers.js": "/assets/@symfony/stimulus-bundle/controllers-qoRywO9.js",
+        "/assets/@symfony/ux-turbo/turbo_controller.js": "/assets/@symfony/ux-turbo/turbo_controller-zl4y2v3.js",
+        "/assets/controllers/hello_controller.js": "/assets/controllers/hello_controller-VYgvytJ.js",
+        "@hotwired/turbo": "/assets/vendor/@hotwired/turbo/turbo.index-pT15T6h.js",
+        "/assets/controllers/csrf_protection_controller.js": "/assets/controllers/csrf_protection_controller-E_gSC5e.js"
+    }
+}
+</script><script async data-turbo-track="reload">
+if (!HTMLScriptElement.supports || !HTMLScriptElement.supports('importmap')) (function () {
+    const script = document.createElement('script');
+    script.src = 'https://ga.jspm.io/npm:es-module-shims@1.10.0/dist/es-module-shims.js';
+    script.setAttribute('async', 'async');
+    script.setAttribute('crossorigin', 'anonymous');
+    script.setAttribute('integrity', 'sha384-ie1x72Xck445i0j4SlNJ5W5iGeL3Dpa0zD48MZopgWsjNB/lt60SuG1iduZGNnJn');
+    script.setAttribute('data-turbo-track', 'reload');
+    document.head.appendChild(script);
+})();
+</script>
+<link rel="modulepreload" href="/assets/app-7JshC3Y.js">
+<link rel="modulepreload" href="/assets/bootstrap-xCO4u8H.js">
+<link rel="modulepreload" href="/assets/@symfony/stimulus-bundle/loader-kxG46ja.js">
+<link rel="modulepreload" href="/assets/vendor/@hotwired/stimulus/stimulus.index-S4zNcea.js">
+<link rel="modulepreload" href="/assets/@symfony/stimulus-bundle/controllers-qoRywO9.js">
+<link rel="modulepreload" href="/assets/@symfony/ux-turbo/turbo_controller-zl4y2v3.js">
+<link rel="modulepreload" href="/assets/controllers/hello_controller-VYgvytJ.js">
+<link rel="modulepreload" href="/assets/vendor/@hotwired/turbo/turbo.index-pT15T6h.js">
+<script type="module" data-turbo-track="reload">import 'app';</script>
+                
+                        
+                            <script type="text/javascript">
+                console.log('🔧 UVE Debug Info:');
+                console.log('Mode:', 'EDIT_MODE');
+                console.log('DotCMS Host (dynamic):', 'http://localhost:8082');
+                console.log('DotCMS Host (env):', 'http://localhost:8082');
+                console.log('Page Identifier (FIXED):', 'a9f30020-54ef-494e-92ed-645e757171c2');
+                console.log('Page Inode (FIXED):', '184404c9-8e47-466f-9a00-6a2f3a0801e2');
+                
+                // Additional debug for page data structure
+                console.log('🔍 Data Structure Debug:');
+                                console.log('pageAsset keys:', []);
+                                                console.log('page keys:', []);
+                console.log('page.identifier:', 'a9f30020-54ef-494e-92ed-645e757171c2');
+                console.log('page.inode:', '184404c9-8e47-466f-9a00-6a2f3a0801e2');
+                                                console.log('pageAsset.page keys:', []);
+                console.log('pageAsset.page.identifier:', 'a9f30020-54ef-494e-92ed-645e757171c2');
+                console.log('pageAsset.page.inode:', '184404c9-8e47-466f-9a00-6a2f3a0801e2');
+                            </script>
+            </head>
+    <body data-dotcms-host="http://localhost:8082">
+            <header class="header-primary">
+    <div class="header-container">
+        <div class="header-logo">
+            <h2>
+                <a href="/" class="header-logo-link">TravelLux in Symfony</a>
+            </h2>
+                    </div>
+        <div class="header-nav">
+            <nav class="header-navigation">
+    <ul class="nav-list">
+                                    <li class="nav-item">
+                    <a href="/blog" target="_self" class="nav-link">Blog</a>
+                                    </li>
+                            <li class="nav-item">
+                    <a href="/destinations" target="_self" class="nav-link">Destinations</a>
+                                    </li>
+                            <li class="nav-item">
+                    <a href="/store" target="_self" class="nav-link">Store</a>
+                                    </li>
+                            <li class="nav-item">
+                    <a href="/TravelBot" target="_self" class="nav-link">Travelbot</a>
+                                    </li>
+                            <li class="nav-item">
+                    <a href="/members" target="_self" class="nav-link">Members Only</a>
+                                    </li>
+                            <li class="nav-item">
+                    <a href="/contact-us" target="_self" class="nav-link">Contact Us</a>
+                                    </li>
+                        </ul>
+</nav>         </div>
+    </div>
+</header>
+        <div style="background: yellow; padding: 1rem; margin: 1rem; border: 2px solid red;">
+        <h2>🧪 RENDER TEST</h2>
+        <p>Mode: <strong>EDIT_MODE</strong></p>
+        <p>Layout exists: YES</p>
+        <p>Rows count: 6</p>
+    </div>
+
+        <div data-dot-object="page" 
+         data-dot-identifier="a9f30020-54ef-494e-92ed-645e757171c2" 
+         data-dot-inode="184404c9-8e47-466f-9a00-6a2f3a0801e2"
+         data-dot-title="Home"
+         data-dot-url=""
+         data-dot-type="htmlpageasset">
+        
+                                    <div class="container" style="border: 1px solid blue; margin: 1rem; padding: 1rem;">
+                    <h3>🔷 ROW 1</h3>
+                    <div data-dot-object="row" class="row p-0 banner-tall">
+                                                                                                                                                    
+                                <div data-dot-object="column" class="col-start-1 col-end-13" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 1 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: //demo.dotcms.com/application/containers/banner/</h5>
+                                                <p>Contentlets: 1</p>
+                                                <div data-dot-object="container" data-dot-identifier="//demo.dotcms.com/application/containers/banner/" data-dot-accept-types="Banner" data-max-contentlets="25" data-dot-uuid="1"><div data-dot-object="contentlet" data-dot-identifier="2e5d54e6-7ea3-4d72-8577-b8731b206ca0" data-dot-basetype="CONTENT" data-dot-title="Explore the World" data-dot-inode="dbcf80e5-9009-4f31-9459-8e7f8160b13d" data-dot-type="Banner" data-dot-container="{&quot;acceptTypes&quot;:&quot;Banner&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/banner\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;1&quot;}">    
+<div class="banner-hero">
+            <div class="banner-image">
+                    <img src="http://localhost:8082/dA/2e5d54e6-7ea3-4d72-8577-b8731b206ca0/image" 
+             alt="Explore&#x20;the&#x20;World">
+    
+        </div>
+        <div class="banner-overlay">
+        <div class="banner-content">
+                            <h1 class="banner-title">Explore the World</h1>
+                                        <p class="banner-caption">Look Great Doing it. Stock up on New Apparel!!</p>
+                                        <a href="/store/category/apparel/#products-title" class="banner-button">
+                    20% Off - Shop Now
+                </a>
+                    </div>
+    </div>
+</div> </div></div>                                            </div>
+                                                                                                            </div>
+                                                                        </div>
+                </div>
+                            <div class="container" style="border: 1px solid blue; margin: 1rem; padding: 1rem;">
+                    <h3>🔷 ROW 2</h3>
+                    <div data-dot-object="row" class="row">
+                                                                                                                                                    
+                                <div data-dot-object="column" class="col-start-1 col-end-5" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 1 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: SYSTEM_CONTAINER</h5>
+                                                <p>Contentlets: 1</p>
+                                                <div data-dot-object="container" data-dot-identifier="SYSTEM_CONTAINER" data-dot-accept-types="Activity,Banner,Blog,BlogAuthor,BlogComment,BlogCommentor,CallToAction,PreviewDevice,dotFavoritePage,calendarEvent,FAQ,PageForm,Product,webPageContent,YouTube,BannerCarousel,CategoryFilter,SimpleWidget,FaqWidget,PhotoGallery,StoreProductList,VtlInclude,Contact,FileAsset,Image,Destination,htmlpageasset,ProductLineLandingPage,Document,dotAsset,Images,Video" data-max-contentlets="25" data-dot-uuid="1"><div data-dot-object="contentlet" data-dot-identifier="1f5c10a8-b87d-4889-9289-147f35f074cf" data-dot-basetype="CONTENT" data-dot-title="Aqua Sphere Cub Kid Mask Goggles" data-dot-inode="6c8119f9-2336-4a6b-ae8b-cd2f10dd27cb" data-dot-type="Product" data-dot-container="{&quot;acceptTypes&quot;:&quot;Activity,Banner,Blog,BlogAuthor,BlogComment,BlogCommentor,CallToAction,PreviewDevice,dotFavoritePage,calendarEvent,FAQ,PageForm,Product,webPageContent,YouTube,BannerCarousel,CategoryFilter,SimpleWidget,FaqWidget,PhotoGallery,StoreProductList,VtlInclude,Contact,FileAsset,Image,Destination,htmlpageasset,ProductLineLandingPage,Document,dotAsset,Images,Video&quot;,&quot;identifier&quot;:&quot;SYSTEM_CONTAINER&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;1&quot;}">    
+<div class="product-card">
+    <div class="product-image-container">
+                            <img src="http://localhost:8082/dA/1f5c10a8-b87d-4889-9289-147f35f074cf/image" 
+             alt="Aqua&#x20;Sphere&#x20;Cub&#x20;Kid&#x20;Mask&#x20;Goggles"
+             class="product-image">
+    
+            </div>
+    <div class="product-content">
+        <div class="product-title">Aqua Sphere Cub Kid Mask Goggles</div>
+        
+        <div class="product-pricing">
+                                    
+                            <div class="product-spacer"></div>
+                <div class="product-main-price">
+                                            12.99
+                                    </div>
+                    </div>
+        
+        <a href="/store/products/aqua-sphere-cub-kid-mask-goggles" class="product-button">
+            Buy Now
+        </a>
+    </div>
+</div> </div></div>                                            </div>
+                                                                                                            </div>
+                                                                                                                            
+                                <div data-dot-object="column" class="col-start-5 col-end-9" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 2 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: SYSTEM_CONTAINER</h5>
+                                                <p>Contentlets: 0</p>
+                                                <div data-dot-object="container" data-dot-identifier="SYSTEM_CONTAINER" data-dot-accept-types="Activity,Banner,Blog,BlogAuthor,BlogComment,BlogCommentor,CallToAction,PreviewDevice,dotFavoritePage,calendarEvent,FAQ,PageForm,Product,webPageContent,YouTube,BannerCarousel,CategoryFilter,SimpleWidget,FaqWidget,PhotoGallery,StoreProductList,VtlInclude,Contact,FileAsset,Image,Destination,htmlpageasset,ProductLineLandingPage,Document,dotAsset,Images,Video" data-max-contentlets="25" data-dot-uuid="2"><div data-dot-object="contentlet" data-dot-identifier="empty-placeholder" data-dot-basetype="CONTENT" data-dot-title="Empty Container" data-dot-inode="empty-placeholder-inode" data-dot-type="placeholder" data-dot-container="{&quot;acceptTypes&quot;:&quot;Activity,Banner,Blog,BlogAuthor,BlogComment,BlogCommentor,CallToAction,PreviewDevice,dotFavoritePage,calendarEvent,FAQ,PageForm,Product,webPageContent,YouTube,BannerCarousel,CategoryFilter,SimpleWidget,FaqWidget,PhotoGallery,StoreProductList,VtlInclude,Contact,FileAsset,Image,Destination,htmlpageasset,ProductLineLandingPage,Document,dotAsset,Images,Video&quot;,&quot;identifier&quot;:&quot;SYSTEM_CONTAINER&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;2&quot;}" class="uve-ghost-contentlet"><div class="empty-container-placeholder">This container is empty.</div></div></div>                                            </div>
+                                                                                                            </div>
+                                                                                                                            
+                                <div data-dot-object="column" class="col-start-9 col-end-13" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 3 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: SYSTEM_CONTAINER</h5>
+                                                <p>Contentlets: 1</p>
+                                                <div data-dot-object="container" data-dot-identifier="SYSTEM_CONTAINER" data-dot-accept-types="Activity,Banner,Blog,BlogAuthor,BlogComment,BlogCommentor,CallToAction,PreviewDevice,dotFavoritePage,calendarEvent,FAQ,PageForm,Product,webPageContent,YouTube,BannerCarousel,CategoryFilter,SimpleWidget,FaqWidget,PhotoGallery,StoreProductList,VtlInclude,Contact,FileAsset,Image,Destination,htmlpageasset,ProductLineLandingPage,Document,dotAsset,Images,Video" data-max-contentlets="25" data-dot-uuid="3"><div data-dot-object="contentlet" data-dot-identifier="f71058bc-99df-4ccc-bf3e-cdd24694b0a0" data-dot-basetype="CONTENT" data-dot-title="Salomon T2 RT Kids Ski Boots 2020" data-dot-inode="591d95e2-a0a7-453f-9446-7281f5aafa70" data-dot-type="Product" data-dot-container="{&quot;acceptTypes&quot;:&quot;Activity,Banner,Blog,BlogAuthor,BlogComment,BlogCommentor,CallToAction,PreviewDevice,dotFavoritePage,calendarEvent,FAQ,PageForm,Product,webPageContent,YouTube,BannerCarousel,CategoryFilter,SimpleWidget,FaqWidget,PhotoGallery,StoreProductList,VtlInclude,Contact,FileAsset,Image,Destination,htmlpageasset,ProductLineLandingPage,Document,dotAsset,Images,Video&quot;,&quot;identifier&quot;:&quot;SYSTEM_CONTAINER&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;3&quot;}">    
+<div class="product-card">
+    <div class="product-image-container">
+                            <img src="http://localhost:8082/dA/f71058bc-99df-4ccc-bf3e-cdd24694b0a0/image" 
+             alt="Salomon&#x20;T2&#x20;RT&#x20;Kids&#x20;Ski&#x20;Boots&#x20;2020"
+             class="product-image">
+    
+            </div>
+    <div class="product-content">
+        <div class="product-title">Salomon T2 RT Kids Ski Boots 2020</div>
+        
+        <div class="product-pricing">
+                                    
+                            <div class="product-retail-price">199.99</div>
+                <div class="product-sale-price">119.99</div>
+                    </div>
+        
+        <a href="/store/products/salomon-t2-rt-kids-ski-boots-2020" class="product-button">
+            Buy Now
+        </a>
+    </div>
+</div> </div></div>                                            </div>
+                                                                                                            </div>
+                                                                        </div>
+                </div>
+                            <div class="container" style="border: 1px solid blue; margin: 1rem; padding: 1rem;">
+                    <h3>🔷 ROW 3</h3>
+                    <div data-dot-object="row" class="row">
+                                                                                                                                                    
+                                <div data-dot-object="column" class="col-start-1 col-end-4" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 1 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: //demo.dotcms.com/application/containers/default/</h5>
+                                                <p>Contentlets: 2</p>
+                                                <div data-dot-object="container" data-dot-identifier="//demo.dotcms.com/application/containers/default/" data-dot-accept-types="Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm" data-max-contentlets="25" data-dot-uuid="1"><div data-dot-object="contentlet" data-dot-identifier="8ccfa397-4369-44bb-b450-33151387eb02" data-dot-basetype="CONTENT" data-dot-title="Surfing" data-dot-inode="60b6ac00-360e-475d-b8d3-911a20fb43b5" data-dot-type="Activity" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;1&quot;}">    
+<article class="activity-card">
+            <div class="activity-image-container">
+                    <img src="http://localhost:8082/dA/8ccfa397-4369-44bb-b450-33151387eb02/image" 
+             alt="Surfing"
+             class="activity-image">
+    
+        </div>
+        <div class="activity-content">
+        <h3 class="activity-title">Surfing</h3>
+        <p class="activity-description">The search for the perfect wave is never-ending, but the journey itself is incredibly fulfilling. Visit one of our surf resorts and get one step closer to finding nirvana.</p>
+    </div>
+    <div class="activity-actions">
+        <a href="/activities/surfing" class="activity-link">
+            Link to detail →
+        </a>
+    </div>
+</article> </div><div data-dot-object="contentlet" data-dot-identifier="af5d2a9d-86ed-421d-a9e6-5e5dae0e484a" data-dot-basetype="CONTENT" data-dot-title="Cross-country Skiing" data-dot-inode="80ddff00-63e3-47ac-b8ff-cccf0b3dd73c" data-dot-type="Activity" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;1&quot;}">    
+<article class="activity-card">
+            <div class="activity-image-container">
+                    <img src="http://localhost:8082/dA/af5d2a9d-86ed-421d-a9e6-5e5dae0e484a/image" 
+             alt="Cross-country&#x20;Skiing"
+             class="activity-image">
+    
+        </div>
+        <div class="activity-content">
+        <h3 class="activity-title">Cross-country Skiing</h3>
+        <p class="activity-description">Visit a cross-country ski center with groomed trails, rent some gear, and try it out. These carved tracks eliminate 90 percent of your worries about sailing off into the woods because they keep your skis pointed forward.</p>
+    </div>
+    <div class="activity-actions">
+        <a href="/activities/nordic-skiing" class="activity-link">
+            Link to detail →
+        </a>
+    </div>
+</article> </div></div>                                            </div>
+                                                                                                            </div>
+                                                                                                                            
+                                <div data-dot-object="column" class="col-start-4 col-end-7" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 2 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: //demo.dotcms.com/application/containers/default/</h5>
+                                                <p>Contentlets: 2</p>
+                                                <div data-dot-object="container" data-dot-identifier="//demo.dotcms.com/application/containers/default/" data-dot-accept-types="Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm" data-max-contentlets="25" data-dot-uuid="2"><div data-dot-object="contentlet" data-dot-identifier="4694d40b-d9be-4e09-b031-64ee3e7c9642" data-dot-basetype="CONTENT" data-dot-title="Diving" data-dot-inode="f3063a32-9c05-47f5-9c1a-56889fc90e4d" data-dot-type="Activity" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;2&quot;}">    
+<article class="activity-card">
+            <div class="activity-image-container">
+                    <img src="http://localhost:8082/dA/4694d40b-d9be-4e09-b031-64ee3e7c9642/image" 
+             alt="Diving"
+             class="activity-image">
+    
+        </div>
+        <div class="activity-content">
+        <h3 class="activity-title">Diving</h3>
+        <p class="activity-description">World-class diving is at your doorstep. From shore or by boat, you have exclusive access to miles of pristine reefs, where diverse and dramatic undersea landscapes harbor the highest level of marine biodiversity on the planet.</p>
+    </div>
+    <div class="activity-actions">
+        <a href="/activities/diving" class="activity-link">
+            Link to detail →
+        </a>
+    </div>
+</article> </div><div data-dot-object="contentlet" data-dot-identifier="574f0aec-185a-4160-9c17-6d037b298318" data-dot-basetype="CONTENT" data-dot-title="Snowboarding" data-dot-inode="669db9d1-9274-4fca-af61-bd54229f049c" data-dot-type="Activity" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;2&quot;}">    
+<article class="activity-card">
+            <div class="activity-image-container">
+                    <img src="http://localhost:8082/dA/574f0aec-185a-4160-9c17-6d037b298318/image" 
+             alt="Snowboarding"
+             class="activity-image">
+    
+        </div>
+        <div class="activity-content">
+        <h3 class="activity-title">Snowboarding</h3>
+        <p class="activity-description">Snowboarding, once a prime route for teen rebellion, today is definitely mainstream. Those teens — both guys and Shred Bettys, who took up snowboarding in the late &#039;80s and &#039;90s now are riding with their kids.</p>
+    </div>
+    <div class="activity-actions">
+        <a href="/activities/snowboarding" class="activity-link">
+            Link to detail →
+        </a>
+    </div>
+</article> </div></div>                                            </div>
+                                                                                                            </div>
+                                                                                                                            
+                                <div data-dot-object="column" class="col-start-7 col-end-10" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 3 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: //demo.dotcms.com/application/containers/default/</h5>
+                                                <p>Contentlets: 2</p>
+                                                <div data-dot-object="container" data-dot-identifier="//demo.dotcms.com/application/containers/default/" data-dot-accept-types="Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm" data-max-contentlets="25" data-dot-uuid="3"><div data-dot-object="contentlet" data-dot-identifier="6ac5921e-e062-49a6-9808-f41aff9343c5" data-dot-basetype="CONTENT" data-dot-title="Snowmobiling" data-dot-inode="d8bb261d-e2d8-4aa0-ad3d-655faaa8b8c0" data-dot-type="Activity" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;3&quot;}">    
+<article class="activity-card">
+            <div class="activity-image-container">
+                    <img src="http://localhost:8082/dA/6ac5921e-e062-49a6-9808-f41aff9343c5/image" 
+             alt="Snowmobiling"
+             class="activity-image">
+    
+        </div>
+        <div class="activity-content">
+        <h3 class="activity-title">Snowmobiling</h3>
+        <p class="activity-description">All winter locations have a variety of snowmobiles available for rent to all our registered guests.</p>
+    </div>
+    <div class="activity-actions">
+        <a href="/activities/snowmobiling" class="activity-link">
+            Link to detail →
+        </a>
+    </div>
+</article> </div><div data-dot-object="contentlet" data-dot-identifier="50351143-3ba6-4c54-9e9b-0d8a90d2f9b0" data-dot-basetype="CONTENT" data-dot-title="Sport Fishing" data-dot-inode="48e25488-def7-468c-b132-3e92bdd38e38" data-dot-type="Activity" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;3&quot;}">    
+<article class="activity-card">
+            <div class="activity-image-container">
+                    <img src="http://localhost:8082/dA/50351143-3ba6-4c54-9e9b-0d8a90d2f9b0/image" 
+             alt="Sport&#x20;Fishing"
+             class="activity-image">
+    
+        </div>
+        <div class="activity-content">
+        <h3 class="activity-title">Sport Fishing</h3>
+        <p class="activity-description">Do you know exactly which fish you are trying to catch? If not, you can learn about all the different types of fish you can catch in Costa Rica. Plus we let you know where the best places to catch them.</p>
+    </div>
+    <div class="activity-actions">
+        <a href="/activities/sport-fishing" class="activity-link">
+            Link to detail →
+        </a>
+    </div>
+</article> </div></div>                                            </div>
+                                                                                                            </div>
+                                                                                                                            
+                                <div data-dot-object="column" class="col-start-10 col-end-13" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 4 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: //demo.dotcms.com/application/containers/default/</h5>
+                                                <p>Contentlets: 2</p>
+                                                <div data-dot-object="container" data-dot-identifier="//demo.dotcms.com/application/containers/default/" data-dot-accept-types="Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm" data-max-contentlets="25" data-dot-uuid="4"><div data-dot-object="contentlet" data-dot-identifier="50757fb4-75df-4e2c-8335-35d36bdb944b" data-dot-basetype="CONTENT" data-dot-title="Zip-Lining" data-dot-inode="449add1c-8abf-4804-b31f-a1452ac69c5c" data-dot-type="Activity" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;4&quot;}">    
+<article class="activity-card">
+            <div class="activity-image-container">
+                    <img src="http://localhost:8082/dA/50757fb4-75df-4e2c-8335-35d36bdb944b/image" 
+             alt="Zip-Lining"
+             class="activity-image">
+    
+        </div>
+        <div class="activity-content">
+        <h3 class="activity-title">Zip-Lining</h3>
+        <p class="activity-description">Ever wondered what it is like to fly through the forest canopy? Zip-lining ais the best way to explore the forest canopy, where thick branches serve as platforms for the adventurous traveler, more than 100 feet above the forest floor.</p>
+    </div>
+    <div class="activity-actions">
+        <a href="/activities/zip-lining" class="activity-link">
+            Link to detail →
+        </a>
+    </div>
+</article> </div><div data-dot-object="contentlet" data-dot-identifier="0e9340f8-08d2-46e3-ae25-be0137c575d0" data-dot-basetype="CONTENT" data-dot-title="White Water Rafting" data-dot-inode="31c5f300-cd29-420e-a600-cb4607ab53ae" data-dot-type="Activity" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;4&quot;}">    
+<article class="activity-card">
+            <div class="activity-image-container">
+                    <img src="http://localhost:8082/dA/0e9340f8-08d2-46e3-ae25-be0137c575d0/image" 
+             alt="White&#x20;Water&#x20;Rafting"
+             class="activity-image">
+    
+        </div>
+        <div class="activity-content">
+        <h3 class="activity-title">White Water Rafting</h3>
+        <p class="activity-description">For those looking for a thrill, we offer some of the worlds bets white water rafting. Class II - IV rivers.</p>
+    </div>
+    <div class="activity-actions">
+        <a href="/activities/white-water-rafting" class="activity-link">
+            Link to detail →
+        </a>
+    </div>
+</article> </div></div>                                            </div>
+                                                                                                            </div>
+                                                                        </div>
+                </div>
+                            <div class="container" style="border: 1px solid blue; margin: 1rem; padding: 1rem;">
+                    <h3>🔷 ROW 4</h3>
+                    <div data-dot-object="row" class="row">
+                                                                                                                                                    
+                                <div data-dot-object="column" class="col-start-1 col-end-7" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 1 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: //demo.dotcms.com/application/containers/default/</h5>
+                                                <p>Contentlets: 2</p>
+                                                <div data-dot-object="container" data-dot-identifier="//demo.dotcms.com/application/containers/default/" data-dot-accept-types="Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm" data-max-contentlets="25" data-dot-uuid="5"><div data-dot-object="contentlet" data-dot-identifier="15a3f62471f158dcf6c5d83f2fe5e64c" data-dot-basetype="CONTENT" data-dot-title="Further" data-dot-inode="792823f1-9c4a-4ded-b92b-d371036b8a0c" data-dot-type="YouTube" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;5&quot;}"><div class="dotcms-content" data-content-type="YouTube"><h3>Further</h3></div></div><div data-dot-object="contentlet" data-dot-identifier="f3aa5cfe853c298df02ae1740e7ac3d7" data-dot-basetype="CONTENT" data-dot-title="Zack Giffin Tears Up Mt. Baker Ski Area - The Good Life Pacific Northwest" data-dot-inode="fdbab362-1f62-4b21-9e5b-f0f2a7e17812" data-dot-type="YouTube" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;5&quot;}"><div class="dotcms-content" data-content-type="YouTube"><h3>Zack Giffin Tears Up Mt. Baker Ski Area - The Good Life Pacific Northwest</h3></div></div></div>                                            </div>
+                                                                                                            </div>
+                                                                                                                            
+                                <div data-dot-object="column" class="col-start-7 col-end-10" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 2 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: //demo.dotcms.com/application/containers/default/</h5>
+                                                <p>Contentlets: 3</p>
+                                                <div data-dot-object="container" data-dot-identifier="//demo.dotcms.com/application/containers/default/" data-dot-accept-types="Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm" data-max-contentlets="25" data-dot-uuid="6"><div data-dot-object="contentlet" data-dot-identifier="39aa1441-2933-4c81-b3f4-cc154195595b" data-dot-basetype="CONTENT" data-dot-title="Rossignol Evo 70 Ski Boots" data-dot-inode="845c17ee-ba36-4029-b243-44e8228e9260" data-dot-type="Product" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;6&quot;}">    
+<div class="product-card">
+    <div class="product-image-container">
+                            <img src="http://localhost:8082/dA/39aa1441-2933-4c81-b3f4-cc154195595b/image" 
+             alt="Rossignol&#x20;Evo&#x20;70&#x20;Ski&#x20;Boots"
+             class="product-image">
+    
+            </div>
+    <div class="product-content">
+        <div class="product-title">Rossignol Evo 70 Ski Boots</div>
+        
+        <div class="product-pricing">
+                                    
+                            <div class="product-spacer"></div>
+                <div class="product-main-price">
+                                            134.94
+                                    </div>
+                    </div>
+        
+        <a href="/store/products/rossignol-evo-70-ski-boots" class="product-button">
+            Buy Now
+        </a>
+    </div>
+</div> </div><div data-dot-object="contentlet" data-dot-identifier="acfcb298-af27-40bc-835b-faf634b0f888" data-dot-basetype="CONTENT" data-dot-title="Aqua Lung Sport Hawkeye Adult Silicone Snorkel Set" data-dot-inode="258df32b-2f3c-4a68-bb56-d17ecdce6729" data-dot-type="Product" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;6&quot;}">    
+<div class="product-card">
+    <div class="product-image-container">
+                            <img src="http://localhost:8082/dA/acfcb298-af27-40bc-835b-faf634b0f888/image" 
+             alt="Aqua&#x20;Lung&#x20;Sport&#x20;Hawkeye&#x20;Adult&#x20;Silicone&#x20;Snorkel&#x20;Set"
+             class="product-image">
+    
+            </div>
+    <div class="product-content">
+        <div class="product-title">Aqua Lung Sport Hawkeye Adult Silicone Snorkel Set</div>
+        
+        <div class="product-pricing">
+                                    
+                            <div class="product-spacer"></div>
+                <div class="product-main-price">
+                                            49.99
+                                    </div>
+                    </div>
+        
+        <a href="/store/products/aqua-lung-sport-hawkeye-adult-silicone-snorkel-set" class="product-button">
+            Buy Now
+        </a>
+    </div>
+</div> </div><div data-dot-object="contentlet" data-dot-identifier="46e52dc2-e72a-4641-8925-026abf2adccd" data-dot-basetype="CONTENT" data-dot-title="Eagles Nest Outfitters DoubleNest Hammock Patriot" data-dot-inode="03f4ba7b-a7c0-4240-9dda-0ed2f98bd29d" data-dot-type="Product" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;6&quot;}">    
+<div class="product-card">
+    <div class="product-image-container">
+                            <img src="http://localhost:8082/dA/46e52dc2-e72a-4641-8925-026abf2adccd/image" 
+             alt="Eagles&#x20;Nest&#x20;Outfitters&#x20;DoubleNest&#x20;Hammock&#x20;Patriot"
+             class="product-image">
+    
+            </div>
+    <div class="product-content">
+        <div class="product-title">Eagles Nest Outfitters DoubleNest Hammock Patriot</div>
+        
+        <div class="product-pricing">
+                                    
+                            <div class="product-spacer"></div>
+                <div class="product-main-price">
+                                            69.95
+                                    </div>
+                    </div>
+        
+        <a href="/store/products/eagles-nest-outfitters-doublenest-hammock-patriot" class="product-button">
+            Buy Now
+        </a>
+    </div>
+</div> </div></div>                                            </div>
+                                                                                                            </div>
+                                                                                                                            
+                                <div data-dot-object="column" class="col-start-10 col-end-13" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 3 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: //demo.dotcms.com/application/containers/default/</h5>
+                                                <p>Contentlets: 3</p>
+                                                <div data-dot-object="container" data-dot-identifier="//demo.dotcms.com/application/containers/default/" data-dot-accept-types="Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm" data-max-contentlets="25" data-dot-uuid="7"><div data-dot-object="contentlet" data-dot-identifier="e9fdab13-72f2-486c-b645-0e2315d5c33b" data-dot-basetype="CONTENT" data-dot-title="O&#039;neill Men&#039;s O&#039;riginal Wetsuit" data-dot-inode="b9a1ae88-e686-4390-a231-8dab00380c0a" data-dot-type="Product" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;7&quot;}">    
+<div class="product-card">
+    <div class="product-image-container">
+                            <img src="http://localhost:8082/dA/e9fdab13-72f2-486c-b645-0e2315d5c33b/image" 
+             alt="O&#x27;neill&#x20;Men&#x27;s&#x20;O&#x27;riginal&#x20;Wetsuit"
+             class="product-image">
+    
+            </div>
+    <div class="product-content">
+        <div class="product-title">O&#039;neill Men&#039;s O&#039;riginal Wetsuit</div>
+        
+        <div class="product-pricing">
+                                    
+                            <div class="product-spacer"></div>
+                <div class="product-main-price">
+                                            109.95
+                                    </div>
+                    </div>
+        
+        <a href="/store/products/oneill-mens-original-wetsuit" class="product-button">
+            Buy Now
+        </a>
+    </div>
+</div> </div><div data-dot-object="contentlet" data-dot-identifier="5985eec0-6bc7-4d87-be13-d4dc83516da2" data-dot-basetype="CONTENT" data-dot-title="Spyder Leader GTX Mens Insulated Ski Jacket" data-dot-inode="2dc8977d-dd26-424e-a5e7-8800b5c14d7b" data-dot-type="Product" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;7&quot;}">    
+<div class="product-card">
+    <div class="product-image-container">
+                            <img src="http://localhost:8082/dA/5985eec0-6bc7-4d87-be13-d4dc83516da2/image" 
+             alt="Spyder&#x20;Leader&#x20;GTX&#x20;Mens&#x20;Insulated&#x20;Ski&#x20;Jacket"
+             class="product-image">
+    
+            </div>
+    <div class="product-content">
+        <div class="product-title">Spyder Leader GTX Mens Insulated Ski Jacket</div>
+        
+        <div class="product-pricing">
+                                    
+                            <div class="product-retail-price">500.00</div>
+                <div class="product-sale-price">399.95</div>
+                    </div>
+        
+        <a href="/store/products/spyder-leader-gtx-mens-insulated-ski-jacket" class="product-button">
+            Buy Now
+        </a>
+    </div>
+</div> </div><div data-dot-object="contentlet" data-dot-identifier="df26d95c-4f1f-4503-ac81-8176bb1c417d" data-dot-basetype="CONTENT" data-dot-title="Modern Falcon - XB" data-dot-inode="d8cedb08-2d46-4e58-b082-08c6f853c78b" data-dot-type="Product" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;7&quot;}">    
+<div class="product-card">
+    <div class="product-image-container">
+                            <img src="http://localhost:8082/dA/df26d95c-4f1f-4503-ac81-8176bb1c417d/image" 
+             alt="Modern&#x20;Falcon&#x20;-&#x20;XB"
+             class="product-image">
+    
+            </div>
+    <div class="product-content">
+        <div class="product-title">Modern Falcon - XB</div>
+        
+        <div class="product-pricing">
+                                    
+                            <div class="product-retail-price">599.00</div>
+                <div class="product-sale-price">510.00</div>
+                    </div>
+        
+        <a href="/store/products/modern-falcon-xb" class="product-button">
+            Buy Now
+        </a>
+    </div>
+</div> </div></div>                                            </div>
+                                                                                                            </div>
+                                                                        </div>
+                </div>
+                            <div class="container" style="border: 1px solid blue; margin: 1rem; padding: 1rem;">
+                    <h3>🔷 ROW 5</h3>
+                    <div data-dot-object="row" class="row bg-white py-5">
+                                                                                                                                                    
+                                <div data-dot-object="column" class="col-start-1 col-end-13" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 1 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: //demo.dotcms.com/application/containers/default/</h5>
+                                                <p>Contentlets: 1</p>
+                                                <div data-dot-object="container" data-dot-identifier="//demo.dotcms.com/application/containers/default/" data-dot-accept-types="Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm" data-max-contentlets="25" data-dot-uuid="8"><div data-dot-object="contentlet" data-dot-identifier="cbe5573b-a201-477b-aea1-5ff3e75a1072" data-dot-basetype="WIDGET" data-dot-title="Recommended Events" data-dot-inode="178ee1ba-1871-4ece-a02a-ec3ebceb9722" data-dot-type="VtlInclude" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;8&quot;}"><div class="dotcms-content" data-content-type="VtlInclude"><h3>Recommended Events</h3></div></div></div>                                            </div>
+                                                                                                            </div>
+                                                                        </div>
+                </div>
+                            <div class="container" style="border: 1px solid blue; margin: 1rem; padding: 1rem;">
+                    <h3>🔷 ROW 6</h3>
+                    <div data-dot-object="row" class="row">
+                                                                                                                                                    
+                                <div data-dot-object="column" class="col-start-1 col-end-13" style="border: 1px solid green; margin: 0.5rem; padding: 0.5rem;">
+                                    <h4>🔶 COLUMN 1 (1 containers)</h4>
+                                                                                                                        <div style="border: 1px solid orange; margin: 0.5rem; padding: 0.5rem;">
+                                                <h5>🔸 CONTAINER: //demo.dotcms.com/application/containers/default/</h5>
+                                                <p>Contentlets: 1</p>
+                                                <div data-dot-object="container" data-dot-identifier="//demo.dotcms.com/application/containers/default/" data-dot-accept-types="Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm" data-max-contentlets="25" data-dot-uuid="9"><div data-dot-object="contentlet" data-dot-identifier="c151d3f0-9572-4bcc-8c8f-00c9da9758e0" data-dot-basetype="WIDGET" data-dot-title="Recommended Products" data-dot-inode="d56fa7a2-9641-41e8-92bc-25510bcfc106" data-dot-type="VtlInclude" data-dot-container="{&quot;acceptTypes&quot;:&quot;Images,CallToAction,webPageContent,calendarEvent,Banner,Video,Activity,Blog,YouTube,Product,PageForm&quot;,&quot;identifier&quot;:&quot;\/\/demo.dotcms.com\/application\/containers\/default\/&quot;,&quot;maxContentlets&quot;:25,&quot;variantId&quot;:&quot;DEFAULT&quot;,&quot;uuid&quot;:&quot;9&quot;}"><div class="dotcms-content" data-content-type="VtlInclude"><h3>Recommended Products</h3></div></div></div>                                            </div>
+                                                                                                            </div>
+                                                                        </div>
+                </div>
+                        </div>
+    
+<div id="sfwdt23238e" class="sf-toolbar sf-display-none" role="region" aria-label="Symfony Web Debug Toolbar">    <!-- START of Symfony Web Debug Toolbar --><div id="sfMiniToolbar-23238e" class="sf-minitoolbar" data-no-turbolink data-turbo="false">    <button type="button" title="Show Symfony toolbar" id="sfToolbarMiniToggler-23238e" accesskey="D" aria-expanded="false" aria-controls="sfToolbarMainContent-23238e">        <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Symfony" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .9C5.8.9.9 5.8.9 12a11 11 0 1 0 22.2 0A11 11 0 0 0 12 .9zm6.5 6c-.6 0-.9-.3-.9-.8 0-.2 0-.4.2-.6l.2-.4c0-.3-.5-.4-.6-.4-1.8.1-2.3 2.5-2.7 4.4l-.2 1c1 .2 1.8 0 2.2-.3.6-.4-.2-.7-.1-1.2.1-.3.5-.5.7-.6.5 0 .7.5.7.9 0 .7-1 1.8-3 1.8l-.6-.1-.6 2.4c-.4 1.6-.8 3.8-2.4 5.7-1.4 1.7-2.9 1.9-3.5 1.9-1.2 0-1.9-.6-2-1.5 0-.8.7-1.3 1.2-1.3.6 0 1.1.5 1.1 1s-.2.6-.4.6c-.1.1-.3.2-.3.4 0 .1.1.3.4.3.5 0 .8-.3 1.1-.5 1.2-.9 1.6-2.7 2.2-5.7l.1-.7.7-3.2c-.8-.6-1.3-1.4-2.4-1.7-.6-.1-1.1.1-1.5.5-.4.5-.2 1.1.2 1.5l.7.6c.7.8 1.2 1.6 1 2.5-.3 1.5-2 2.6-4 1.9-1.8-.6-2-1.8-1.8-2.5.2-.6.6-.7 1.1-.6.5.2.6.7.6 1.2l-.1.3c-.2.1-.3.3-.3.4-.1.4.4.6.7.7.7.3 1.6-.2 1.8-.8a1 1 0 0 0-.4-1.1l-.7-.8c-.4-.4-1.1-1.4-.7-2.6.1-.5.4-.9.7-1.3a4 4 0 0 1 2.8-.6c1.2.4 1.8 1.1 2.6 1.8.5-1.2 1-2.4 1.8-3.5.9-.9 1.9-1.6 3.1-1.7 1.3.2 2.2.7 2.2 1.6 0 .4-.2 1.1-.9 1.1z"/></svg>    </button></div><div id="sfToolbarClearer-23238e" class="sf-toolbar-clearer"></div><div id="sfToolbarMainContent-23238e" class="sf-toolbarreset notranslate clear-fix" data-no-turbolink data-turbo="false">                                                    <div class="sf-toolbar-block sf-toolbar-block-request sf-toolbar-status-normal " >    <a href="http://localhost:8000/_profiler/23238e?panel=request">        <div class="sf-toolbar-icon">        <svg xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Symfony" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 .9C5.8.9.9 5.8.9 12a11 11 0 1 0 22.2 0A11 11 0 0 0 12 .9zm6.5 6c-.6 0-.9-.3-.9-.8 0-.2 0-.4.2-.6l.2-.4c0-.3-.5-.4-.6-.4-1.8.1-2.3 2.5-2.7 4.4l-.2 1c1 .2 1.8 0 2.2-.3.6-.4-.2-.7-.1-1.2.1-.3.5-.5.7-.6.5 0 .7.5.7.9 0 .7-1 1.8-3 1.8l-.6-.1-.6 2.4c-.4 1.6-.8 3.8-2.4 5.7-1.4 1.7-2.9 1.9-3.5 1.9-1.2 0-1.9-.6-2-1.5 0-.8.7-1.3 1.2-1.3.6 0 1.1.5 1.1 1s-.2.6-.4.6c-.1.1-.3.2-.3.4 0 .1.1.3.4.3.5 0 .8-.3 1.1-.5 1.2-.9 1.6-2.7 2.2-5.7l.1-.7.7-3.2c-.8-.6-1.3-1.4-2.4-1.7-.6-.1-1.1.1-1.5.5-.4.5-.2 1.1.2 1.5l.7.6c.7.8 1.2 1.6 1 2.5-.3 1.5-2 2.6-4 1.9-1.8-.6-2-1.8-1.8-2.5.2-.6.6-.7 1.1-.6.5.2.6.7.6 1.2l-.1.3c-.2.1-.3.3-.3.4-.1.4.4.6.7.7.7.3 1.6-.2 1.8-.8a1 1 0 0 0-.4-1.1l-.7-.8c-.4-.4-1.1-1.4-.7-2.6.1-.5.4-.9.7-1.3a4 4 0 0 1 2.8-.6c1.2.4 1.8 1.1 2.6 1.8.5-1.2 1-2.4 1.8-3.5.9-.9 1.9-1.6 3.1-1.7 1.3.2 2.2.7 2.2 1.6 0 .4-.2 1.1-.9 1.1z"/></svg>        <span class="sf-toolbar-value sf-toolbar-ajax-request-counter">            Loading&hellip;        </span>    </div>    </a>        <div class="sf-toolbar-info">        <div class="sf-toolbar-info-piece">            <b>Loading the web debug toolbar&hellip;</b>        </div>        <div class="sf-toolbar-info-piece">            Attempt #<span id="sfLoadCounter-23238e"></span>        </div>        <div class="sf-toolbar-info-piece">            <b>                <button class="sf-cancel-button" type="button" id="sfLoadCancel-23238e" title="Cancel loading">Cancel</button>            </b>        </div>    </div></div>                                <button class="hide-button" type="button" id="sfToolbarHideButton-23238e" title="Close Toolbar" accesskey="D" aria-expanded="true" aria-controls="sfToolbarMainContent-23238e">        <svg xmlns="http://www.w3.org/2000/svg" data-icon-name="icon-tabler-x" width="24" height="24" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>    <line x1="18" y1="6" x2="6" y2="18"></line>    <line x1="6" y1="6" x2="18" y2="18"></line></svg>    </button></div><!-- END of Symfony Web Debug Toolbar --></div><link rel="stylesheet" nonce="a34f0c3d97863811f0c8ec55333247e4" href="http://localhost:8000/_wdt/styles" /><script nonce="f93284ab1e57fb78ff70329c2ba16ebc">/*<![CDATA[*/    if (typeof Sfjs === 'undefined' || typeof Sfjs.loadToolbar === 'undefined') {        Sfjs = (function() {            "use strict";            if ('classList' in document.documentElement) {                var hasClass = function (el, cssClass) { return el.classList.contains(cssClass); };                var removeClass = function(el, cssClass) { el.classList.remove(cssClass); };                var addClass = function(el, cssClass) { el.classList.add(cssClass); };                var toggleClass = function(el, cssClass) { el.classList.toggle(cssClass); };            } else {                var hasClass = function (el, cssClass) { return el.className.match(new RegExp('\\b' + cssClass + '\\b')); };                var removeClass = function(el, cssClass) { el.className = el.className.replace(new RegExp('\\b' + cssClass + '\\b'), ' '); };                var addClass = function(el, cssClass) { if (!hasClass(el, cssClass)) { el.className += " " + cssClass; } };                var toggleClass = function(el, cssClass) { hasClass(el, cssClass) ? removeClass(el, cssClass) : addClass(el, cssClass); };            }            var noop = function() {};            var profilerStorageKey = 'symfony/profiler/';            var addEventListener;            var el = document.createElement('div');            if (!('addEventListener' in el)) {                addEventListener = function (element, eventName, callback) {                    element.attachEvent('on' + eventName, callback);                };            } else {                addEventListener = function (element, eventName, callback) {                    element.addEventListener(eventName, callback, false);                };            }            var request = function(url, onSuccess, onError, payload, options, tries) {                url = new URL(url);                url.searchParams.set('XDEBUG_IGNORE', '1');                url = url.toString();                var xhr = window.XMLHttpRequest ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');                options = options || {};                options.retry = options.retry || false;                tries = tries || 1;                /* this delays for 125, 375, 625, 875, and 1000, ... */                var delay = tries < 5 ? (tries - 0.5) * 250 : 1000;                xhr.open(options.method || 'GET', url, true);                xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');                xhr.onreadystatechange = function(state) {                    if (4 !== xhr.readyState) {                        return null;                    }                    if (xhr.status == 404 && options.retry && !options.stop) {                        setTimeout(function() {                            if (options.stop) {                                return;                            }                            request(url, onSuccess, onError, payload, options, tries + 1);                        }, delay);                        return null;                    }                    if (200 === xhr.status) {                        (onSuccess || noop)(xhr);                    } else {                        (onError || noop)(xhr);                    }                };                if (options.onSend) {                    options.onSend(tries);                }                xhr.send(payload || '');            };            var getPreference = function(name) {                if (!window.localStorage) {                    return null;                }                return localStorage.getItem(profilerStorageKey + name);            };            var setPreference = function(name, value) {                if (!window.localStorage) {                    return null;                }                localStorage.setItem(profilerStorageKey + name, value);            };            var requestStack = [];            var extractHeaders = function(xhr, stackElement) {                /* Here we avoid to call xhr.getResponseHeader in order to */                /* prevent polluting the console with CORS security errors */                var allHeaders = xhr.getAllResponseHeaders();                var ret;                if (ret = allHeaders.match(/^x-debug-token:\s+(.*)$/im)) {                    stackElement.profile = ret[1];                }                if (ret = allHeaders.match(/^x-debug-token-link:\s+(.*)$/im)) {                    stackElement.profilerUrl = ret[1];                }                if (ret = allHeaders.match(/^Symfony-Debug-Toolbar-Replace:\s+(.*)$/im)) {                    stackElement.toolbarReplaceFinished = false;                    stackElement.toolbarReplace = '1' === ret[1];                }            };            var successStreak = 4;            var pendingRequests = 0;            var renderAjaxRequests = function() {                var requestCounter = document.querySelector('.sf-toolbar-ajax-request-counter');                if (!requestCounter) {                    return;                }                requestCounter.textContent = requestStack.length;                var infoSpan = document.querySelector(".sf-toolbar-ajax-info");                if (infoSpan) {                    infoSpan.textContent = requestStack.length + ' AJAX request' + (requestStack.length !== 1 ? 's' : '');                }                var ajaxToolbarPanel = document.querySelector('.sf-toolbar-block-ajax');                if (requestStack.length) {                    ajaxToolbarPanel.style.display = 'block';                } else {                    ajaxToolbarPanel.style.display = 'none';                }                if (pendingRequests > 0) {                    addClass(ajaxToolbarPanel, 'sf-ajax-request-loading');                } else if (successStreak < 4) {                    addClass(ajaxToolbarPanel, 'sf-toolbar-status-red');                    removeClass(ajaxToolbarPanel, 'sf-ajax-request-loading');                } else {                    removeClass(ajaxToolbarPanel, 'sf-ajax-request-loading');                    removeClass(ajaxToolbarPanel, 'sf-toolbar-status-red');                }            };            var startAjaxRequest = function(index) {                var tbody = document.querySelector('.sf-toolbar-ajax-request-list');                if (!tbody) {                    return;                }                var nbOfAjaxRequest = tbody.rows.length;                if (nbOfAjaxRequest >= 100) {                    tbody.deleteRow(0);                }                var request = requestStack[index];                pendingRequests++;                var row = document.createElement('tr');                request.DOMNode = row;                var requestNumberCell = document.createElement('td');                requestNumberCell.textContent = index + 1;                row.appendChild(requestNumberCell);                var profilerCell = document.createElement('td');                profilerCell.textContent = 'n/a';                row.appendChild(profilerCell);                var methodCell = document.createElement('td');                methodCell.textContent = request.method;                row.appendChild(methodCell);                var typeCell = document.createElement('td');                typeCell.textContent = request.type;                row.appendChild(typeCell);                var statusCodeCell = document.createElement('td');                var statusCode = document.createElement('span');                statusCode.textContent = 'n/a';                statusCodeCell.appendChild(statusCode);                row.appendChild(statusCodeCell);                var pathCell = document.createElement('td');                pathCell.className = 'sf-ajax-request-url';                if ('GET' === request.method) {                    var pathLink = document.createElement('a');                    pathLink.setAttribute('href', request.url);                    pathLink.textContent = request.url;                    pathCell.appendChild(pathLink);                } else {                    pathCell.textContent = request.url;                }                pathCell.setAttribute('title', request.url);                row.appendChild(pathCell);                var durationCell = document.createElement('td');                durationCell.className = 'sf-ajax-request-duration';                durationCell.textContent = 'n/a';                row.appendChild(durationCell);                request.liveDurationHandle = setInterval(function() {                    durationCell.textContent = (new Date() - request.start) + ' ms';                }, 100);                row.className = 'sf-ajax-request sf-ajax-request-loading';                tbody.insertBefore(row, null);                var toolbarInfo = document.querySelector('.sf-toolbar-block-ajax .sf-toolbar-info');                toolbarInfo.scrollTop = toolbarInfo.scrollHeight;                renderAjaxRequests();            };            var finishAjaxRequest = function(index) {                var request = requestStack[index];                clearInterval(request.liveDurationHandle);                if (!request.DOMNode) {                    return;                }                if (request.toolbarReplace && !request.toolbarReplaceFinished && request.profile) {                    /* Flag as complete because finishAjaxRequest can be called multiple times. */                    request.toolbarReplaceFinished = true;                    /* Search up through the DOM to find the toolbar's container ID. */                    for (var elem = request.DOMNode; elem && elem !== document; elem = elem.parentNode) {                        if (elem.id.match(/^sfwdt/)) {                            Sfjs.loadToolbar(elem.id.replace(/^sfwdt/, ''), request.profile);                            break;                        }                    }                }                pendingRequests--;                var row = request.DOMNode;                /* Unpack the children from the row */                var profilerCell = row.children[1];                var methodCell = row.children[2];                var statusCodeCell = row.children[4];                var statusCodeElem = statusCodeCell.children[0];                var durationCell = row.children[6];                if (request.error) {                    row.className = 'sf-ajax-request sf-ajax-request-error';                    methodCell.className = 'sf-ajax-request-error';                    successStreak = 0;                } else {                    row.className = 'sf-ajax-request sf-ajax-request-ok';                    successStreak++;                }                if (request.statusCode) {                    if (request.statusCode < 300) {                        statusCodeElem.setAttribute('class', 'sf-toolbar-status');                    } else if (request.statusCode < 400) {                        statusCodeElem.setAttribute('class', 'sf-toolbar-status sf-toolbar-status-yellow');                    } else {                        statusCodeElem.setAttribute('class', 'sf-toolbar-status sf-toolbar-status-red');                    }                    statusCodeElem.textContent = request.statusCode;                } else {                    statusCodeElem.setAttribute('class', 'sf-toolbar-status sf-toolbar-status-red');                }                if (request.duration) {                    durationCell.textContent = request.duration + ' ms';                }                if (request.profilerUrl) {                    profilerCell.textContent = '';                    var profilerLink = document.createElement('a');                    profilerLink.setAttribute('href', request.profilerUrl);                    profilerLink.textContent = request.profile;                    profilerCell.appendChild(profilerLink);                }                renderAjaxRequests();            };                        if (window.fetch && window.fetch.polyfill === undefined) {                var oldFetch = window.fetch;                window.fetch = function () {                    var promise = oldFetch.apply(this, arguments);                    var url = arguments[0];                    var params = arguments[1];                    var paramType = Object.prototype.toString.call(arguments[0]);                    if (paramType === '[object Request]') {                        url = arguments[0].url;                        params = {                            method: arguments[0].method,                            credentials: arguments[0].credentials,                            headers: arguments[0].headers,                            mode: arguments[0].mode,                            redirect: arguments[0].redirect                        };                    } else {                        url = String(url);                    }                    if (!url.match(new RegExp("^\/((index|app(_[\\w]+)?)\\.php\/)?_wdt"))) {                        var method = 'GET';                        if (params && params.method !== undefined) {                            method = params.method;                        }                        var stackElement = {                            error: false,                            url: url,                            method: method,                            type: 'fetch',                            start: new Date()                        };                        var idx = requestStack.push(stackElement) - 1;                        promise.then(function (r) {                            stackElement.duration = new Date() - stackElement.start;                            stackElement.error = r.status < 200 || r.status >= 400;                            stackElement.statusCode = r.status;                            stackElement.profile = r.headers.get('x-debug-token');                            stackElement.profilerUrl = r.headers.get('x-debug-token-link');                            stackElement.toolbarReplaceFinished = false;                            stackElement.toolbarReplace = '1' === r.headers.get('Symfony-Debug-Toolbar-Replace');                            finishAjaxRequest(idx);                        }, function (e){                            stackElement.error = true;                            finishAjaxRequest(idx);                        });                        startAjaxRequest(idx);                    }                    return promise;                };            }            if (window.XMLHttpRequest && XMLHttpRequest.prototype.addEventListener) {                var proxied = XMLHttpRequest.prototype.open;                XMLHttpRequest.prototype.open = function(method, url, async, user, pass) {                    var self = this;                    /* prevent logging AJAX calls to static and inline files, like templates */                    var path = url;                    if (url.slice(0, 1) === '/') {                        if (0 === url.indexOf('')) {                            path = url.slice(0);                        }                    }                    else if (0 === url.indexOf('http\u003A\/\/localhost\u003A8000')) {                        path = url.slice(21);                    }                    if (!path.match(new RegExp("^\/((index|app(_[\\w]+)?)\\.php\/)?_wdt"))) {                        var stackElement = {                            error: false,                            url: url,                            method: method,                            type: 'xhr',                            start: new Date()                        };                        var idx = requestStack.push(stackElement) - 1;                        this.addEventListener('readystatechange', function() {                            if (self.readyState == 4) {                                stackElement.duration = new Date() - stackElement.start;                                stackElement.error = self.status < 200 || self.status >= 400;                                stackElement.statusCode = self.status;                                extractHeaders(self, stackElement);                                finishAjaxRequest(idx);                            }                        }, false);                        startAjaxRequest(idx);                    }                    proxied.apply(this, Array.prototype.slice.call(arguments));                };            }                        return {                hasClass: hasClass,                removeClass: removeClass,                addClass: addClass,                toggleClass: toggleClass,                getPreference: getPreference,                setPreference: setPreference,                addEventListener: addEventListener,                request: request,                renderAjaxRequests: renderAjaxRequests,                getSfwdt: function(token) {                    if (!this.sfwdt) {                        this.sfwdt = document.getElementById('sfwdt' + token);                    }                    return this.sfwdt;                },                load: function(selector, url, onSuccess, onError, options) {                    var el = document.getElementById(selector);                    if (el && el.getAttribute('data-sfurl') !== url) {                        request(                            url,                            function(xhr) {                                el.innerHTML = xhr.responseText;                                el.setAttribute('data-sfurl', url);                                removeClass(el, 'loading');                                var pending = pendingRequests;                                for (var i = 0; i < requestStack.length; i++) {                                    startAjaxRequest(i);                                    if (requestStack[i].duration) {                                        finishAjaxRequest(i);                                    }                                }                                /* Revert the pending state in case there was a start called without a finish above. */                                pendingRequests = pending;                                (onSuccess || noop)(xhr, el);                            },                            function(xhr) { (onError || noop)(xhr, el); },                            '',                            options                        );                    }                    return this;                },                showToolbar: function(token) {                    var sfwdt = this.getSfwdt(token);                    removeClass(sfwdt, 'sf-display-none');                    if (getPreference('toolbar/displayState') == 'none') {                        document.getElementById('sfToolbarMainContent-' + token).style.display = 'none';                        document.getElementById('sfToolbarClearer-' + token).style.display = 'none';                        document.getElementById('sfMiniToolbar-' + token).style.display = 'block';                    } else {                        document.getElementById('sfToolbarMainContent-' + token).style.display = 'block';                        document.getElementById('sfToolbarClearer-' + token).style.display = 'block';                        document.getElementById('sfMiniToolbar-' + token).style.display = 'none';                    }                },                hideToolbar: function(token) {                    var sfwdt = this.getSfwdt(token);                    addClass(sfwdt, 'sf-display-none');                },                initToolbar: function(token) {                    this.showToolbar(token);                    var hideButton = document.getElementById('sfToolbarHideButton-' + token);                    var hideButtonSvg = hideButton.querySelector('svg');                    hideButtonSvg.setAttribute('aria-hidden', 'true');                    hideButtonSvg.setAttribute('focusable', 'false');                    addEventListener(hideButton, 'click', function (event) {                        event.preventDefault();                        var p = this.parentNode;                        p.style.display = 'none';                        (p.previousElementSibling || p.previousSibling).style.display = 'none';                        document.getElementById('sfMiniToolbar-' + token).style.display = 'block';                        setPreference('toolbar/displayState', 'none');                    });                    var showButton = document.getElementById('sfToolbarMiniToggler-' + token);                    var showButtonSvg = showButton.querySelector('svg');                    showButtonSvg.setAttribute('aria-hidden', 'true');                    showButtonSvg.setAttribute('focusable', 'false');                    addEventListener(showButton, 'click', function (event) {                        event.preventDefault();                        var elem = this.parentNode;                        if (elem.style.display == 'none') {                            document.getElementById('sfToolbarMainContent-' + token).style.display = 'none';                            document.getElementById('sfToolbarClearer-' + token).style.display = 'none';                            elem.style.display = 'block';                        } else {                            document.getElementById('sfToolbarMainContent-' + token).style.display = 'block';                            document.getElementById('sfToolbarClearer-' + token).style.display = 'block';                            elem.style.display = 'none'                        }                        setPreference('toolbar/displayState', 'block');                    });                },                loadToolbar: function(token, newToken) {                    var that = this;                    var triesCounter = document.getElementById('sfLoadCounter-' + token);                    var options = {                        retry: true,                        onSend: function (count) {                            if (count === 3) {                                that.initToolbar(token);                            }                            if (triesCounter) {                                triesCounter.textContent = count;                            }                        },                    };                    var cancelButton = document.getElementById('sfLoadCancel-' + token);                    if (cancelButton) {                        addEventListener(cancelButton, 'click', function (event) {                            event.preventDefault();                            options.stop = true;                            that.hideToolbar(token);                        });                    }                    newToken = (newToken || token);                    this.load(                        'sfwdt' + token,                        'http\u003A\/\/localhost\u003A8000\/_wdt\/xxxxxx'.replace(/xxxxxx/, newToken),                        function(xhr, el) {                            /* Do nothing in the edge case where the toolbar has already been replaced with a new one */                            if (!document.getElementById('sfToolbarMainContent-' + newToken)) {                                return;                            }                            /* Evaluate in global scope scripts embedded inside the toolbar */                            var i, scripts = [].slice.call(el.querySelectorAll('script'));                            for (i = 0; i < scripts.length; ++i) {                                if (scripts[i].firstChild) {                                    eval.call({}, scripts[i].firstChild.nodeValue);                                }                            }                            el.style.display = -1 !== xhr.responseText.indexOf('sf-toolbarreset') ? 'block' : 'none';                            if (el.style.display == 'none') {                                return;                            }                            that.initToolbar(newToken);                            /* Handle toolbar-info position */                            var toolbarBlocks = [].slice.call(el.querySelectorAll('.sf-toolbar-block'));                            for (i = 0; i < toolbarBlocks.length; ++i) {                                toolbarBlocks[i].onmouseover = function () {                                    var toolbarInfo = this.querySelectorAll('.sf-toolbar-info')[0];                                    var pageWidth = document.body.clientWidth;                                    var elementWidth = toolbarInfo.offsetWidth;                                    var leftValue = (elementWidth + this.offsetLeft) - pageWidth;                                    var rightValue = (elementWidth + (pageWidth - this.offsetLeft)) - pageWidth;                                    /* Reset right and left value, useful on window resize */                                    toolbarInfo.style.right = '';                                    toolbarInfo.style.left = '';                                    if (elementWidth > pageWidth) {                                        toolbarInfo.style.left = 0;                                    }                                    else if (leftValue > 0 && rightValue > 0) {                                        toolbarInfo.style.right = (rightValue * -1) + 'px';                                    } else if (leftValue < 0) {                                        toolbarInfo.style.left = 0;                                    } else {                                        toolbarInfo.style.right = '0px';                                    }                                };                            }                            renderAjaxRequests();                            addEventListener(document.querySelector('.sf-toolbar-ajax-clear'), 'click', function() {                                requestStack = [];                                renderAjaxRequests();                                successStreak = 4;                                document.querySelector('.sf-toolbar-ajax-request-list').innerHTML = '';                            });                            addEventListener(document.querySelector('.sf-toolbar-block-ajax'), 'mouseenter', function (event) {                                var elem = document.querySelector('.sf-toolbar-block-ajax .sf-toolbar-info');                                elem.scrollTop = elem.scrollHeight;                            });                            addEventListener(document.querySelector('.sf-toolbar-block-ajax > .sf-toolbar-icon'), 'click', function (event) {                                event.preventDefault();                                toggleClass(this.parentNode, 'hover');                            });                            var dumpInfo = document.querySelector('.sf-toolbar-block-dump .sf-toolbar-info');                            if (null !== dumpInfo) {                                addEventListener(dumpInfo, 'sfbeforedumpcollapse', function () {                                    dumpInfo.style.minHeight = dumpInfo.getBoundingClientRect().height+'px';                                });                                addEventListener(dumpInfo, 'mouseleave', function () {                                    dumpInfo.style.minHeight = '';                                });                            }                        },                        function(xhr) {                            if (xhr.status !== 0 && !options.stop) {                                var sfwdt = that.getSfwdt(token);                                sfwdt.innerHTML = '\                                <div class="sf-toolbarreset notranslate">\                                    <div class="sf-toolbar-icon"><svg width="26" height="28" xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 26 28" enable-background="new 0 0 26 28" xml:space="preserve"><path fill="#FFFFFF" d="M13 0C5.8 0 0 5.8 0 13c0 7.2 5.8 13 13 13c7.2 0 13-5.8 13-13C26 5.8 20.2 0 13 0z M20 7.5 c-0.6 0-1-0.3-1-0.9c0-0.2 0-0.4 0.2-0.6c0.1-0.3 0.2-0.3 0.2-0.4c0-0.3-0.5-0.4-0.7-0.4c-2 0.1-2.5 2.7-2.9 4.8l-0.2 1.1 c1.1 0.2 1.9 0 2.4-0.3c0.6-0.4-0.2-0.8-0.1-1.3C18 9.2 18.4 9 18.7 8.9c0.5 0 0.8 0.5 0.8 1c0 0.8-1.1 2-3.3 1.9 c-0.3 0-0.5 0-0.7-0.1L15 14.1c-0.4 1.7-0.9 4.1-2.6 6.2c-1.5 1.8-3.1 2.1-3.8 2.1c-1.3 0-2.1-0.6-2.2-1.6c0-0.9 0.8-1.4 1.3-1.4 c0.7 0 1.2 0.5 1.2 1.1c0 0.5-0.2 0.6-0.4 0.7c-0.1 0.1-0.3 0.2-0.3 0.4c0 0.1 0.1 0.3 0.4 0.3c0.5 0 0.9-0.3 1.2-0.5 c1.3-1 1.7-2.9 2.4-6.2l0.1-0.8c0.2-1.1 0.5-2.3 0.8-3.5c-0.9-0.7-1.4-1.5-2.6-1.8c-0.8-0.2-1.3 0-1.7 0.4C8.4 10 8.6 10.7 9 11.1 l0.7 0.7c0.8 0.9 1.3 1.7 1.1 2.7c-0.3 1.6-2.1 2.8-4.3 2.1c-1.9-0.6-2.2-1.9-2-2.7c0.2-0.6 0.7-0.8 1.2-0.6 c0.5 0.2 0.7 0.8 0.6 1.3c0 0.1 0 0.1-0.1 0.3C6 15 5.9 15.2 5.9 15.3c-0.1 0.4 0.4 0.7 0.8 0.8c0.8 0.3 1.7-0.2 1.9-0.9 c0.2-0.6-0.2-1.1-0.4-1.2l-0.8-0.9c-0.4-0.4-1.2-1.5-0.8-2.8c0.2-0.5 0.5-1 0.9-1.4c1-0.7 2-0.8 3-0.6c1.3 0.4 1.9 1.2 2.8 1.9 c0.5-1.3 1.1-2.6 2-3.8c0.9-1 2-1.7 3.3-1.8C20 4.8 21 5.4 21 6.3C21 6.7 20.8 7.5 20 7.5z"/></svg></div>\                                    An error occurred while loading the web debug toolbar. <a href="http\u003A\/\/localhost\u003A8000\/_profiler\/' + newToken + '">Open the web profiler.</a>\                                </div>\                            ';                                sfwdt.setAttribute('class', 'sf-toolbar sf-error-toolbar');                            }                        },                        options                    );                    return this;                },                toggle: function(selector, elOn, elOff) {                    var tmp = elOn.style.display,                        el = document.getElementById(selector);                    elOn.style.display = elOff.style.display;                    elOff.style.display = tmp;                    if (el) {                        el.style.display = 'none' === tmp ? 'none' : 'block';                    }                    return this;                },            };        })();    }    Sfjs.loadToolbar('23238e');/*]]>*/</script>
+</body>
+</html>

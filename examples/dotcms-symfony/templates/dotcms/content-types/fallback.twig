@@ -1,0 +1,15 @@
+{# Fallback template for unknown content types #}
+<div class="content-fallback">
+    <h3>{{ content.title|default('Unknown Content Type') }}</h3>
+    <p><strong>Content Type:</strong> {{ content.contentType|default('Unknown') }}</p>
+    {% if content.caption is defined and content.caption %}
+        <p><strong>Caption:</strong> {{ content.caption }}</p>
+    {% endif %}
+    {% if content.body is defined and content.body %}
+        <div><strong>Body:</strong> {{ content.body|raw }}</div>
+    {% endif %}
+    <details>
+        <summary>Debug Information</summary>
+        <pre>{{ content|json_encode(constant('JSON_PRETTY_PRINT')) }}</pre>
+    </details>
+</div> 
