@@ -90,7 +90,7 @@ class DotCmsHelper
             'data-dot-identifier' => $containerRef->identifier ?? '',
             'data-dot-accept-types' => $containerRef->acceptTypes ?? '',
             'data-max-contentlets' => $containerRef->maxContentlets ?? '',
-            'data-dot-uuid' => $containerRef->uuid ?? ''
+            'data-dot-uuid' => $containerRef->uuid ?? '',
         ];
     }
 
@@ -115,8 +115,8 @@ class DotCmsHelper
                 'identifier' => $containerRef->identifier ?? '',
                 'maxContentlets' => $containerRef->maxContentlets ?? '',
                 'variantId' => $containerRef->variantId ?? '',
-                'uuid' => $containerRef->uuid ?? ''
-            ])
+                'uuid' => $containerRef->uuid ?? '',
+            ]),
         ];
     }
 
@@ -140,8 +140,8 @@ class DotCmsHelper
                 'identifier' => $containerRef->identifier ?? '',
                 'maxContentlets' => $containerRef->maxContentlets ?? '',
                 'variantId' => $containerRef->variantId ?? '',
-                'uuid' => $containerRef->uuid ?? ''
-            ])
+                'uuid' => $containerRef->uuid ?? '',
+            ]),
         ];
     }
 
@@ -179,8 +179,8 @@ class DotCmsHelper
      * @return string Complete container HTML
      */
     public static function renderContainer(
-        ContainerRef $containerRef, 
-        array $contentlets, 
+        ContainerRef $containerRef,
+        array $contentlets,
         ?string $mode = null,
         ?callable $contentRenderer = null
     ): string {
@@ -188,22 +188,22 @@ class DotCmsHelper
         $containerAttrsHtml = self::htmlAttributes($containerAttrs);
         $hasContentlets = !empty($contentlets);
         $isEditMode = self::isEditMode($mode);
-        
+
         $html = "<div{$containerAttrsHtml}>";
-        
+
         if ($hasContentlets) {
             // Render contentlets
             foreach ($contentlets as $content) {
                 $contentAttrs = self::getContentletAttributes($content, $containerRef);
                 $contentAttrsHtml = self::htmlAttributes($contentAttrs);
-                
+
                 $contentHtml = '';
                 if ($contentRenderer && is_callable($contentRenderer)) {
                     $contentHtml = $contentRenderer($content);
                 } else {
                     $contentHtml = self::simpleContentHtml($content->jsonSerialize());
                 }
-                
+
                 $html .= "<div{$contentAttrsHtml}>{$contentHtml}</div>";
             }
         } elseif ($isEditMode) {
@@ -211,12 +211,12 @@ class DotCmsHelper
             $ghostAttrs = self::getGhostContentletAttributes($containerRef);
             $ghostAttrsHtml = self::htmlAttributes($ghostAttrs);
             $placeholder = self::generateEmptyContainerPlaceholder();
-            
+
             $html .= "<div{$ghostAttrsHtml} class=\"uve-ghost-contentlet\">{$placeholder}</div>";
         }
-        
+
         $html .= '</div>';
-        
+
         return $html;
     }
 
