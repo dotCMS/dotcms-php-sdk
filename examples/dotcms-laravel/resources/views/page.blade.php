@@ -21,7 +21,8 @@
                                     @foreach($column->containers as $containerRef)
                                         @include('layouts.container', [
                                             'containerRef' => $containerRef,
-                                            'containers' => $pageAsset->containers ?? []
+                                            'containers' => $pageAsset->containers ?? [],
+                                            'mode' => $mode ?? null
                                         ])
                                     @endforeach
                                 @endif

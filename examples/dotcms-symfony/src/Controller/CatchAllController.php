@@ -12,6 +12,9 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException as SymfonyHttpException;
 use Dotcms\PhpSdk\Exception\HttpException;
 use Dotcms\PhpSdk\Exception\ResponseException;
+use Dotcms\PhpSdk\DotCMSClient;
+use Dotcms\PhpSdk\Config\Config;
+use Dotcms\PhpSdk\Config\LogLevel;
 
 class CatchAllController extends AbstractController
 {
@@ -32,8 +35,26 @@ class CatchAllController extends AbstractController
             $mode = $request->query->get('mode');
             $personaId = $request->query->get('personaId');
             $publishDate = $request->query->get('publishDate');
+            $dotCMSHost = $request->query->get('dotCMSHost');
             
-            $pageAsset = $this->dotCMSService->getPage(
+            // Create service with dynamic host if dotCMSHost parameter is provided (for UVE)
+            $service = $this->dotCMSService;
+            if ($dotCMSHost) {
+                // Decode the URL-encoded host
+                $decodedHost = urldecode($dotCMSHost);
+                
+                // Create a new client with the dynamic host for UVE compatibility
+                $config = new Config(
+                    $decodedHost,
+                    $_ENV['DOTCMS_API_KEY'],
+                    ['timeout' => 30, 'verify' => true],
+                    ['level' => LogLevel::DEBUG, 'console' => true]
+                );
+                $dynamicClient = new DotCMSClient($config);
+                $service = new DotCMSService($dynamicClient);
+            }
+            
+            $pageAsset = $service->getPage(
                 $actualPath,
                 $languageId ? (int)$languageId : null,
                 $mode,
@@ -46,14 +67,16 @@ class CatchAllController extends AbstractController
             }
             
             // Get navigation with depth of 2 (top level + one level of children)
-            $navigation = $this->dotCMSService->getNavigation('/', 2);
+            $navigation = $service->getNavigation('/', 2);
 
             return $this->render('page.html.twig', [
                 'pageAsset' => $pageAsset,
                 'layout' => $pageAsset->layout ?? null,
                 'page' => $pageAsset->page ?? null,
                 'containers' => $pageAsset->containers ?? [],
-                'navigation' => $navigation
+                'navigation' => $navigation,
+                'mode' => $mode,
+                'dotCMSHost' => $dotCMSHost ? urldecode($dotCMSHost) : null
             ]);
         } catch (HttpException $e) {
             // Map HTTP errors to appropriate Symfony exceptions

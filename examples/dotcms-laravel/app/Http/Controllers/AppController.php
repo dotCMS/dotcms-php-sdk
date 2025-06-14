@@ -87,7 +87,8 @@ class AppController extends Controller
             return view('page', [
                 'pageAsset' => $page,
                 'navigation' => $nav,
-                'publishDate' => $publishDate
+                'publishDate' => $publishDate,
+                'mode' => $mode
             ]);
         } catch (\Exception $e) {
             // Log the error
