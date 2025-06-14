@@ -153,8 +153,8 @@ class DotCmsHelper
      */
     public static function generateEmptyContainerPlaceholder(string $message = 'This container is empty.'): string
     {
-        return '<div class="empty-container-placeholder">' . 
-               htmlspecialchars($message, ENT_QUOTES, 'UTF-8') . 
+        return '<div class="empty-container-placeholder">' .
+               htmlspecialchars($message, ENT_QUOTES, 'UTF-8') .
                '</div>';
     }
 
@@ -186,7 +186,7 @@ class DotCmsHelper
     ): string {
         $containerAttrs = self::getContainerAttributes($containerRef);
         $containerAttrsHtml = self::htmlAttributes($containerAttrs);
-        $hasContentlets = !empty($contentlets);
+        $hasContentlets = ! empty($contentlets);
         $isEditMode = self::isEditMode($mode);
 
         $html = "<div{$containerAttrsHtml}>";
