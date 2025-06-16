@@ -2,12 +2,12 @@
 
 namespace Dotcms\PhpSdk\Twig;
 
-use Dotcms\PhpSdk\Utils\DotCmsHelper;
 use Dotcms\PhpSdk\Model\Content\Contentlet;
 use Dotcms\PhpSdk\Model\Layout\ContainerRef;
+use Dotcms\PhpSdk\Utils\DotCmsHelper;
+use Twig\Environment;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
-use Twig\Environment;
 
 /**
  * DotCMS Twig Extension for empty container support
@@ -24,7 +24,7 @@ class DotCMSExtension extends AbstractExtension
         return [
             new TwigFunction('renderContainer', [$this, 'renderContainer'], ['is_safe' => ['html']]),
             new TwigFunction('getEmptyContainerCSS', [$this, 'getEmptyContainerCSS'], ['is_safe' => ['html']]),
-            new TwigFunction('htmlAttr', [$this, 'htmlAttr'], ['is_safe' => ['html']])
+            new TwigFunction('htmlAttr', [$this, 'htmlAttr'], ['is_safe' => ['html']]),
         ];
     }
 
@@ -46,22 +46,23 @@ class DotCMSExtension extends AbstractExtension
         // If no custom renderer provided, use the existing Twig content rendering logic
         if ($contentRenderer === null) {
             $twig = $this->twig; // Capture for closure
-            $contentRenderer = function(Contentlet $content) use ($twig) {
+            $contentRenderer = function (Contentlet $content) use ($twig) {
                 $contentType = $content->contentType;
                 if ($contentType) {
                     $template = 'dotcms/content-types/' . strtolower($contentType) . '.twig';
                     if ($twig->getLoader()->exists($template)) {
                         return $twig->render($template, [
                             'content' => $content,
-                            'dotcms_host' => $_ENV['DOTCMS_HOST'] ?? 'https://demo.dotcms.com'
+                            'dotcms_host' => $_ENV['DOTCMS_HOST'] ?? 'https://demo.dotcms.com',
                         ]);
                     }
                 }
+
                 // Fall back to the SDK simple HTML renderer
                 return DotCmsHelper::simpleContentHtml($content->jsonSerialize());
             };
         }
-        
+
         return DotCmsHelper::renderContainer($containerRef, $contentlets, $mode, $contentRenderer);
     }
 
@@ -85,4 +86,4 @@ class DotCMSExtension extends AbstractExtension
     {
         return DotCmsHelper::htmlAttributes($attrs);
     }
-} 
+}

@@ -2,9 +2,9 @@
 
 namespace Dotcms\PhpSdk\Laravel;
 
-use Dotcms\PhpSdk\Utils\DotCmsHelper;
 use Dotcms\PhpSdk\Model\Content\Contentlet;
 use Dotcms\PhpSdk\Model\Layout\ContainerRef;
+use Dotcms\PhpSdk\Utils\DotCmsHelper;
 
 /**
  * DotCMS Laravel Helper for empty container support
@@ -62,6 +62,7 @@ class DotCmsHelpers
         if (isset($containerRef->identifier)) {
             $containerRef->identifier = str_replace('//demo.dotcms.com/', "//$newHost/", $containerRef->identifier);
         }
+
         return $containerRef;
     }
-} 
+}
