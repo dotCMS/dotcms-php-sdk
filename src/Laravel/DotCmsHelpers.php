@@ -59,10 +59,20 @@ class DotCmsHelpers
      */
     public function rewriteContainerIdentifier(ContainerRef $containerRef, string $newHost): ContainerRef
     {
-        if (isset($containerRef->identifier)) {
-            $containerRef->identifier = str_replace('//demo.dotcms.com/', "//$newHost/", $containerRef->identifier);
+        // Since ContainerRef properties are readonly, we need to create a new instance
+        $newIdentifier = $containerRef->identifier;
+        if ($newIdentifier !== '') {
+            $newIdentifier = str_replace('//demo.dotcms.com/', "//$newHost/", $newIdentifier);
         }
 
-        return $containerRef;
+        return new ContainerRef(
+            identifier: $newIdentifier,
+            uuid: $containerRef->uuid,
+            historyUUIDs: $containerRef->historyUUIDs,
+            contentlets: $containerRef->contentlets,
+            acceptTypes: $containerRef->acceptTypes,
+            maxContentlets: $containerRef->maxContentlets,
+            variantId: $containerRef->variantId,
+        );
     }
 }

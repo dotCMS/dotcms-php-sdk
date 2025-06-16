@@ -19,6 +19,9 @@ class DotCMSExtension extends AbstractExtension
     ) {
     }
 
+    /**
+     * @return array<TwigFunction>
+     */
     public function getFunctions(): array
     {
         return [

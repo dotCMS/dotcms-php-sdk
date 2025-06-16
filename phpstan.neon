@@ -6,4 +6,5 @@ parameters:
     treatPhpDocTypesAsCertain: false
     excludePaths:
         analyse:
-            - tests/* 
+            - tests/*
+            - src/Twig/* 
