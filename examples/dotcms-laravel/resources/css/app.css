@@ -21,6 +21,7 @@
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .col-start-1 { grid-column-start: 1; }

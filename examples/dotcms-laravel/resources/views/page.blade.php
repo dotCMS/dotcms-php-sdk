@@ -4,7 +4,14 @@
 
 @section('content')
 
-    {{-- Page Content --}}
+    {{-- Page Content with UVE page-level attributes --}}
+    <div data-dot-object="page" 
+         data-dot-identifier="{{ $pageAsset->page->identifier ?? '' }}" 
+         data-dot-inode="{{ $pageAsset->page->inode ?? '' }}"
+         data-dot-title="{{ $pageAsset->page->title ?? '' }}"
+         data-dot-url="{{ $pageAsset->page->uri ?? '' }}"
+         data-dot-type="{{ $pageAsset->page->contentType ?? '' }}">
+         
     @if(isset($pageAsset->layout) && isset($pageAsset->layout->body) && isset($pageAsset->layout->body->rows))
         @foreach($pageAsset->layout->body->rows as $row)
             <div class="container">
@@ -21,7 +28,8 @@
                                     @foreach($column->containers as $containerRef)
                                         @include('layouts.container', [
                                             'containerRef' => $containerRef,
-                                            'containers' => $pageAsset->containers ?? []
+                                            'containers' => $pageAsset->containers ?? [],
+                                            'mode' => $mode ?? null
                                         ])
                                     @endforeach
                                 @endif
@@ -66,4 +74,5 @@
             </div>
         </div>
     @endif
+    </div>
 @endsection

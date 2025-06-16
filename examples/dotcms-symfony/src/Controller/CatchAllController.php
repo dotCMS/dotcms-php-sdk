@@ -53,7 +53,8 @@ class CatchAllController extends AbstractController
                 'layout' => $pageAsset->layout ?? null,
                 'page' => $pageAsset->page ?? null,
                 'containers' => $pageAsset->containers ?? [],
-                'navigation' => $navigation
+                'navigation' => $navigation,
+                'mode' => $mode
             ]);
         } catch (HttpException $e) {
             // Map HTTP errors to appropriate Symfony exceptions
