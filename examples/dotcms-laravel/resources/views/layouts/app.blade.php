@@ -9,6 +9,9 @@
         @section('stylesheets')
             @vite(['resources/css/app.css', 'resources/js/app.js'])
         @show
+        
+        {{-- Load UVE script from DotCMS --}}
+        <script src="{{ env('DOTCMS_HOST') }}/ext/uve/dot-uve.js"></script>
     </head>
     <body>
         @include('layouts.header')

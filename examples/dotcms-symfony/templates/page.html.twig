@@ -5,7 +5,14 @@
 {% block body %}
     {% include 'dotcms/header.twig' %}
 
-    {# Page Content #}
+    {# Page Content with UVE page-level attributes #}
+    <div data-dot-object="page" 
+         data-dot-identifier="{{ page.identifier|default(pageAsset.page.identifier|default('')) }}" 
+         data-dot-inode="{{ page.inode|default(pageAsset.page.inode|default('')) }}"
+         data-dot-title="{{ page.title|default(pageAsset.page.title|default(page.friendlyName|default(''))) }}"
+         data-dot-url="{{ page.uri|default(pageAsset.page.uri|default('')) }}"
+         data-dot-type="{{ page.contentType|default(pageAsset.page.contentType|default('')) }}">
+         
     {% if layout is not null and layout.body is defined %}
         {% for row in layout.body.rows %}
             <div class="container">
@@ -20,7 +27,8 @@
                                     {% for container in column.containers %}
                                         {% include 'dotcms/container.twig' with {
                                             'container': container,
-                                            'containers': containers
+                                            'containers': containers,
+                                            'mode': mode|default(null)
                                         } %}
                                     {% endfor %}
                                 {% endif %}
@@ -41,4 +49,5 @@
             </div>
         </div>
     {% endif %}
+    </div>
 {% endblock %} 

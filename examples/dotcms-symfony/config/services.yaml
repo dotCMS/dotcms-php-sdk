@@ -48,3 +48,8 @@ services:
 
     App\Twig\DotCMSExtension:
         tags: ['twig.extension']
+
+    # Register the core SDK Twig extension for empty container support
+    Dotcms\PhpSdk\Twig\DotCMSExtension:
+        arguments: ['@twig']
+        tags: ['twig.extension']
